@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ASDKPaymentFormSummCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfW-69-a9M">
+                        <rect key="frame" x="87" y="11" width="218" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="на сумму:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLH-hL-3K2">
+                        <rect key="frame" x="15" y="14" width="64" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EcF-Sz-70a" userLabel="Top separator">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="9JH-L8-xhA"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hff-YX-4VS" userLabel="Bottom separator">
+                        <rect key="frame" x="0.0" y="33" width="320" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="QcE-X2-Q8L"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="leading" secondItem="fLH-hL-3K2" secondAttribute="leading" constant="-15" id="3Vm-hV-yqh"/>
+                    <constraint firstItem="dfW-69-a9M" firstAttribute="leading" secondItem="fLH-hL-3K2" secondAttribute="trailing" constant="8" id="8sb-0f-L1u"/>
+                    <constraint firstItem="Hff-YX-4VS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="Mav-9J-h7p"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Hff-YX-4VS" secondAttribute="trailing" constant="-8" id="TmB-De-Z8d"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="EcF-Sz-70a" secondAttribute="trailing" constant="-8" id="Yi3-bq-S7z"/>
+                    <constraint firstItem="dfW-69-a9M" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cl6-XK-aJm"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Hff-YX-4VS" secondAttribute="bottom" constant="-8" id="dOs-ua-Ikv"/>
+                    <constraint firstItem="EcF-Sz-70a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="fEd-VI-pb3"/>
+                    <constraint firstItem="EcF-Sz-70a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="gk5-My-axz"/>
+                    <constraint firstItem="fLH-hL-3K2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lr0-L6-t7b"/>
+                    <constraint firstAttribute="trailing" secondItem="dfW-69-a9M" secondAttribute="trailing" constant="15" id="yP9-do-STX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="customBottomSeparator" destination="Hff-YX-4VS" id="sHu-tl-q7u"/>
+                <outlet property="customBottomSeparatorHeight" destination="QcE-X2-Q8L" id="h6u-YI-dlt"/>
+                <outlet property="customTopSeparator" destination="EcF-Sz-70a" id="3s9-VS-0ll"/>
+                <outlet property="customTopSeparatorHeight" destination="9JH-L8-xhA" id="dHv-vD-n6d"/>
+                <outlet property="summLabel" destination="dfW-69-a9M" id="ODN-8Y-xnE"/>
+                <outlet property="summTitleLabel" destination="fLH-hL-3K2" id="ccM-oT-f9A"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

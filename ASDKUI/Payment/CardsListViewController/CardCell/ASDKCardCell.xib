@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ASDKCardCell" id="hUL-Hw-eOE" customClass="ASDKCardCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hUL-Hw-eOE" id="puZ-XJ-1BZ">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qNz-4I-DvD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="iYK-99-MyB"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uON-rg-wrr" userLabel="Name">
+                        <rect key="frame" x="47" y="11" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="RZz-5B-eyC"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1nY-4j-NXZ" userLabel="paymentSystemLogo">
+                        <rect key="frame" x="15" y="16" width="24" height="11"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="11" id="tyR-8E-g3Q"/>
+                            <constraint firstAttribute="width" constant="24" id="wyj-5e-Q4l"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="07b-jW-ISW">
+                        <rect key="frame" x="0.0" y="33" width="320" height="10"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="Kvi-4X-0yc"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_green" translatesAutoresizingMaskIntoConstraints="NO" id="paE-5g-su5" userLabel="checkmark">
+                        <rect key="frame" x="292" y="12" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="anC-4B-e1m"/>
+                            <constraint firstAttribute="width" constant="20" id="ggA-XX-EAt"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="leadingMargin" secondItem="1nY-4j-NXZ" secondAttribute="leading" constant="-7" id="8ub-G7-NwV"/>
+                    <constraint firstItem="paE-5g-su5" firstAttribute="centerY" secondItem="puZ-XJ-1BZ" secondAttribute="centerY" id="G9K-WB-je7"/>
+                    <constraint firstItem="1nY-4j-NXZ" firstAttribute="centerY" secondItem="puZ-XJ-1BZ" secondAttribute="centerY" id="Mtg-4b-9Ah"/>
+                    <constraint firstItem="uON-rg-wrr" firstAttribute="centerY" secondItem="puZ-XJ-1BZ" secondAttribute="centerY" id="NA5-5y-Bl9"/>
+                    <constraint firstItem="qNz-4I-DvD" firstAttribute="leading" secondItem="puZ-XJ-1BZ" secondAttribute="leadingMargin" constant="-8" id="UB6-Ra-wgX"/>
+                    <constraint firstItem="qNz-4I-DvD" firstAttribute="top" secondItem="puZ-XJ-1BZ" secondAttribute="topMargin" constant="-8" id="X84-ge-eXL"/>
+                    <constraint firstItem="07b-jW-ISW" firstAttribute="leading" secondItem="puZ-XJ-1BZ" secondAttribute="leadingMargin" constant="-8" id="Z40-ra-ZFD"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="07b-jW-ISW" secondAttribute="bottom" constant="-8" id="Z5q-66-fqE"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qNz-4I-DvD" secondAttribute="trailing" constant="-8" id="l2y-3e-MXl"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="paE-5g-su5" secondAttribute="trailing" id="ofv-ir-prR"/>
+                    <constraint firstItem="uON-rg-wrr" firstAttribute="leading" secondItem="1nY-4j-NXZ" secondAttribute="trailing" constant="8" id="prg-Ch-pnf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="07b-jW-ISW" secondAttribute="trailing" constant="-8" id="qUm-Wa-HBH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cardNameLabel" destination="uON-rg-wrr" id="ZnD-gV-zMK"/>
+                <outlet property="checkmarkImageView" destination="paE-5g-su5" id="VgA-M7-6dI"/>
+                <outlet property="customBottomSeparator" destination="07b-jW-ISW" id="iHf-aB-Yu8"/>
+                <outlet property="customBottomSeparatorHeight" destination="Kvi-4X-0yc" id="244-Vb-99x"/>
+                <outlet property="customTopSeparator" destination="qNz-4I-DvD" id="aFq-e5-UkG"/>
+                <outlet property="customTopSeparatorHeight" destination="iYK-99-MyB" id="XGP-Q8-d1e"/>
+                <outlet property="paymentSystemLogoImageView" destination="1nY-4j-NXZ" id="lQF-dO-Acb"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="check_green" width="20" height="20"/>
+    </resources>
+</document>

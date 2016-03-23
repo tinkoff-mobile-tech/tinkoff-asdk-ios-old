@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ASDKDeleteCell">
+            <rect key="frame" x="0.0" y="0.0" width="106" height="54"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="106" height="54"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbD-0Z-r0k" customClass="ASDKHighlightedButton">
+                        <rect key="frame" x="0.0" y="0.0" width="106" height="54"/>
+                        <state key="normal" image="delete"/>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="tbD-0Z-r0k" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Dh1-RS-cIy"/>
+                <constraint firstItem="tbD-0Z-r0k" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EDV-mi-ohN"/>
+                <constraint firstAttribute="trailing" secondItem="tbD-0Z-r0k" secondAttribute="trailing" id="Pzb-f0-r5A"/>
+                <constraint firstAttribute="bottom" secondItem="tbD-0Z-r0k" secondAttribute="bottom" id="lKq-xM-Ogz"/>
+            </constraints>
+            <connections>
+                <outlet property="deleteButton" destination="tbD-0Z-r0k" id="VgR-8A-Jbg"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="delete" width="27" height="16"/>
+    </resources>
+</document>

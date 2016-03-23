@@ -1,0 +1,37 @@
+/* 
+  Localizable.strings
+  ASDKUI
+
+  Copyright (c) 2016 TCS Bank
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+    http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+*/
+
+"Common.Cancel" = "Отмена";
+"Common.Close" = "Закрыть";
+
+"Title.CardsList" = "Выберите карту";
+
+"paymentForm.title" = "Оплата";
+"PaymentForm.payButtonTitle" = "Оплатить";
+"PaymentForm.summCellTitle" = "На сумму:";
+"PaymentForm.changeCard" = "Изменить";
+
+"CardsList.AddNewCard" = "Ввести данные новой карты";
+
+"Transfer.CardNumber.Sender" = "Номер карты для оплаты";
+
+"externalCardsCell.savedCard" = "Сохраненная карта";
+"externalCardsCell.newCard" = "Новая карта";
+
+"emailCell.placeholder" = "E-mail для квитанции";

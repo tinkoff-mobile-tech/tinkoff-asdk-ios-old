@@ -1,0 +1,848 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		8316723A1C6477E300533D85 /* ASDKCore-universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8316723B1C6477E300533D85 /* Build configuration list for PBXAggregateTarget "ASDKCore-universal" */;
+			buildPhases = (
+				8316723E1C6477ED00533D85 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "ASDKCore-universal";
+			productName = "ASDKCore-universal";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		83166ED71C63984E00533D85 /* ASDKCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166ED61C63984E00533D85 /* ASDKCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F2F1C63988F00533D85 /* ASDKBaseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EE11C63988F00533D85 /* ASDKBaseObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F301C63988F00533D85 /* ASDKBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE21C63988F00533D85 /* ASDKBaseObject.m */; };
+		83166F321C63988F00533D85 /* ASDKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE51C63988F00533D85 /* ASDKCard.m */; };
+		83166F331C63988F00533D85 /* ASDKAcquiringRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EE71C63988F00533D85 /* ASDKAcquiringRequest.h */; };
+		83166F341C63988F00533D85 /* ASDKAcquiringRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE81C63988F00533D85 /* ASDKAcquiringRequest.m */; };
+		83166F351C63988F00533D85 /* ASDKChargeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EEA1C63988F00533D85 /* ASDKChargeRequest.h */; };
+		83166F361C63988F00533D85 /* ASDKChargeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EEB1C63988F00533D85 /* ASDKChargeRequest.m */; };
+		83166F371C63988F00533D85 /* ASDKFinishAuthorizeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EED1C63988F00533D85 /* ASDKFinishAuthorizeRequest.h */; };
+		83166F381C63988F00533D85 /* ASDKFinishAuthorizeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EEE1C63988F00533D85 /* ASDKFinishAuthorizeRequest.m */; };
+		83166F391C63988F00533D85 /* ASDKGetCardListRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EF01C63988F00533D85 /* ASDKGetCardListRequest.h */; };
+		83166F3A1C63988F00533D85 /* ASDKGetCardListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EF11C63988F00533D85 /* ASDKGetCardListRequest.m */; };
+		83166F3B1C63988F00533D85 /* ASDKGetStateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EF31C63988F00533D85 /* ASDKGetStateRequest.h */; };
+		83166F3C1C63988F00533D85 /* ASDKGetStateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EF41C63988F00533D85 /* ASDKGetStateRequest.m */; };
+		83166F3D1C63988F00533D85 /* ASDKInitRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EF61C63988F00533D85 /* ASDKInitRequest.h */; };
+		83166F3E1C63988F00533D85 /* ASDKInitRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EF71C63988F00533D85 /* ASDKInitRequest.m */; };
+		83166F3F1C63988F00533D85 /* ASDKRemoveCardRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EF91C63988F00533D85 /* ASDKRemoveCardRequest.h */; };
+		83166F401C63988F00533D85 /* ASDKRemoveCardRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EFA1C63988F00533D85 /* ASDKRemoveCardRequest.m */; };
+		83166F411C63988F00533D85 /* ASDKAcquiringResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EFC1C63988F00533D85 /* ASDKAcquiringResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F421C63988F00533D85 /* ASDKAcquiringResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EFD1C63988F00533D85 /* ASDKAcquiringResponse.m */; };
+		83166F431C63988F00533D85 /* ASDKChargeResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EFF1C63988F00533D85 /* ASDKChargeResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F441C63988F00533D85 /* ASDKChargeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F001C63988F00533D85 /* ASDKChargeResponse.m */; };
+		83166F451C63988F00533D85 /* ASDKFinishAuthorizeResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F021C63988F00533D85 /* ASDKFinishAuthorizeResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F461C63988F00533D85 /* ASDKFinishAuthorizeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F031C63988F00533D85 /* ASDKFinishAuthorizeResponse.m */; };
+		83166F471C63988F00533D85 /* ASDKGetCardListResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F051C63988F00533D85 /* ASDKGetCardListResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F481C63988F00533D85 /* ASDKGetCardListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F061C63988F00533D85 /* ASDKGetCardListResponse.m */; };
+		83166F491C63988F00533D85 /* ASDKGetStateResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F081C63988F00533D85 /* ASDKGetStateResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F4A1C63988F00533D85 /* ASDKGetStateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F091C63988F00533D85 /* ASDKGetStateResponse.m */; };
+		83166F4B1C63988F00533D85 /* ASDKInitResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F0B1C63988F00533D85 /* ASDKInitResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F4C1C63988F00533D85 /* ASDKInitResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F0C1C63988F00533D85 /* ASDKInitResponse.m */; };
+		83166F4D1C63988F00533D85 /* ASDKRemoveCardResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F0E1C63988F00533D85 /* ASDKRemoveCardResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F4E1C63988F00533D85 /* ASDKRemoveCardResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F0F1C63988F00533D85 /* ASDKRemoveCardResponse.m */; };
+		83166F4F1C63988F00533D85 /* ASDKAcquiringApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F101C63988F00533D85 /* ASDKAcquiringApi.h */; };
+		83166F501C63988F00533D85 /* ASDKAcquiringApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F111C63988F00533D85 /* ASDKAcquiringApi.m */; };
+		83166F511C63988F00533D85 /* ASDKAcquiringSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F121C63988F00533D85 /* ASDKAcquiringSdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83166F521C63988F00533D85 /* ASDKAcquiringSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F131C63988F00533D85 /* ASDKAcquiringSdk.m */; };
+		83166F541C63988F00533D85 /* ASDKCryptoUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F161C63988F00533D85 /* ASDKCryptoUtils.h */; };
+		83166F551C63988F00533D85 /* ASDKCryptoUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F171C63988F00533D85 /* ASDKCryptoUtils.m */; };
+		83166F561C63988F00533D85 /* ASDKRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F191C63988F00533D85 /* ASDKRequestBuilder.h */; };
+		83166F571C63988F00533D85 /* ASDKRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F1A1C63988F00533D85 /* ASDKRequestBuilder.m */; };
+		83166F581C63988F00533D85 /* ASDKChargeRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F1C1C63988F00533D85 /* ASDKChargeRequestBuilder.h */; };
+		83166F591C63988F00533D85 /* ASDKChargeRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F1D1C63988F00533D85 /* ASDKChargeRequestBuilder.m */; };
+		83166F5A1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F1F1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.h */; };
+		83166F5B1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F201C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.m */; };
+		83166F5C1C63988F00533D85 /* ASDKGetCardListRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F221C63988F00533D85 /* ASDKGetCardListRequestBuilder.h */; };
+		83166F5D1C63988F00533D85 /* ASDKGetCardListRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F231C63988F00533D85 /* ASDKGetCardListRequestBuilder.m */; };
+		83166F5E1C63988F00533D85 /* ASDKGetStateRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F251C63988F00533D85 /* ASDKGetStateRequestBuilder.h */; };
+		83166F5F1C63988F00533D85 /* ASDKGetStateRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F261C63988F00533D85 /* ASDKGetStateRequestBuilder.m */; };
+		83166F601C63988F00533D85 /* ASDKInitRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F281C63988F00533D85 /* ASDKInitRequestBuilder.h */; };
+		83166F611C63988F00533D85 /* ASDKInitRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F291C63988F00533D85 /* ASDKInitRequestBuilder.m */; };
+		83166F621C63988F00533D85 /* ASDKRemoveCardRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166F2B1C63988F00533D85 /* ASDKRemoveCardRequestBuilder.h */; };
+		83166F631C63988F00533D85 /* ASDKRemoveCardRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166F2C1C63988F00533D85 /* ASDKRemoveCardRequestBuilder.m */; };
+		83871B7F1C6CC5EF00D69603 /* ASDKStringKeyCreator.h in Headers */ = {isa = PBXBuildFile; fileRef = 83871B7D1C6CC5EF00D69603 /* ASDKStringKeyCreator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83871B801C6CC5EF00D69603 /* ASDKStringKeyCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83871B7E1C6CC5EF00D69603 /* ASDKStringKeyCreator.m */; };
+		943FC86D1C6881650044C707 /* ASDKPaymentInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 943FC86B1C6881650044C707 /* ASDKPaymentInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		943FC86E1C6881650044C707 /* ASDKPaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 943FC86C1C6881650044C707 /* ASDKPaymentInfo.m */; };
+		943FC8711C6881F10044C707 /* ASDKThreeDsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 943FC86F1C6881F10044C707 /* ASDKThreeDsData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		943FC8721C6881F10044C707 /* ASDKThreeDsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 943FC8701C6881F10044C707 /* ASDKThreeDsData.m */; };
+		946C399A1C648F630036D1AF /* ASDKRSAEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 946C39981C648F630036D1AF /* ASDKRSAEncryptor.h */; };
+		946C399B1C648F630036D1AF /* ASDKRSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 946C39991C648F630036D1AF /* ASDKRSAEncryptor.m */; };
+		946C399E1C648F940036D1AF /* ASDKCardData.h in Headers */ = {isa = PBXBuildFile; fileRef = 946C399C1C648F940036D1AF /* ASDKCardData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		946C399F1C648F940036D1AF /* ASDKCardData.m in Sources */ = {isa = PBXBuildFile; fileRef = 946C399D1C648F940036D1AF /* ASDKCardData.m */; };
+		946C39A31C64921A0036D1AF /* ASDKApiKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 946C39A21C64921A0036D1AF /* ASDKApiKeys.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9483E8E61C69C9A2007F029A /* RSA.h in Headers */ = {isa = PBXBuildFile; fileRef = 9483E8E41C69C9A2007F029A /* RSA.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9483E8E71C69C9A2007F029A /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 9483E8E51C69C9A2007F029A /* RSA.m */; };
+		BE1555361C7768EA00BEA6E1 /* ASDKAcquringSdkError.h in Headers */ = {isa = PBXBuildFile; fileRef = BE1555341C7768EA00BEA6E1 /* ASDKAcquringSdkError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE1555371C7768EA00BEA6E1 /* ASDKAcquringSdkError.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1555351C7768EA00BEA6E1 /* ASDKAcquringSdkError.m */; };
+		BE15553A1C77690400BEA6E1 /* ASDKAcquringApiError.h in Headers */ = {isa = PBXBuildFile; fileRef = BE1555381C77690400BEA6E1 /* ASDKAcquringApiError.h */; };
+		BE15553B1C77690400BEA6E1 /* ASDKAcquringApiError.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1555391C77690400BEA6E1 /* ASDKAcquringApiError.m */; };
+		BE7E027C1C73407600DF6230 /* ASDKCard.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EE41C63988F00533D85 /* ASDKCard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		83166ED31C63984E00533D85 /* ASDKCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ASDKCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83166ED61C63984E00533D85 /* ASDKCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKCore.h; sourceTree = "<group>"; };
+		83166ED81C63984E00533D85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83166EE11C63988F00533D85 /* ASDKBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKBaseObject.h; sourceTree = "<group>"; };
+		83166EE21C63988F00533D85 /* ASDKBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKBaseObject.m; sourceTree = "<group>"; };
+		83166EE41C63988F00533D85 /* ASDKCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCard.h; sourceTree = "<group>"; };
+		83166EE51C63988F00533D85 /* ASDKCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCard.m; sourceTree = "<group>"; };
+		83166EE71C63988F00533D85 /* ASDKAcquiringRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKAcquiringRequest.h; sourceTree = "<group>"; };
+		83166EE81C63988F00533D85 /* ASDKAcquiringRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKAcquiringRequest.m; sourceTree = "<group>"; };
+		83166EEA1C63988F00533D85 /* ASDKChargeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKChargeRequest.h; sourceTree = "<group>"; };
+		83166EEB1C63988F00533D85 /* ASDKChargeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKChargeRequest.m; sourceTree = "<group>"; };
+		83166EED1C63988F00533D85 /* ASDKFinishAuthorizeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKFinishAuthorizeRequest.h; sourceTree = "<group>"; };
+		83166EEE1C63988F00533D85 /* ASDKFinishAuthorizeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKFinishAuthorizeRequest.m; sourceTree = "<group>"; };
+		83166EF01C63988F00533D85 /* ASDKGetCardListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKGetCardListRequest.h; sourceTree = "<group>"; };
+		83166EF11C63988F00533D85 /* ASDKGetCardListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKGetCardListRequest.m; sourceTree = "<group>"; };
+		83166EF31C63988F00533D85 /* ASDKGetStateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKGetStateRequest.h; sourceTree = "<group>"; };
+		83166EF41C63988F00533D85 /* ASDKGetStateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKGetStateRequest.m; sourceTree = "<group>"; };
+		83166EF61C63988F00533D85 /* ASDKInitRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKInitRequest.h; sourceTree = "<group>"; };
+		83166EF71C63988F00533D85 /* ASDKInitRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKInitRequest.m; sourceTree = "<group>"; };
+		83166EF91C63988F00533D85 /* ASDKRemoveCardRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKRemoveCardRequest.h; sourceTree = "<group>"; };
+		83166EFA1C63988F00533D85 /* ASDKRemoveCardRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKRemoveCardRequest.m; sourceTree = "<group>"; };
+		83166EFC1C63988F00533D85 /* ASDKAcquiringResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKAcquiringResponse.h; sourceTree = "<group>"; };
+		83166EFD1C63988F00533D85 /* ASDKAcquiringResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKAcquiringResponse.m; sourceTree = "<group>"; };
+		83166EFF1C63988F00533D85 /* ASDKChargeResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKChargeResponse.h; sourceTree = "<group>"; };
+		83166F001C63988F00533D85 /* ASDKChargeResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKChargeResponse.m; sourceTree = "<group>"; };
+		83166F021C63988F00533D85 /* ASDKFinishAuthorizeResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKFinishAuthorizeResponse.h; sourceTree = "<group>"; };
+		83166F031C63988F00533D85 /* ASDKFinishAuthorizeResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKFinishAuthorizeResponse.m; sourceTree = "<group>"; };
+		83166F051C63988F00533D85 /* ASDKGetCardListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKGetCardListResponse.h; sourceTree = "<group>"; };
+		83166F061C63988F00533D85 /* ASDKGetCardListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKGetCardListResponse.m; sourceTree = "<group>"; };
+		83166F081C63988F00533D85 /* ASDKGetStateResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKGetStateResponse.h; sourceTree = "<group>"; };
+		83166F091C63988F00533D85 /* ASDKGetStateResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKGetStateResponse.m; sourceTree = "<group>"; };
+		83166F0B1C63988F00533D85 /* ASDKInitResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKInitResponse.h; sourceTree = "<group>"; };
+		83166F0C1C63988F00533D85 /* ASDKInitResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKInitResponse.m; sourceTree = "<group>"; };
+		83166F0E1C63988F00533D85 /* ASDKRemoveCardResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKRemoveCardResponse.h; sourceTree = "<group>"; };
+		83166F0F1C63988F00533D85 /* ASDKRemoveCardResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKRemoveCardResponse.m; sourceTree = "<group>"; };
+		83166F101C63988F00533D85 /* ASDKAcquiringApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKAcquiringApi.h; sourceTree = "<group>"; };
+		83166F111C63988F00533D85 /* ASDKAcquiringApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKAcquiringApi.m; sourceTree = "<group>"; };
+		83166F121C63988F00533D85 /* ASDKAcquiringSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKAcquiringSdk.h; sourceTree = "<group>"; };
+		83166F131C63988F00533D85 /* ASDKAcquiringSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKAcquiringSdk.m; sourceTree = "<group>"; };
+		83166F161C63988F00533D85 /* ASDKCryptoUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCryptoUtils.h; sourceTree = "<group>"; };
+		83166F171C63988F00533D85 /* ASDKCryptoUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCryptoUtils.m; sourceTree = "<group>"; };
+		83166F191C63988F00533D85 /* ASDKRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKRequestBuilder.h; sourceTree = "<group>"; };
+		83166F1A1C63988F00533D85 /* ASDKRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKRequestBuilder.m; sourceTree = "<group>"; };
+		83166F1C1C63988F00533D85 /* ASDKChargeRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKChargeRequestBuilder.h; sourceTree = "<group>"; };
+		83166F1D1C63988F00533D85 /* ASDKChargeRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKChargeRequestBuilder.m; sourceTree = "<group>"; };
+		83166F1F1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKFinishAuthorizeRequestBuilder.h; sourceTree = "<group>"; };
+		83166F201C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKFinishAuthorizeRequestBuilder.m; sourceTree = "<group>"; };
+		83166F221C63988F00533D85 /* ASDKGetCardListRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKGetCardListRequestBuilder.h; sourceTree = "<group>"; };
+		83166F231C63988F00533D85 /* ASDKGetCardListRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKGetCardListRequestBuilder.m; sourceTree = "<group>"; };
+		83166F251C63988F00533D85 /* ASDKGetStateRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKGetStateRequestBuilder.h; sourceTree = "<group>"; };
+		83166F261C63988F00533D85 /* ASDKGetStateRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKGetStateRequestBuilder.m; sourceTree = "<group>"; };
+		83166F281C63988F00533D85 /* ASDKInitRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKInitRequestBuilder.h; sourceTree = "<group>"; };
+		83166F291C63988F00533D85 /* ASDKInitRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKInitRequestBuilder.m; sourceTree = "<group>"; };
+		83166F2B1C63988F00533D85 /* ASDKRemoveCardRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKRemoveCardRequestBuilder.h; sourceTree = "<group>"; };
+		83166F2C1C63988F00533D85 /* ASDKRemoveCardRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKRemoveCardRequestBuilder.m; sourceTree = "<group>"; };
+		83871B7D1C6CC5EF00D69603 /* ASDKStringKeyCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKStringKeyCreator.h; sourceTree = "<group>"; };
+		83871B7E1C6CC5EF00D69603 /* ASDKStringKeyCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKStringKeyCreator.m; sourceTree = "<group>"; };
+		943FC86B1C6881650044C707 /* ASDKPaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKPaymentInfo.h; sourceTree = "<group>"; };
+		943FC86C1C6881650044C707 /* ASDKPaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKPaymentInfo.m; sourceTree = "<group>"; };
+		943FC86F1C6881F10044C707 /* ASDKThreeDsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKThreeDsData.h; sourceTree = "<group>"; };
+		943FC8701C6881F10044C707 /* ASDKThreeDsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKThreeDsData.m; sourceTree = "<group>"; };
+		946C39981C648F630036D1AF /* ASDKRSAEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKRSAEncryptor.h; sourceTree = "<group>"; };
+		946C39991C648F630036D1AF /* ASDKRSAEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKRSAEncryptor.m; sourceTree = "<group>"; };
+		946C399C1C648F940036D1AF /* ASDKCardData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCardData.h; sourceTree = "<group>"; };
+		946C399D1C648F940036D1AF /* ASDKCardData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCardData.m; sourceTree = "<group>"; };
+		946C39A21C64921A0036D1AF /* ASDKApiKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKApiKeys.h; sourceTree = "<group>"; };
+		9483E8E41C69C9A2007F029A /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSA.h; path = "../API Objects/Card/RSA.h"; sourceTree = "<group>"; };
+		9483E8E51C69C9A2007F029A /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSA.m; path = "../API Objects/Card/RSA.m"; sourceTree = "<group>"; };
+		BE1555341C7768EA00BEA6E1 /* ASDKAcquringSdkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKAcquringSdkError.h; sourceTree = "<group>"; };
+		BE1555351C7768EA00BEA6E1 /* ASDKAcquringSdkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKAcquringSdkError.m; sourceTree = "<group>"; };
+		BE1555381C77690400BEA6E1 /* ASDKAcquringApiError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKAcquringApiError.h; sourceTree = "<group>"; };
+		BE1555391C77690400BEA6E1 /* ASDKAcquringApiError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKAcquringApiError.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83166ECF1C63984E00533D85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83166EC91C63984E00533D85 = {
+			isa = PBXGroup;
+			children = (
+				83166ED51C63984E00533D85 /* ASDKCore */,
+				83166ED41C63984E00533D85 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83166ED41C63984E00533D85 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83166ED31C63984E00533D85 /* ASDKCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83166ED51C63984E00533D85 /* ASDKCore */ = {
+			isa = PBXGroup;
+			children = (
+				83166ED61C63984E00533D85 /* ASDKCore.h */,
+				83166ED81C63984E00533D85 /* Info.plist */,
+				83166EDE1C63988F00533D85 /* API Objects */,
+				83166F101C63988F00533D85 /* ASDKAcquiringApi.h */,
+				83166F111C63988F00533D85 /* ASDKAcquiringApi.m */,
+				83166F121C63988F00533D85 /* ASDKAcquiringSdk.h */,
+				83166F131C63988F00533D85 /* ASDKAcquiringSdk.m */,
+				946C39A21C64921A0036D1AF /* ASDKApiKeys.h */,
+				83166F151C63988F00533D85 /* CryptoUtils */,
+				83166F181C63988F00533D85 /* RequestBuilder */,
+			);
+			path = ASDKCore;
+			sourceTree = "<group>";
+		};
+		83166EDE1C63988F00533D85 /* API Objects */ = {
+			isa = PBXGroup;
+			children = (
+				BE1555331C77687200BEA6E1 /* Errors */,
+				83166EE11C63988F00533D85 /* ASDKBaseObject.h */,
+				83166EE21C63988F00533D85 /* ASDKBaseObject.m */,
+				83166EE31C63988F00533D85 /* Card */,
+				83166EE61C63988F00533D85 /* Request */,
+				83166EFB1C63988F00533D85 /* Response */,
+			);
+			path = "API Objects";
+			sourceTree = "<group>";
+		};
+		83166EE31C63988F00533D85 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				83166EE41C63988F00533D85 /* ASDKCard.h */,
+				83166EE51C63988F00533D85 /* ASDKCard.m */,
+				946C399C1C648F940036D1AF /* ASDKCardData.h */,
+				946C399D1C648F940036D1AF /* ASDKCardData.m */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
+		83166EE61C63988F00533D85 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				83166EE71C63988F00533D85 /* ASDKAcquiringRequest.h */,
+				83166EE81C63988F00533D85 /* ASDKAcquiringRequest.m */,
+				83166EE91C63988F00533D85 /* Charge */,
+				83166EEC1C63988F00533D85 /* FinishAuthorize */,
+				83166EEF1C63988F00533D85 /* GetCardList */,
+				83166EF21C63988F00533D85 /* GetState */,
+				83166EF51C63988F00533D85 /* Init */,
+				83166EF81C63988F00533D85 /* RemoveCard */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		83166EE91C63988F00533D85 /* Charge */ = {
+			isa = PBXGroup;
+			children = (
+				83166EEA1C63988F00533D85 /* ASDKChargeRequest.h */,
+				83166EEB1C63988F00533D85 /* ASDKChargeRequest.m */,
+			);
+			path = Charge;
+			sourceTree = "<group>";
+		};
+		83166EEC1C63988F00533D85 /* FinishAuthorize */ = {
+			isa = PBXGroup;
+			children = (
+				83166EED1C63988F00533D85 /* ASDKFinishAuthorizeRequest.h */,
+				83166EEE1C63988F00533D85 /* ASDKFinishAuthorizeRequest.m */,
+			);
+			path = FinishAuthorize;
+			sourceTree = "<group>";
+		};
+		83166EEF1C63988F00533D85 /* GetCardList */ = {
+			isa = PBXGroup;
+			children = (
+				83166EF01C63988F00533D85 /* ASDKGetCardListRequest.h */,
+				83166EF11C63988F00533D85 /* ASDKGetCardListRequest.m */,
+			);
+			path = GetCardList;
+			sourceTree = "<group>";
+		};
+		83166EF21C63988F00533D85 /* GetState */ = {
+			isa = PBXGroup;
+			children = (
+				83166EF31C63988F00533D85 /* ASDKGetStateRequest.h */,
+				83166EF41C63988F00533D85 /* ASDKGetStateRequest.m */,
+			);
+			path = GetState;
+			sourceTree = "<group>";
+		};
+		83166EF51C63988F00533D85 /* Init */ = {
+			isa = PBXGroup;
+			children = (
+				83166EF61C63988F00533D85 /* ASDKInitRequest.h */,
+				83166EF71C63988F00533D85 /* ASDKInitRequest.m */,
+			);
+			path = Init;
+			sourceTree = "<group>";
+		};
+		83166EF81C63988F00533D85 /* RemoveCard */ = {
+			isa = PBXGroup;
+			children = (
+				83166EF91C63988F00533D85 /* ASDKRemoveCardRequest.h */,
+				83166EFA1C63988F00533D85 /* ASDKRemoveCardRequest.m */,
+			);
+			path = RemoveCard;
+			sourceTree = "<group>";
+		};
+		83166EFB1C63988F00533D85 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				83166EFC1C63988F00533D85 /* ASDKAcquiringResponse.h */,
+				83166EFD1C63988F00533D85 /* ASDKAcquiringResponse.m */,
+				943FC8691C6881550044C707 /* PaymentInfo */,
+				943FC86A1C6881550044C707 /* ThreeDsData */,
+				83166EFE1C63988F00533D85 /* Charge */,
+				83166F011C63988F00533D85 /* FinishAuthorize */,
+				83166F041C63988F00533D85 /* GetCardList */,
+				83166F071C63988F00533D85 /* GetState */,
+				83166F0A1C63988F00533D85 /* Init */,
+				83166F0D1C63988F00533D85 /* RemoveCard */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		83166EFE1C63988F00533D85 /* Charge */ = {
+			isa = PBXGroup;
+			children = (
+				83166EFF1C63988F00533D85 /* ASDKChargeResponse.h */,
+				83166F001C63988F00533D85 /* ASDKChargeResponse.m */,
+			);
+			path = Charge;
+			sourceTree = "<group>";
+		};
+		83166F011C63988F00533D85 /* FinishAuthorize */ = {
+			isa = PBXGroup;
+			children = (
+				83166F021C63988F00533D85 /* ASDKFinishAuthorizeResponse.h */,
+				83166F031C63988F00533D85 /* ASDKFinishAuthorizeResponse.m */,
+			);
+			path = FinishAuthorize;
+			sourceTree = "<group>";
+		};
+		83166F041C63988F00533D85 /* GetCardList */ = {
+			isa = PBXGroup;
+			children = (
+				83166F051C63988F00533D85 /* ASDKGetCardListResponse.h */,
+				83166F061C63988F00533D85 /* ASDKGetCardListResponse.m */,
+			);
+			path = GetCardList;
+			sourceTree = "<group>";
+		};
+		83166F071C63988F00533D85 /* GetState */ = {
+			isa = PBXGroup;
+			children = (
+				83166F081C63988F00533D85 /* ASDKGetStateResponse.h */,
+				83166F091C63988F00533D85 /* ASDKGetStateResponse.m */,
+			);
+			path = GetState;
+			sourceTree = "<group>";
+		};
+		83166F0A1C63988F00533D85 /* Init */ = {
+			isa = PBXGroup;
+			children = (
+				83166F0B1C63988F00533D85 /* ASDKInitResponse.h */,
+				83166F0C1C63988F00533D85 /* ASDKInitResponse.m */,
+			);
+			path = Init;
+			sourceTree = "<group>";
+		};
+		83166F0D1C63988F00533D85 /* RemoveCard */ = {
+			isa = PBXGroup;
+			children = (
+				83166F0E1C63988F00533D85 /* ASDKRemoveCardResponse.h */,
+				83166F0F1C63988F00533D85 /* ASDKRemoveCardResponse.m */,
+			);
+			path = RemoveCard;
+			sourceTree = "<group>";
+		};
+		83166F151C63988F00533D85 /* CryptoUtils */ = {
+			isa = PBXGroup;
+			children = (
+				9483E8E41C69C9A2007F029A /* RSA.h */,
+				9483E8E51C69C9A2007F029A /* RSA.m */,
+				83871B7D1C6CC5EF00D69603 /* ASDKStringKeyCreator.h */,
+				83871B7E1C6CC5EF00D69603 /* ASDKStringKeyCreator.m */,
+				83166F161C63988F00533D85 /* ASDKCryptoUtils.h */,
+				83166F171C63988F00533D85 /* ASDKCryptoUtils.m */,
+				946C39981C648F630036D1AF /* ASDKRSAEncryptor.h */,
+				946C39991C648F630036D1AF /* ASDKRSAEncryptor.m */,
+			);
+			path = CryptoUtils;
+			sourceTree = "<group>";
+		};
+		83166F181C63988F00533D85 /* RequestBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				83166F191C63988F00533D85 /* ASDKRequestBuilder.h */,
+				83166F1A1C63988F00533D85 /* ASDKRequestBuilder.m */,
+				83166F1B1C63988F00533D85 /* Charge */,
+				83166F1E1C63988F00533D85 /* FinishAuthorize */,
+				83166F211C63988F00533D85 /* GetCardList */,
+				83166F241C63988F00533D85 /* GetState */,
+				83166F271C63988F00533D85 /* Init */,
+				83166F2A1C63988F00533D85 /* RemoveCard */,
+			);
+			path = RequestBuilder;
+			sourceTree = "<group>";
+		};
+		83166F1B1C63988F00533D85 /* Charge */ = {
+			isa = PBXGroup;
+			children = (
+				83166F1C1C63988F00533D85 /* ASDKChargeRequestBuilder.h */,
+				83166F1D1C63988F00533D85 /* ASDKChargeRequestBuilder.m */,
+			);
+			path = Charge;
+			sourceTree = "<group>";
+		};
+		83166F1E1C63988F00533D85 /* FinishAuthorize */ = {
+			isa = PBXGroup;
+			children = (
+				83166F1F1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.h */,
+				83166F201C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.m */,
+			);
+			path = FinishAuthorize;
+			sourceTree = "<group>";
+		};
+		83166F211C63988F00533D85 /* GetCardList */ = {
+			isa = PBXGroup;
+			children = (
+				83166F221C63988F00533D85 /* ASDKGetCardListRequestBuilder.h */,
+				83166F231C63988F00533D85 /* ASDKGetCardListRequestBuilder.m */,
+			);
+			path = GetCardList;
+			sourceTree = "<group>";
+		};
+		83166F241C63988F00533D85 /* GetState */ = {
+			isa = PBXGroup;
+			children = (
+				83166F251C63988F00533D85 /* ASDKGetStateRequestBuilder.h */,
+				83166F261C63988F00533D85 /* ASDKGetStateRequestBuilder.m */,
+			);
+			path = GetState;
+			sourceTree = "<group>";
+		};
+		83166F271C63988F00533D85 /* Init */ = {
+			isa = PBXGroup;
+			children = (
+				83166F281C63988F00533D85 /* ASDKInitRequestBuilder.h */,
+				83166F291C63988F00533D85 /* ASDKInitRequestBuilder.m */,
+			);
+			path = Init;
+			sourceTree = "<group>";
+		};
+		83166F2A1C63988F00533D85 /* RemoveCard */ = {
+			isa = PBXGroup;
+			children = (
+				83166F2B1C63988F00533D85 /* ASDKRemoveCardRequestBuilder.h */,
+				83166F2C1C63988F00533D85 /* ASDKRemoveCardRequestBuilder.m */,
+			);
+			path = RemoveCard;
+			sourceTree = "<group>";
+		};
+		943FC8691C6881550044C707 /* PaymentInfo */ = {
+			isa = PBXGroup;
+			children = (
+				943FC86B1C6881650044C707 /* ASDKPaymentInfo.h */,
+				943FC86C1C6881650044C707 /* ASDKPaymentInfo.m */,
+			);
+			path = PaymentInfo;
+			sourceTree = "<group>";
+		};
+		943FC86A1C6881550044C707 /* ThreeDsData */ = {
+			isa = PBXGroup;
+			children = (
+				943FC86F1C6881F10044C707 /* ASDKThreeDsData.h */,
+				943FC8701C6881F10044C707 /* ASDKThreeDsData.m */,
+			);
+			path = ThreeDsData;
+			sourceTree = "<group>";
+		};
+		BE1555331C77687200BEA6E1 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				BE1555341C7768EA00BEA6E1 /* ASDKAcquringSdkError.h */,
+				BE1555351C7768EA00BEA6E1 /* ASDKAcquringSdkError.m */,
+				BE1555381C77690400BEA6E1 /* ASDKAcquringApiError.h */,
+				BE1555391C77690400BEA6E1 /* ASDKAcquringApiError.m */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		83166ED01C63984E00533D85 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE15553A1C77690400BEA6E1 /* ASDKAcquringApiError.h in Headers */,
+				83166F511C63988F00533D85 /* ASDKAcquiringSdk.h in Headers */,
+				83166F5A1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.h in Headers */,
+				83166F561C63988F00533D85 /* ASDKRequestBuilder.h in Headers */,
+				83166F391C63988F00533D85 /* ASDKGetCardListRequest.h in Headers */,
+				83166F4B1C63988F00533D85 /* ASDKInitResponse.h in Headers */,
+				83166F3B1C63988F00533D85 /* ASDKGetStateRequest.h in Headers */,
+				BE1555361C7768EA00BEA6E1 /* ASDKAcquringSdkError.h in Headers */,
+				83166F581C63988F00533D85 /* ASDKChargeRequestBuilder.h in Headers */,
+				83166F2F1C63988F00533D85 /* ASDKBaseObject.h in Headers */,
+				83166F5E1C63988F00533D85 /* ASDKGetStateRequestBuilder.h in Headers */,
+				83166F541C63988F00533D85 /* ASDKCryptoUtils.h in Headers */,
+				83166F5C1C63988F00533D85 /* ASDKGetCardListRequestBuilder.h in Headers */,
+				83166F471C63988F00533D85 /* ASDKGetCardListResponse.h in Headers */,
+				83166F601C63988F00533D85 /* ASDKInitRequestBuilder.h in Headers */,
+				83166F331C63988F00533D85 /* ASDKAcquiringRequest.h in Headers */,
+				83166F621C63988F00533D85 /* ASDKRemoveCardRequestBuilder.h in Headers */,
+				946C399A1C648F630036D1AF /* ASDKRSAEncryptor.h in Headers */,
+				83166F351C63988F00533D85 /* ASDKChargeRequest.h in Headers */,
+				BE7E027C1C73407600DF6230 /* ASDKCard.h in Headers */,
+				83166F411C63988F00533D85 /* ASDKAcquiringResponse.h in Headers */,
+				946C399E1C648F940036D1AF /* ASDKCardData.h in Headers */,
+				943FC86D1C6881650044C707 /* ASDKPaymentInfo.h in Headers */,
+				83166F4F1C63988F00533D85 /* ASDKAcquiringApi.h in Headers */,
+				943FC8711C6881F10044C707 /* ASDKThreeDsData.h in Headers */,
+				83166F451C63988F00533D85 /* ASDKFinishAuthorizeResponse.h in Headers */,
+				83166ED71C63984E00533D85 /* ASDKCore.h in Headers */,
+				83166F431C63988F00533D85 /* ASDKChargeResponse.h in Headers */,
+				83166F3F1C63988F00533D85 /* ASDKRemoveCardRequest.h in Headers */,
+				946C39A31C64921A0036D1AF /* ASDKApiKeys.h in Headers */,
+				83166F371C63988F00533D85 /* ASDKFinishAuthorizeRequest.h in Headers */,
+				83166F4D1C63988F00533D85 /* ASDKRemoveCardResponse.h in Headers */,
+				9483E8E61C69C9A2007F029A /* RSA.h in Headers */,
+				83166F3D1C63988F00533D85 /* ASDKInitRequest.h in Headers */,
+				83166F491C63988F00533D85 /* ASDKGetStateResponse.h in Headers */,
+				83871B7F1C6CC5EF00D69603 /* ASDKStringKeyCreator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		83166ED21C63984E00533D85 /* ASDKCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83166EDB1C63984E00533D85 /* Build configuration list for PBXNativeTarget "ASDKCore" */;
+			buildPhases = (
+				83166ECE1C63984E00533D85 /* Sources */,
+				83166ECF1C63984E00533D85 /* Frameworks */,
+				83166ED01C63984E00533D85 /* Headers */,
+				83166ED11C63984E00533D85 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ASDKCore;
+			productName = ASDKCore;
+			productReference = 83166ED31C63984E00533D85 /* ASDKCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83166ECA1C63984E00533D85 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ASDK;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "TCS Bank";
+				TargetAttributes = {
+					83166ED21C63984E00533D85 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					8316723A1C6477E300533D85 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 83166ECD1C63984E00533D85 /* Build configuration list for PBXProject "ASDKCore" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83166EC91C63984E00533D85;
+			productRefGroup = 83166ED41C63984E00533D85 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83166ED21C63984E00533D85 /* ASDKCore */,
+				8316723A1C6477E300533D85 /* ASDKCore-universal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83166ED11C63984E00533D85 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8316723E1C6477ED00533D85 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"ASDKCore\"\nSAMPLEAPP_NAME=\"ASDKSampleApp\"\n\nUNIVERSAL_OUTPUTFOLDER=${SRCROOT}/Builds/Core-${CONFIGURATION}-universal\nIPHONE_DEVICE_BUILD_DIR=${SRCROOT}/Builds/Core-${CONFIGURATION}-iphoneos\nIPHONE_SIMULATOR_BUILD_DIR=${SRCROOT}/Builds/Core-${CONFIGURATION}-iphonesimulator\n\nSAMPLEAPP_FRAMEWORKFOLDER=${SRCROOT}/\"SampleProject\"/${SAMPLEAPP_NAME}/\"ASDK\"\n\n# 3\n# If remnants from a previous build exist, delete them.\n\nif [ -d \"${UNIVERSAL_OUTPUTFOLDER}\" ]; then\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}\"\nfi\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\nif [ -d \"${IPHONE_DEVICE_BUILD_DIR}\" ]; then\nrm -rf \"${IPHONE_DEVICE_BUILD_DIR}\"\nfi\nmkdir -p \"${IPHONE_DEVICE_BUILD_DIR}\"\n\nif [ -d \"${IPHONE_SIMULATOR_BUILD_DIR}\" ]; then\nrm -rf \"${IPHONE_SIMULATOR_BUILD_DIR}\"\nfi\nmkdir -p \"${IPHONE_SIMULATOR_BUILD_DIR}\"\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\n\nxcodebuild -project \"ASDKCore.xcodeproj\" -target \"ASDKCore\" -configuration \"${CONFIGURATION}\" clean build -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk iphoneos CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}\" OTHER_CFLAGS=\"-fembed-bitcode\"\n\nxcodebuild -project \"ASDKCore.xcodeproj\" -target \"ASDKCore\" -configuration \"${CONFIGURATION}\" clean build -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk iphonesimulator CONFIGURATION_BUILD_DIR=\"${IPHONE_SIMULATOR_BUILD_DIR}\" OTHER_CFLAGS=\"-fembed-bitcode\"\n\n\n\n# 5\n# Remove .framework file if exists on Desktop from previous run.\nif [ -d \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Copy the device version of framework to Desktop.\ncp -r \"${IPHONE_DEVICE_BUILD_DIR}/${FRAMEWORK_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework\"\n\n# 7\n# Replace the framework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${IPHONE_DEVICE_BUILD_DIR}/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${IPHONE_SIMULATOR_BUILD_DIR}/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 8\n# Copy the Swift module mappings for the simulator into the\n# framework.  The device mappings already exist from step 6.\nif [ -d \"${IPHONE_SIMULATOR_BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules/{FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -r \"${IPHONE_SIMULATOR_BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/\" \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule\"\nfi\n\n# 9\n# Delete the most recent build.\nif [ -d \"${IPHONE_DEVICE_BUILD_DIR}\" ]; then\nrm -rf \"${IPHONE_DEVICE_BUILD_DIR}\"\nfi\n\nif [ -d \"${IPHONE_SIMULATOR_BUILD_DIR}\" ]; then\nrm -rf \"${IPHONE_SIMULATOR_BUILD_DIR}\"\nfi\n\nif [ -d \"${SAMPLEAPP_FRAMEWORKFOLDER}/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${SAMPLEAPP_FRAMEWORKFOLDER}/${FRAMEWORK_NAME}.framework\"\n\ncp -r \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework\" \"${SAMPLEAPP_FRAMEWORKFOLDER}\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83166ECE1C63984E00533D85 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9483E8E71C69C9A2007F029A /* RSA.m in Sources */,
+				83166F591C63988F00533D85 /* ASDKChargeRequestBuilder.m in Sources */,
+				83166F5B1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.m in Sources */,
+				943FC8721C6881F10044C707 /* ASDKThreeDsData.m in Sources */,
+				83166F4E1C63988F00533D85 /* ASDKRemoveCardResponse.m in Sources */,
+				943FC86E1C6881650044C707 /* ASDKPaymentInfo.m in Sources */,
+				83166F461C63988F00533D85 /* ASDKFinishAuthorizeResponse.m in Sources */,
+				83166F571C63988F00533D85 /* ASDKRequestBuilder.m in Sources */,
+				83166F401C63988F00533D85 /* ASDKRemoveCardRequest.m in Sources */,
+				BE15553B1C77690400BEA6E1 /* ASDKAcquringApiError.m in Sources */,
+				83166F3A1C63988F00533D85 /* ASDKGetCardListRequest.m in Sources */,
+				83166F4C1C63988F00533D85 /* ASDKInitResponse.m in Sources */,
+				83166F521C63988F00533D85 /* ASDKAcquiringSdk.m in Sources */,
+				83166F3E1C63988F00533D85 /* ASDKInitRequest.m in Sources */,
+				946C399F1C648F940036D1AF /* ASDKCardData.m in Sources */,
+				83166F441C63988F00533D85 /* ASDKChargeResponse.m in Sources */,
+				83166F631C63988F00533D85 /* ASDKRemoveCardRequestBuilder.m in Sources */,
+				83166F341C63988F00533D85 /* ASDKAcquiringRequest.m in Sources */,
+				83166F481C63988F00533D85 /* ASDKGetCardListResponse.m in Sources */,
+				BE1555371C7768EA00BEA6E1 /* ASDKAcquringSdkError.m in Sources */,
+				83166F381C63988F00533D85 /* ASDKFinishAuthorizeRequest.m in Sources */,
+				83166F5F1C63988F00533D85 /* ASDKGetStateRequestBuilder.m in Sources */,
+				83166F301C63988F00533D85 /* ASDKBaseObject.m in Sources */,
+				83166F361C63988F00533D85 /* ASDKChargeRequest.m in Sources */,
+				83166F421C63988F00533D85 /* ASDKAcquiringResponse.m in Sources */,
+				83871B801C6CC5EF00D69603 /* ASDKStringKeyCreator.m in Sources */,
+				83166F501C63988F00533D85 /* ASDKAcquiringApi.m in Sources */,
+				83166F4A1C63988F00533D85 /* ASDKGetStateResponse.m in Sources */,
+				83166F5D1C63988F00533D85 /* ASDKGetCardListRequestBuilder.m in Sources */,
+				83166F3C1C63988F00533D85 /* ASDKGetStateRequest.m in Sources */,
+				83166F551C63988F00533D85 /* ASDKCryptoUtils.m in Sources */,
+				946C399B1C648F630036D1AF /* ASDKRSAEncryptor.m in Sources */,
+				83166F611C63988F00533D85 /* ASDKInitRequestBuilder.m in Sources */,
+				83166F321C63988F00533D85 /* ASDKCard.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		83166ED91C63984E00533D85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		83166EDA1C63984E00533D85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		83166EDC1C63984E00533D85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ASDKCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKCore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+			};
+			name = Debug;
+		};
+		83166EDD1C63984E00533D85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ASDKCore/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKCore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+			};
+			name = Release;
+		};
+		8316723C1C6477E300533D85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8316723D1C6477E300533D85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83166ECD1C63984E00533D85 /* Build configuration list for PBXProject "ASDKCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83166ED91C63984E00533D85 /* Debug */,
+				83166EDA1C63984E00533D85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83166EDB1C63984E00533D85 /* Build configuration list for PBXNativeTarget "ASDKCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83166EDC1C63984E00533D85 /* Debug */,
+				83166EDD1C63984E00533D85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8316723B1C6477E300533D85 /* Build configuration list for PBXAggregateTarget "ASDKCore-universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8316723C1C6477E300533D85 /* Debug */,
+				8316723D1C6477E300533D85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83166ECA1C63984E00533D85 /* Project object */;
+}

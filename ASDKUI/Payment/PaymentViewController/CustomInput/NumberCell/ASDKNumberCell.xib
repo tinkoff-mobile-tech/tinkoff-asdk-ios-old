@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ASDKNumberCell" id="gTV-IL-0wX" customClass="ASDKNumberCell">
+            <rect key="frame" x="0.0" y="0.0" width="106" height="54"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="106" height="54"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vj1-yM-TW3" customClass="ASDKHighlightedButton">
+                        <rect key="frame" x="0.0" y="0.0" width="106" height="54"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="25"/>
+                        <state key="normal">
+                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </state>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jM-Ud-nxv" userLabel="bottomSeparator">
+                        <rect key="frame" x="0.0" y="53" width="105" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="xtd-P2-21R"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aD2-r6-vhx" userLabel="rightSeparator">
+                        <rect key="frame" x="105" y="0.0" width="1" height="54"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="zW3-nT-hDC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="1jM-Ud-nxv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CMr-C5-hTe"/>
+                <constraint firstAttribute="bottom" secondItem="1jM-Ud-nxv" secondAttribute="bottom" id="Lr7-Ll-Fuo"/>
+                <constraint firstAttribute="bottom" secondItem="aD2-r6-vhx" secondAttribute="bottom" id="Oxi-48-1fr"/>
+                <constraint firstAttribute="trailing" secondItem="Vj1-yM-TW3" secondAttribute="trailing" id="TXc-l7-xal"/>
+                <constraint firstAttribute="trailing" secondItem="aD2-r6-vhx" secondAttribute="trailing" id="TyI-9R-Llz"/>
+                <constraint firstAttribute="bottom" secondItem="Vj1-yM-TW3" secondAttribute="bottom" id="XWb-vE-a32"/>
+                <constraint firstItem="Vj1-yM-TW3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cRp-oW-SWL"/>
+                <constraint firstItem="aD2-r6-vhx" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gwn-tX-Uuc"/>
+                <constraint firstItem="Vj1-yM-TW3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jSX-cX-Y9T"/>
+                <constraint firstAttribute="trailing" secondItem="1jM-Ud-nxv" secondAttribute="trailing" constant="1" id="lax-uE-e3D"/>
+            </constraints>
+            <connections>
+                <outlet property="bottomSeparator" destination="1jM-Ud-nxv" id="Dmx-Rv-2Xg"/>
+                <outlet property="bottomSeparatorHeight" destination="xtd-P2-21R" id="bkm-9j-H5F"/>
+                <outlet property="bottomSeparatorTrailing" destination="lax-uE-e3D" id="QNy-YV-wxE"/>
+                <outlet property="numberButton" destination="Vj1-yM-TW3" id="UkM-HN-kYH"/>
+                <outlet property="rightSeparator" destination="aD2-r6-vhx" id="6VI-Nj-b0f"/>
+                <outlet property="rightSeparatorWidth" destination="zW3-nT-hDC" id="fLK-Xh-km3"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

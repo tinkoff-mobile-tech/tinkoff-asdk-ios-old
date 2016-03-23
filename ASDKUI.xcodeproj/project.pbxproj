@@ -1,0 +1,973 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		8316725A1C6479A200533D85 /* ASDKUI-universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8316725B1C6479A200533D85 /* Build configuration list for PBXAggregateTarget "ASDKUI-universal" */;
+			buildPhases = (
+				8316725E1C6479DE00533D85 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "ASDKUI-universal";
+			productName = "ASDKUI-universal";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		83129AFF1C68CAAD00A1F5DE /* ASDKMacroses.h in Headers */ = {isa = PBXBuildFile; fileRef = 83129AFE1C68CAAD00A1F5DE /* ASDKMacroses.h */; };
+		831672531C64798800533D85 /* ASDKUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 831672521C64798800533D85 /* ASDKUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		831672681C647A3400533D85 /* ASDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831672651C647A1200533D85 /* ASDKCore.framework */; };
+		8333793F1C7470E20097208D /* ASDKBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8333793D1C7470E20097208D /* ASDKBarButtonItem.h */; };
+		833379401C7470E20097208D /* ASDKBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8333793E1C7470E20097208D /* ASDKBarButtonItem.m */; };
+		83E156451C71AE6F000BBD57 /* ASDKUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E156431C71AE6F000BBD57 /* ASDKUtils.h */; };
+		83E156461C71AE6F000BBD57 /* ASDKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E156441C71AE6F000BBD57 /* ASDKUtils.m */; };
+		83E1564B1C71B17B000BBD57 /* ASDKBaseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E156491C71B17B000BBD57 /* ASDKBaseViewController.h */; };
+		83E1564C1C71B17B000BBD57 /* ASDKBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1564A1C71B17B000BBD57 /* ASDKBaseViewController.m */; };
+		83E1564F1C71B201000BBD57 /* ASDKBaseTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E1564D1C71B201000BBD57 /* ASDKBaseTableViewController.h */; };
+		83E156501C71B201000BBD57 /* ASDKBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1564E1C71B201000BBD57 /* ASDKBaseTableViewController.m */; };
+		83E156531C71B526000BBD57 /* ASDKBaseCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E156511C71B526000BBD57 /* ASDKBaseCell.h */; };
+		83E156541C71B526000BBD57 /* ASDKBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E156521C71B526000BBD57 /* ASDKBaseCell.m */; };
+		83E156571C71C3B5000BBD57 /* ASDKDesign.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E156551C71C3B5000BBD57 /* ASDKDesign.h */; };
+		83E156581C71C3B5000BBD57 /* ASDKDesign.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E156561C71C3B5000BBD57 /* ASDKDesign.m */; };
+		83E1565B1C7201AA000BBD57 /* ASDKNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E156591C7201AA000BBD57 /* ASDKNavigationController.h */; };
+		83E1565C1C7201AA000BBD57 /* ASDKNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1565A1C7201AA000BBD57 /* ASDKNavigationController.m */; };
+		83E156611C720A20000BBD57 /* ASDKLoaderViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E1565F1C720A20000BBD57 /* ASDKLoaderViewController.h */; };
+		83E156621C720A20000BBD57 /* ASDKLoaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E156601C720A20000BBD57 /* ASDKLoaderViewController.m */; };
+		83E156641C720A31000BBD57 /* ASDKLoaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E156631C720A31000BBD57 /* ASDKLoaderViewController.xib */; };
+		83E1566F1C731C8A000BBD57 /* ASDKExternalCardsCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E1566D1C731C8A000BBD57 /* ASDKExternalCardsCell.h */; };
+		83E156701C731C8A000BBD57 /* ASDKExternalCardsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1566E1C731C8A000BBD57 /* ASDKExternalCardsCell.m */; };
+		83E156721C731CFD000BBD57 /* ASDKExternalCardsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E156711C731CFD000BBD57 /* ASDKExternalCardsCell.xib */; };
+		83E1567D1C737439000BBD57 /* ASDKFooterCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E1567A1C737439000BBD57 /* ASDKFooterCell.h */; };
+		83E1567E1C737439000BBD57 /* ASDKFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1567B1C737439000BBD57 /* ASDKFooterCell.m */; };
+		83E1567F1C737439000BBD57 /* ASDKFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83E1567C1C737439000BBD57 /* ASDKFooterCell.xib */; };
+		83E156831C746474000BBD57 /* ASDKDesignConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E156811C746474000BBD57 /* ASDKDesignConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		83E156841C746474000BBD57 /* ASDKDesignConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E156821C746474000BBD57 /* ASDKDesignConfiguration.m */; };
+		94AA136A1C68D32F006FBC7E /* UIView+AutoLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 94AA13681C68D32F006FBC7E /* UIView+AutoLayout.h */; };
+		94AA136B1C68D32F006FBC7E /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AA13691C68D32F006FBC7E /* UIView+AutoLayout.m */; };
+		94C5BCBA1C6B3E0300542BC8 /* ASDK3DSViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C5BCB71C6B3E0300542BC8 /* ASDK3DSViewController.h */; };
+		94C5BCBB1C6B3E0300542BC8 /* ASDK3DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C5BCB81C6B3E0300542BC8 /* ASDK3DSViewController.m */; };
+		94C5BCBC1C6B3E0300542BC8 /* ASDK3DSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C5BCB91C6B3E0300542BC8 /* ASDK3DSViewController.xib */; };
+		94C86A051C6B2E5100046F0E /* ASDKUIImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94C86A001C6B2E5100046F0E /* ASDKUIImages.xcassets */; };
+		94C86A061C6B2E5100046F0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94C86A021C6B2E5100046F0E /* Localizable.strings */; };
+		94C86A1C1C6B304900046F0E /* ASDKPaymentFormStarter.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C86A0B1C6B304900046F0E /* ASDKPaymentFormStarter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		94C86A1D1C6B304900046F0E /* ASDKPaymentFormStarter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C86A0C1C6B304900046F0E /* ASDKPaymentFormStarter.m */; };
+		94C86A1E1C6B304900046F0E /* ASDKPaymentFormViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C86A0E1C6B304900046F0E /* ASDKPaymentFormViewController.h */; };
+		94C86A1F1C6B304900046F0E /* ASDKPaymentFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C86A0F1C6B304900046F0E /* ASDKPaymentFormViewController.m */; };
+		94C86A201C6B304900046F0E /* ASDKEmailCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C86A111C6B304900046F0E /* ASDKEmailCell.h */; };
+		94C86A211C6B304900046F0E /* ASDKEmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C86A121C6B304900046F0E /* ASDKEmailCell.m */; };
+		94C86A221C6B304900046F0E /* ASDKEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C86A131C6B304900046F0E /* ASDKEmailCell.xib */; };
+		94C86A231C6B304900046F0E /* ASDKCardInputTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C86A151C6B304900046F0E /* ASDKCardInputTableViewCell.h */; };
+		94C86A241C6B304900046F0E /* ASDKCardInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C86A161C6B304900046F0E /* ASDKCardInputTableViewCell.m */; };
+		94C86A251C6B304900046F0E /* ASDKCardInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C86A171C6B304900046F0E /* ASDKCardInputTableViewCell.xib */; };
+		94C86A261C6B304900046F0E /* ASDKLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C86A181C6B304900046F0E /* ASDKLabel.h */; };
+		94C86A271C6B304900046F0E /* ASDKLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C86A191C6B304900046F0E /* ASDKLabel.m */; };
+		94C86A281C6B304900046F0E /* ASDKTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C86A1A1C6B304900046F0E /* ASDKTextField.h */; };
+		94C86A291C6B304900046F0E /* ASDKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C86A1B1C6B304900046F0E /* ASDKTextField.m */; };
+		BE4029E11C731DA1003FFBDD /* ASDKCardsListViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4029DF1C731DA1003FFBDD /* ASDKCardsListViewController.h */; };
+		BE4029E21C731DA1003FFBDD /* ASDKCardsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4029E01C731DA1003FFBDD /* ASDKCardsListViewController.m */; };
+		BE7E02751C733D0F00DF6230 /* ASDKCardCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E02721C733D0F00DF6230 /* ASDKCardCell.h */; };
+		BE7E02761C733D0F00DF6230 /* ASDKCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E02731C733D0F00DF6230 /* ASDKCardCell.m */; };
+		BE7E02771C733D0F00DF6230 /* ASDKCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7E02741C733D0F00DF6230 /* ASDKCardCell.xib */; };
+		BE7E02811C7354F900DF6230 /* ASDKAddNewCardCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E027E1C7354F900DF6230 /* ASDKAddNewCardCell.h */; };
+		BE7E02821C7354F900DF6230 /* ASDKAddNewCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E027F1C7354F900DF6230 /* ASDKAddNewCardCell.m */; };
+		BE7E02831C7354F900DF6230 /* ASDKAddNewCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7E02801C7354F900DF6230 /* ASDKAddNewCardCell.xib */; };
+		BEB3F8C41C7DF171003771A4 /* ASDKCardsListDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = BEB3F8C21C7DF171003771A4 /* ASDKCardsListDataController.h */; };
+		BEB3F8C51C7DF171003771A4 /* ASDKCardsListDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB3F8C31C7DF171003771A4 /* ASDKCardsListDataController.m */; };
+		BEDEFF851C75A4CF0026D454 /* ASDKCardInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BEDEFF821C75A4CF0026D454 /* ASDKCardInputViewController.h */; };
+		BEDEFF861C75A4CF0026D454 /* ASDKCardInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDEFF831C75A4CF0026D454 /* ASDKCardInputViewController.m */; };
+		BEDEFF871C75A4CF0026D454 /* ASDKCardInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF841C75A4CF0026D454 /* ASDKCardInputViewController.xib */; };
+		BEDEFF8C1C75A6780026D454 /* ASDKNumberCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BEDEFF891C75A6780026D454 /* ASDKNumberCell.h */; };
+		BEDEFF8D1C75A6780026D454 /* ASDKNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDEFF8A1C75A6780026D454 /* ASDKNumberCell.m */; };
+		BEDEFF8E1C75A6780026D454 /* ASDKNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF8B1C75A6780026D454 /* ASDKNumberCell.xib */; };
+		BEDEFF951C75FC330026D454 /* ASDKDeleteCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BEDEFF921C75FC330026D454 /* ASDKDeleteCell.h */; };
+		BEDEFF961C75FC330026D454 /* ASDKDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDEFF931C75FC330026D454 /* ASDKDeleteCell.m */; };
+		BEDEFF971C75FC330026D454 /* ASDKDeleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF941C75FC330026D454 /* ASDKDeleteCell.xib */; };
+		BEDEFFA91C761C370026D454 /* ASDKHighlightedButton.h in Headers */ = {isa = PBXBuildFile; fileRef = BEDEFFA71C761C370026D454 /* ASDKHighlightedButton.h */; };
+		BEDEFFAA1C761C370026D454 /* ASDKHighlightedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDEFFA81C761C370026D454 /* ASDKHighlightedButton.m */; };
+		BEDEFFAE1C761CFD0026D454 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDEFFAD1C761CFD0026D454 /* AudioToolbox.framework */; };
+		CA82FD1E1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = CA82FD1C1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.h */; };
+		CA82FD1F1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA82FD1D1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.m */; };
+		CA82FD211C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA82FD201C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib */; };
+		CA82FD261C70F811005FD294 /* ASDKPaymentFormSummCell.h in Headers */ = {isa = PBXBuildFile; fileRef = CA82FD231C70F811005FD294 /* ASDKPaymentFormSummCell.h */; };
+		CA82FD271C70F811005FD294 /* ASDKPaymentFormSummCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA82FD241C70F811005FD294 /* ASDKPaymentFormSummCell.m */; };
+		CA82FD281C70F811005FD294 /* ASDKPaymentFormSummCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA82FD251C70F811005FD294 /* ASDKPaymentFormSummCell.xib */; };
+		CAB1A6911C70FCBF00D2A252 /* ASDKPayButtonCell.h in Headers */ = {isa = PBXBuildFile; fileRef = CAB1A68E1C70FCBF00D2A252 /* ASDKPayButtonCell.h */; };
+		CAB1A6921C70FCBF00D2A252 /* ASDKPayButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB1A68F1C70FCBF00D2A252 /* ASDKPayButtonCell.m */; };
+		CAB1A6931C70FCBF00D2A252 /* ASDKPayButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAB1A6901C70FCBF00D2A252 /* ASDKPayButtonCell.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		831672641C647A1200533D85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8316725F1C647A1200533D85 /* ASDKCore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 83166ED31C63984E00533D85;
+			remoteInfo = ASDKCore;
+		};
+		831672661C647A2E00533D85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8316725F1C647A1200533D85 /* ASDKCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 83166ED21C63984E00533D85;
+			remoteInfo = ASDKCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		83129AFE1C68CAAD00A1F5DE /* ASDKMacroses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKMacroses.h; sourceTree = "<group>"; };
+		8316724F1C64798800533D85 /* ASDKUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ASDKUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		831672521C64798800533D85 /* ASDKUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKUI.h; sourceTree = "<group>"; };
+		831672541C64798800533D85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8316725F1C647A1200533D85 /* ASDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ASDKCore.xcodeproj; sourceTree = "<group>"; };
+		831672AB1C64925700533D85 /* ASDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ASDKCore.framework; sourceTree = "<group>"; };
+		8333793D1C7470E20097208D /* ASDKBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKBarButtonItem.h; sourceTree = "<group>"; };
+		8333793E1C7470E20097208D /* ASDKBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKBarButtonItem.m; sourceTree = "<group>"; };
+		83E156431C71AE6F000BBD57 /* ASDKUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKUtils.h; sourceTree = "<group>"; };
+		83E156441C71AE6F000BBD57 /* ASDKUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKUtils.m; sourceTree = "<group>"; };
+		83E156491C71B17B000BBD57 /* ASDKBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKBaseViewController.h; sourceTree = "<group>"; };
+		83E1564A1C71B17B000BBD57 /* ASDKBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKBaseViewController.m; sourceTree = "<group>"; };
+		83E1564D1C71B201000BBD57 /* ASDKBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKBaseTableViewController.h; sourceTree = "<group>"; };
+		83E1564E1C71B201000BBD57 /* ASDKBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKBaseTableViewController.m; sourceTree = "<group>"; };
+		83E156511C71B526000BBD57 /* ASDKBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKBaseCell.h; sourceTree = "<group>"; };
+		83E156521C71B526000BBD57 /* ASDKBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKBaseCell.m; sourceTree = "<group>"; };
+		83E156551C71C3B5000BBD57 /* ASDKDesign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKDesign.h; sourceTree = "<group>"; };
+		83E156561C71C3B5000BBD57 /* ASDKDesign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKDesign.m; sourceTree = "<group>"; };
+		83E156591C7201AA000BBD57 /* ASDKNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKNavigationController.h; sourceTree = "<group>"; };
+		83E1565A1C7201AA000BBD57 /* ASDKNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKNavigationController.m; sourceTree = "<group>"; };
+		83E1565F1C720A20000BBD57 /* ASDKLoaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKLoaderViewController.h; sourceTree = "<group>"; };
+		83E156601C720A20000BBD57 /* ASDKLoaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKLoaderViewController.m; sourceTree = "<group>"; };
+		83E156631C720A31000BBD57 /* ASDKLoaderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKLoaderViewController.xib; sourceTree = "<group>"; };
+		83E1566D1C731C8A000BBD57 /* ASDKExternalCardsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKExternalCardsCell.h; sourceTree = "<group>"; };
+		83E1566E1C731C8A000BBD57 /* ASDKExternalCardsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKExternalCardsCell.m; sourceTree = "<group>"; };
+		83E156711C731CFD000BBD57 /* ASDKExternalCardsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKExternalCardsCell.xib; sourceTree = "<group>"; };
+		83E1567A1C737439000BBD57 /* ASDKFooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKFooterCell.h; sourceTree = "<group>"; };
+		83E1567B1C737439000BBD57 /* ASDKFooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKFooterCell.m; sourceTree = "<group>"; };
+		83E1567C1C737439000BBD57 /* ASDKFooterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKFooterCell.xib; sourceTree = "<group>"; };
+		83E156811C746474000BBD57 /* ASDKDesignConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKDesignConfiguration.h; sourceTree = "<group>"; };
+		83E156821C746474000BBD57 /* ASDKDesignConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKDesignConfiguration.m; sourceTree = "<group>"; };
+		94AA13681C68D32F006FBC7E /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		94AA13691C68D32F006FBC7E /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		94C5BCB71C6B3E0300542BC8 /* ASDK3DSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDK3DSViewController.h; sourceTree = "<group>"; };
+		94C5BCB81C6B3E0300542BC8 /* ASDK3DSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDK3DSViewController.m; sourceTree = "<group>"; };
+		94C5BCB91C6B3E0300542BC8 /* ASDK3DSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDK3DSViewController.xib; sourceTree = "<group>"; };
+		94C86A001C6B2E5100046F0E /* ASDKUIImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ASDKUIImages.xcassets; sourceTree = "<group>"; };
+		94C86A031C6B2E5100046F0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		94C86A041C6B2E5100046F0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		94C86A0B1C6B304900046F0E /* ASDKPaymentFormStarter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKPaymentFormStarter.h; sourceTree = "<group>"; };
+		94C86A0C1C6B304900046F0E /* ASDKPaymentFormStarter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKPaymentFormStarter.m; sourceTree = "<group>"; };
+		94C86A0E1C6B304900046F0E /* ASDKPaymentFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKPaymentFormViewController.h; sourceTree = "<group>"; };
+		94C86A0F1C6B304900046F0E /* ASDKPaymentFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKPaymentFormViewController.m; sourceTree = "<group>"; };
+		94C86A111C6B304900046F0E /* ASDKEmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKEmailCell.h; sourceTree = "<group>"; };
+		94C86A121C6B304900046F0E /* ASDKEmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKEmailCell.m; sourceTree = "<group>"; };
+		94C86A131C6B304900046F0E /* ASDKEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKEmailCell.xib; sourceTree = "<group>"; };
+		94C86A151C6B304900046F0E /* ASDKCardInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCardInputTableViewCell.h; sourceTree = "<group>"; };
+		94C86A161C6B304900046F0E /* ASDKCardInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCardInputTableViewCell.m; sourceTree = "<group>"; };
+		94C86A171C6B304900046F0E /* ASDKCardInputTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKCardInputTableViewCell.xib; sourceTree = "<group>"; };
+		94C86A181C6B304900046F0E /* ASDKLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKLabel.h; sourceTree = "<group>"; };
+		94C86A191C6B304900046F0E /* ASDKLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKLabel.m; sourceTree = "<group>"; };
+		94C86A1A1C6B304900046F0E /* ASDKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKTextField.h; sourceTree = "<group>"; };
+		94C86A1B1C6B304900046F0E /* ASDKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKTextField.m; sourceTree = "<group>"; };
+		BE4029DF1C731DA1003FFBDD /* ASDKCardsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCardsListViewController.h; sourceTree = "<group>"; };
+		BE4029E01C731DA1003FFBDD /* ASDKCardsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCardsListViewController.m; sourceTree = "<group>"; };
+		BE7E02721C733D0F00DF6230 /* ASDKCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCardCell.h; sourceTree = "<group>"; };
+		BE7E02731C733D0F00DF6230 /* ASDKCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCardCell.m; sourceTree = "<group>"; };
+		BE7E02741C733D0F00DF6230 /* ASDKCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKCardCell.xib; sourceTree = "<group>"; };
+		BE7E027E1C7354F900DF6230 /* ASDKAddNewCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKAddNewCardCell.h; sourceTree = "<group>"; };
+		BE7E027F1C7354F900DF6230 /* ASDKAddNewCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKAddNewCardCell.m; sourceTree = "<group>"; };
+		BE7E02801C7354F900DF6230 /* ASDKAddNewCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKAddNewCardCell.xib; sourceTree = "<group>"; };
+		BEB3F8C21C7DF171003771A4 /* ASDKCardsListDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCardsListDataController.h; sourceTree = "<group>"; };
+		BEB3F8C31C7DF171003771A4 /* ASDKCardsListDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCardsListDataController.m; sourceTree = "<group>"; };
+		BEDEFF821C75A4CF0026D454 /* ASDKCardInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCardInputViewController.h; sourceTree = "<group>"; };
+		BEDEFF831C75A4CF0026D454 /* ASDKCardInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCardInputViewController.m; sourceTree = "<group>"; };
+		BEDEFF841C75A4CF0026D454 /* ASDKCardInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKCardInputViewController.xib; sourceTree = "<group>"; };
+		BEDEFF891C75A6780026D454 /* ASDKNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKNumberCell.h; sourceTree = "<group>"; };
+		BEDEFF8A1C75A6780026D454 /* ASDKNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKNumberCell.m; sourceTree = "<group>"; };
+		BEDEFF8B1C75A6780026D454 /* ASDKNumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKNumberCell.xib; sourceTree = "<group>"; };
+		BEDEFF921C75FC330026D454 /* ASDKDeleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKDeleteCell.h; sourceTree = "<group>"; };
+		BEDEFF931C75FC330026D454 /* ASDKDeleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKDeleteCell.m; sourceTree = "<group>"; };
+		BEDEFF941C75FC330026D454 /* ASDKDeleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKDeleteCell.xib; sourceTree = "<group>"; };
+		BEDEFFA71C761C370026D454 /* ASDKHighlightedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKHighlightedButton.h; sourceTree = "<group>"; };
+		BEDEFFA81C761C370026D454 /* ASDKHighlightedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKHighlightedButton.m; sourceTree = "<group>"; };
+		BEDEFFAD1C761CFD0026D454 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CA82FD1C1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKPaymentFormHeaderCell.h; sourceTree = "<group>"; };
+		CA82FD1D1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKPaymentFormHeaderCell.m; sourceTree = "<group>"; };
+		CA82FD201C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKPaymentFormHeaderCell.xib; sourceTree = "<group>"; };
+		CA82FD231C70F811005FD294 /* ASDKPaymentFormSummCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKPaymentFormSummCell.h; sourceTree = "<group>"; };
+		CA82FD241C70F811005FD294 /* ASDKPaymentFormSummCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKPaymentFormSummCell.m; sourceTree = "<group>"; };
+		CA82FD251C70F811005FD294 /* ASDKPaymentFormSummCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKPaymentFormSummCell.xib; sourceTree = "<group>"; };
+		CAB1A68E1C70FCBF00D2A252 /* ASDKPayButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKPayButtonCell.h; sourceTree = "<group>"; };
+		CAB1A68F1C70FCBF00D2A252 /* ASDKPayButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKPayButtonCell.m; sourceTree = "<group>"; };
+		CAB1A6901C70FCBF00D2A252 /* ASDKPayButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKPayButtonCell.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8316724B1C64798800533D85 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDEFFAE1C761CFD0026D454 /* AudioToolbox.framework in Frameworks */,
+				831672681C647A3400533D85 /* ASDKCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83129AFD1C68CAAD00A1F5DE /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				94AA13681C68D32F006FBC7E /* UIView+AutoLayout.h */,
+				94AA13691C68D32F006FBC7E /* UIView+AutoLayout.m */,
+				83129AFE1C68CAAD00A1F5DE /* ASDKMacroses.h */,
+				83E156431C71AE6F000BBD57 /* ASDKUtils.h */,
+				83E156441C71AE6F000BBD57 /* ASDKUtils.m */,
+				83E156551C71C3B5000BBD57 /* ASDKDesign.h */,
+				83E156561C71C3B5000BBD57 /* ASDKDesign.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		831672451C64798800533D85 = {
+			isa = PBXGroup;
+			children = (
+				8316725F1C647A1200533D85 /* ASDKCore.xcodeproj */,
+				831672511C64798800533D85 /* ASDKUI */,
+				831672501C64798800533D85 /* Products */,
+				D558888C130B411382A2C0CC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		831672501C64798800533D85 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8316724F1C64798800533D85 /* ASDKUI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		831672511C64798800533D85 /* ASDKUI */ = {
+			isa = PBXGroup;
+			children = (
+				83E1565E1C7206BF000BBD57 /* Loader */,
+				83E1565D1C720696000BBD57 /* Base Classes */,
+				94C869FF1C6B2E5100046F0E /* Resources */,
+				831672AB1C64925700533D85 /* ASDKCore.framework */,
+				831672521C64798800533D85 /* ASDKUI.h */,
+				831672541C64798800533D85 /* Info.plist */,
+				83129AFD1C68CAAD00A1F5DE /* Helpers */,
+				94C86A091C6B304900046F0E /* Payment */,
+				94C5BCB61C6B3E0300542BC8 /* 3DSController */,
+			);
+			path = ASDKUI;
+			sourceTree = "<group>";
+		};
+		831672601C647A1200533D85 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				831672651C647A1200533D85 /* ASDKCore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83E1565D1C720696000BBD57 /* Base Classes */ = {
+			isa = PBXGroup;
+			children = (
+				83E156491C71B17B000BBD57 /* ASDKBaseViewController.h */,
+				83E1564A1C71B17B000BBD57 /* ASDKBaseViewController.m */,
+				83E1564D1C71B201000BBD57 /* ASDKBaseTableViewController.h */,
+				83E1564E1C71B201000BBD57 /* ASDKBaseTableViewController.m */,
+				83E156511C71B526000BBD57 /* ASDKBaseCell.h */,
+				83E156521C71B526000BBD57 /* ASDKBaseCell.m */,
+				83E156591C7201AA000BBD57 /* ASDKNavigationController.h */,
+				83E1565A1C7201AA000BBD57 /* ASDKNavigationController.m */,
+				8333793D1C7470E20097208D /* ASDKBarButtonItem.h */,
+				8333793E1C7470E20097208D /* ASDKBarButtonItem.m */,
+			);
+			name = "Base Classes";
+			sourceTree = "<group>";
+		};
+		83E1565E1C7206BF000BBD57 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				83E1565F1C720A20000BBD57 /* ASDKLoaderViewController.h */,
+				83E156601C720A20000BBD57 /* ASDKLoaderViewController.m */,
+				83E156631C720A31000BBD57 /* ASDKLoaderViewController.xib */,
+			);
+			name = Loader;
+			sourceTree = "<group>";
+		};
+		83E1566A1C731C50000BBD57 /* ExternalCardsCell */ = {
+			isa = PBXGroup;
+			children = (
+				83E1566D1C731C8A000BBD57 /* ASDKExternalCardsCell.h */,
+				83E1566E1C731C8A000BBD57 /* ASDKExternalCardsCell.m */,
+				83E156711C731CFD000BBD57 /* ASDKExternalCardsCell.xib */,
+			);
+			name = ExternalCardsCell;
+			sourceTree = "<group>";
+		};
+		83E156791C737404000BBD57 /* Footer */ = {
+			isa = PBXGroup;
+			children = (
+				83E1567A1C737439000BBD57 /* ASDKFooterCell.h */,
+				83E1567B1C737439000BBD57 /* ASDKFooterCell.m */,
+				83E1567C1C737439000BBD57 /* ASDKFooterCell.xib */,
+			);
+			name = Footer;
+			sourceTree = "<group>";
+		};
+		83E156801C746442000BBD57 /* DesignConfig */ = {
+			isa = PBXGroup;
+			children = (
+				83E156811C746474000BBD57 /* ASDKDesignConfiguration.h */,
+				83E156821C746474000BBD57 /* ASDKDesignConfiguration.m */,
+			);
+			name = DesignConfig;
+			sourceTree = "<group>";
+		};
+		94C5BCB61C6B3E0300542BC8 /* 3DSController */ = {
+			isa = PBXGroup;
+			children = (
+				94C5BCB71C6B3E0300542BC8 /* ASDK3DSViewController.h */,
+				94C5BCB81C6B3E0300542BC8 /* ASDK3DSViewController.m */,
+				94C5BCB91C6B3E0300542BC8 /* ASDK3DSViewController.xib */,
+			);
+			path = 3DSController;
+			sourceTree = "<group>";
+		};
+		94C869FF1C6B2E5100046F0E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				94C86A001C6B2E5100046F0E /* ASDKUIImages.xcassets */,
+				94C86A011C6B2E5100046F0E /* Localization */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		94C86A011C6B2E5100046F0E /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				94C86A021C6B2E5100046F0E /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		94C86A091C6B304900046F0E /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				BEB3F8C01C7DF14E003771A4 /* CardListDataSource */,
+				BE4029DC1C731D69003FFBDD /* CardsListViewController */,
+				94C86A0A1C6B304900046F0E /* PaymentFormStarter */,
+				94C86A0D1C6B304900046F0E /* PaymentViewController */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		94C86A0A1C6B304900046F0E /* PaymentFormStarter */ = {
+			isa = PBXGroup;
+			children = (
+				83E156801C746442000BBD57 /* DesignConfig */,
+				94C86A0B1C6B304900046F0E /* ASDKPaymentFormStarter.h */,
+				94C86A0C1C6B304900046F0E /* ASDKPaymentFormStarter.m */,
+			);
+			path = PaymentFormStarter;
+			sourceTree = "<group>";
+		};
+		94C86A0D1C6B304900046F0E /* PaymentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BEDEFF791C75A4400026D454 /* CustomInput */,
+				94C86A0E1C6B304900046F0E /* ASDKPaymentFormViewController.h */,
+				94C86A0F1C6B304900046F0E /* ASDKPaymentFormViewController.m */,
+				CA82FD191C70ECFA005FD294 /* HeaderCell */,
+				CA82FD221C70F7D7005FD294 /* SummCell */,
+				83E1566A1C731C50000BBD57 /* ExternalCardsCell */,
+				94C86A141C6B304900046F0E /* InputCardCell */,
+				94C86A101C6B304900046F0E /* EmailCell */,
+				CAB1A68B1C70FC9D00D2A252 /* PayButtonCell */,
+				83E156791C737404000BBD57 /* Footer */,
+			);
+			path = PaymentViewController;
+			sourceTree = "<group>";
+		};
+		94C86A101C6B304900046F0E /* EmailCell */ = {
+			isa = PBXGroup;
+			children = (
+				94C86A111C6B304900046F0E /* ASDKEmailCell.h */,
+				94C86A121C6B304900046F0E /* ASDKEmailCell.m */,
+				94C86A131C6B304900046F0E /* ASDKEmailCell.xib */,
+			);
+			path = EmailCell;
+			sourceTree = "<group>";
+		};
+		94C86A141C6B304900046F0E /* InputCardCell */ = {
+			isa = PBXGroup;
+			children = (
+				94C86A151C6B304900046F0E /* ASDKCardInputTableViewCell.h */,
+				94C86A161C6B304900046F0E /* ASDKCardInputTableViewCell.m */,
+				94C86A171C6B304900046F0E /* ASDKCardInputTableViewCell.xib */,
+				94C86A181C6B304900046F0E /* ASDKLabel.h */,
+				94C86A191C6B304900046F0E /* ASDKLabel.m */,
+				94C86A1A1C6B304900046F0E /* ASDKTextField.h */,
+				94C86A1B1C6B304900046F0E /* ASDKTextField.m */,
+			);
+			path = InputCardCell;
+			sourceTree = "<group>";
+		};
+		BE4029DC1C731D69003FFBDD /* CardsListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BE7E027D1C7354E300DF6230 /* AddNewCardCell */,
+				BE4029E31C731DD9003FFBDD /* CardCell */,
+				BE4029DF1C731DA1003FFBDD /* ASDKCardsListViewController.h */,
+				BE4029E01C731DA1003FFBDD /* ASDKCardsListViewController.m */,
+			);
+			path = CardsListViewController;
+			sourceTree = "<group>";
+		};
+		BE4029E31C731DD9003FFBDD /* CardCell */ = {
+			isa = PBXGroup;
+			children = (
+				BE7E02721C733D0F00DF6230 /* ASDKCardCell.h */,
+				BE7E02731C733D0F00DF6230 /* ASDKCardCell.m */,
+				BE7E02741C733D0F00DF6230 /* ASDKCardCell.xib */,
+			);
+			path = CardCell;
+			sourceTree = "<group>";
+		};
+		BE7E027D1C7354E300DF6230 /* AddNewCardCell */ = {
+			isa = PBXGroup;
+			children = (
+				BE7E027E1C7354F900DF6230 /* ASDKAddNewCardCell.h */,
+				BE7E027F1C7354F900DF6230 /* ASDKAddNewCardCell.m */,
+				BE7E02801C7354F900DF6230 /* ASDKAddNewCardCell.xib */,
+			);
+			path = AddNewCardCell;
+			sourceTree = "<group>";
+		};
+		BEB3F8C01C7DF14E003771A4 /* CardListDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				BEB3F8C21C7DF171003771A4 /* ASDKCardsListDataController.h */,
+				BEB3F8C31C7DF171003771A4 /* ASDKCardsListDataController.m */,
+			);
+			path = CardListDataSource;
+			sourceTree = "<group>";
+		};
+		BEDEFF791C75A4400026D454 /* CustomInput */ = {
+			isa = PBXGroup;
+			children = (
+				BEDEFFA61C761C370026D454 /* HighlightedButton */,
+				BEDEFF911C75FC1C0026D454 /* DeleteCell */,
+				BEDEFF881C75A6660026D454 /* NumberCell */,
+				BEDEFF821C75A4CF0026D454 /* ASDKCardInputViewController.h */,
+				BEDEFF831C75A4CF0026D454 /* ASDKCardInputViewController.m */,
+				BEDEFF841C75A4CF0026D454 /* ASDKCardInputViewController.xib */,
+			);
+			path = CustomInput;
+			sourceTree = "<group>";
+		};
+		BEDEFF881C75A6660026D454 /* NumberCell */ = {
+			isa = PBXGroup;
+			children = (
+				BEDEFF891C75A6780026D454 /* ASDKNumberCell.h */,
+				BEDEFF8A1C75A6780026D454 /* ASDKNumberCell.m */,
+				BEDEFF8B1C75A6780026D454 /* ASDKNumberCell.xib */,
+			);
+			path = NumberCell;
+			sourceTree = "<group>";
+		};
+		BEDEFF911C75FC1C0026D454 /* DeleteCell */ = {
+			isa = PBXGroup;
+			children = (
+				BEDEFF921C75FC330026D454 /* ASDKDeleteCell.h */,
+				BEDEFF931C75FC330026D454 /* ASDKDeleteCell.m */,
+				BEDEFF941C75FC330026D454 /* ASDKDeleteCell.xib */,
+			);
+			path = DeleteCell;
+			sourceTree = "<group>";
+		};
+		BEDEFFA61C761C370026D454 /* HighlightedButton */ = {
+			isa = PBXGroup;
+			children = (
+				BEDEFFA71C761C370026D454 /* ASDKHighlightedButton.h */,
+				BEDEFFA81C761C370026D454 /* ASDKHighlightedButton.m */,
+			);
+			path = HighlightedButton;
+			sourceTree = "<group>";
+		};
+		CA82FD191C70ECFA005FD294 /* HeaderCell */ = {
+			isa = PBXGroup;
+			children = (
+				CA82FD1C1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.h */,
+				CA82FD1D1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.m */,
+				CA82FD201C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib */,
+			);
+			name = HeaderCell;
+			sourceTree = "<group>";
+		};
+		CA82FD221C70F7D7005FD294 /* SummCell */ = {
+			isa = PBXGroup;
+			children = (
+				CA82FD231C70F811005FD294 /* ASDKPaymentFormSummCell.h */,
+				CA82FD241C70F811005FD294 /* ASDKPaymentFormSummCell.m */,
+				CA82FD251C70F811005FD294 /* ASDKPaymentFormSummCell.xib */,
+			);
+			name = SummCell;
+			sourceTree = "<group>";
+		};
+		CAB1A68B1C70FC9D00D2A252 /* PayButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				CAB1A68E1C70FCBF00D2A252 /* ASDKPayButtonCell.h */,
+				CAB1A68F1C70FCBF00D2A252 /* ASDKPayButtonCell.m */,
+				CAB1A6901C70FCBF00D2A252 /* ASDKPayButtonCell.xib */,
+			);
+			name = PayButtonCell;
+			sourceTree = "<group>";
+		};
+		D558888C130B411382A2C0CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEDEFFAD1C761CFD0026D454 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8316724C1C64798800533D85 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94C86A281C6B304900046F0E /* ASDKTextField.h in Headers */,
+				83E156571C71C3B5000BBD57 /* ASDKDesign.h in Headers */,
+				BEB3F8C41C7DF171003771A4 /* ASDKCardsListDataController.h in Headers */,
+				94C86A1C1C6B304900046F0E /* ASDKPaymentFormStarter.h in Headers */,
+				CAB1A6911C70FCBF00D2A252 /* ASDKPayButtonCell.h in Headers */,
+				94AA136A1C68D32F006FBC7E /* UIView+AutoLayout.h in Headers */,
+				BE7E02811C7354F900DF6230 /* ASDKAddNewCardCell.h in Headers */,
+				83E156611C720A20000BBD57 /* ASDKLoaderViewController.h in Headers */,
+				BE4029E11C731DA1003FFBDD /* ASDKCardsListViewController.h in Headers */,
+				83E1567D1C737439000BBD57 /* ASDKFooterCell.h in Headers */,
+				BEDEFF851C75A4CF0026D454 /* ASDKCardInputViewController.h in Headers */,
+				83E1564F1C71B201000BBD57 /* ASDKBaseTableViewController.h in Headers */,
+				CA82FD261C70F811005FD294 /* ASDKPaymentFormSummCell.h in Headers */,
+				83E1565B1C7201AA000BBD57 /* ASDKNavigationController.h in Headers */,
+				BEDEFFA91C761C370026D454 /* ASDKHighlightedButton.h in Headers */,
+				83E156531C71B526000BBD57 /* ASDKBaseCell.h in Headers */,
+				831672531C64798800533D85 /* ASDKUI.h in Headers */,
+				83129AFF1C68CAAD00A1F5DE /* ASDKMacroses.h in Headers */,
+				94C86A231C6B304900046F0E /* ASDKCardInputTableViewCell.h in Headers */,
+				94C86A201C6B304900046F0E /* ASDKEmailCell.h in Headers */,
+				83E1566F1C731C8A000BBD57 /* ASDKExternalCardsCell.h in Headers */,
+				BEDEFF951C75FC330026D454 /* ASDKDeleteCell.h in Headers */,
+				94C86A261C6B304900046F0E /* ASDKLabel.h in Headers */,
+				BE7E02751C733D0F00DF6230 /* ASDKCardCell.h in Headers */,
+				8333793F1C7470E20097208D /* ASDKBarButtonItem.h in Headers */,
+				83E156451C71AE6F000BBD57 /* ASDKUtils.h in Headers */,
+				83E1564B1C71B17B000BBD57 /* ASDKBaseViewController.h in Headers */,
+				BEDEFF8C1C75A6780026D454 /* ASDKNumberCell.h in Headers */,
+				94C86A1E1C6B304900046F0E /* ASDKPaymentFormViewController.h in Headers */,
+				94C5BCBA1C6B3E0300542BC8 /* ASDK3DSViewController.h in Headers */,
+				CA82FD1E1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.h in Headers */,
+				83E156831C746474000BBD57 /* ASDKDesignConfiguration.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8316724E1C64798800533D85 /* ASDKUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 831672571C64798800533D85 /* Build configuration list for PBXNativeTarget "ASDKUI" */;
+			buildPhases = (
+				8316724A1C64798800533D85 /* Sources */,
+				8316724B1C64798800533D85 /* Frameworks */,
+				8316724C1C64798800533D85 /* Headers */,
+				8316724D1C64798800533D85 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				831672671C647A2E00533D85 /* PBXTargetDependency */,
+			);
+			name = ASDKUI;
+			productName = ASDKUI;
+			productReference = 8316724F1C64798800533D85 /* ASDKUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		831672461C64798800533D85 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ASDK;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "TCS Bank";
+				TargetAttributes = {
+					8316724E1C64798800533D85 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					8316725A1C6479A200533D85 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 831672491C64798800533D85 /* Build configuration list for PBXProject "ASDKUI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ru,
+			);
+			mainGroup = 831672451C64798800533D85;
+			productRefGroup = 831672501C64798800533D85 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 831672601C647A1200533D85 /* Products */;
+					ProjectRef = 8316725F1C647A1200533D85 /* ASDKCore.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				8316724E1C64798800533D85 /* ASDKUI */,
+				8316725A1C6479A200533D85 /* ASDKUI-universal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		831672651C647A1200533D85 /* ASDKCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ASDKCore.framework;
+			remoteRef = 831672641C647A1200533D85 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8316724D1C64798800533D85 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDEFF871C75A4CF0026D454 /* ASDKCardInputViewController.xib in Resources */,
+				BEDEFF8E1C75A6780026D454 /* ASDKNumberCell.xib in Resources */,
+				83E156641C720A31000BBD57 /* ASDKLoaderViewController.xib in Resources */,
+				CA82FD211C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib in Resources */,
+				94C86A061C6B2E5100046F0E /* Localizable.strings in Resources */,
+				CA82FD281C70F811005FD294 /* ASDKPaymentFormSummCell.xib in Resources */,
+				94C86A221C6B304900046F0E /* ASDKEmailCell.xib in Resources */,
+				83E1567F1C737439000BBD57 /* ASDKFooterCell.xib in Resources */,
+				94C5BCBC1C6B3E0300542BC8 /* ASDK3DSViewController.xib in Resources */,
+				BEDEFF971C75FC330026D454 /* ASDKDeleteCell.xib in Resources */,
+				BE7E02771C733D0F00DF6230 /* ASDKCardCell.xib in Resources */,
+				BE7E02831C7354F900DF6230 /* ASDKAddNewCardCell.xib in Resources */,
+				94C86A051C6B2E5100046F0E /* ASDKUIImages.xcassets in Resources */,
+				83E156721C731CFD000BBD57 /* ASDKExternalCardsCell.xib in Resources */,
+				94C86A251C6B304900046F0E /* ASDKCardInputTableViewCell.xib in Resources */,
+				CAB1A6931C70FCBF00D2A252 /* ASDKPayButtonCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8316725E1C6479DE00533D85 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"ASDKUI\"\nSAMPLEAPP_NAME=\"ASDKSampleApp\"\n\nUNIVERSAL_OUTPUTFOLDER=${SRCROOT}/Builds/UI-${CONFIGURATION}-universal\nIPHONE_DEVICE_BUILD_DIR=${SRCROOT}/Builds/UI-${CONFIGURATION}-iphoneos\nIPHONE_SIMULATOR_BUILD_DIR=${SRCROOT}/Builds/UI-${CONFIGURATION}-iphonesimulator\n\nSAMPLEAPP_FRAMEWORKFOLDER=${SRCROOT}/\"SampleProject\"/${SAMPLEAPP_NAME}/\"ASDK\"\n\n# 3\n# If remnants from a previous build exist, delete them.\n\nif [ -d \"${UNIVERSAL_OUTPUTFOLDER}\" ]; then\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}\"\nfi\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\nif [ -d \"${IPHONE_DEVICE_BUILD_DIR}\" ]; then\nrm -rf \"${IPHONE_DEVICE_BUILD_DIR}\"\nfi\nmkdir -p \"${IPHONE_DEVICE_BUILD_DIR}\"\n\nif [ -d \"${IPHONE_SIMULATOR_BUILD_DIR}\" ]; then\nrm -rf \"${IPHONE_SIMULATOR_BUILD_DIR}\"\nfi\nmkdir -p \"${IPHONE_SIMULATOR_BUILD_DIR}\"\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\n\nxcodebuild -project \"ASDKUI.xcodeproj\" -target \"ASDKUI\" -configuration \"${CONFIGURATION}\" clean build -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk iphoneos CONFIGURATION_BUILD_DIR=\"${IPHONE_DEVICE_BUILD_DIR}\" OTHER_CFLAGS=\"-fembed-bitcode\"\n\nxcodebuild -project \"ASDKUI.xcodeproj\" -target \"ASDKUI\" -configuration \"${CONFIGURATION}\" clean build -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk iphonesimulator CONFIGURATION_BUILD_DIR=\"${IPHONE_SIMULATOR_BUILD_DIR}\" OTHER_CFLAGS=\"-fembed-bitcode\"\n\n\n\n# 5\n# Remove .framework file if exists on Desktop from previous run.\nif [ -d \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Copy the device version of framework to Desktop.\ncp -r \"${IPHONE_DEVICE_BUILD_DIR}/${FRAMEWORK_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework\"\n\n# 7\n# Replace the framework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${IPHONE_DEVICE_BUILD_DIR}/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${IPHONE_SIMULATOR_BUILD_DIR}/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 8\n# Copy the Swift module mappings for the simulator into the\n# framework.  The device mappings already exist from step 6.\nif [ -d \"${IPHONE_SIMULATOR_BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules/{FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -r \"${IPHONE_SIMULATOR_BUILD_DIR}/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/\" \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule\"\nfi\n\n# 9\n# Delete the most recent build.\nif [ -d \"${IPHONE_DEVICE_BUILD_DIR}\" ]; then\nrm -rf \"${IPHONE_DEVICE_BUILD_DIR}\"\nfi\n\nif [ -d \"${IPHONE_SIMULATOR_BUILD_DIR}\" ]; then\nrm -rf \"${IPHONE_SIMULATOR_BUILD_DIR}\"\nfi\n\n\nif [ -d \"${SAMPLEAPP_FRAMEWORKFOLDER}/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${SAMPLEAPP_FRAMEWORKFOLDER}/${FRAMEWORK_NAME}.framework\"\n\ncp -r \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.framework\" \"${SAMPLEAPP_FRAMEWORKFOLDER}\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8316724A1C64798800533D85 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEDEFF861C75A4CF0026D454 /* ASDKCardInputViewController.m in Sources */,
+				BEDEFF8D1C75A6780026D454 /* ASDKNumberCell.m in Sources */,
+				CAB1A6921C70FCBF00D2A252 /* ASDKPayButtonCell.m in Sources */,
+				83E1564C1C71B17B000BBD57 /* ASDKBaseViewController.m in Sources */,
+				94C86A291C6B304900046F0E /* ASDKTextField.m in Sources */,
+				94AA136B1C68D32F006FBC7E /* UIView+AutoLayout.m in Sources */,
+				83E156581C71C3B5000BBD57 /* ASDKDesign.m in Sources */,
+				83E156541C71B526000BBD57 /* ASDKBaseCell.m in Sources */,
+				CA82FD1F1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.m in Sources */,
+				94C5BCBB1C6B3E0300542BC8 /* ASDK3DSViewController.m in Sources */,
+				94C86A1F1C6B304900046F0E /* ASDKPaymentFormViewController.m in Sources */,
+				94C86A1D1C6B304900046F0E /* ASDKPaymentFormStarter.m in Sources */,
+				83E156701C731C8A000BBD57 /* ASDKExternalCardsCell.m in Sources */,
+				94C86A211C6B304900046F0E /* ASDKEmailCell.m in Sources */,
+				CA82FD271C70F811005FD294 /* ASDKPaymentFormSummCell.m in Sources */,
+				83E156621C720A20000BBD57 /* ASDKLoaderViewController.m in Sources */,
+				94C86A241C6B304900046F0E /* ASDKCardInputTableViewCell.m in Sources */,
+				BEB3F8C51C7DF171003771A4 /* ASDKCardsListDataController.m in Sources */,
+				BE4029E21C731DA1003FFBDD /* ASDKCardsListViewController.m in Sources */,
+				83E1565C1C7201AA000BBD57 /* ASDKNavigationController.m in Sources */,
+				83E156841C746474000BBD57 /* ASDKDesignConfiguration.m in Sources */,
+				BEDEFFAA1C761C370026D454 /* ASDKHighlightedButton.m in Sources */,
+				83E1567E1C737439000BBD57 /* ASDKFooterCell.m in Sources */,
+				BEDEFF961C75FC330026D454 /* ASDKDeleteCell.m in Sources */,
+				83E156501C71B201000BBD57 /* ASDKBaseTableViewController.m in Sources */,
+				BE7E02761C733D0F00DF6230 /* ASDKCardCell.m in Sources */,
+				83E156461C71AE6F000BBD57 /* ASDKUtils.m in Sources */,
+				94C86A271C6B304900046F0E /* ASDKLabel.m in Sources */,
+				BE7E02821C7354F900DF6230 /* ASDKAddNewCardCell.m in Sources */,
+				833379401C7470E20097208D /* ASDKBarButtonItem.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		831672671C647A2E00533D85 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ASDKCore;
+			targetProxy = 831672661C647A2E00533D85 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		94C86A021C6B2E5100046F0E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				94C86A031C6B2E5100046F0E /* en */,
+				94C86A041C6B2E5100046F0E /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		831672551C64798800533D85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		831672561C64798800533D85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		831672581C64798800533D85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ASDKUI",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = ASDKUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ASDKUI/CardIO",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+			};
+			name = Debug;
+		};
+		831672591C64798800533D85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CURRENT_PROJECT_VERSION = 1.0.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ASDKUI",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = ASDKUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ASDKUI/CardIO",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+			};
+			name = Release;
+		};
+		8316725C1C6479A200533D85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Debug;
+		};
+		8316725D1C6479A200533D85 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		831672491C64798800533D85 /* Build configuration list for PBXProject "ASDKUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				831672551C64798800533D85 /* Debug */,
+				831672561C64798800533D85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		831672571C64798800533D85 /* Build configuration list for PBXNativeTarget "ASDKUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				831672581C64798800533D85 /* Debug */,
+				831672591C64798800533D85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8316725B1C6479A200533D85 /* Build configuration list for PBXAggregateTarget "ASDKUI-universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8316725C1C6479A200533D85 /* Debug */,
+				8316725D1C6479A200533D85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 831672461C64798800533D85 /* Project object */;
+}

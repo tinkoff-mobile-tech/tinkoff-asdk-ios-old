@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ASDK3DSViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="Ckg-TD-Akj"/>
+                <outlet property="webView" destination="NrG-fE-fI1" id="Ork-W2-SPb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NrG-fE-fI1">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="e1r-vO-hxa"/>
+                    </connections>
+                </webView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="NrG-fE-fI1" secondAttribute="trailing" id="46x-Or-Kb3"/>
+                <constraint firstItem="NrG-fE-fI1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Br9-pC-gaK"/>
+                <constraint firstItem="NrG-fE-fI1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CJD-Lz-3lN"/>
+                <constraint firstAttribute="bottom" secondItem="NrG-fE-fI1" secondAttribute="bottom" id="e9h-sS-1vD"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

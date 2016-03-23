@@ -1,0 +1,2 @@
+headerdoc2html -o documentation ASDKUI/Payment/PaymentFormStarter/ASDKPaymentFormStarter.h ASDKUI/Payment/PaymentFormStarter/ASDKDesignConfiguration.h
+gatherheaderdoc documentation
