@@ -1,6 +1,0 @@
-framework module ASDKUI {
-  umbrella header "ASDKUI.h"
-
-  export *
-  module * { export * }
-}
