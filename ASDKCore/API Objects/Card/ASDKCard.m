@@ -85,7 +85,7 @@
     if (!_cardType)
     {
         NSString *cardNumber = [self pan];
-        char firstCardNumberSymbol;
+        char firstCardNumberSymbol = '0';
         
         if (cardNumber.length > 0)
         {
