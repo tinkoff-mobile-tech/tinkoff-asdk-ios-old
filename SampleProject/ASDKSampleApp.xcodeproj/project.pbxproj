@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		684AD5C6421F7F3343AABD7F /* libPods-ASDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */; };
-		833E8B771CA19DE300AD2A4B /* ASDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833E8B761CA19DE300AD2A4B /* ASDKUI.framework */; };
-		833E8B791CA19DF100AD2A4B /* ASDKUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 833E8B761CA19DE300AD2A4B /* ASDKUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83871B8B1C6DCFDC00D69603 /* ShopCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 83871B8A1C6DCFDC00D69603 /* ShopCart.m */; };
 		83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B8C1C6DF29C00D69603 /* DetailInfoTableViewController.xib */; };
 		83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B901C6E0C3100D69603 /* ShopCartTableViewController.xib */; };
@@ -45,7 +43,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				833E8B791CA19DF100AD2A4B /* ASDKUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,7 +54,6 @@
 		38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ASDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80ADADDCD6F59A2D7EF6C6A3 /* Pods-ASDKSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASDKSampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		831672871C6486A500533D85 /* ASDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		833E8B761CA19DE300AD2A4B /* ASDKUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ASDKUI.framework; sourceTree = "<group>"; };
 		83871B891C6DCFDC00D69603 /* ShopCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCart.h; sourceTree = "<group>"; };
 		83871B8A1C6DCFDC00D69603 /* ShopCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCart.m; sourceTree = "<group>"; };
 		83871B8C1C6DF29C00D69603 /* DetailInfoTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailInfoTableViewController.xib; sourceTree = "<group>"; };
@@ -108,7 +104,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				684AD5C6421F7F3343AABD7F /* libPods-ASDKSampleApp.a in Frameworks */,
-				833E8B771CA19DE300AD2A4B /* ASDKUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +182,6 @@
 			children = (
 				94251ADF1C6C899E00B5FE2B /* ASDKCardIOScanner.h */,
 				94251AE01C6C899E00B5FE2B /* ASDKCardIOScanner.m */,
-				833E8B761CA19DE300AD2A4B /* ASDKUI.framework */,
 			);
 			path = ASDK;
 			sourceTree = "<group>";
