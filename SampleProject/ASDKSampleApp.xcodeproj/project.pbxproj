@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		684AD5C6421F7F3343AABD7F /* libPods-ASDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */; };
-		833E8B691CA19A1200AD2A4B /* ASDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833E8B671CA19A0800AD2A4B /* ASDKCore.framework */; };
-		833E8B6A1CA19A1200AD2A4B /* ASDKCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 833E8B671CA19A0800AD2A4B /* ASDKCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		833E8B771CA19DE300AD2A4B /* ASDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833E8B761CA19DE300AD2A4B /* ASDKUI.framework */; };
 		833E8B791CA19DF100AD2A4B /* ASDKUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 833E8B761CA19DE300AD2A4B /* ASDKUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83871B8B1C6DCFDC00D69603 /* ShopCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 83871B8A1C6DCFDC00D69603 /* ShopCart.m */; };
@@ -47,7 +45,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				833E8B6A1CA19A1200AD2A4B /* ASDKCore.framework in Embed Frameworks */,
 				833E8B791CA19DF100AD2A4B /* ASDKUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -60,7 +57,6 @@
 		38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ASDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80ADADDCD6F59A2D7EF6C6A3 /* Pods-ASDKSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASDKSampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		831672871C6486A500533D85 /* ASDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		833E8B671CA19A0800AD2A4B /* ASDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ASDKCore.framework; sourceTree = "<group>"; };
 		833E8B761CA19DE300AD2A4B /* ASDKUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ASDKUI.framework; sourceTree = "<group>"; };
 		83871B891C6DCFDC00D69603 /* ShopCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCart.h; sourceTree = "<group>"; };
 		83871B8A1C6DCFDC00D69603 /* ShopCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShopCart.m; sourceTree = "<group>"; };
@@ -113,7 +109,6 @@
 			files = (
 				684AD5C6421F7F3343AABD7F /* libPods-ASDKSampleApp.a in Frameworks */,
 				833E8B771CA19DE300AD2A4B /* ASDKUI.framework in Frameworks */,
-				833E8B691CA19A1200AD2A4B /* ASDKCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,7 +188,6 @@
 				94251ADF1C6C899E00B5FE2B /* ASDKCardIOScanner.h */,
 				94251AE01C6C899E00B5FE2B /* ASDKCardIOScanner.m */,
 				833E8B761CA19DE300AD2A4B /* ASDKUI.framework */,
-				833E8B671CA19A0800AD2A4B /* ASDKCore.framework */,
 			);
 			path = ASDK;
 			sourceTree = "<group>";
@@ -325,13 +319,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8316729E1C6486A500533D85 /* Build configuration list for PBXNativeTarget "ASDKSampleApp" */;
 			buildPhases = (
-				6350D7BD1EF85E2BB386E837 /* Check Pods Manifest.lock */,
+				6350D7BD1EF85E2BB386E837 /* [CP] Check Pods Manifest.lock */,
 				831672831C6486A500533D85 /* Sources */,
 				831672841C6486A500533D85 /* Frameworks */,
 				831672851C6486A500533D85 /* Resources */,
 				831672A51C64878A00533D85 /* Embed Frameworks */,
-				A11A4A4A9DD47BEE00292CE2 /* Embed Pods Frameworks */,
-				57600297A2546A01FB72C740 /* Copy Pods Resources */,
+				A11A4A4A9DD47BEE00292CE2 /* [CP] Embed Pods Frameworks */,
+				57600297A2546A01FB72C740 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -399,14 +393,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		57600297A2546A01FB72C740 /* Copy Pods Resources */ = {
+		57600297A2546A01FB72C740 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,14 +408,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6350D7BD1EF85E2BB386E837 /* Check Pods Manifest.lock */ = {
+		6350D7BD1EF85E2BB386E837 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -429,14 +423,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A11A4A4A9DD47BEE00292CE2 /* Embed Pods Frameworks */ = {
+		A11A4A4A9DD47BEE00292CE2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
