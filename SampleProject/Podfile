@@ -6,7 +6,7 @@
 target 'ASDKSampleApp' do
 
 pod 'CardIO'
-pod 'ASDKCore'
+pod 'ASDKUI'
 
 end
 
