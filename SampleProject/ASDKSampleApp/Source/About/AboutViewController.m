@@ -7,7 +7,7 @@
 //
 
 #import "AboutViewController.h"
-#import <ASDKUI/ASDKUI.h>
+#import "ASDKUI.h"
 
 @interface AboutViewController ()
 
@@ -40,11 +40,8 @@
 }
 
 - (NSString *)sdkVersionString
-{
-    NSString *projectVersion = [NSString stringWithFormat:@"%s",ASDKUIVersionString];
-    projectVersion = [projectVersion substringFromIndex:[projectVersion rangeOfString:@"ASDKUI-"].location+7];
-    
-    return [NSString stringWithFormat:@"Tinkoff Acquiring SDK v%@", projectVersion];
+{    
+    return @"Tinkoff Acquiring SDK v 1.0.0";
 }
 
 

@@ -19,11 +19,6 @@
 #import <UIKit/UIKit.h>
 #import "ASDKPaymentFormStarter.h"
 
-//! Project version number for ASDKUI.
-FOUNDATION_EXPORT double ASDKUIVersionNumber;
-
-//! Project version string for ASDKUI.
-FOUNDATION_EXPORT const unsigned char ASDKUIVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <ASDKUI/PublicHeader.h>
 
