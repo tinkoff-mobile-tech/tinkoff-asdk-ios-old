@@ -17,4 +17,5 @@ SampleProject/xcuserdata
 SampleProject/UserInterfaceState.xcuserstate
 SampleProject/build/
 SampleProject/DerivedData
-SampleProject/Pods
+SampleProject/Pods/
+SampleProject/Podfile.lock
