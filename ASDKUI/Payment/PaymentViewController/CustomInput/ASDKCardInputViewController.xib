@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ASDKCardInputViewController">
@@ -13,12 +12,15 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="JXT-6e-MHd">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="226" id="r8Y-be-n0c"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="RDn-3x-KeV">
                         <size key="itemSize" width="106" height="54"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -31,12 +33,11 @@
                     </connections>
                 </collectionView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="JXT-6e-MHd" secondAttribute="bottom" id="TdU-AU-AX8"/>
-                <constraint firstItem="JXT-6e-MHd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bMx-52-H9g"/>
-                <constraint firstAttribute="trailing" secondItem="JXT-6e-MHd" secondAttribute="trailing" id="bdE-iU-DrA"/>
-                <constraint firstItem="JXT-6e-MHd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="lmn-2y-f4L"/>
+                <constraint firstAttribute="trailing" secondItem="JXT-6e-MHd" secondAttribute="trailing" id="3Gc-Wu-sBI"/>
+                <constraint firstAttribute="bottom" secondItem="JXT-6e-MHd" secondAttribute="bottom" id="fv1-0f-eQ4"/>
+                <constraint firstItem="JXT-6e-MHd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mfJ-Lg-oL8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="374.5" y="551"/>

@@ -16,7 +16,6 @@
 		83871B991C6E1A0200D69603 /* public.pem in Resources */ = {isa = PBXBuildFile; fileRef = 83871B981C6E1A0200D69603 /* public.pem */; };
 		94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94251ADB1C6C899E00B5FE2B /* Assets.xcassets */; };
 		94251AEA1C6C899E00B5FE2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251ADE1C6C899E00B5FE2B /* AppDelegate.m */; };
-		94251AEB1C6C899E00B5FE2B /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251AE01C6C899E00B5FE2B /* ASDKCardIOScanner.m */; };
 		94251AEC1C6C899E00B5FE2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251AE31C6C899E00B5FE2B /* ViewController.m */; };
 		94251AEE1C6C899E00B5FE2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251AE61C6C899E00B5FE2B /* main.m */; };
 		94251AF61C6C89F600B5FE2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94251AF51C6C89F600B5FE2B /* LaunchScreen.storyboard */; };
@@ -34,6 +33,7 @@
 		BEDEFF581C74B2A00026D454 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF561C74B2A00026D454 /* Localizable.strings */; };
 		BEF535711C72091D00935A15 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF5356F1C72091D00935A15 /* AboutViewController.m */; };
 		BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF535701C72091D00935A15 /* AboutViewController.xib */; };
+		C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,8 +66,6 @@
 		94251ADB1C6C899E00B5FE2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94251ADD1C6C899E00B5FE2B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94251ADE1C6C899E00B5FE2B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		94251ADF1C6C899E00B5FE2B /* ASDKCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKCardIOScanner.h; path = ../Source/ASDKCardIOScanner.h; sourceTree = "<group>"; };
-		94251AE01C6C899E00B5FE2B /* ASDKCardIOScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKCardIOScanner.m; path = ../Source/ASDKCardIOScanner.m; sourceTree = "<group>"; };
 		94251AE11C6C899E00B5FE2B /* ASDKTestKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKTestKeys.h; sourceTree = "<group>"; };
 		94251AE21C6C899E00B5FE2B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		94251AE31C6C899E00B5FE2B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -96,6 +94,8 @@
 		BEF5356E1C72091D00935A15 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		BEF5356F1C72091D00935A15 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		BEF535701C72091D00935A15 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		C38C87091D37B7F6001ABBFA /* ASDKCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKCardIOScanner.h; path = ASDKSampleApp/Source/ASDKCardIOScanner.h; sourceTree = SOURCE_ROOT; };
+		C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKCardIOScanner.m; path = ASDKSampleApp/Source/ASDKCardIOScanner.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,8 +180,8 @@
 		94251AD71C6C899E00B5FE2B /* ASDK */ = {
 			isa = PBXGroup;
 			children = (
-				94251ADF1C6C899E00B5FE2B /* ASDKCardIOScanner.h */,
-				94251AE01C6C899E00B5FE2B /* ASDKCardIOScanner.m */,
+				C38C87091D37B7F6001ABBFA /* ASDKCardIOScanner.h */,
+				C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */,
 			);
 			path = ASDK;
 			sourceTree = "<group>";
@@ -448,11 +448,11 @@
 				94251AFA1C6C8D0D00B5FE2B /* ItemsListTableViewController.m in Sources */,
 				94251B021C6C8F4500B5FE2B /* DetailInfoTableViewController.m in Sources */,
 				94251B281C6CC6C500B5FE2B /* PaymentSuccessViewController.m in Sources */,
-				94251AEB1C6C899E00B5FE2B /* ASDKCardIOScanner.m in Sources */,
 				BEF535711C72091D00935A15 /* AboutViewController.m in Sources */,
 				94251AFE1C6C8E5900B5FE2B /* ShopCartTableViewController.m in Sources */,
 				94251B0A1C6CA60400B5FE2B /* BookItem.m in Sources */,
 				94251B1D1C6CB8BF00B5FE2B /* ShopCartCell.m in Sources */,
+				C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
