@@ -12,8 +12,6 @@
 		83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B8C1C6DF29C00D69603 /* DetailInfoTableViewController.xib */; };
 		83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B901C6E0C3100D69603 /* ShopCartTableViewController.xib */; };
 		83871B951C6E112400D69603 /* PayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83871B941C6E112400D69603 /* PayController.m */; };
-		83871B971C6E19C300D69603 /* publicOLD.pem in Resources */ = {isa = PBXBuildFile; fileRef = 83871B961C6E19C300D69603 /* publicOLD.pem */; };
-		83871B991C6E1A0200D69603 /* public.pem in Resources */ = {isa = PBXBuildFile; fileRef = 83871B981C6E1A0200D69603 /* public.pem */; };
 		94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94251ADB1C6C899E00B5FE2B /* Assets.xcassets */; };
 		94251AEA1C6C899E00B5FE2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251ADE1C6C899E00B5FE2B /* AppDelegate.m */; };
 		94251AEC1C6C899E00B5FE2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251AE31C6C899E00B5FE2B /* ViewController.m */; };
@@ -60,8 +58,6 @@
 		83871B901C6E0C3100D69603 /* ShopCartTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCartTableViewController.xib; sourceTree = "<group>"; };
 		83871B931C6E112400D69603 /* PayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayController.h; sourceTree = "<group>"; };
 		83871B941C6E112400D69603 /* PayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayController.m; sourceTree = "<group>"; };
-		83871B961C6E19C300D69603 /* publicOLD.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = publicOLD.pem; sourceTree = "<group>"; };
-		83871B981C6E1A0200D69603 /* public.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = public.pem; sourceTree = "<group>"; };
 		83E156691C721F26000BBD57 /* LocalConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalConstants.h; sourceTree = "<group>"; };
 		94251ADB1C6C899E00B5FE2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94251ADD1C6C899E00B5FE2B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -139,8 +135,6 @@
 		831672891C6486A500533D85 /* ASDKSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				83871B981C6E1A0200D69603 /* public.pem */,
-				83871B961C6E19C300D69603 /* publicOLD.pem */,
 				94251AD71C6C899E00B5FE2B /* ASDK */,
 				94251ADC1C6C899E00B5FE2B /* Source */,
 				94251ADA1C6C899E00B5FE2B /* Resources */,
@@ -371,12 +365,10 @@
 			files = (
 				83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */,
 				94F1095A1C6DDFB70043410D /* books.json in Resources */,
-				83871B971C6E19C300D69603 /* publicOLD.pem in Resources */,
 				94251B1E1C6CB8BF00B5FE2B /* ShopCartCell.xib in Resources */,
 				94251AF61C6C89F600B5FE2B /* LaunchScreen.storyboard in Resources */,
 				94251B331C6CD2B500B5FE2B /* BookItemCell.xib in Resources */,
 				94251B291C6CC6C500B5FE2B /* PaymentSuccessViewController.xib in Resources */,
-				83871B991C6E1A0200D69603 /* public.pem in Resources */,
 				BEDEFF581C74B2A00026D454 /* Localizable.strings in Resources */,
 				94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,

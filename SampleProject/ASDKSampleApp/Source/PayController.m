@@ -25,10 +25,11 @@
               cancelled:(void (^)())onCancelled
                   error:(void(^)(ASDKAcquringSdkError *error))onError
 {
-    NSString *publicKeyPath = [[NSBundle mainBundle] pathForResource:kASDKTestPublicKeyName ofType:@"pem"];
-    
-    ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyPath:publicKeyPath];
-    
+    //NSString *publicKeyPath = [[NSBundle mainBundle] pathForResource:kASDKTestPublicKeyName ofType:@"pem"];
+    //ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyPath:publicKeyPath];
+	
+	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:kASDKTestPublicKey];
+	
     ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:kASDKTestTerminalKey
                                                                           password:kASDKTestPassword
                                                                publicKeyDataSource:stringKeyCreator];
