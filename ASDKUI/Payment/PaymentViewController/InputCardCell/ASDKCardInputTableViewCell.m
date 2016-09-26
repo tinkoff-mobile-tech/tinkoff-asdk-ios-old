@@ -180,9 +180,13 @@ typedef enum
 
 - (NSString *)cardCVC
 {
-	return _textFieldCardCVC.text;
+	if (_showSecretContainer)
+	{
+		return self.secretCVVTextField.text;
+	}
+	
+	return self.textFieldCardCVC.text;
 }
-
 
 - (NSString *)exampleSavedCardName
 {

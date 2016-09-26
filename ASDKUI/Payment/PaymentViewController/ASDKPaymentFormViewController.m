@@ -881,7 +881,7 @@ typedef enum
                   }];
              }
          }
-         else if (status == ASDKPaymentStatus_CONFIRMED)
+         else if (status == ASDKPaymentStatus_CONFIRMED || status == ASDKPaymentStatus_AUTHORIZED)
          {
              [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
              

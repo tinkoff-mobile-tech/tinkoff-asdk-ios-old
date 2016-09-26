@@ -22,6 +22,8 @@
 
 - (void)awakeFromNib
 {
+	[super awakeFromNib];
+	
     self.deleteButtonLongPress = [[UILongPressGestureRecognizer alloc] init];
     [self.deleteButton addGestureRecognizer:self.deleteButtonLongPress];
 }

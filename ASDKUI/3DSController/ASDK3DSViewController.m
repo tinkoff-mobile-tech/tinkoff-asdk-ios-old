@@ -168,7 +168,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
     
@@ -207,14 +207,11 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
     
-    [self.acquiringSdk getStateWithPaymentId:self.paymentId
-                                    success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status)
-     {
+    [self.acquiringSdk getStateWithPaymentId:self.paymentId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status){
          [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
          
-         [self closeSelfWithCompletion:^
-          {
-              if (status == ASDKPaymentStatus_CONFIRMED)
+         [self closeSelfWithCompletion:^{
+              if (status == ASDKPaymentStatus_CONFIRMED || status == ASDKPaymentStatus_AUTHORIZED)
               {
                   if (self.onSuccess)
                   {

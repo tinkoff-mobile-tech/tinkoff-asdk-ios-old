@@ -34,6 +34,8 @@
 
 - (void)awakeFromNib
 {
+	[super awakeFromNib];
+	
     self.bottomSeparatorHeight.constant = 1.0f / [UIScreen mainScreen].scale;
     self.rightSeparatorWidth.constant = 1.0f / [UIScreen mainScreen].scale;
     self.bottomSeparatorTrailing.constant /= 2;
