@@ -34,10 +34,10 @@
                          email:(NSString *)email
                    customerKey:(NSString *)customerKey
                 customKeyboard:(BOOL)keyboard
-                       success:(void (^)(NSNumber *paymentId))success
+                       success:(void (^)(NSString *paymentId))success
                      cancelled:(void (^)())cancelled
                          error:(void(^)(ASDKAcquringSdkError *error))error;
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 
 @end

@@ -24,7 +24,8 @@
 #import "ASDKBarButtonItem.h"
 #import "ASDKCardsListDataController.h"
 
-@interface ASDKPaymentFormStarter ()
+
+@interface ASDKPaymentFormStarter () <PKPaymentAuthorizationViewControllerDelegate>
 {
     UIStatusBarStyle _oldStatusBarStyle;
 }
@@ -38,6 +39,13 @@
 @property (nonatomic, strong) id<ASDKAcquiringSdkLoggerDelegate> logger;
 
 @property (nonatomic, strong) UIWindow *loaderWindow;
+
+// ApplePay
+@property (nonatomic, weak) UIViewController *presentingViewControllerApplePay;
+//
+@property (nonatomic, strong) void (^onSuccess)(NSString *paymentId);
+@property (nonatomic, strong) void (^onCancelled)();
+@property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
 @end
 
@@ -103,7 +111,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                        email:(NSString *)email
                               customKeyboard:(BOOL)keyboard
                                  customerKey:(NSString *)customerKey
-                                     success:(void (^)(NSNumber *paymentId))onSuccess
+                                     success:(void (^)(NSString *paymentId))onSuccess
                                    cancelled:(void (^)())onCancelled
                                        error:(void(^)(ASDKAcquringSdkError *error))onError
 {
@@ -117,7 +125,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                                                                         email:email
                                                                                   customerKey:customerKey
                                                                                customKeyboard:keyboard
-                                                                                      success:^(NSNumber *paymentId)
+                                                                                      success:^(NSString *paymentId)
                                          {
                                              [ASDKPaymentFormStarter resetSharedInstance];
                                              
@@ -217,5 +225,99 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
     return _loaderWindow;
 }
 
+#pragma mark - PKPaymentAuthorizationViewController
+
++ (BOOL)isPayWithAppleAvailable
+{
+	return [PKPaymentAuthorizationViewController canMakePayments] &&
+	[PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:[ASDKPaymentFormStarter payWithAppleSupportedNetworks]];
+}
+
++ (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks
+{
+	return  @[//PKPaymentNetworkAmex,
+			  //PKPaymentNetworkChinaUnionPay,
+			  PKPaymentNetworkDiscover,
+			  //PKPaymentNetworkInterac,
+			  PKPaymentNetworkMasterCard,
+			  //PKPaymentNetworkPrivateLabel,
+			  PKPaymentNetworkVisa];
+}
+
+- (void)payWithApplePayFromViewController:(UIViewController *)presentingViewController
+								  orderId:(NSString *)orderId
+								   amount:(NSNumber *)amount
+									title:(NSString *)title
+							  description:(NSString *)description
+								   cardId:(NSString *)cardId
+									email:(NSString *)email
+						   customKeyboard:(BOOL)keyboard
+							  customerKey:(NSString *)customerKey
+								  success:(void (^)(NSString *paymentId))onSuccess
+								cancelled:(void (^)())onCancelled
+									error:(void(^)(ASDKAcquringSdkError *error))onError
+{
+	self.onSuccess = onSuccess;
+	self.onError = onError;
+	self.onCancelled = onCancelled;
+
+	PKPaymentRequest *paymentRequest = [PKPaymentRequest new];
+	paymentRequest.merchantIdentifier = @"";
+	paymentRequest.countryCode = @"RUB";
+	paymentRequest.currencyCode = @"RU";
+	paymentRequest.supportedNetworks = [ASDKPaymentFormStarter payWithAppleSupportedNetworks];
+	//
+	paymentRequest.merchantCapabilities = PKMerchantCapability3DS;
+	//
+	paymentRequest.paymentSummaryItems = @[[PKPaymentSummaryItem summaryItemWithLabel:@"total" amount:[NSDecimalNumber decimalNumberWithDecimal:[amount decimalValue]]]];
+	paymentRequest.requiredShippingAddressFields = PKAddressFieldNone;
+	
+	// Request shipping information, in this case just postal address.
+	//	if ([_email length] > 0)
+	//	{
+	//		paymentRequest.requiredShippingAddressFields = PKAddressFieldEmail;
+	//	}
+	//	else
+	//	{
+	//		paymentRequest.requiredShippingAddressFields = PKAddressFieldNone;
+	//	}
+
+	PKPaymentAuthorizationViewController *viewController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
+	viewController.delegate = self;
+
+	self.presentingViewControllerApplePay = presentingViewController;
+	[self.presentingViewControllerApplePay presentViewController:viewController animated:YES completion:^{
+		
+	}];
+}
+
+#pragma mark - PKPaymentAuthorizationViewControllerDelegate
+
+- (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
+					   didAuthorizePayment:(PKPayment *)payment
+								completion:(void (^)(PKPaymentAuthorizationStatus status))completion
+{
+	if (completion)
+	{
+		NSString *paymentDataString = [[NSString alloc] initWithData:payment.token.paymentData encoding:NSUTF8StringEncoding];
+		
+		[self.acquiringSdk finishAuthorizeWithPaymentId:paymentDataString
+											   cardData:@""
+											  infoEmail:@""
+												success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+															completion(PKPaymentAuthorizationStatusSuccess);
+												}
+												failure:^(ASDKAcquringSdkError *error) {
+															completion(PKPaymentAuthorizationStatusFailure);
+												}];
+	}
+}
+
+- (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller
+{
+	[self.presentingViewControllerApplePay dismissViewControllerAnimated:YES completion:^{
+		
+	}];
+}
 
 @end

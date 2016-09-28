@@ -22,7 +22,7 @@
 
 @interface ASDKGetStateRequestBuilder : ASDKRequestBuilder
 
-+ (ASDKGetStateRequestBuilder *)builderWithPaymentId:(NSNumber *)paymentId
++ (ASDKGetStateRequestBuilder *)builderWithPaymentId:(NSString *)paymentId
                                       terminalKey:(NSString *)terminalKey
                                          password:(NSString *)password;
 

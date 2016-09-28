@@ -23,7 +23,7 @@
 @implementation ASDKFinishAuthorizeRequest
 
 - (ASDKFinishAuthorizeRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                          paymentId:(NSNumber *)paymentId
+                                          paymentId:(NSString *)paymentId
                                           sendEmail:(NSString *)sendEmail
                                            cardData:(NSString *)cardData
                                           infoEmail:(NSString *)infoEmail

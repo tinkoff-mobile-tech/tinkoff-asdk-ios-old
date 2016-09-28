@@ -24,12 +24,12 @@
 
 @interface ASDK3DSViewController : ASDKBaseViewController
 
-- (instancetype)initWithPaymentId:(NSNumber *)paymentId
+- (instancetype)initWithPaymentId:(NSString *)paymentId
                       threeDsData:(ASDKThreeDsData *)data
                      acquiringSdk:(ASDKAcquiringSdk *)acquiringSdk;
 
 - (void)showFromViewController:(UIViewController *)viewController
-                       success:(void (^)(NSNumber *paymentId))success
+                       success:(void (^)(NSString *paymentId))success
                        failure:(void (^)(ASDKAcquringSdkError *statusError))failure
                         cancel:(void (^)())cancel;
 

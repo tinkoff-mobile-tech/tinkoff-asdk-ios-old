@@ -70,18 +70,18 @@
                success:(void (^)(ASDKInitResponse *response))success
                failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
-- (void)finishAuthorizeWithPaymentId:(NSNumber *)paymentId
+- (void)finishAuthorizeWithPaymentId:(NSString *)paymentId
                             cardData:(NSString *)cardData
                            infoEmail:(NSString *)infoEmail
                              success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                              failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
-- (void)chargeWithPaymentId:(NSNumber *)paymentId
+- (void)chargeWithPaymentId:(NSString *)paymentId
                    rebillId:(NSNumber *)rebillId
                     success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo))success
                     failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
-- (void)getStateWithPaymentId:(NSNumber *)paymentId
+- (void)getStateWithPaymentId:(NSString *)paymentId
                       success:(void (^)(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                       failure:(void (^)(ASDKAcquringSdkError *error))failure;
 

@@ -22,7 +22,7 @@
 
 @interface ASDKChargeRequestBuilder : ASDKRequestBuilder
 
-+ (ASDKChargeRequestBuilder *)builderWithPaymentId:(NSNumber *)paymentId
++ (ASDKChargeRequestBuilder *)builderWithPaymentId:(NSString *)paymentId
                                        rebillId:(NSNumber *)rebillId
                                     terminalKey:(NSString *)terminalKey
                                        password:(NSString *)password;

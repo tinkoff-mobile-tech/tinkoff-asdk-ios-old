@@ -20,7 +20,7 @@
 
 @interface ASDKFinishAuthorizeRequestBuilder ()
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 @property (nonatomic) NSString *sendEmail;
 @property (nonatomic, copy) NSString *cardData;
 @property (nonatomic, strong) NSString *infoEmail;
@@ -29,7 +29,7 @@
 
 @implementation ASDKFinishAuthorizeRequestBuilder
 
-+ (ASDKFinishAuthorizeRequestBuilder *)builderWithPaymentId:(NSNumber *)paymentId
++ (ASDKFinishAuthorizeRequestBuilder *)builderWithPaymentId:(NSString *)paymentId
                                                 cardData:(NSString *)cardData
                                                infoEmail:(NSString *)infoEmail
                                              terminalKey:(NSString *)terminalKey
@@ -86,7 +86,7 @@
     
 #define kASDKPaymentIdDescription @"Уникальный идентификатор транзакции в системе Банка, полученный в ответе на вызов метода Init."
 #define kASDKPaymentIdMaxLength 20
-    NSString *paymentId = self.paymentId.stringValue;
+    NSString *paymentId = self.paymentId;
     NSLog(@"paymentId=%@\nrealPaymentId=%@",paymentId,self.paymentId);
     if (paymentId.length > kASDKPaymentIdMaxLength || paymentId.length == 0)
     {

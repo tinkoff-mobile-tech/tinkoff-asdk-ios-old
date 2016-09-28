@@ -23,7 +23,7 @@
 
 @interface ASDKPaymentInfo : ASDKBaseObject
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, strong) NSNumber *amount;
 

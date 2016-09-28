@@ -93,7 +93,7 @@ typedef enum
 @property (nonatomic) CGSize keyboardSize;
 
 
-@property (nonatomic, strong) void (^onSuccess)(NSNumber *paymentId);
+@property (nonatomic, strong) void (^onSuccess)(NSString *paymentId);
 @property (nonatomic, strong) void (^onCancelled)();
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
@@ -118,7 +118,7 @@ typedef enum
                          email:(NSString *)email
                    customerKey:(NSString *)customerKey
                 customKeyboard:(BOOL)keyboard
-                       success:(void (^)(NSNumber *paymentId))success
+                       success:(void (^)(NSString *paymentId))success
                      cancelled:(void (^)())cancelled
                          error:(void(^)(ASDKAcquringSdkError *error))error
 {
@@ -807,7 +807,7 @@ typedef enum
     }];
 }
 
-- (void)performFinishAuthorizeRequestWithPaymentId:(NSNumber *)paymentId
+- (void)performFinishAuthorizeRequestWithPaymentId:(NSString *)paymentId
 {
     NSString *cardNumber = [self cardRequisitesCell].cardNumber;
     NSString *date = [self cardRequisitesCell].cardExpirationDate;
@@ -846,7 +846,7 @@ typedef enum
                                                                                                 acquiringSdk:strongSelf.acquiringSdk];
                  
                  [threeDsController showFromViewController:strongSelf
-                                                   success:^(NSNumber *paymentId)
+                                                   success:^(NSString *paymentId)
                   {
                       NSLog(@"\n\n\nPAYMENT SUCCESS AFTER 3DS\n\n\n");
                       
@@ -936,7 +936,7 @@ typedef enum
     [self performInitRequest];
 }
 
-- (void)manageSuccessWithPaymentId:(NSNumber *)paymentId
+- (void)manageSuccessWithPaymentId:(NSString *)paymentId
 {
     __weak typeof(self) weakSelf = self;
     
