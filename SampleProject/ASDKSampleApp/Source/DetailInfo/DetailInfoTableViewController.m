@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UIButton *addToCartButton;
+@property (weak, nonatomic) IBOutlet UIButton *buttonApplePay;
 @property (nonatomic, weak) IBOutlet UILabel *itemCostLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomContainerView;
@@ -68,6 +69,8 @@
     [self.itemCostLabel setText:[_item amountAsString]];
     
     self.bottomContainerView.backgroundColor = kMainBlueColor;
+	
+	[self.buttonApplePay setEnabled:[PayController isPayWithAppleAvailable]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -154,7 +157,7 @@
                        description:self.item.bookDescription
                             amount:self.item.cost
                 fromViewController:self
-                           success:^(NSNumber *paymentId)
+                           success:^(NSString *paymentId)
      {
          NSLog(@"%@",paymentId);
      }
@@ -168,5 +171,38 @@
      }];
 }
 
+- (IBAction)buttonActionApplePay:(UIButton *)sender
+{
+	if ([PayController isPayWithAppleAvailable])
+	{
+		PKShippingMethod *method1 = [[PKShippingMethod alloc] init];
+		method1.identifier = @"method1";
+		method1.detail = @"ShippingMethod";
+
+		[PayController buyWithApplePayAmount:self.item.cost
+								 description:self.item.title
+									recurent:YES
+									   email:@"test@gmail.com"
+							 appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
+							 shippingMethods:@[method1]//(NSArray<PKShippingMethod *> *)
+									 contact:nil
+						  fromViewController:self
+									 success:^(NSString *paymentId) { NSLog(@"%@",paymentId); }
+								   cancelled:^{ NSLog(@"Canceled"); }
+									   error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@",error); }];
+		
+		
+//		[PayController buyWithApplePayItemWithName:self.item.title
+//									   description:self.item.bookDescription
+//											amount:self.item.cost
+//								   appleMerchantId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"AAPLEmporiumBundlePrefix"]
+//								   shippingMethods:nil//(NSArray<PKShippingMethod *> *)shippingMethods
+//										   contact:nil//(PKContact *)contact
+//								fromViewController:self
+//										   success:^(NSString *paymentId) {  NSLog(@"%@",paymentId); }
+//										 cancelled:^{ NSLog(@"Canceled");  }
+//											 error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@",error); }];
+	}
+}
 
 @end

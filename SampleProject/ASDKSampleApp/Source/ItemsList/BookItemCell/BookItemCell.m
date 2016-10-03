@@ -10,6 +10,7 @@
 #import "LocalConstants.h"
 
 NSString *const kDetailsInfoNotification = @"kDetailsInfoNotification";
+
 #define kSeparatorLineHeight		1.0f / [[UIScreen mainScreen] scale]
 
 @interface BookItemCell ()
@@ -33,6 +34,8 @@ NSString *const kDetailsInfoNotification = @"kDetailsInfoNotification";
 
 - (void)awakeFromNib
 {
+	[super awakeFromNib];
+	
     self.itemCostLabel.textColor = kMainBlueColor;
     [self.imageItemContainerView.layer setBorderColor:[UIColor grayColor].CGColor];
     [self.imageItemContainerView.layer setBorderWidth:kSeparatorLineHeight];

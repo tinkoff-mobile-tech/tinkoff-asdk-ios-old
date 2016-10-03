@@ -75,14 +75,16 @@
 + (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks;
 
 - (void)payWithApplePayFromViewController:(UIViewController *)presentingViewController
-								  orderId:(NSString *)orderId
 								   amount:(NSNumber *)amount
-									title:(NSString *)title
+								  orderId:(NSString *)orderId
 							  description:(NSString *)description
-								   cardId:(NSString *)cardId
-									email:(NSString *)email
-						   customKeyboard:(BOOL)keyboard
 							  customerKey:(NSString *)customerKey
+								 recurent:(BOOL)recurent
+								sendEmail:(BOOL)sendEmail
+									email:(NSString *)email
+						  appleMerchantId:(NSString *)appleMerchantId
+						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
+						  shippingContact:(PKContact *)shippingContact
 								  success:(void (^)(NSString *paymentId))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void(^)(ASDKAcquringSdkError *error))onError;

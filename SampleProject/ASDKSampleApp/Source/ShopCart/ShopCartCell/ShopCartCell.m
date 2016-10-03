@@ -14,6 +14,8 @@
 
 - (void)awakeFromNib
 {
+	[super awakeFromNib];
+	
     // Initialization code
     self.itemCostLabel.textColor = kMainBlueColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;

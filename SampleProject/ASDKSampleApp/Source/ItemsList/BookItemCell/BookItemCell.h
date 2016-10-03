@@ -19,7 +19,6 @@ extern NSString *const kDetailsInfoNotification;
 @property (nonatomic, weak) IBOutlet UILabel *itemDescriptionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *itemCostLabel;
 @property (nonatomic, weak) IBOutlet UIButton *itemDetailsButton;
-
 @property (weak, nonatomic) IBOutlet UIView *imageItemContainerView;
 
 @property (nonatomic, strong) BookItem *bookItem;

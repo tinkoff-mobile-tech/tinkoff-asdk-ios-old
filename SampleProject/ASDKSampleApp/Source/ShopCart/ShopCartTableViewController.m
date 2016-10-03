@@ -24,6 +24,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *totalLabel;
 @property (nonatomic, weak) IBOutlet UIButton *payButton;
+@property (weak, nonatomic) IBOutlet UIButton *buttonApplePay;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomContainerView;
 
@@ -59,8 +60,9 @@
     [self updateTotalLabel];
     
     self.bottomContainerView.backgroundColor = kMainBlueColor;
+	
+	[self.buttonApplePay setEnabled:[PayController isPayWithAppleAvailable]];
 }
-
 
 - (void)handleShopCartUpdate
 {
@@ -178,7 +180,7 @@
                        description:@"Много книг"
                             amount:[NSNumber numberWithDouble:_total]
                 fromViewController:self
-                           success:^(NSNumber *paymentId)
+                           success:^(NSString *paymentId)
      {
          NSLog(@"%@",paymentId);
          
@@ -192,6 +194,11 @@
      {
          NSLog(@"%@",error);
      }];
+}
+
+- (IBAction)buttonActionApplePay:(UIButton *)sender
+{
+	
 }
 
 @end

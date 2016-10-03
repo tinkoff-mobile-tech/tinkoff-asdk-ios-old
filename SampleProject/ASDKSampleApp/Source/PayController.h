@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <ASDKCore/ASDKCore.h>
+#import <PassKit/PassKit.h>
 
 @interface PayController : NSObject
 
@@ -16,8 +17,21 @@
             description:(NSString *)description
                  amount:(NSNumber *)amount
      fromViewController:(UIViewController *)viewController
-                success:(void (^)(NSNumber *paymentId))onSuccess
+                success:(void (^)(NSString *paymentId))onSuccess
               cancelled:(void (^)())onCancelled
                   error:(void(^)(ASDKAcquringSdkError *error))onError;
+
++ (BOOL)isPayWithAppleAvailable;
++ (void)buyWithApplePayAmount:(NSNumber *)amount
+				  description:(NSString *)description
+					 recurent:(BOOL)recurent
+						email:(NSString *)email
+			  appleMerchantId:(NSString *)appleMerchantId
+			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
+					  contact:(PKContact *)contact
+		   fromViewController:(UIViewController *)viewController
+					  success:(void (^)(NSString *paymentId))onSuccess
+					cancelled:(void (^)())onCancelled
+						error:(void(^)(ASDKAcquringSdkError *error))onError;
 
 @end
