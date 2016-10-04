@@ -69,7 +69,7 @@
                                  customerKey:(NSString *)customerKey
                                      success:(void (^)(NSString *paymentId))onSuccess
                                    cancelled:(void (^)())onCancelled
-                                       error:(void(^)(ASDKAcquringSdkError *error))onError;
+                                       error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 + (BOOL)isPayWithAppleAvailable;
 + (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks;
@@ -79,7 +79,6 @@
 								  orderId:(NSString *)orderId
 							  description:(NSString *)description
 							  customerKey:(NSString *)customerKey
-								 recurent:(BOOL)recurent
 								sendEmail:(BOOL)sendEmail
 									email:(NSString *)email
 						  appleMerchantId:(NSString *)appleMerchantId
@@ -87,6 +86,6 @@
 						  shippingContact:(PKContact *)shippingContact
 								  success:(void (^)(NSString *paymentId))onSuccess
 								cancelled:(void (^)())onCancelled
-									error:(void(^)(ASDKAcquringSdkError *error))onError;
+									error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 @end

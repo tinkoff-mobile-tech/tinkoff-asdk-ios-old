@@ -24,11 +24,10 @@
 + (BOOL)isPayWithAppleAvailable;
 + (void)buyWithApplePayAmount:(NSNumber *)amount
 				  description:(NSString *)description
-					 recurent:(BOOL)recurent
 						email:(NSString *)email
 			  appleMerchantId:(NSString *)appleMerchantId
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
-					  contact:(PKContact *)contact
+			  shippingContact:(PKContact *)shippingContact
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(NSString *paymentId))onSuccess
 					cancelled:(void (^)())onCancelled

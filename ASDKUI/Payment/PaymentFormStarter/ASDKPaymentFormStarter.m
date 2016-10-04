@@ -249,7 +249,6 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 								  orderId:(NSString *)orderId
 							  description:(NSString *)description
 							  customerKey:(NSString *)customerKey
-								 recurent:(BOOL)recurent
 								sendEmail:(BOOL)sendEmail
 									email:(NSString *)email
 						  appleMerchantId:(NSString *)appleMerchantId
@@ -257,72 +256,66 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 						  shippingContact:(PKContact *)shippingContact
 								  success:(void (^)(NSString *paymentId))onSuccess
 								cancelled:(void (^)())onCancelled
-									error:(void(^)(ASDKAcquringSdkError *error))onError
+									error:(void (^)(ASDKAcquringSdkError *error))onError
 {
+	///////////////
 	self.onSuccess = onSuccess;
 	self.onError = onError;
 	self.onCancelled = onCancelled;
 
-	PKPaymentRequest *paymentRequest = [PKPaymentRequest new];
-	paymentRequest.merchantIdentifier = appleMerchantId;
-	paymentRequest.countryCode = @"RU";
-	paymentRequest.currencyCode = @"RUB";
-	paymentRequest.supportedNetworks = [ASDKPaymentFormStarter payWithAppleSupportedNetworks];
-	paymentRequest.merchantCapabilities = PKMerchantCapability3DS;
-	//paymentSummaryItems
-	NSMutableArray *paymentSummaryItems = [NSMutableArray new];//
-	[paymentSummaryItems addObject:[PKPaymentSummaryItem summaryItemWithLabel:description amount:[NSDecimalNumber decimalNumberWithDecimal:[amount decimalValue]]]];
-	for (PKShippingMethod *method in shippingMethods)
- 	{
-		[paymentSummaryItems addObject:[PKPaymentSummaryItem summaryItemWithLabel:method.identifier amount:[NSDecimalNumber decimalNumberWithDecimal:[amount decimalValue]]]];
-	}
-	
-	paymentRequest.paymentSummaryItems = paymentSummaryItems;
-	
-	//paymentRequest.shippingMethods = shippingMethods;
-	
-	PKAddressField addressField = PKAddressFieldNone;
-	
-	//if (sendEmail == YES)
-	{
-		addressField |= PKAddressFieldEmail;
-	}
-	
-	//if (contact && contact.postalAddress)
-	{
-		if (addressField == PKAddressFieldNone)
-		{
-			addressField = PKAddressFieldPostalAddress;
-			addressField |= PKAddressFieldPhone;
-		}
-		else
-		{
-			addressField |= PKAddressFieldPostalAddress;
-			addressField |= PKAddressFieldPhone;
-		}
-		
-		addressField = PKAddressFieldPostalAddress|PKAddressFieldPhone|PKAddressFieldEmail|PKAddressFieldName;
-	}
-	
-	paymentRequest.requiredBillingAddressFields = addressField;
-	paymentRequest.requiredShippingAddressFields = addressField;
-	
-	paymentRequest.shippingContact = shippingContact;
-	
-	PKPaymentAuthorizationViewController *viewController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
-	viewController.delegate = self;
-
-	if (viewController)
-	{
-		self.presentingViewControllerApplePay = presentingViewController;
-		[self.presentingViewControllerApplePay presentViewController:viewController animated:YES completion:^{
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:NO
+		success:^(ASDKInitResponse *response){
+			PKPaymentRequest *paymentRequest = [PKPaymentRequest new];
+			paymentRequest.merchantIdentifier = appleMerchantId;
+			paymentRequest.countryCode = @"RU";
+			paymentRequest.currencyCode = @"RUB";
+			paymentRequest.supportedNetworks = [ASDKPaymentFormStarter payWithAppleSupportedNetworks];
+			paymentRequest.merchantCapabilities = PKMerchantCapability3DS;
+			//paymentSummaryItems
+			NSMutableArray *paymentSummaryItems = [NSMutableArray new];//
+			[paymentSummaryItems addObject:[PKPaymentSummaryItem summaryItemWithLabel:description amount:[NSDecimalNumber decimalNumberWithDecimal:[amount decimalValue]]]];
+			[paymentSummaryItems addObjectsFromArray:shippingMethods];
 			
-		}];
-	}
-	else
-	{
-		onError(nil);
-	}
+			paymentRequest.paymentSummaryItems = paymentSummaryItems;
+			
+			//
+			PKAddressField addressFieldBilling = PKAddressFieldNone;
+			if (sendEmail == YES) { addressFieldBilling |= PKAddressFieldEmail; }
+			//	if (shippingContact.postalAddress) { addressFieldBilling |= PKAddressFieldPostalAddress; }
+			
+			PKContact *billingContact = [[PKContact alloc] init];
+			billingContact.emailAddress = email;
+			paymentRequest.billingContact = billingContact;
+			paymentRequest.requiredBillingAddressFields = addressFieldBilling;
+			
+			//
+			PKAddressField addressFieldShipping = PKAddressFieldNone;
+			if (shippingContact.postalAddress) { addressFieldShipping |= PKAddressFieldPostalAddress; }
+			if (shippingContact.name) { addressFieldShipping |= PKAddressFieldName; }
+			if (shippingContact.emailAddress) { addressFieldShipping |= PKAddressFieldEmail; }
+			if (shippingContact.phoneNumber) { addressFieldShipping |= PKAddressFieldPhone; }
+			paymentRequest.shippingContact = shippingContact;
+			paymentRequest.requiredShippingAddressFields = addressFieldShipping;
+			
+			//paymentRequest.shippingMethods = shippingMethods;
+			
+			PKPaymentAuthorizationViewController *viewController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
+			viewController.delegate = self;
+			
+			if (viewController)
+			{
+				self.presentingViewControllerApplePay = presentingViewController;
+				[self.presentingViewControllerApplePay presentViewController:viewController animated:YES completion:^{}];
+			}
+			else
+			{
+				self.onError(nil);
+			}
+		}
+		failure:^(ASDKAcquringSdkError *error){
+			self.onError(error);
+		}
+	 ];
 }
 
 #pragma mark - PKPaymentAuthorizationViewControllerDelegate

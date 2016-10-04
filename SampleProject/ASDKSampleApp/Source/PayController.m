@@ -117,11 +117,10 @@
 
 + (void)buyWithApplePayAmount:(NSNumber *)amount
 				  description:(NSString *)description
-					 recurent:(BOOL)recurent
 						email:(NSString *)email
 			  appleMerchantId:(NSString *)appleMerchantId
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
-					  contact:(PKContact *)contact
+			  shippingContact:(PKContact *)shippingContact
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(NSString *paymentId))onSuccess
 					cancelled:(void (^)())onCancelled
@@ -133,12 +132,11 @@
 												  orderId:[NSNumber numberWithDouble:(arc4random()%10000000)].stringValue
 											  description:description
 											  customerKey:[PayController customerKey]
-												 recurent:recurent
 												sendEmail:([email length] > 0)
 													email:email
 										  appleMerchantId:appleMerchantId
 										  shippingMethods:shippingMethods
-												  contact:contact
+										  shippingContact:shippingContact
 												  success:^(NSString *paymentId) {
 													  PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];
 													  vc.amount = amount;

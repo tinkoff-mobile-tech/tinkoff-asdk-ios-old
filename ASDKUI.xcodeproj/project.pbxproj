@@ -14,6 +14,7 @@
 				8316725E1C6479DE00533D85 /* ShellScript */,
 			);
 			dependencies = (
+				C355FAA11DA3C28700073675 /* PBXTargetDependency */,
 			);
 			name = "ASDKUI-universal";
 			productName = "ASDKUI-universal";
@@ -23,7 +24,6 @@
 /* Begin PBXBuildFile section */
 		83129AFF1C68CAAD00A1F5DE /* ASDKMacroses.h in Headers */ = {isa = PBXBuildFile; fileRef = 83129AFE1C68CAAD00A1F5DE /* ASDKMacroses.h */; };
 		831672531C64798800533D85 /* ASDKUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 831672521C64798800533D85 /* ASDKUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		831672681C647A3400533D85 /* ASDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831672651C647A1200533D85 /* ASDKCore.framework */; };
 		8333793F1C7470E20097208D /* ASDKBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8333793D1C7470E20097208D /* ASDKBarButtonItem.h */; };
 		833379401C7470E20097208D /* ASDKBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8333793E1C7470E20097208D /* ASDKBarButtonItem.m */; };
 		83E156451C71AE6F000BBD57 /* ASDKUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E156431C71AE6F000BBD57 /* ASDKUtils.h */; };
@@ -92,6 +92,7 @@
 		BEDEFFA91C761C370026D454 /* ASDKHighlightedButton.h in Headers */ = {isa = PBXBuildFile; fileRef = BEDEFFA71C761C370026D454 /* ASDKHighlightedButton.h */; };
 		BEDEFFAA1C761C370026D454 /* ASDKHighlightedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDEFFA81C761C370026D454 /* ASDKHighlightedButton.m */; };
 		BEDEFFAE1C761CFD0026D454 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDEFFAD1C761CFD0026D454 /* AudioToolbox.framework */; };
+		C355FAA51DA3C3DF00073675 /* ASDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831672651C647A1200533D85 /* ASDKCore.framework */; };
 		CA82FD1E1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = CA82FD1C1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.h */; };
 		CA82FD1F1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA82FD1D1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.m */; };
 		CA82FD211C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA82FD201C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib */; };
@@ -111,12 +112,19 @@
 			remoteGlobalIDString = 83166ED31C63984E00533D85;
 			remoteInfo = ASDKCore;
 		};
-		831672661C647A2E00533D85 /* PBXContainerItemProxy */ = {
+		C355FA9E1DA3C10200073675 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8316725F1C647A1200533D85 /* ASDKCore.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 83166ED21C63984E00533D85;
 			remoteInfo = ASDKCore;
+		};
+		C355FAA01DA3C28700073675 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8316725F1C647A1200533D85 /* ASDKCore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8316723A1C6477E300533D85;
+			remoteInfo = "ASDKCore-universal";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -212,8 +220,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C355FAA51DA3C3DF00073675 /* ASDKCore.framework in Frameworks */,
 				BEDEFFAE1C761CFD0026D454 /* AudioToolbox.framework in Frameworks */,
-				831672681C647A3400533D85 /* ASDKCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +606,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				831672671C647A2E00533D85 /* PBXTargetDependency */,
+				C355FA9F1DA3C10200073675 /* PBXTargetDependency */,
 			);
 			name = ASDKUI;
 			productName = ASDKUI;
@@ -742,10 +750,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		831672671C647A2E00533D85 /* PBXTargetDependency */ = {
+		C355FA9F1DA3C10200073675 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ASDKCore;
-			targetProxy = 831672661C647A2E00533D85 /* PBXContainerItemProxy */;
+			targetProxy = C355FA9E1DA3C10200073675 /* PBXContainerItemProxy */;
+		};
+		C355FAA11DA3C28700073675 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ASDKCore-universal";
+			targetProxy = C355FAA01DA3C28700073675 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -804,7 +817,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -851,7 +864,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
@@ -880,13 +893,9 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ASDKUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ASDKUI/CardIO",
-				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -911,13 +920,9 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ASDKUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/ASDKUI/CardIO",
-				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

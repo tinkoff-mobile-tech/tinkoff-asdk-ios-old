@@ -175,33 +175,27 @@
 {
 	if ([PayController isPayWithAppleAvailable])
 	{
-		PKShippingMethod *method1 = [[PKShippingMethod alloc] init];
-		method1.identifier = @"method1";
-		method1.detail = @"ShippingMethod";
-
+		PKContact *shippingContact = [[PKContact alloc] init];
+		shippingContact.emailAddress = @"test@gmail.com";
+		shippingContact.phoneNumber = [CNPhoneNumber phoneNumberWithStringValue:@"+74956481000"];
+		CNMutablePostalAddress *postalAddress = [[CNMutablePostalAddress alloc] init];
+		[postalAddress setStreet:@"Головинское шоссе, дом 5, корп. 1,"];
+		[postalAddress setCountry:@"Россия"];
+		[postalAddress setCity:@"Москва"];
+		[postalAddress setPostalCode:@"125212"];
+		[postalAddress setISOCountryCode:@"643"];
+		shippingContact.postalAddress = [postalAddress copy];
+		
 		[PayController buyWithApplePayAmount:self.item.cost
 								 description:self.item.title
-									recurent:YES
-									   email:@"test@gmail.com"
+									   email:shippingContact.emailAddress
 							 appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
-							 shippingMethods:@[method1]//(NSArray<PKShippingMethod *> *)
-									 contact:nil
+							 shippingMethods:nil//@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
+							 shippingContact:shippingContact
 						  fromViewController:self
-									 success:^(NSString *paymentId) { NSLog(@"%@",paymentId); }
+									 success:^(NSString *paymentId) { NSLog(@"%@", paymentId); }
 								   cancelled:^{ NSLog(@"Canceled"); }
-									   error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@",error); }];
-		
-		
-//		[PayController buyWithApplePayItemWithName:self.item.title
-//									   description:self.item.bookDescription
-//											amount:self.item.cost
-//								   appleMerchantId:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"AAPLEmporiumBundlePrefix"]
-//								   shippingMethods:nil//(NSArray<PKShippingMethod *> *)shippingMethods
-//										   contact:nil//(PKContact *)contact
-//								fromViewController:self
-//										   success:^(NSString *paymentId) {  NSLog(@"%@",paymentId); }
-//										 cancelled:^{ NSLog(@"Canceled");  }
-//											 error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@",error); }];
+									   error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@", error); }];
 	}
 }
 
