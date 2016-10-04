@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *payButton;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *labelContentStatus;
 
 @end
 
@@ -59,13 +60,25 @@
     [self updateTotalLabel];
     
     self.bottomContainerView.backgroundColor = kMainBlueColor;
+	
+	[self handleShopCartUpdate];
 }
-
 
 - (void)handleShopCartUpdate
 {
     [self updateTotal];
     [self updateTotalLabel];
+	
+	if (_items.count == 0)
+	{
+		[self.labelContentStatus setHidden:NO];
+		[self.labelContentStatus setText:@"Корзина пуста"];
+	}
+	else
+	{
+		[self.labelContentStatus setHidden:YES];
+	}
+	
     [self.myTableView reloadData];
 }
 
