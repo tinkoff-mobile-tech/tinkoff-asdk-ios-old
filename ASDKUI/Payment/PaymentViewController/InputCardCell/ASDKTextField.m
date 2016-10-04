@@ -19,7 +19,10 @@
 #import "ASDKTextField.h"
 
 @interface ASDKTextField () <UIKeyInput>
-
+{
+	NSString *_countryCodeString;
+	NSString *_maskPrefix;
+}
 @end
 
 @implementation ASDKTextField
@@ -30,6 +33,8 @@ NSMutableString *filteredPhoneStringFromStringWithFilter(NSString *string, NSStr
 - (void)setInputMask:(NSString *)inputMask
 {
 	_inputMask = inputMask;
+	_countryCodeString = [self countryCodeFromMask:_inputMask];
+
 	if (_labelInputMask == nil)
  	{
 		_labelInputMask = [[ASDKLabel alloc] initWithFrame:self.bounds];
@@ -91,17 +96,42 @@ NSMutableString *filteredPhoneStringFromStringWithFilter(NSString *string, NSStr
 	_showInputMaskCharacters = [NSArray arrayWithArray:characters];
 }
 
-NSMutableString *filteredPhoneStringFromStringWithFilter(NSString *string, NSString *filter)
+- (NSString *)countryCodeFromMask:(NSString *)inputMask
+{
+	_maskPrefix = [self prefixFromMask:inputMask];
+	NSRange bracketRange = [inputMask rangeOfString:@"("];
+	NSString *countryCodeString = [_maskPrefix substringWithRange:NSMakeRange(0, bracketRange.location)];
+	return [countryCodeString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
+- (NSString *)prefixFromMask:(NSString *)inputMask
+{
+	if(inputMask.length)
+	{
+		NSRange bracketRange = [inputMask rangeOfString:@"("];
+		NSRange plusRange = [inputMask rangeOfString:@"+"];
+		
+		if(bracketRange.location != NSNotFound && plusRange.location != NSNotFound)
+		{
+			return [inputMask substringWithRange:NSMakeRange(plusRange.location, (bracketRange.location + bracketRange.length) - plusRange.location)];
+		}
+	}
+	
+	return nil;
+}
+
+- (NSMutableString *)filteredPhoneStringFromString:(NSString *)string withFilter:(NSString*)filter
 {
 	NSUInteger onOriginal = 0, onFilter = 0, onOutput = 0;
 	char outputString[([filter length])];
 	BOOL done = NO;
+	BOOL phoneWithCountryCode = _countryCodeString.length ? [string rangeOfString:_countryCodeString].location != NSNotFound : NO;
 	
 	while(onFilter < [filter length] && !done)
 	{
 		char originalChar = onOriginal >= string.length ? '\0' : (char)[string characterAtIndex:onOriginal];
-        
-        char filterChar = (char)[filter characterAtIndex:onFilter];
+		
+		char filterChar = (char)[filter characterAtIndex:onFilter];
 		switch (filterChar) {
 			case '_':
 				if(originalChar=='\0')
@@ -127,17 +157,17 @@ NSMutableString *filteredPhoneStringFromStringWithFilter(NSString *string, NSStr
 				outputString[onOutput] = filterChar;
 				onOutput++;
 				onFilter++;
-				if(originalChar == filterChar)
+				if(originalChar == filterChar && phoneWithCountryCode)
 					onOriginal++;
 				break;
 		}
 	}
 	
 	outputString[onOutput] = '\0'; // Cap the output string
-    
-    NSMutableString *result = [NSMutableString stringWithUTF8String:outputString];
-    
-    return result?:[[NSMutableString alloc] initWithBytes:outputString length:sizeof(outputString) encoding:NSASCIIStringEncoding];
+	
+	NSMutableString *result = [NSMutableString stringWithUTF8String:outputString];
+	
+	return result?:[[NSMutableString alloc] initWithBytes:outputString length:sizeof(outputString) encoding:NSASCIIStringEncoding];
 }
 
 - (NSRange)fixRange:(NSRange)range oldString:(NSString *)olsString mask:(NSString *)mask
@@ -156,57 +186,119 @@ NSMutableString *filteredPhoneStringFromStringWithFilter(NSString *string, NSStr
     return range;
 }
 
+- (void)fixCursorPositionInTextField:(UITextField *)textField cursorPosition:(UITextPosition *)cursorPosition oldText:(NSString *)oldText range:(NSRange)range text:(NSString *)text newText:(NSString *)newText maskSymbols:(NSArray *)maskSymbols
+{
+	if (cursorPosition && ![newText isEqualToString:@"0"])
+	{
+		if ([maskSymbols containsObject:[oldText substringWithRange:range]])
+		{
+			cursorPosition = [textField positionFromPosition:cursorPosition offset:-1];
+			
+			if (!cursorPosition)
+			{
+				cursorPosition = [textField endOfDocument];
+			}
+		}
+		else
+		{
+			NSUInteger location = range.location > 0 ? range.location - 1 : 0;
+			
+			NSUInteger length = [text length] + 1;
+			
+			NSString *insertedString = nil;
+			
+			if (location + length <= [textField.text length])
+			{
+				insertedString = [textField.text substringWithRange:NSMakeRange(location, length)];
+			}
+			
+			BOOL isMaskSymbolLationInInsertedString = NO;
+			
+			for (NSString *maskSymbol in maskSymbols)
+			{
+				isMaskSymbolLationInInsertedString = [insertedString rangeOfString:maskSymbol].location != NSNotFound;
+				
+				if (isMaskSymbolLationInInsertedString)
+				{
+					break;
+				}
+			}
+			
+			if (insertedString
+				&& ![maskSymbols containsObject:insertedString]
+				&& isMaskSymbolLationInInsertedString)
+			{
+				cursorPosition = [textField positionFromPosition:cursorPosition offset:1];
+			}
+		}
+		
+		// set start/end location to same spot so that nothing is highlighted
+		UITextRange *selectedTextRange = [textField textRangeFromPosition:cursorPosition toPosition:cursorPosition];
+		
+		[textField setSelectedTextRange:selectedTextRange];
+	}
+}
+
 - (BOOL)shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	if (string == nil)
-	{
-		return YES;
-	}
 	//self.inputMask = @"+7 (___) ___ - ____";
 	
 	if(self.inputMask == nil) return YES; // No filter provided, allow anything
 	
-    if (range.length == 1 && string.length == 0)// && [[self.text substringWithRange:range] isEqualToString:@" "]) // мы удаляем символ маски
-    {
-        NSRange previouseRange = range;
-        
-        for (NSInteger i = (NSInteger)range.location; i >= 0; i--)
-        {
-            NSRange newRange = [self fixRange:previouseRange oldString:self.text mask:self.inputMask];
-            
-            if (newRange.location == previouseRange.location)
-            {
-                break;
-            }
-            else
-            {
-                previouseRange = newRange;
-            }
-        }
-        
-        range = previouseRange;
-    }
+	if (range.length == 1 && string.length == 0)// && [[self.text substringWithRange:range] isEqualToString:@" "]) // мы удаляем символ маски
+	{
+		if(range.location == [self.text rangeOfString:@"("].location)
+		{
+			self.text = @"";
+			return NO;
+		}
+		
+		NSRange previouseRange = range;
+		
+		for (NSInteger i = (NSInteger)range.location; i >= 0; i--)
+		{
+			NSRange newRange = [self fixRange:previouseRange oldString:self.text mask:self.inputMask];
+			
+			if (newRange.location == previouseRange.location)
+			{
+				break;
+			}
+			else
+			{
+				previouseRange = newRange;
+			}
+		}
+		
+		range = previouseRange;
+	}
 	
-    NSString *changedString = [self.text stringByReplacingCharactersInRange:range withString:string];
-
-    self.text = filteredPhoneStringFromStringWithFilter(changedString, self.inputMask);
+	NSString *changedString = [self.text stringByReplacingCharactersInRange:range withString:string];
+	
+	NSString *oldString = self.text;
+	
+	UITextPosition *beginning = self.beginningOfDocument;
+	UITextPosition *cursorLocation = [self positionFromPosition:beginning offset:(NSInteger)(range.location + string.length)];
+	
+	self.text = [self filteredPhoneStringFromString:changedString withFilter:self.inputMask];
+	
+	[self fixCursorPositionInTextField:self cursorPosition:cursorLocation oldText:oldString range:range text:string newText:self.text maskSymbols:@[@"+", @" ", @"-", @"(", @")"]];
 	
 	if ([_labelInputMask isHidden] == NO)
- 	{
-        NSMutableString *maskPlaseholder = [[NSMutableString alloc] init];
-        for (NSUInteger i = 0; i < [self.inputMask length]; i++)
-        {
-            NSRange maskPlaseholderRange = {i,1};
-            if (i >= self.text.length)
-            {
-                [maskPlaseholder appendString:[self.inputMask substringWithRange:maskPlaseholderRange]];
-            }
-            else
-            {
-                [maskPlaseholder appendString:[self.text substringWithRange:maskPlaseholderRange]];
-            }
-        }
-        
+	{
+		NSMutableString *maskPlaseholder = [[NSMutableString alloc] init];
+		for (NSUInteger i = 0; i < [self.inputMask length]; i++)
+		{
+			NSRange maskPlaseholderRange = {i,1};
+			if (i >= self.text.length)
+			{
+				[maskPlaseholder appendString:[self.inputMask substringWithRange:maskPlaseholderRange]];
+			}
+			else
+			{
+				[maskPlaseholder appendString:[self.text substringWithRange:maskPlaseholderRange]];
+			}
+		}
+		
 		if ([_showInputMaskCharacters count] > 0)
 		{
 			NSMutableAttributedString *attributedForMask = [[NSMutableAttributedString alloc] initWithString:maskPlaseholder];
@@ -223,8 +315,18 @@ NSMutableString *filteredPhoneStringFromStringWithFilter(NSString *string, NSStr
 			[_labelInputMask setText:maskPlaseholder];
 		}
 	}
-
+	
 	return NO;
+}
+
+#pragma mark - Actions
+
+- (void)textFieldTextDidBeginEditing:(NSNotification *)notification
+{
+	if (self.text.length == 0 && _maskPrefix.length)
+	{
+		self.text = _maskPrefix;
+	}
 }
 
 #pragma mark - Copy/Paste

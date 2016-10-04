@@ -574,7 +574,12 @@ typedef enum
 			return result;
 		}
 	}
-	else if (textField == self.textFieldCardCVC || textField == self.textFieldCardDate || textField == self.secretCVVTextField)
+	else if (textField == self.textFieldCardDate)
+	{
+		ASDKTextField *tcsTextField = (ASDKTextField *)textField;
+		return [tcsTextField shouldChangeCharactersInRange:range replacementString:string];
+	}
+	else if (textField == self.textFieldCardCVC || textField == self.secretCVVTextField)
 	{
 		ASDKTextField *tcsTextField = (ASDKTextField *)textField;
 		if (![tcsTextField shouldChangeCharactersInRange:range replacementString:string])
