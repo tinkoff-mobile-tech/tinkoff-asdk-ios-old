@@ -46,11 +46,11 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Интернет магазин";
+	self.title = NSLocalizedString(@"OnlineShop", @"Интернет магазин");
     
     [self.myTableView registerNib:[UINib nibWithNibName:NSStringFromClass([BookItemCell class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:NSStringFromClass([BookItemCell class])];
     
-    UIBarButtonItem *shopCartButton = [[UIBarButtonItem alloc] initWithTitle:@"Корзина"
+    UIBarButtonItem *shopCartButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bag", @"Корзина")
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(openShopCart:)];
@@ -60,8 +60,10 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self.buyButton.layer setCornerRadius:3.0f];
+	[self.buyButton setTitle:NSLocalizedString(@"Buy", @"КУПИТЬ") forState:UIControlStateNormal];
     [self.addToCartButton.layer setCornerRadius:3.0f];
-    
+	[self.addToCartButton setTitle:NSLocalizedString(@"AddToBag", @"В КОРЗИНУ") forState:UIControlStateNormal];
+	
     [self.buyButton addTarget:self action:@selector(buyItem) forControlEvents:UIControlEventTouchUpInside];
     [self.addToCartButton addTarget:self action:@selector(addItemToCart) forControlEvents:UIControlEventTouchUpInside];
     
@@ -133,10 +135,10 @@
 {
     [[ShopCart sharedInstance] addItem:self.item.copy];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Товар добавлен в корзину" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"ProductAddedToBag", @"Товар добавлен в корзину") message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:@"Закрыть"
+                                   actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
                                    style:UIAlertActionStyleCancel
                                    handler:^(UIAlertAction *action)
                                    {

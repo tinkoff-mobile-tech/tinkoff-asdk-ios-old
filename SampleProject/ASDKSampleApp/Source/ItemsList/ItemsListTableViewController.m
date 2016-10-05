@@ -42,13 +42,13 @@
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self setTitle:@"Интернет магазин"];
+    [self setTitle:NSLocalizedString(@"OnlineShop", @"Интернет магазин")];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([BookItemCell class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:NSStringFromClass([BookItemCell class])];
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    UIBarButtonItem *shopCartButton = [[UIBarButtonItem alloc] initWithTitle:@"Корзина"
+    UIBarButtonItem *shopCartButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bag", @"Корзина")
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
                                                                       action:@selector(openShopCart:)];

@@ -22,11 +22,11 @@
 {
     [super viewDidLoad];
     
-    [self setTitle:@"Интернет магазин"];
+    [self setTitle:NSLocalizedString(@"OnlineShop", @"Интернет магазин")];
     
     [self.versionLabel setText:[self sdkVersionString]];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отмена"
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Отмена") 
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(closeSelf)];

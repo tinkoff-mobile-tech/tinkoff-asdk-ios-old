@@ -40,7 +40,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Корзина";
+    self.title = NSLocalizedString(@"Bag", @"Корзина");
     
     [self.myTableView setRowHeight:117.0f];
     
@@ -49,7 +49,8 @@
     [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissSelf)]];
     
     [self.payButton.layer setCornerRadius:3.0f];
-    
+	[self.payButton setTitle:NSLocalizedString(@"Pay", @"ОПЛАТИТЬ") forState:UIControlStateNormal];
+	
     self.items = [[ShopCart sharedInstance] allItems];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleShopCartUpdate) name:kShopCartUpdated object:nil];
@@ -72,7 +73,7 @@
 	if (_items.count == 0)
 	{
 		[self.labelContentStatus setHidden:NO];
-		[self.labelContentStatus setText:@"Корзина пуста"];
+		[self.labelContentStatus setText:NSLocalizedString(@"BagIsEmpty", @"Корзина пуста")];
 	}
 	else
 	{
@@ -85,7 +86,7 @@
 - (void)updateTotalLabel
 {
     NSString *amountAsString = [[NSString stringWithFormat:@"%.2f ₽",_total]  stringByReplacingOccurrencesOfString:@"." withString:@","];
-    self.totalLabel.text = [NSString stringWithFormat:@"Итого: %@",amountAsString];
+    self.totalLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Total", @"Итого"), amountAsString];
 }
 
 - (void)updateTotal
@@ -158,10 +159,10 @@
 {
     if (_items.count == 0)
     {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Корзина пуста" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"BagIsEmpty", @"Корзина пуста") message:nil preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction
-                                       actionWithTitle:@"Закрыть"
+                                       actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
                                        style:UIAlertActionStyleCancel
                                        handler:^(UIAlertAction *action)
                                        {
@@ -187,8 +188,8 @@
     
     #warning TITLE & DESCRIPTION!!!
     
-    [PayController buyItemWithName:@"Книги"
-                       description:@"Много книг"
+    [PayController buyItemWithName:NSLocalizedString(@"Books", @"Книги")
+                       description:NSLocalizedString(@"ALotOfBooks", @"Много книг")
                             amount:[NSNumber numberWithDouble:_total]
                 fromViewController:self
                            success:^(NSNumber *paymentId)
