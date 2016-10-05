@@ -577,7 +577,10 @@ typedef enum
 	else if (textField == self.textFieldCardDate)
 	{
 		ASDKTextField *tcsTextField = (ASDKTextField *)textField;
-		return [tcsTextField shouldChangeCharactersInRange:range replacementString:string];
+		BOOL result = [tcsTextField shouldChangeCharactersInRange:range replacementString:string];
+		
+		[self textFieldDidChange:textField];
+		return result;
 	}
 	else if (textField == self.textFieldCardCVC || textField == self.secretCVVTextField)
 	{
