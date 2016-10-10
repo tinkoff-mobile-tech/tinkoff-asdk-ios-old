@@ -126,7 +126,6 @@
 		831672521C64798800533D85 /* ASDKUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKUI.h; sourceTree = "<group>"; };
 		831672541C64798800533D85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8316725F1C647A1200533D85 /* ASDKCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ASDKCore.xcodeproj; sourceTree = "<group>"; };
-		831672AB1C64925700533D85 /* ASDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ASDKCore.framework; sourceTree = "<group>"; };
 		8333793D1C7470E20097208D /* ASDKBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKBarButtonItem.h; sourceTree = "<group>"; };
 		8333793E1C7470E20097208D /* ASDKBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKBarButtonItem.m; sourceTree = "<group>"; };
 		83E156431C71AE6F000BBD57 /* ASDKUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKUtils.h; sourceTree = "<group>"; };
@@ -258,7 +257,6 @@
 				83E1565E1C7206BF000BBD57 /* Loader */,
 				83E1565D1C720696000BBD57 /* Base Classes */,
 				94C869FF1C6B2E5100046F0E /* Resources */,
-				831672AB1C64925700533D85 /* ASDKCore.framework */,
 				831672521C64798800533D85 /* ASDKUI.h */,
 				831672541C64798800533D85 /* Info.plist */,
 				83129AFD1C68CAAD00A1F5DE /* Helpers */,

@@ -382,7 +382,14 @@ typedef enum
         
         if (selectedRange.location != NSNotFound)
         {
-            range.location = selectedRange.location - 1;
+			if (selectedRange.location > 0)
+			{
+				range.location = selectedRange.location - 1;
+			}
+			else
+			{
+				range.location = 0;
+			}
         }
 		
 		if (selectedRange.length > 0)

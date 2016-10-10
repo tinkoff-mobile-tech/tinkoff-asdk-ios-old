@@ -26,7 +26,5 @@
 	<string>NSPhotoLibraryUsageDescription</string>
 	<key>NSCameraUsageDescription</key>
 	<string>NSCameraUsageDescription</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 </dict>
 </plist>
