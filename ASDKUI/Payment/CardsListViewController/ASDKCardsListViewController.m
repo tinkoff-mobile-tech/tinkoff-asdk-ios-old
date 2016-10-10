@@ -172,11 +172,13 @@ typedef enum
              [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
              
              [weakSelf setCards:[ASDKCardsListDataController instance].externalCards];
-             
-             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-             [tableView reloadData];
-             
-             _didRemoveCards = YES;
+			 
+			 [tableView beginUpdates];
+             	[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			 	[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+			 [tableView endUpdates];
+
+			 _didRemoveCards = YES;
          }
                                                           errorBlock:^(ASDKAcquringSdkError *error)
          {
