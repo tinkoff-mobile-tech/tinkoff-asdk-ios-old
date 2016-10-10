@@ -19,6 +19,7 @@
 
 "Common.Cancel" = "Отмена";
 "Common.Close" = "Закрыть";
+"Common.error" = "Ошибка";
 
 "Title.CardsList" = "Выберите карту";
 
