@@ -35,3 +35,6 @@
 "externalCardsCell.newCard" = "Новая карта";
 
 "emailCell.placeholder" = "E-mail для квитанции";
+
+"NSPhotoLibraryUsageDescription" = "";
+"NSCameraUsageDescription" = "";
