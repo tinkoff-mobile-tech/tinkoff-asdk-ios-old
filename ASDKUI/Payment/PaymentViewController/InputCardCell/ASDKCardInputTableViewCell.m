@@ -374,6 +374,8 @@ typedef enum
     
     [self.secretCVVTextField setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.secretCVVTextField setInputMask:@"___"];
+	[self.secretCVVTextField setDisablePaste:YES];
+	[self.secretCVVTextField setDisableCopy:YES];
     [self.secretCVVTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [self.secretCVVTextField setKeyboardAppearance:UIKeyboardAppearanceLight];
     [self.secretCVVTextField setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
