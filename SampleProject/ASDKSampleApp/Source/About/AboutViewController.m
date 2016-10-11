@@ -41,7 +41,7 @@
 
 - (NSString *)sdkVersionString
 {    
-    return @"Tinkoff Acquiring SDK v 1.0.0";
+    return @"Tinkoff Acquiring SDK v 1.0.3";
 }
 
 

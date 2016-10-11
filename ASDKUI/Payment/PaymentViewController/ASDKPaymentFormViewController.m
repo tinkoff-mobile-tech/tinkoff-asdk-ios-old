@@ -380,10 +380,22 @@ typedef enum
         
         NSRange selectedRange = [(ASDKTextField *)textField selectedRange];
         
-        if (selectedRange.length > 0)
+        if (selectedRange.location != NSNotFound)
         {
-            range = selectedRange;
+			if (selectedRange.location > 0)
+			{
+				range.location = selectedRange.location - 1;
+			}
+			else
+			{
+				range.location = 0;
+			}
         }
+		
+		if (selectedRange.length > 0)
+		{
+			range.length = selectedRange.length;
+		}
         
         [self.cardRequisitesCell textField:textField shouldChangeCharactersInRange:range replacementString:@""];
     }

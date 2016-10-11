@@ -91,7 +91,11 @@
      }
                                                        error:^(ASDKAcquringSdkError *error)
      {
-         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.errorMessage message:error.errorDetails preferredStyle:UIAlertControllerStyleAlert];
+		 
+		 NSString *alertTitle = error.errorMessage ? error.errorMessage : @"Ошибка";
+		 NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
+		 
+         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
          
          UIAlertAction *cancelAction = [UIAlertAction
                                         actionWithTitle:@"Закрыть"

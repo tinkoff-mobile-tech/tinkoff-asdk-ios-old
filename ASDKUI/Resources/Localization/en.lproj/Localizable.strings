@@ -19,6 +19,7 @@
 
 "Common.Cancel" = "Отмена";
 "Common.Close" = "Закрыть";
+"Common.error" = "Ошибка";
 
 "Title.CardsList" = "Выберите карту";
 
@@ -35,3 +36,6 @@
 "externalCardsCell.newCard" = "Новая карта";
 
 "emailCell.placeholder" = "E-mail для квитанции";
+
+"NSPhotoLibraryUsageDescription" = "";
+"NSCameraUsageDescription" = "";

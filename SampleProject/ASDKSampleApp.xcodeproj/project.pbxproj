@@ -32,6 +32,7 @@
 		BEF535711C72091D00935A15 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF5356F1C72091D00935A15 /* AboutViewController.m */; };
 		BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF535701C72091D00935A15 /* AboutViewController.xib */; };
 		C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */; };
+		C3F4891F1DACC5F20032EC5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F489211DACC5F20032EC5E /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +94,9 @@
 		C35E56AF1D9684FD001CFAF7 /* ASDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ASDKSampleApp.entitlements; sourceTree = "<group>"; };
 		C38C87091D37B7F6001ABBFA /* ASDKCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKCardIOScanner.h; path = ASDKSampleApp/Source/ASDKCardIOScanner.h; sourceTree = SOURCE_ROOT; };
 		C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKCardIOScanner.m; path = ASDKSampleApp/Source/ASDKCardIOScanner.m; sourceTree = SOURCE_ROOT; };
+		C3F489201DACC5F20032EC5E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C3F489231DACC6ED0032EC5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3F489241DACC6ED0032EC5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +220,7 @@
 			children = (
 				94251AE51C6C899E00B5FE2B /* Info.plist */,
 				94251AE61C6C899E00B5FE2B /* main.m */,
+				C3F489211DACC5F20032EC5E /* InfoPlist.strings */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -353,9 +358,9 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 				ru,
+				en,
 			);
 			mainGroup = 8316727E1C6486A500533D85;
 			productRefGroup = 831672881C6486A500533D85 /* Products */;
@@ -380,6 +385,7 @@
 				94251B291C6CC6C500B5FE2B /* PaymentSuccessViewController.xib in Resources */,
 				BEDEFF581C74B2A00026D454 /* Localizable.strings in Resources */,
 				94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */,
+				C3F4891F1DACC5F20032EC5E /* InfoPlist.strings in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,
 				83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */,
 			);
@@ -464,8 +470,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				BEDEFF571C74B2A00026D454 /* ru */,
+				C3F489231DACC6ED0032EC5E /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		C3F489211DACC5F20032EC5E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3F489201DACC5F20032EC5E /* ru */,
+				C3F489241DACC6ED0032EC5E /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -475,6 +491,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -519,6 +536,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
