@@ -26,7 +26,7 @@
     
     [self.versionLabel setText:[self sdkVersionString]];
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Отмена") 
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Закрыть") 
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(closeSelf)];
@@ -41,8 +41,7 @@
 
 - (NSString *)sdkVersionString
 {    
-    return @"Tinkoff Acquiring SDK v 1.0.0";
+    return @"Tinkoff Acquiring SDK v 1.1.0";
 }
-
 
 @end

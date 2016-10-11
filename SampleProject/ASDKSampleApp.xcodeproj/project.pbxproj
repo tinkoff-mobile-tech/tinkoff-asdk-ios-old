@@ -32,6 +32,11 @@
 		BEF535711C72091D00935A15 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF5356F1C72091D00935A15 /* AboutViewController.m */; };
 		BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF535701C72091D00935A15 /* AboutViewController.xib */; };
 		C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */; };
+		C3F4893C1DAD19390032EC5E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F4893B1DAD19390032EC5E /* SettingsViewController.m */; };
+		C3F489401DAD1A8E0032EC5E /* TableViewCellSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F4893E1DAD1A8E0032EC5E /* TableViewCellSwitch.m */; };
+		C3F489411DAD1A8E0032EC5E /* TableViewCellSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F4893F1DAD1A8E0032EC5E /* TableViewCellSwitch.xib */; };
+		C3F489461DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F489441DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m */; };
+		C3F489471DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F489451DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +98,14 @@
 		C35E56AF1D9684FD001CFAF7 /* ASDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ASDKSampleApp.entitlements; sourceTree = "<group>"; };
 		C38C87091D37B7F6001ABBFA /* ASDKCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKCardIOScanner.h; path = ASDKSampleApp/Source/ASDKCardIOScanner.h; sourceTree = SOURCE_ROOT; };
 		C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKCardIOScanner.m; path = ASDKSampleApp/Source/ASDKCardIOScanner.m; sourceTree = SOURCE_ROOT; };
+		C3F4893A1DAD19390032EC5E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		C3F4893B1DAD19390032EC5E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		C3F4893D1DAD1A8E0032EC5E /* TableViewCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSwitch.h; sourceTree = "<group>"; };
+		C3F4893E1DAD1A8E0032EC5E /* TableViewCellSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSwitch.m; sourceTree = "<group>"; };
+		C3F4893F1DAD1A8E0032EC5E /* TableViewCellSwitch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellSwitch.xib; sourceTree = "<group>"; };
+		C3F489431DAD1DEA0032EC5E /* TableViewCellSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSegmentedControl.h; sourceTree = "<group>"; };
+		C3F489441DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSegmentedControl.m; sourceTree = "<group>"; };
+		C3F489451DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellSegmentedControl.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +208,7 @@
 		94251ADC1C6C899E00B5FE2B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C3F489391DAD18E90032EC5E /* Settings */,
 				BEF5356A1C7208E000935A15 /* About */,
 				83871B921C6E110200D69603 /* PayController */,
 				94251B241C6CC6AA00B5FE2B /* PaymentSuccess */,
@@ -302,6 +316,21 @@
 			path = About;
 			sourceTree = "<group>";
 		};
+		C3F489391DAD18E90032EC5E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				C3F4893A1DAD19390032EC5E /* SettingsViewController.h */,
+				C3F4893B1DAD19390032EC5E /* SettingsViewController.m */,
+				C3F4893D1DAD1A8E0032EC5E /* TableViewCellSwitch.h */,
+				C3F4893E1DAD1A8E0032EC5E /* TableViewCellSwitch.m */,
+				C3F4893F1DAD1A8E0032EC5E /* TableViewCellSwitch.xib */,
+				C3F489431DAD1DEA0032EC5E /* TableViewCellSegmentedControl.h */,
+				C3F489441DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m */,
+				C3F489451DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -375,9 +404,11 @@
 				83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */,
 				94F1095A1C6DDFB70043410D /* books.json in Resources */,
 				94251B1E1C6CB8BF00B5FE2B /* ShopCartCell.xib in Resources */,
+				C3F489411DAD1A8E0032EC5E /* TableViewCellSwitch.xib in Resources */,
 				94251AF61C6C89F600B5FE2B /* LaunchScreen.storyboard in Resources */,
 				94251B331C6CD2B500B5FE2B /* BookItemCell.xib in Resources */,
 				94251B291C6CC6C500B5FE2B /* PaymentSuccessViewController.xib in Resources */,
+				C3F489471DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib in Resources */,
 				BEDEFF581C74B2A00026D454 /* Localizable.strings in Resources */,
 				94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,
@@ -442,9 +473,11 @@
 			files = (
 				83871B951C6E112400D69603 /* PayController.m in Sources */,
 				94251AEC1C6C899E00B5FE2B /* ViewController.m in Sources */,
+				C3F489461DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m in Sources */,
 				94251AEA1C6C899E00B5FE2B /* AppDelegate.m in Sources */,
 				94251B321C6CD2B500B5FE2B /* BookItemCell.m in Sources */,
 				83871B8B1C6DCFDC00D69603 /* ShopCart.m in Sources */,
+				C3F489401DAD1A8E0032EC5E /* TableViewCellSwitch.m in Sources */,
 				94251AEE1C6C899E00B5FE2B /* main.m in Sources */,
 				94251AFA1C6C8D0D00B5FE2B /* ItemsListTableViewController.m in Sources */,
 				94251B021C6C8F4500B5FE2B /* DetailInfoTableViewController.m in Sources */,
@@ -452,6 +485,7 @@
 				BEF535711C72091D00935A15 /* AboutViewController.m in Sources */,
 				94251AFE1C6C8E5900B5FE2B /* ShopCartTableViewController.m in Sources */,
 				94251B0A1C6CA60400B5FE2B /* BookItem.m in Sources */,
+				C3F4893C1DAD19390032EC5E /* SettingsViewController.m in Sources */,
 				94251B1D1C6CB8BF00B5FE2B /* ShopCartCell.m in Sources */,
 				C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */,
 			);

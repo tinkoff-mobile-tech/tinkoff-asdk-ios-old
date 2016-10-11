@@ -14,6 +14,7 @@
 #import "ShopCartTableViewController.h"
 
 #import "AboutViewController.h"
+#import "SettingsViewController.h"
 
 @interface ItemsListTableViewController ()
 
@@ -59,8 +60,10 @@
     [infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+	
+	UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showSettings)];
     
-    [self.navigationItem setLeftBarButtonItem:infoBarButton];
+    [self.navigationItem setLeftBarButtonItems:@[infoBarButton, settingsBarButton]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDetailsInfoNotification:) name:kDetailsInfoNotification object:nil];
 }
@@ -94,6 +97,12 @@
                      completion:nil];
 }
 
+- (void)showSettings
+{
+	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped]]
+					   animated:YES
+					 completion:nil];
+}
 
 #pragma mark - Table view data source
 
