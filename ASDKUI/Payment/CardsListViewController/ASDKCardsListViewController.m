@@ -157,9 +157,28 @@ typedef enum
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	BOOL result = NO;
+	
+	switch (indexPath.section)
+	{
+  		case ASDKCardsListSectionCard:
+			result = YES;
+		break;
+		
+		case ASDKCardsListSectionAddNewCard:
+  		default:
+			result = NO;
+		break;
+	}
+	
+	return result;
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete)
+    if (indexPath.section == ASDKCardsListSectionCard && editingStyle == UITableViewCellEditingStyleDelete)
     {
         ASDKCard *card = _cards[indexPath.row];
         
