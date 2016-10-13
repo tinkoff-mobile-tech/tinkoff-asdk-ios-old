@@ -34,7 +34,8 @@
     [super awakeFromNib];
     
     self.emailTextField.textColor = [ASDKDesign colorTextDark];
-    
+    self.emailTextField.tintColor = [ASDKDesign colorTextDark];
+	
     NSDictionary *placeholderAttributes = @{NSForegroundColorAttributeName:[ASDKDesign colorTextPlaceholder]};
     NSAttributedString *placeholderString = [[NSAttributedString alloc] initWithString:LOC(@"emailCell.placeholder") attributes:placeholderAttributes];
     
