@@ -28,7 +28,6 @@
 		94251B321C6CD2B500B5FE2B /* BookItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251B301C6CD2B500B5FE2B /* BookItemCell.m */; };
 		94251B331C6CD2B500B5FE2B /* BookItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94251B311C6CD2B500B5FE2B /* BookItemCell.xib */; };
 		94F1095A1C6DDFB70043410D /* books.json in Resources */ = {isa = PBXBuildFile; fileRef = 94F109591C6DDFB70043410D /* books.json */; };
-		BEDEFF581C74B2A00026D454 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF561C74B2A00026D454 /* Localizable.strings */; };
 		BEF535711C72091D00935A15 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF5356F1C72091D00935A15 /* AboutViewController.m */; };
 		BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF535701C72091D00935A15 /* AboutViewController.xib */; };
 		C316661A1DAF7BCB00BA6AB8 /* ASDKTestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C31666111DAF7BCB00BA6AB8 /* ASDKTestSettings.m */; };
@@ -37,6 +36,7 @@
 		C316661D1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31666161DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib */; };
 		C316661E1DAF7BCB00BA6AB8 /* TableViewCellSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C31666181DAF7BCB00BA6AB8 /* TableViewCellSwitch.m */; };
 		C316661F1DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31666191DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib */; };
+		C31666201DAF7DF900BA6AB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF561C74B2A00026D454 /* Localizable.strings */; };
 		C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */; };
 		C3F4891F1DACC5F20032EC5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F489211DACC5F20032EC5E /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
@@ -107,6 +107,8 @@
 		C31666171DAF7BCB00BA6AB8 /* TableViewCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSwitch.h; sourceTree = "<group>"; };
 		C31666181DAF7BCB00BA6AB8 /* TableViewCellSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSwitch.m; sourceTree = "<group>"; };
 		C31666191DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellSwitch.xib; sourceTree = "<group>"; };
+		C31666211DAF7DFD00BA6AB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C31666221DAF7E0100BA6AB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C35E56AF1D9684FD001CFAF7 /* ASDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ASDKSampleApp.entitlements; sourceTree = "<group>"; };
 		C38C87091D37B7F6001ABBFA /* ASDKCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKCardIOScanner.h; path = ASDKSampleApp/Source/ASDKCardIOScanner.h; sourceTree = SOURCE_ROOT; };
 		C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKCardIOScanner.m; path = ASDKSampleApp/Source/ASDKCardIOScanner.m; sourceTree = SOURCE_ROOT; };
@@ -419,8 +421,8 @@
 				94251AF61C6C89F600B5FE2B /* LaunchScreen.storyboard in Resources */,
 				94251B331C6CD2B500B5FE2B /* BookItemCell.xib in Resources */,
 				94251B291C6CC6C500B5FE2B /* PaymentSuccessViewController.xib in Resources */,
-				BEDEFF581C74B2A00026D454 /* Localizable.strings in Resources */,
 				94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */,
+				C31666201DAF7DF900BA6AB8 /* Localizable.strings in Resources */,
 				C3F4891F1DACC5F20032EC5E /* InfoPlist.strings in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,
 				83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */,
@@ -511,6 +513,7 @@
 			children = (
 				BEDEFF571C74B2A00026D454 /* ru */,
 				C3F489231DACC6ED0032EC5E /* en */,
+				C31666211DAF7DFD00BA6AB8 /* Base */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 			children = (
 				C3F489201DACC5F20032EC5E /* ru */,
 				C3F489241DACC6ED0032EC5E /* en */,
+				C31666221DAF7E0100BA6AB8 /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
