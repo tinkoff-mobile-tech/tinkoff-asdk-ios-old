@@ -23,3 +23,6 @@
 "ALotOfBooks" = "A lot of books";
 "BuyingSuccessful" = "Buying in the amount %@ is successful";
 "ProductAddedToBag" = "Product added to cart";
+"ActiveTerminal" = "Active terminal";
+"UseSystemKeyboard" = "Use system keyboard";
+"UseSystemKeyboardDescription" = "digital keyboard to enter card requisites";
