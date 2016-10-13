@@ -31,13 +31,14 @@
 		BEDEFF581C74B2A00026D454 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF561C74B2A00026D454 /* Localizable.strings */; };
 		BEF535711C72091D00935A15 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF5356F1C72091D00935A15 /* AboutViewController.m */; };
 		BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF535701C72091D00935A15 /* AboutViewController.xib */; };
+		C316661A1DAF7BCB00BA6AB8 /* ASDKTestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C31666111DAF7BCB00BA6AB8 /* ASDKTestSettings.m */; };
+		C316661B1DAF7BCB00BA6AB8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C31666131DAF7BCB00BA6AB8 /* SettingsViewController.m */; };
+		C316661C1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C31666151DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.m */; };
+		C316661D1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31666161DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib */; };
+		C316661E1DAF7BCB00BA6AB8 /* TableViewCellSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C31666181DAF7BCB00BA6AB8 /* TableViewCellSwitch.m */; };
+		C316661F1DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31666191DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib */; };
 		C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */; };
-		C3D58EAC1DAE895500592C29 /* ASDKTestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D58EAB1DAE895500592C29 /* ASDKTestSettings.m */; };
-		C3F4893C1DAD19390032EC5E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F4893B1DAD19390032EC5E /* SettingsViewController.m */; };
-		C3F489401DAD1A8E0032EC5E /* TableViewCellSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F4893E1DAD1A8E0032EC5E /* TableViewCellSwitch.m */; };
-		C3F489411DAD1A8E0032EC5E /* TableViewCellSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F4893F1DAD1A8E0032EC5E /* TableViewCellSwitch.xib */; };
-		C3F489461DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F489441DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m */; };
-		C3F489471DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F489451DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib */; };
+		C3F4891F1DACC5F20032EC5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F489211DACC5F20032EC5E /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,20 +97,22 @@
 		BEF5356E1C72091D00935A15 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		BEF5356F1C72091D00935A15 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		BEF535701C72091D00935A15 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		C31666101DAF7BCB00BA6AB8 /* ASDKTestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKTestSettings.h; sourceTree = "<group>"; };
+		C31666111DAF7BCB00BA6AB8 /* ASDKTestSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKTestSettings.m; sourceTree = "<group>"; };
+		C31666121DAF7BCB00BA6AB8 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		C31666131DAF7BCB00BA6AB8 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		C31666141DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSegmentedControl.h; sourceTree = "<group>"; };
+		C31666151DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSegmentedControl.m; sourceTree = "<group>"; };
+		C31666161DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellSegmentedControl.xib; sourceTree = "<group>"; };
+		C31666171DAF7BCB00BA6AB8 /* TableViewCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSwitch.h; sourceTree = "<group>"; };
+		C31666181DAF7BCB00BA6AB8 /* TableViewCellSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSwitch.m; sourceTree = "<group>"; };
+		C31666191DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellSwitch.xib; sourceTree = "<group>"; };
 		C35E56AF1D9684FD001CFAF7 /* ASDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ASDKSampleApp.entitlements; sourceTree = "<group>"; };
 		C38C87091D37B7F6001ABBFA /* ASDKCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKCardIOScanner.h; path = ASDKSampleApp/Source/ASDKCardIOScanner.h; sourceTree = SOURCE_ROOT; };
 		C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKCardIOScanner.m; path = ASDKSampleApp/Source/ASDKCardIOScanner.m; sourceTree = SOURCE_ROOT; };
-		C39C4F751DAF618400514F82 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C3D58EAA1DAE895500592C29 /* ASDKTestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKTestSettings.h; sourceTree = "<group>"; };
-		C3D58EAB1DAE895500592C29 /* ASDKTestSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKTestSettings.m; sourceTree = "<group>"; };
-		C3F4893A1DAD19390032EC5E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		C3F4893B1DAD19390032EC5E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		C3F4893D1DAD1A8E0032EC5E /* TableViewCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSwitch.h; sourceTree = "<group>"; };
-		C3F4893E1DAD1A8E0032EC5E /* TableViewCellSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSwitch.m; sourceTree = "<group>"; };
-		C3F4893F1DAD1A8E0032EC5E /* TableViewCellSwitch.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellSwitch.xib; sourceTree = "<group>"; };
-		C3F489431DAD1DEA0032EC5E /* TableViewCellSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSegmentedControl.h; sourceTree = "<group>"; };
-		C3F489441DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCellSegmentedControl.m; sourceTree = "<group>"; };
-		C3F489451DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCellSegmentedControl.xib; sourceTree = "<group>"; };
+		C3F489201DACC5F20032EC5E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C3F489231DACC6ED0032EC5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3F489241DACC6ED0032EC5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,7 +215,7 @@
 		94251ADC1C6C899E00B5FE2B /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C3F489391DAD18E90032EC5E /* Settings */,
+				C316660F1DAF7BB800BA6AB8 /* Settings */,
 				BEF5356A1C7208E000935A15 /* About */,
 				83871B921C6E110200D69603 /* PayController */,
 				94251B241C6CC6AA00B5FE2B /* PaymentSuccess */,
@@ -234,6 +237,7 @@
 			children = (
 				94251AE51C6C899E00B5FE2B /* Info.plist */,
 				94251AE61C6C899E00B5FE2B /* main.m */,
+				C3F489211DACC5F20032EC5E /* InfoPlist.strings */,
 			);
 			path = "Supporting files";
 			sourceTree = "<group>";
@@ -320,19 +324,19 @@
 			path = About;
 			sourceTree = "<group>";
 		};
-		C3F489391DAD18E90032EC5E /* Settings */ = {
+		C316660F1DAF7BB800BA6AB8 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				C3F4893A1DAD19390032EC5E /* SettingsViewController.h */,
-				C3F4893B1DAD19390032EC5E /* SettingsViewController.m */,
-				C3F4893D1DAD1A8E0032EC5E /* TableViewCellSwitch.h */,
-				C3F4893E1DAD1A8E0032EC5E /* TableViewCellSwitch.m */,
-				C3F4893F1DAD1A8E0032EC5E /* TableViewCellSwitch.xib */,
-				C3F489431DAD1DEA0032EC5E /* TableViewCellSegmentedControl.h */,
-				C3F489441DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m */,
-				C3F489451DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib */,
-				C3D58EAA1DAE895500592C29 /* ASDKTestSettings.h */,
-				C3D58EAB1DAE895500592C29 /* ASDKTestSettings.m */,
+				C31666101DAF7BCB00BA6AB8 /* ASDKTestSettings.h */,
+				C31666111DAF7BCB00BA6AB8 /* ASDKTestSettings.m */,
+				C31666121DAF7BCB00BA6AB8 /* SettingsViewController.h */,
+				C31666131DAF7BCB00BA6AB8 /* SettingsViewController.m */,
+				C31666141DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.h */,
+				C31666151DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.m */,
+				C31666161DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib */,
+				C31666171DAF7BCB00BA6AB8 /* TableViewCellSwitch.h */,
+				C31666181DAF7BCB00BA6AB8 /* TableViewCellSwitch.m */,
+				C31666191DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -367,9 +371,9 @@
 		8316727F1C6486A500533D85 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = ADSK;
+				CLASSPREFIX = "";
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "Tinkoff Bank";
+				ORGANIZATIONNAME = "TCS Bank";
 				TargetAttributes = {
 					831672861C6486A500533D85 = {
 						CreatedOnToolsVersion = 7.2;
@@ -388,9 +392,9 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 				ru,
+				en,
 			);
 			mainGroup = 8316727E1C6486A500533D85;
 			productRefGroup = 831672881C6486A500533D85 /* Products */;
@@ -407,16 +411,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C316661F1DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib in Resources */,
 				83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */,
 				94F1095A1C6DDFB70043410D /* books.json in Resources */,
+				C316661D1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib in Resources */,
 				94251B1E1C6CB8BF00B5FE2B /* ShopCartCell.xib in Resources */,
-				C3F489411DAD1A8E0032EC5E /* TableViewCellSwitch.xib in Resources */,
 				94251AF61C6C89F600B5FE2B /* LaunchScreen.storyboard in Resources */,
 				94251B331C6CD2B500B5FE2B /* BookItemCell.xib in Resources */,
 				94251B291C6CC6C500B5FE2B /* PaymentSuccessViewController.xib in Resources */,
-				C3F489471DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib in Resources */,
 				BEDEFF581C74B2A00026D454 /* Localizable.strings in Resources */,
 				94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */,
+				C3F4891F1DACC5F20032EC5E /* InfoPlist.strings in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,
 				83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */,
 			);
@@ -478,21 +483,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				83871B951C6E112400D69603 /* PayController.m in Sources */,
+				C316661C1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.m in Sources */,
 				94251AEC1C6C899E00B5FE2B /* ViewController.m in Sources */,
-				C3F489461DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m in Sources */,
 				94251AEA1C6C899E00B5FE2B /* AppDelegate.m in Sources */,
+				C316661B1DAF7BCB00BA6AB8 /* SettingsViewController.m in Sources */,
 				94251B321C6CD2B500B5FE2B /* BookItemCell.m in Sources */,
 				83871B8B1C6DCFDC00D69603 /* ShopCart.m in Sources */,
-				C3F489401DAD1A8E0032EC5E /* TableViewCellSwitch.m in Sources */,
 				94251AEE1C6C899E00B5FE2B /* main.m in Sources */,
 				94251AFA1C6C8D0D00B5FE2B /* ItemsListTableViewController.m in Sources */,
 				94251B021C6C8F4500B5FE2B /* DetailInfoTableViewController.m in Sources */,
 				94251B281C6CC6C500B5FE2B /* PaymentSuccessViewController.m in Sources */,
+				C316661A1DAF7BCB00BA6AB8 /* ASDKTestSettings.m in Sources */,
 				BEF535711C72091D00935A15 /* AboutViewController.m in Sources */,
+				C316661E1DAF7BCB00BA6AB8 /* TableViewCellSwitch.m in Sources */,
 				94251AFE1C6C8E5900B5FE2B /* ShopCartTableViewController.m in Sources */,
 				94251B0A1C6CA60400B5FE2B /* BookItem.m in Sources */,
-				C3F4893C1DAD19390032EC5E /* SettingsViewController.m in Sources */,
-				C3D58EAC1DAE895500592C29 /* ASDKTestSettings.m in Sources */,
 				94251B1D1C6CB8BF00B5FE2B /* ShopCartCell.m in Sources */,
 				C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */,
 			);
@@ -505,9 +510,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				BEDEFF571C74B2A00026D454 /* ru */,
-				C39C4F751DAF618400514F82 /* en */,
+				C3F489231DACC6ED0032EC5E /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		C3F489211DACC5F20032EC5E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3F489201DACC5F20032EC5E /* ru */,
+				C3F489241DACC6ED0032EC5E /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -517,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -561,6 +576,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

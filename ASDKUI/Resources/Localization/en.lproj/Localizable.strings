@@ -19,6 +19,7 @@
 
 "Common.Cancel" = "Cancel";
 "Common.Close" = "Close";
+"Common.error" = "Error";
 
 "Title.CardsList" = "Select card";
 
@@ -34,4 +35,7 @@
 "externalCardsCell.savedCard" = "Saved card";
 "externalCardsCell.newCard" = "New card";
 
-"emailCell.placeholder" = "E-mail for  receipt";
+"emailCell.placeholder" = "E-mail для квитанции";
+
+"NSPhotoLibraryUsageDescription" = "";
+"NSCameraUsageDescription" = "";
