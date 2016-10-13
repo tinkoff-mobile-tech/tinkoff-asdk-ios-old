@@ -132,12 +132,9 @@ typedef enum
             }
             
             [(ASDKCardCell *)cell setCard:_cards[indexPath.row]];
-            
-            if ([_cards[indexPath.row] isEqual:_selectedCard])
-            {
-                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-            }
-            if (indexPath.row == 0)
+			[(ASDKCardCell *)cell setCheck:[_cards[indexPath.row] isEqual:_selectedCard]];
+
+			if (indexPath.row == 0)
             {
                 ((ASDKCardCell *)cell).shouldShowTopSeparator = YES;
             }
@@ -209,12 +206,12 @@ typedef enum
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     ASDKCard *selectedCard = nil;
-    
+	
     if (indexPath.section == ASDKCardsListSectionCard)
     {
         selectedCard = _cards[indexPath.row];
     }
-    
+
     id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
     
     if (cardsListDelegate && [cardsListDelegate respondsToSelector:@selector(didSelectCard:)])

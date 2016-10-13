@@ -45,13 +45,11 @@
     return newCell;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (void)setCheck:(BOOL)value
 {
-    [super setSelected:selected animated:animated];
-    
-    CGFloat alpha = selected ? 1.0f : 0.0f;
-    
-    [self.checkmarkImageView setAlpha:alpha];
+	CGFloat alpha = value ? 1.0f : 0.0f;
+	
+	[self.checkmarkImageView setAlpha:alpha];
 }
 
 - (void)setCard:(ASDKCard *)card
