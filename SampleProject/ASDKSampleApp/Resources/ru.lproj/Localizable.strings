@@ -23,3 +23,6 @@
 "ALotOfBooks" = "Много книг";
 "BuyingSuccessful" = "Buying in the amount %@ is successful";
 "ProductAddedToBag" = "Товар добавлен в корзину";
+"ActiveTerminal" = "Активный терминал";
+"UseSystemKeyboard" = "Использовать системную клавиатуру";
+"UseSystemKeyboardDescription" = "цифровая клаиатура для ввода реквизитов карты";

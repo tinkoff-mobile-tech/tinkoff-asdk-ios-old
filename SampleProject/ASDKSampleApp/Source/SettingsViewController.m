@@ -106,7 +106,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 	switch ([self sectionTypeAtIndex:section])
 	{
 		case SectionTypeTerminal:
-			result = @"Активный терминал";
+			result = NSLocalizedString(@"ActiveTerminal", @"Активный терминал");
 			break;
 			
 		case SectionTypeKeyboard:
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 			break;
 			
 		case SectionTypeKeyboard:
-			result = @"цифровая клаиатура для ввода реквизитов карты";
+			result = NSLocalizedString(@"UseSystemKeyboardDescription", @"цифровая клаиатура для ввода реквизитов карты");
 			break;
 			
 		default:
@@ -156,7 +156,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 
 		case CellTypeKeyboard:
 			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSwitch class])];
-			[(TableViewCellSwitch *)cell setTitle:@"Использовать системную клавиатуру"];
+			[(TableViewCellSwitch *)cell setTitle:NSLocalizedString(@"UseSystemKeyboard", @"Использовать системную клавиатуру")];
 			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(useSystemKeyboard:) forControlEvents:UIControlEventValueChanged];
 			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings useSystemKeyboard]];
 			break;
