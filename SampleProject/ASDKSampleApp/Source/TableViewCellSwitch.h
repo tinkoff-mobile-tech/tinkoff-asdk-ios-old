@@ -11,6 +11,7 @@
 @interface TableViewCellSwitch : UITableViewCell
 
 - (void)setTitle:(NSString *)title;
+- (void)setSwitchValue:(BOOL)value;
 - (void)addSwitchValueChangedTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
 
 @end

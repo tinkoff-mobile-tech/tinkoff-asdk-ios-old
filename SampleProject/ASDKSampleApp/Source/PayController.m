@@ -8,7 +8,7 @@
 
 #import "PayController.h"
 
-#import "ASDKTestKeys.h"
+#import "ASDKTestSettings.h"
 #import <ASDKUI/ASDKUI.h>
 
 #import "ASDKCardIOScanner.h"
@@ -28,10 +28,10 @@
     //NSString *publicKeyPath = [[NSBundle mainBundle] pathForResource:kASDKTestPublicKeyName ofType:@"pem"];
     //ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyPath:publicKeyPath];
 	
-	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:kASDKTestPublicKey];
+	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:[ASDKTestSettings testPublicKey]];
 	
-    ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:kASDKTestTerminalKey
-                                                                          password:kASDKTestPassword
+    ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:[ASDKTestSettings testActiveTerminal]
+                                                                          password:[ASDKTestSettings testTerminalPassword]
                                                                publicKeyDataSource:stringKeyCreator];
     
     [acquiringSdk setDebug:YES];

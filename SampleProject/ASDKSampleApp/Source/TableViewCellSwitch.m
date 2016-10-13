@@ -28,7 +28,12 @@
 {
 	[self.labelTitle setText:title];
 }
-	
+
+- (void)setSwitchValue:(BOOL)value
+{
+	[self.buttonSwitch setOn:value];
+}
+
 - (void)addSwitchValueChangedTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents
 {
 	[self.buttonSwitch addTarget:target action:action forControlEvents:controlEvents];

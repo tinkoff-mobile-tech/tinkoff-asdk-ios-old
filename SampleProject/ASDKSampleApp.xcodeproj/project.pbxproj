@@ -32,6 +32,7 @@
 		BEF535711C72091D00935A15 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF5356F1C72091D00935A15 /* AboutViewController.m */; };
 		BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF535701C72091D00935A15 /* AboutViewController.xib */; };
 		C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */; };
+		C3D58EAC1DAE895500592C29 /* ASDKTestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D58EAB1DAE895500592C29 /* ASDKTestSettings.m */; };
 		C3F4893C1DAD19390032EC5E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F4893B1DAD19390032EC5E /* SettingsViewController.m */; };
 		C3F489401DAD1A8E0032EC5E /* TableViewCellSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F4893E1DAD1A8E0032EC5E /* TableViewCellSwitch.m */; };
 		C3F489411DAD1A8E0032EC5E /* TableViewCellSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F4893F1DAD1A8E0032EC5E /* TableViewCellSwitch.xib */; };
@@ -98,6 +99,9 @@
 		C35E56AF1D9684FD001CFAF7 /* ASDKSampleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ASDKSampleApp.entitlements; sourceTree = "<group>"; };
 		C38C87091D37B7F6001ABBFA /* ASDKCardIOScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASDKCardIOScanner.h; path = ASDKSampleApp/Source/ASDKCardIOScanner.h; sourceTree = SOURCE_ROOT; };
 		C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASDKCardIOScanner.m; path = ASDKSampleApp/Source/ASDKCardIOScanner.m; sourceTree = SOURCE_ROOT; };
+		C39C4F751DAF618400514F82 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C3D58EAA1DAE895500592C29 /* ASDKTestSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKTestSettings.h; sourceTree = "<group>"; };
+		C3D58EAB1DAE895500592C29 /* ASDKTestSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKTestSettings.m; sourceTree = "<group>"; };
 		C3F4893A1DAD19390032EC5E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		C3F4893B1DAD19390032EC5E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		C3F4893D1DAD1A8E0032EC5E /* TableViewCellSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCellSwitch.h; sourceTree = "<group>"; };
@@ -327,6 +331,8 @@
 				C3F489431DAD1DEA0032EC5E /* TableViewCellSegmentedControl.h */,
 				C3F489441DAD1DEA0032EC5E /* TableViewCellSegmentedControl.m */,
 				C3F489451DAD1DEA0032EC5E /* TableViewCellSegmentedControl.xib */,
+				C3D58EAA1DAE895500592C29 /* ASDKTestSettings.h */,
+				C3D58EAB1DAE895500592C29 /* ASDKTestSettings.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -361,9 +367,9 @@
 		8316727F1C6486A500533D85 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = "";
+				CLASSPREFIX = ADSK;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "TCS Bank";
+				ORGANIZATIONNAME = "Tinkoff Bank";
 				TargetAttributes = {
 					831672861C6486A500533D85 = {
 						CreatedOnToolsVersion = 7.2;
@@ -486,6 +492,7 @@
 				94251AFE1C6C8E5900B5FE2B /* ShopCartTableViewController.m in Sources */,
 				94251B0A1C6CA60400B5FE2B /* BookItem.m in Sources */,
 				C3F4893C1DAD19390032EC5E /* SettingsViewController.m in Sources */,
+				C3D58EAC1DAE895500592C29 /* ASDKTestSettings.m in Sources */,
 				94251B1D1C6CB8BF00B5FE2B /* ShopCartCell.m in Sources */,
 				C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */,
 			);
@@ -498,6 +505,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BEDEFF571C74B2A00026D454 /* ru */,
+				C39C4F751DAF618400514F82 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

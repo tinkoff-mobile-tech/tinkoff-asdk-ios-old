@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="43"/>
+                <frame key="frameInset" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LLx-LC-HRC"/>
@@ -23,10 +25,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="rZb-mE-71p" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="H5o-Jk-eGC"/>
+                    <constraint firstItem="rZb-mE-71p" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="topMargin" priority="750" constant="3.5" id="Q8n-4w-EWJ"/>
                     <constraint firstItem="rZb-mE-71p" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TaN-jF-cqe"/>
                     <constraint firstItem="LLx-LC-HRC" firstAttribute="leading" secondItem="rZb-mE-71p" secondAttribute="trailing" constant="8" id="UBZ-EB-vWe"/>
                     <constraint firstItem="LLx-LC-HRC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Vhc-aB-6Cs"/>
                     <constraint firstAttribute="trailing" secondItem="LLx-LC-HRC" secondAttribute="trailing" constant="16" id="f45-hz-cnJ"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="rZb-mE-71p" secondAttribute="bottom" priority="750" constant="3.5" id="vck-O6-9kw"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

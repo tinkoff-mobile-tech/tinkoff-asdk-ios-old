@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "TableViewCellSwitch.h"
 #import "TableViewCellSegmentedControl.h"
+#import "ASDKTestSettings.h"
 
 typedef NS_ENUM(NSUInteger, SectionType)
 {
@@ -34,9 +35,13 @@ typedef NS_ENUM(NSUInteger, CellType)
 {
     [super viewDidLoad];
 	
+	[self setTitle:NSLocalizedString(@"Settings", @"Настройки")];
+	
 	[self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCellSwitch class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:NSStringFromClass([TableViewCellSwitch class])];
 	[self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCellSegmentedControl class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:NSStringFromClass([TableViewCellSegmentedControl class])];
-
+	[self.tableView setRowHeight:UITableViewAutomaticDimension];
+	[self.tableView setEstimatedRowHeight:50];
+	
 	self.tableViewDataSource = @[@{@(SectionTypeKeyboard):@[@(CellTypeKeyboard)]},
 								 @{@(SectionTypeTerminal):@[@(CellTypeTerminal)]}];
 	
@@ -68,6 +73,13 @@ typedef NS_ENUM(NSUInteger, CellType)
 	return [sectionInfo objectForKey:[[sectionInfo allKeys] firstObject]];
 }
 
+- (SectionType)sectionTypeAtIndex:(NSInteger)section
+{
+	NSDictionary *sectionInfo = [self.tableViewDataSource objectAtIndex:section];
+	
+	return [[[sectionInfo allKeys] firstObject] integerValue];
+}
+
 - (CellType)cellTypeForIndexPath:(NSIndexPath *)indexPath
 {
 	NSArray *cellsInSection = [self cellsSourceForSection:indexPath.section];
@@ -87,6 +99,48 @@ typedef NS_ENUM(NSUInteger, CellType)
 	return [[self cellsSourceForSection:section] count];
 }
 
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+	NSString *result = @"";
+	//
+	switch ([self sectionTypeAtIndex:section])
+	{
+		case SectionTypeTerminal:
+			result = @"Активный терминал";
+			break;
+			
+		case SectionTypeKeyboard:
+			result = @"";
+			break;
+			
+		default:
+			break;
+	}
+	
+	return result;
+}
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+	NSString *result = @"";
+	//
+	switch ([self sectionTypeAtIndex:section])
+	{
+		case SectionTypeTerminal:
+			//
+			break;
+			
+		case SectionTypeKeyboard:
+			result = @"цифровая клаиатура для ввода реквизитов карты";
+			break;
+			
+		default:
+			break;
+	}
+	
+	return result;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = nil;
@@ -95,13 +149,16 @@ typedef NS_ENUM(NSUInteger, CellType)
 	{
   		case CellTypeTerminal:
 			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSegmentedControl class])];
-			
+			[(TableViewCellSegmentedControl *)cell setSegments:[ASDKTestSettings testTerminals]];
+			[(TableViewCellSegmentedControl *)cell addSegmentedControlValueChangedTarget:self action:@selector(terminalSourceChanged:) forControlEvents:UIControlEventValueChanged];
+			[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:[ASDKTestSettings testActiveTerminal]];
 			break;
-			
+
 		case CellTypeKeyboard:
 			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSwitch class])];
 			[(TableViewCellSwitch *)cell setTitle:@"Использовать системную клавиатуру"];
 			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(useSystemKeyboard:) forControlEvents:UIControlEventValueChanged];
+			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings useSystemKeyboard]];
 			break;
 			
   		default:
@@ -111,15 +168,16 @@ typedef NS_ENUM(NSUInteger, CellType)
     return cell;
 }
 
-
 - (void)useSystemKeyboard:(UISwitch *)sender
 {
-	
+	NSLog(@"%@", @(sender.isOn));
+	[ASDKTestSettings setUseSystemKeyboard:sender.isOn];
 }
 
 - (void)terminalSourceChanged:(UISegmentedControl *)sender
 {
-	
+	NSLog(@"%@", @(sender.selectedSegmentIndex));
+	[ASDKTestSettings setActiveTestTerminal:[sender titleForSegmentAtIndex:sender.selectedSegmentIndex]];
 }
 
 @end

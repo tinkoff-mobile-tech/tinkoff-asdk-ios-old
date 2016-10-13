@@ -10,4 +10,8 @@
 
 @interface TableViewCellSegmentedControl : UITableViewCell
 
+- (void)setSegments:(NSArray *)segments;
+- (void)addSegmentedControlValueChangedTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents;
+- (void)segmentedControlSelectSegment:(NSString *)title;
+
 @end
