@@ -59,7 +59,7 @@
                                                  description:description
                                                       cardId:nil
                                                        email:nil
-                                              customKeyboard:YES
+                                              customKeyboard:[ASDKTestSettings useSystemKeyboard]
                                                  customerKey:customerKey
                                                      success:^(NSNumber *paymentId)
      {
