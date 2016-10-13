@@ -157,9 +157,28 @@ typedef enum
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	BOOL result = NO;
+	
+	switch (indexPath.section)
+	{
+  		case ASDKCardsListSectionCard:
+			result = YES;
+		break;
+		
+		case ASDKCardsListSectionAddNewCard:
+  		default:
+			result = NO;
+		break;
+	}
+	
+	return result;
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete)
+    if (indexPath.section == ASDKCardsListSectionCard && editingStyle == UITableViewCellEditingStyleDelete)
     {
         ASDKCard *card = _cards[indexPath.row];
         
@@ -172,11 +191,13 @@ typedef enum
              [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
              
              [weakSelf setCards:[ASDKCardsListDataController instance].externalCards];
-             
-             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-             [tableView reloadData];
-             
-             _didRemoveCards = YES;
+			 
+			 [tableView beginUpdates];
+             	[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			 	[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+			 [tableView endUpdates];
+
+			 _didRemoveCards = YES;
          }
                                                           errorBlock:^(ASDKAcquringSdkError *error)
          {
