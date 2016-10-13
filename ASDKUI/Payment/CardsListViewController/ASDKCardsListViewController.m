@@ -186,8 +186,9 @@ typedef enum
                                                         successBlock:^
          {
              [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-             
+
              [weakSelf setCards:[ASDKCardsListDataController instance].externalCards];
+			 [weakSelf setSelectedCard:[[ASDKCardsListDataController instance].externalCards firstObject]];
 			 
 			 [tableView beginUpdates];
              	[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
