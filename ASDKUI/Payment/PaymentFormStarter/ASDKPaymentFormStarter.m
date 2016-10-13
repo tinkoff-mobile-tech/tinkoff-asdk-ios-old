@@ -71,7 +71,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
             
             [__paymentFormStarterInstance registerForNotifications];
         }
-        
+
         return __paymentFormStarterInstance;
     }
 }

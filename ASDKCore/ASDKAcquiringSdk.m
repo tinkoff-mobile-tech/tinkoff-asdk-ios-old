@@ -31,6 +31,7 @@
 
 @property (nonatomic, strong) ASDKAcquiringApi *acquiringApi;
 
+@property (nonatomic, strong) NSString *payType;
 @property (nonatomic, strong) NSString *terminalKey;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) id<ASDKAcquiringSdkPublicKeyDataSource> publicKeyDataSource;
@@ -43,6 +44,7 @@
 @implementation ASDKAcquiringSdk
 
 + (ASDKAcquiringSdk *)acquiringSdkWithTerminalKey:(NSString *)terminalKey
+										  payType:(NSString *)payType
                                          password:(NSString *)password
                               publicKeyDataSource:(id<ASDKAcquiringSdkPublicKeyDataSource>)publicKeyDataSource
 {
@@ -51,6 +53,7 @@
     if (acquiringSdk)
     {
         acquiringSdk.terminalKey = terminalKey;
+		acquiringSdk.payType = payType;
         acquiringSdk.password = password;
         acquiringSdk.publicKeyDataSource = publicKeyDataSource;
         acquiringSdk.acquiringApi = [ASDKAcquiringApi acquiringApiWithDomainPath:[acquiringSdk domainPath]];
@@ -102,13 +105,14 @@
     ASDKAcquringSdkError *buildError;
     
     ASDKInitRequestBuilder *builder = [ASDKInitRequestBuilder builderWithAmount:amount
-                                                                             orderId:orderId
-                                                                         description:description
-                                                                             payForm:payForm
-                                                                         customerKey:customerKey
-                                                                           recurrent:recurrent
-                                                                         terminalKey:self.terminalKey
-                                                                            password:self.password];
+																		orderId:orderId
+																	description:description
+																		payForm:payForm
+																		payType:self.payType
+																	customerKey:customerKey
+																	  recurrent:recurrent
+																	terminalKey:self.terminalKey
+																	   password:self.password];
     
     ASDKInitRequest *request = (ASDKInitRequest *)[builder buildError:&buildError];
     

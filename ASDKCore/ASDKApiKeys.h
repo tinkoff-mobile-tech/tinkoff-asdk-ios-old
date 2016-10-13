@@ -53,6 +53,7 @@
 #define kASDKDescription                    @"Description"
 #define kASDKDATA                           @"DATA"
 #define kASDKPayForm                        @"PayForm"
+#define kASDKPayType                        @"PayType"
 #define kASDKRecurrent                      @"Recurrent"
 #define kASDKPassword                       @"Password"
 #define kASDKSendEmail                      @"SendEmail"
