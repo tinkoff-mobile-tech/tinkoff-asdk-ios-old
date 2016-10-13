@@ -132,12 +132,9 @@ typedef enum
             }
             
             [(ASDKCardCell *)cell setCard:_cards[indexPath.row]];
-            
-            if ([_cards[indexPath.row] isEqual:_selectedCard])
-            {
-                [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-            }
-            if (indexPath.row == 0)
+			[(ASDKCardCell *)cell setCheck:[_cards[indexPath.row] isEqual:_selectedCard]];
+
+			if (indexPath.row == 0)
             {
                 ((ASDKCardCell *)cell).shouldShowTopSeparator = YES;
             }
@@ -157,9 +154,28 @@ typedef enum
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	BOOL result = NO;
+	
+	switch (indexPath.section)
+	{
+  		case ASDKCardsListSectionCard:
+			result = YES;
+		break;
+		
+		case ASDKCardsListSectionAddNewCard:
+  		default:
+			result = NO;
+		break;
+	}
+	
+	return result;
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete)
+    if (indexPath.section == ASDKCardsListSectionCard && editingStyle == UITableViewCellEditingStyleDelete)
     {
         ASDKCard *card = _cards[indexPath.row];
         
@@ -170,13 +186,16 @@ typedef enum
                                                         successBlock:^
          {
              [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-             
+
              [weakSelf setCards:[ASDKCardsListDataController instance].externalCards];
-             
-             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-             [tableView reloadData];
-             
-             _didRemoveCards = YES;
+			 [weakSelf setSelectedCard:[[ASDKCardsListDataController instance].externalCards firstObject]];
+			 
+			 [tableView beginUpdates];
+             	[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			 	[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+			 [tableView endUpdates];
+
+			 _didRemoveCards = YES;
          }
                                                           errorBlock:^(ASDKAcquringSdkError *error)
          {
@@ -188,12 +207,12 @@ typedef enum
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     ASDKCard *selectedCard = nil;
-    
+	
     if (indexPath.section == ASDKCardsListSectionCard)
     {
         selectedCard = _cards[indexPath.row];
     }
-    
+
     id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
     
     if (cardsListDelegate && [cardsListDelegate respondsToSelector:@selector(didSelectCard:)])

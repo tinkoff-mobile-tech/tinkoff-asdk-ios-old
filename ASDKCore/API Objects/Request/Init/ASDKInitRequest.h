@@ -22,6 +22,7 @@
 
 @interface ASDKInitRequest : ASDKAcquiringRequest
 
+@property (nonatomic, copy) NSString *payType;
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, copy) NSString *customerKey;
@@ -35,6 +36,7 @@
                              description:(NSString *)description
                                    token:(NSString *)token
                                  payForm:(NSString *)payForm
+								 payType:(NSString *)payType
                              customerKey:(NSString *)customerKey
                                recurrent:(BOOL)recurrent;
 

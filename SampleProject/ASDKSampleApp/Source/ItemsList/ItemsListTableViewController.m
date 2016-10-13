@@ -8,10 +8,13 @@
 
 #import "ItemsListTableViewController.h"
 #import "BookItemCell.h"
+
 #import "DetailInfoTableViewController.h"
+
 #import "ShopCartTableViewController.h"
+
 #import "AboutViewController.h"
-#import "PayController.h"
+#import "SettingsViewController.h"
 
 @interface ItemsListTableViewController ()
 
@@ -40,13 +43,13 @@
     
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-    [self setTitle:@"Интернет магазин"];
+    [self setTitle:NSLocalizedString(@"OnlineShop", @"Интернет магазин")];
     
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([BookItemCell class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:NSStringFromClass([BookItemCell class])];
     
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    UIBarButtonItem *shopCartButton = [[UIBarButtonItem alloc] initWithTitle:@"Корзина"
+    UIBarButtonItem *shopCartButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bag", @"Корзина")
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
                                                                       action:@selector(openShopCart:)];
@@ -57,8 +60,10 @@
     [infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
+	
+	UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showSettings)];
     
-    [self.navigationItem setLeftBarButtonItem:infoBarButton];
+    [self.navigationItem setLeftBarButtonItems:@[infoBarButton, settingsBarButton]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDetailsInfoNotification:) name:kDetailsInfoNotification object:nil];
 }
@@ -92,6 +97,12 @@
                      completion:nil];
 }
 
+- (void)showSettings
+{
+	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped]]
+					   animated:YES
+					 completion:nil];
+}
 
 #pragma mark - Table view data source
 

@@ -53,13 +53,9 @@
 - (SecKeyRef)publicKeyRef;
 
 + (ASDKAcquiringSdk *)acquiringSdkWithTerminalKey:(NSString *)terminalKey
+										  payType:(NSString *)payType
                                          password:(NSString *)password
                               publicKeyDataSource:(id<ASDKAcquiringSdkPublicKeyDataSource>)publicKeyDataSource;
-
-//+ (ASDKAcquiringSdk *)acquiringSdkWithTerminalKey:(NSString *)terminalKey
-//                                         password:(NSString *)password
-//                                        publicKey:(SecKeyRef)publicKey;
-
 
 - (void)initWithAmount:(NSNumber *)amount
                orderId:(NSString *)orderId

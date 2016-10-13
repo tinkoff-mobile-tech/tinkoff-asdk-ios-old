@@ -37,7 +37,8 @@
     
     self.titleLabel.textColor = [ASDKDesign colorTextDark];
     self.changeCardButton.titleLabel.textColor = [ASDKDesign colorMainBlue];
-    
+	[self.changeCardButton setTitle:LOC(@"PaymentForm.changeCard") forState:UIControlStateNormal];
+	
     self.titleLabel.text = LOC(@"PaymentForm.changeCard");
 }
 

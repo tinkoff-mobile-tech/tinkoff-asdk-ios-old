@@ -200,8 +200,8 @@ typedef enum
 {
     if (_customerKey.length > 0)
     {
-        if ([[ASDKCardsListDataController instance] externalCards] == nil)
-        {
+//        if ([[ASDKCardsListDataController instance] externalCards] == nil)
+//        {
             [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
             
             __weak typeof(self) weakSelf = self;
@@ -228,11 +228,11 @@ typedef enum
                     [strongSelf updateSelectedExternalCardOnStart];
                 }
             }];
-        }
-        else
-        {
-            [self updateSelectedExternalCardOnStart];
-        }
+//        }
+//        else
+//        {
+//            [self updateSelectedExternalCardOnStart];
+//        }
     }
 }
 
@@ -380,10 +380,22 @@ typedef enum
         
         NSRange selectedRange = [(ASDKTextField *)textField selectedRange];
         
-        if (selectedRange.length > 0)
+        if (selectedRange.location != NSNotFound)
         {
-            range = selectedRange;
+			if (selectedRange.location > 0)
+			{
+				range.location = selectedRange.location - 1;
+			}
+			else
+			{
+				range.location = 0;
+			}
         }
+		
+		if (selectedRange.length > 0)
+		{
+			range.length = selectedRange.length;
+		}
         
         [self.cardRequisitesCell textField:textField shouldChangeCharactersInRange:range replacementString:@""];
     }
@@ -780,7 +792,7 @@ typedef enum
     [self.acquiringSdk initWithAmount:realAmount
                               orderId:_orderId
                           description:nil
-                              payForm:nil
+							  payForm:nil
                           customerKey:_customerKey
                             recurrent:NO
                               success:^(ASDKInitResponse *response)

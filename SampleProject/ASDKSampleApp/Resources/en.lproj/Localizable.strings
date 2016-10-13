@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  ASDKSampleApp
+
+  Created by e.orlova on 17.02.16.
+  Copyright © 2016 TCS Bank. All rights reserved.
+*/
+
+"OnlineShop" = "Online Shop";
+"Close" = "Close";
+"Cancel" = "Cancel";
+"CanceledPayment" = "The payment is canceled";
+"Done" = "Done";
+"Delete" = "DELETE";
+"Detailds" = "Details";
+"AddToBag" = "ADD TO BAG";
+"Pay" = "PAY";
+"Buy" = "BUY";
+"Bag" = "Bag";
+"BagIsEmpty" = "The bag is empty";
+"Total" = "Total: %@";
+"Books" = "Books";
+"ALotOfBooks" = "A lot of books";
+"BuyingSuccessful" = "Buying in the amount %@ is successful";
+"ProductAddedToBag" = "Product added to cart";
+"ActiveTerminal" = "Active terminal";
+"UseSystemKeyboard" = "Use system keyboard";
+"UseSystemKeyboardDescription" = "digital keyboard to enter card requisites";

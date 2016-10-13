@@ -27,6 +27,8 @@
 
 @property (nonatomic, strong) ASDKCard *card;
 
+- (void)setCheck:(BOOL)value;
+
 + (instancetype)newCell;
 
 @end

@@ -5,3 +5,24 @@
   Created by e.orlova on 17.02.16.
   Copyright © 2016 TCS Bank. All rights reserved.
 */
+
+"OnlineShop" = "Интернет магазин";
+"Close" = "Закрыть";
+"Cancel" = "Отмена";
+"CanceledPayment" = "Оплата отменена";
+"Done" = "Готово";
+"Delete" = "УДАЛИТЬ";
+"Detailds" = "ПОДРОБНЕЕ";
+"AddToBag" = "В КОРЗИНУ";
+"Pay" = "ОПЛАТИТЬ";
+"Buy" = "КУПИТЬ";
+"Bag" = "Корзина";
+"BagIsEmpty" = "Корзина пуста";
+"Total" = "Итого: %@";
+"Books" = "Книги";
+"ALotOfBooks" = "Много книг";
+"BuyingSuccessful" = "Buying in the amount %@ is successful";
+"ProductAddedToBag" = "Товар добавлен в корзину";
+"ActiveTerminal" = "Активный терминал";
+"UseSystemKeyboard" = "Использовать системную клавиатуру";
+"UseSystemKeyboardDescription" = "цифровая клаиатура для ввода реквизитов карты";

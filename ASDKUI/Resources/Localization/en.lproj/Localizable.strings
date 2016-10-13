@@ -17,21 +17,25 @@
   limitations under the License.
 */
 
-"Common.Cancel" = "Отмена";
-"Common.Close" = "Закрыть";
+"Common.Cancel" = "Cancel";
+"Common.Close" = "Close";
+"Common.error" = "Error";
 
-"Title.CardsList" = "Выберите карту";
+"Title.CardsList" = "Select card";
 
-"paymentForm.title" = "Оплата";
-"PaymentForm.payButtonTitle" = "Оплатить";
-"PaymentForm.summCellTitle" = "На сумму:";
-"PaymentForm.changeCard" = "Изменить";
+"paymentForm.title" = "Payment";
+"PaymentForm.payButtonTitle" = "Pay";
+"PaymentForm.summCellTitle" = "Total sum:";
+"PaymentForm.changeCard" = "сhange";
 
-"CardsList.AddNewCard" = "Ввести данные новой карты";
+"CardsList.AddNewCard" = "New card number";
 
-"Transfer.CardNumber.Sender" = "Номер карты для оплаты";
+"Transfer.CardNumber.Sender" = "card number";
 
-"externalCardsCell.savedCard" = "Сохраненная карта";
-"externalCardsCell.newCard" = "Новая карта";
+"externalCardsCell.savedCard" = "Saved card";
+"externalCardsCell.newCard" = "New card";
 
-"emailCell.placeholder" = "E-mail для квитанции";
+"emailCell.placeholder" = "E-mail for  receipt";
+
+"NSPhotoLibraryUsageDescription" = "";
+"NSCameraUsageDescription" = "";

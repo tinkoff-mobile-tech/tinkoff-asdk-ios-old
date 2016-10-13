@@ -8,7 +8,7 @@
 
 #import "PayController.h"
 
-#import "ASDKTestKeys.h"
+#import "ASDKTestSettings.h"
 #import <ASDKUI/ASDKUI.h>
 
 #import "ASDKCardIOScanner.h"
@@ -19,8 +19,11 @@
 
 + (ASDKPaymentFormStarter *)paymentFormStarter
 {
-	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:kASDKTestPublicKey];
-	ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:kASDKTestTerminalKey password:kASDKTestPassword publicKeyDataSource:stringKeyCreator];
+	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:[ASDKTestSettings testActiveTerminal]];
+	ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:[ASDKTestSettings testActiveTerminal]
+																		   payType:nil//@"О"//@"T"
+																		  password:[ASDKTestSettings testTerminalPassword]
+															   publicKeyDataSource:stringKeyCreator];
 	
 	[acquiringSdk setDebug:YES];
 	[acquiringSdk setLogger:nil];
@@ -42,6 +45,7 @@
                   error:(void(^)(ASDKAcquringSdkError *error))onError
 {
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
+
     double randomOrderId = arc4random()%10000000;
 	
 //Настройка дизайна
@@ -63,6 +67,7 @@
                                               customKeyboard:YES
                                                  customerKey:[PayController customerKey]
                                                      success:^(NSString *paymentId)
+
      {
          PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];
          vc.amount = amount;
@@ -74,10 +79,10 @@
      }
                                                    cancelled:^
      {
-         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Оплата отменена" message:nil preferredStyle:UIAlertControllerStyleAlert];
+         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"CanceledPayment", @"Оплата отменена") message:nil preferredStyle:UIAlertControllerStyleAlert];
          
          UIAlertAction *cancelAction = [UIAlertAction
-                                        actionWithTitle:@"Закрыть"
+                                        actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
                                         style:UIAlertActionStyleCancel
                                         handler:^(UIAlertAction *action)
                                         {
@@ -92,10 +97,14 @@
      }
                                                        error:^(ASDKAcquringSdkError *error)
      {
-         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.errorMessage message:error.errorDetails preferredStyle:UIAlertControllerStyleAlert];
+		 
+		 NSString *alertTitle = error.errorMessage ? error.errorMessage : @"Ошибка";
+		 NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
+		 
+         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
          
          UIAlertAction *cancelAction = [UIAlertAction
-                                        actionWithTitle:@"Закрыть"
+                                        actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
                                         style:UIAlertActionStyleCancel
                                         handler:^(UIAlertAction *action)
                                         {

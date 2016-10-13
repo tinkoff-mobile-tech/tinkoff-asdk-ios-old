@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentSuccessViewController">
@@ -14,45 +14,43 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXV-du-yk7" userLabel="ContainerView">
-                    <rect key="frame" x="175" y="175" width="250" height="250"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRl-K3-Klo">
-                            <rect key="frame" x="104" y="135" width="42" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRl-K3-Klo">
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ok" translatesAutoresizingMaskIntoConstraints="NO" id="mPF-Zx-fck">
-                            <rect key="frame" x="65" y="0.0" width="120" height="120"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <color key="tintColor" red="0.20000000000000001" green="0.63921568630000003" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.20000000000000001" green="0.63921568630000003" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="120" id="1Uq-s7-Px5"/>
                                 <constraint firstAttribute="height" constant="120" id="RnW-dq-Wjs"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="250" id="3PP-s7-Dbc"/>
                         <constraint firstItem="mPF-Zx-fck" firstAttribute="top" secondItem="yXV-du-yk7" secondAttribute="top" id="L9L-KN-Hv0"/>
                         <constraint firstAttribute="width" constant="250" id="O0V-cq-aOb"/>
                         <constraint firstItem="mPF-Zx-fck" firstAttribute="centerX" secondItem="yXV-du-yk7" secondAttribute="centerX" id="UQG-Ir-eIQ"/>
-                        <constraint firstItem="TRl-K3-Klo" firstAttribute="centerX" secondItem="yXV-du-yk7" secondAttribute="centerX" id="lmo-nZ-NCB"/>
+                        <constraint firstAttribute="trailing" secondItem="TRl-K3-Klo" secondAttribute="trailing" constant="16" id="dLH-df-g4b"/>
                         <constraint firstItem="TRl-K3-Klo" firstAttribute="top" secondItem="mPF-Zx-fck" secondAttribute="bottom" constant="15" id="oq2-bg-nQ7"/>
+                        <constraint firstItem="TRl-K3-Klo" firstAttribute="leading" secondItem="yXV-du-yk7" secondAttribute="leading" constant="16" id="yq0-Pu-Sj9"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="yXV-du-yk7" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="vOM-QS-ewd"/>
                 <constraint firstItem="yXV-du-yk7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vgt-Uu-PwU"/>
             </constraints>
-            <point key="canvasLocation" x="565" y="437"/>
+            <point key="canvasLocation" x="-185" y="65"/>
         </view>
     </objects>
     <resources>

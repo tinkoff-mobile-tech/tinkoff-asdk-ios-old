@@ -333,6 +333,8 @@ typedef enum
 	self.textFieldCardNumber = [[ASDKTextField alloc] init];
 	[self.textFieldCardNumber setInputMask:@"____ ____ ____ _____"];
 	[self.textFieldCardNumber setShowInputMask:NO];
+	[self.textFieldCardNumber setDisablePaste:YES];
+	[self.textFieldCardNumber setDisableCopy:YES];
 	[self.textFieldCardNumber setKeyboardType:UIKeyboardTypeNumberPad];
 	[self.textFieldCardNumber setKeyboardAppearance:UIKeyboardAppearanceLight];
 	[self.textFieldCardNumber setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
@@ -340,11 +342,12 @@ typedef enum
 	
 	[_viewCardNumber addSubview:self.textFieldCardNumber];
 	[self.textFieldCardNumber autoPinEdgesToSuperviewEdgesWithInsets:textFieldInsets];
-	
+
 	self.textFieldCardDate = [[ASDKTextField alloc] init];
 	[self.textFieldCardDate setInputMask:@"__/__"];
 	[self.textFieldCardDate setShowInputMask:NO];
 	[self.textFieldCardDate setDisablePaste:YES];
+	[self.textFieldCardDate setDisableCopy:YES];
 	[self.textFieldCardDate setDelegate:self];
 	[self.textFieldCardDate setKeyboardType:UIKeyboardTypeNumberPad];
 	[self.textFieldCardDate setKeyboardAppearance:UIKeyboardAppearanceLight];
@@ -357,6 +360,8 @@ typedef enum
 	self.textFieldCardCVC = [[ASDKTextField alloc] init];
 	[self.textFieldCardCVC setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 	[self.textFieldCardCVC setInputMask:@"___"];
+	[self.textFieldCardCVC setDisablePaste:YES];
+	[self.textFieldCardCVC setDisableCopy:YES];
 	[self.textFieldCardCVC setKeyboardType:UIKeyboardTypeNumberPad];
 	[self.textFieldCardCVC setKeyboardAppearance:UIKeyboardAppearanceLight];
 	[self.textFieldCardCVC setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
@@ -369,6 +374,8 @@ typedef enum
     
     [self.secretCVVTextField setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self.secretCVVTextField setInputMask:@"___"];
+	[self.secretCVVTextField setDisablePaste:YES];
+	[self.secretCVVTextField setDisableCopy:YES];
     [self.secretCVVTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [self.secretCVVTextField setKeyboardAppearance:UIKeyboardAppearanceLight];
     [self.secretCVVTextField setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
@@ -569,7 +576,15 @@ typedef enum
 			return result;
 		}
 	}
-	else if (textField == self.textFieldCardCVC || textField == self.textFieldCardDate || textField == self.secretCVVTextField)
+	else if (textField == self.textFieldCardDate)
+	{
+		ASDKTextField *tcsTextField = (ASDKTextField *)textField;
+		BOOL result = [tcsTextField shouldChangeCharactersInRange:range replacementString:string];
+		
+		[self textFieldDidChange:textField];
+		return result;
+	}
+	else if (textField == self.textFieldCardCVC || textField == self.secretCVVTextField)
 	{
 		ASDKTextField *tcsTextField = (ASDKTextField *)textField;
 		if (![tcsTextField shouldChangeCharactersInRange:range replacementString:string])
