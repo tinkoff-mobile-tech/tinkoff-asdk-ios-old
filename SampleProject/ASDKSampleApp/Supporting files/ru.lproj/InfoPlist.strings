@@ -6,6 +6,6 @@
   Copyright © 2016 TCS Bank. All rights reserved.
 */
 
-"CFBundleDisplayName" = "ASDK-ру";
+"CFBundleDisplayName" = "ASDK";
 
 "NSCameraUsageDescription" = "Вы можете воспользоваться камерой для сканирования реквизитов карты и не вводить их вручную.";

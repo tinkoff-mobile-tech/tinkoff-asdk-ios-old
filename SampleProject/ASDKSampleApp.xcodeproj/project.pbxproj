@@ -36,9 +36,9 @@
 		C316661D1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31666161DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib */; };
 		C316661E1DAF7BCB00BA6AB8 /* TableViewCellSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C31666181DAF7BCB00BA6AB8 /* TableViewCellSwitch.m */; };
 		C316661F1DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31666191DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib */; };
-		C31666201DAF7DF900BA6AB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF561C74B2A00026D454 /* Localizable.strings */; };
 		C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */; };
-		C3F4891F1DACC5F20032EC5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F489211DACC5F20032EC5E /* InfoPlist.strings */; };
+		C3AAB1401DAFE3FC00C64972 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF561C74B2A00026D454 /* Localizable.strings */; };
+		C3AAB1411DAFE40000C64972 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F489211DACC5F20032EC5E /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -416,14 +416,14 @@
 				C316661F1DAF7BCB00BA6AB8 /* TableViewCellSwitch.xib in Resources */,
 				83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */,
 				94F1095A1C6DDFB70043410D /* books.json in Resources */,
+				C3AAB1411DAFE40000C64972 /* InfoPlist.strings in Resources */,
 				C316661D1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib in Resources */,
 				94251B1E1C6CB8BF00B5FE2B /* ShopCartCell.xib in Resources */,
 				94251AF61C6C89F600B5FE2B /* LaunchScreen.storyboard in Resources */,
 				94251B331C6CD2B500B5FE2B /* BookItemCell.xib in Resources */,
 				94251B291C6CC6C500B5FE2B /* PaymentSuccessViewController.xib in Resources */,
 				94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */,
-				C31666201DAF7DF900BA6AB8 /* Localizable.strings in Resources */,
-				C3F4891F1DACC5F20032EC5E /* InfoPlist.strings in Resources */,
+				C3AAB1401DAFE3FC00C64972 /* Localizable.strings in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,
 				83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */,
 			);
@@ -535,7 +535,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -580,7 +580,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

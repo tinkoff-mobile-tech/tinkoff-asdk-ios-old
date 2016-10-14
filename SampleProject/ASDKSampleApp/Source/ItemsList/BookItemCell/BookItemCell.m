@@ -41,7 +41,7 @@ NSString *const kDetailsInfoNotification = @"kDetailsInfoNotification";
     [self.imageItemContainerView.layer setBorderWidth:kSeparatorLineHeight];
     [self.imageItemContainerView.layer setCornerRadius:3.0f];
 	
-	[self.itemDetailsButton setTitle:NSLocalizedString(@"Detailds", @"ПОДРОБНЕЕ") forState:UIControlStateNormal];
+	[self.itemDetailsButton setTitle:NSLocalizedString(@"Details", @"ПОДРОБНЕЕ") forState:UIControlStateNormal];
     [self.itemDetailsButton.layer setCornerRadius:3.0f];
     
     for (NSLayoutConstraint *heightConstraint in self.bordersHeightConstraint)
