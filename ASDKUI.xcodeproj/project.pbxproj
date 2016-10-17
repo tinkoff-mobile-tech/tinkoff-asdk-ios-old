@@ -55,7 +55,7 @@
 		94C5BCBB1C6B3E0300542BC8 /* ASDK3DSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C5BCB81C6B3E0300542BC8 /* ASDK3DSViewController.m */; };
 		94C5BCBC1C6B3E0300542BC8 /* ASDK3DSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C5BCB91C6B3E0300542BC8 /* ASDK3DSViewController.xib */; };
 		94C86A051C6B2E5100046F0E /* ASDKUIImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94C86A001C6B2E5100046F0E /* ASDKUIImages.xcassets */; };
-		94C86A061C6B2E5100046F0E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94C86A021C6B2E5100046F0E /* Localizable.strings */; };
+		94C86A061C6B2E5100046F0E /* ASDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 94C86A021C6B2E5100046F0E /* ASDKLocalizable.strings */; };
 		94C86A1C1C6B304900046F0E /* ASDKPaymentFormStarter.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C86A0B1C6B304900046F0E /* ASDKPaymentFormStarter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		94C86A1D1C6B304900046F0E /* ASDKPaymentFormStarter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94C86A0C1C6B304900046F0E /* ASDKPaymentFormStarter.m */; };
 		94C86A1E1C6B304900046F0E /* ASDKPaymentFormViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 94C86A0E1C6B304900046F0E /* ASDKPaymentFormViewController.h */; };
@@ -165,8 +165,8 @@
 		94C5BCB81C6B3E0300542BC8 /* ASDK3DSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDK3DSViewController.m; sourceTree = "<group>"; };
 		94C5BCB91C6B3E0300542BC8 /* ASDK3DSViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDK3DSViewController.xib; sourceTree = "<group>"; };
 		94C86A001C6B2E5100046F0E /* ASDKUIImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ASDKUIImages.xcassets; sourceTree = "<group>"; };
-		94C86A031C6B2E5100046F0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		94C86A041C6B2E5100046F0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		94C86A031C6B2E5100046F0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ASDKLocalizable.strings; sourceTree = "<group>"; };
+		94C86A041C6B2E5100046F0E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/ASDKLocalizable.strings; sourceTree = "<group>"; };
 		94C86A0B1C6B304900046F0E /* ASDKPaymentFormStarter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKPaymentFormStarter.h; sourceTree = "<group>"; };
 		94C86A0C1C6B304900046F0E /* ASDKPaymentFormStarter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKPaymentFormStarter.m; sourceTree = "<group>"; };
 		94C86A0E1C6B304900046F0E /* ASDKPaymentFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKPaymentFormViewController.h; sourceTree = "<group>"; };
@@ -360,7 +360,7 @@
 		94C86A011C6B2E5100046F0E /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				94C86A021C6B2E5100046F0E /* Localizable.strings */,
+				94C86A021C6B2E5100046F0E /* ASDKLocalizable.strings */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -674,7 +674,7 @@
 				BEDEFF8E1C75A6780026D454 /* ASDKNumberCell.xib in Resources */,
 				83E156641C720A31000BBD57 /* ASDKLoaderViewController.xib in Resources */,
 				CA82FD211C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib in Resources */,
-				94C86A061C6B2E5100046F0E /* Localizable.strings in Resources */,
+				94C86A061C6B2E5100046F0E /* ASDKLocalizable.strings in Resources */,
 				CA82FD281C70F811005FD294 /* ASDKPaymentFormSummCell.xib in Resources */,
 				94C86A221C6B304900046F0E /* ASDKEmailCell.xib in Resources */,
 				83E1567F1C737439000BBD57 /* ASDKFooterCell.xib in Resources */,
@@ -761,13 +761,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		94C86A021C6B2E5100046F0E /* Localizable.strings */ = {
+		94C86A021C6B2E5100046F0E /* ASDKLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				94C86A031C6B2E5100046F0E /* en */,
 				94C86A041C6B2E5100046F0E /* ru */,
 			);
-			name = Localizable.strings;
+			name = ASDKLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
