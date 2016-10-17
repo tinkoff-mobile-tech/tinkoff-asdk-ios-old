@@ -44,6 +44,10 @@ typedef enum
     ASDKCreditCardTypeVisa = '4',
     /// MasterCard
     ASDKCreditCardTypeMastercard = '5',
+	
+	ASDKCreditCardTypeMastercard2 = '2',
+	//
+	ASDKCreditCardTypeMIR = '2',
     /// Discover Card
     ASDKCreditCardTypeDiscover = '6'
 } ASDKCreditCardType;
@@ -195,22 +199,24 @@ typedef enum
 	if ([self cardNumber].length > 4)
 	{
 		NSString *prefix;
-		switch (_creditCardType) {
+		switch (_creditCardType)
+		{
 			case ASDKCreditCardTypeVisa:
-			{
 				prefix = @"VISA *";
 				break;
-			}
+
 			case ASDKCreditCardTypeMastercard:
-			{
 				prefix = @"MasterCard *";
 				break;
-			}
+
 			case ASDKCreditCardTypeDiscover:
-			{
 				prefix = @"Maestro *";
 				break;
-			}
+
+			case ASDKCreditCardTypeMIR:
+				prefix  = @"MIR *";
+				break;
+
 			default:
 				prefix = @"*";
 				break;
@@ -616,8 +622,7 @@ typedef enum
 	else
 		firstCardNumberSymbol = '\0';
 	
-	
-	ASDKCreditCardType cardType;
+	ASDKCreditCardType cardType = ASDKCreditCardTypeUnrecognized;
 	
 	switch (firstCardNumberSymbol)
 	{
@@ -626,6 +631,7 @@ typedef enum
 			cardType = ASDKCreditCardTypeVisa;
 			break;
 		}
+			
         case ASDKCreditCardTypeMastercard:
 		{
 			cardType = ASDKCreditCardTypeMastercard;
@@ -636,9 +642,29 @@ typedef enum
 			cardType = ASDKCreditCardTypeDiscover;
 			break;
 		}
+			
+		case ASDKCreditCardTypeMastercard2:
+			cardType = ASDKCreditCardTypeMastercard;
 		default:
 		{
-			cardType = ASDKCreditCardTypeUnrecognized;
+			if ([cardNumber length] >= 4)
+			{
+				NSString *headNumbers = [cardNumber substringToIndex:4];
+				if (headNumbers )
+				{
+					NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:@"^220[0-4]" options:NSRegularExpressionCaseInsensitive error:nil];
+					
+					__block NSTextCheckingType checkingType;
+					[regExp enumerateMatchesInString:cardNumber options:0 range:NSMakeRange(0, cardNumber.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop){
+						 checkingType = result.resultType;
+					 }];
+					
+					if (checkingType == NSTextCheckingTypeRegularExpression)
+					{
+						cardType = ASDKCreditCardTypeMIR;
+					}
+				}
+			}
 			break;
 		}
 	}
@@ -1225,12 +1251,15 @@ typedef enum
 			[self.textFieldCardCVC setInputMask:@"___"];
 			break;
 		}
+			
+		case ASDKCreditCardTypeMIR:
 		case ASDKCreditCardTypeMastercard:
 		{
 			self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMasterCard;
 			[self.textFieldCardCVC setInputMask:@"___"];
 			break;
 		}
+
 		case ASDKCreditCardTypeDiscover:
 		{
 			if (cardNumber.length <= 16)
@@ -1268,6 +1297,7 @@ typedef enum
 			securityCodeName = @"CVV";
 			break;
 			
+		case ASDKCreditCardTypeMIR:
 		case ASDKCreditCardTypeMastercard:
 		case ASDKCreditCardTypeDiscover:
 			securityCodeName = @"CVC";
@@ -1289,27 +1319,27 @@ typedef enum
 	switch (creditCardType)
 	{
 		case ASDKCreditCardTypeVisa:
-		{
 			iconName = _useDarkIcons ? @"psIconVisa" : @"psIconVisa_White";
 			break;
-		}
+
 		case ASDKCreditCardTypeMastercard:
-		{
 			iconName = @"psIconMastercard";
 			break;
-		}
+			
 		case ASDKCreditCardTypeDiscover:
-		{
 			iconName = @"psIconMaestro";
 			break;
-		}
+			
+		case ASDKCreditCardTypeMIR:
+			iconName = @"psIconMir";
+			break;
+
 		default:
-		{
-			if (self.textFieldCardNumber.text.length == 0) {
+			if (self.textFieldCardNumber.text.length == 0)
+			{
 				iconName = @"psIcons";
 			}
 			break;
-		}
 	}
 	
 	return iconName;
