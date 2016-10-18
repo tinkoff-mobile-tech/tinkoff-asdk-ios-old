@@ -229,15 +229,17 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 
 + (BOOL)isPayWithAppleAvailable
 {
-	return [PKPaymentAuthorizationViewController canMakePayments] &&
-	[PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:[ASDKPaymentFormStarter payWithAppleSupportedNetworks]];
+	BOOL canMakePayments = [PKPaymentAuthorizationViewController canMakePayments];
+	BOOL canMakePaymentsUsingNetworks = [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:[ASDKPaymentFormStarter payWithAppleSupportedNetworks]];
+	
+	return canMakePayments && canMakePaymentsUsingNetworks;
 }
 
 + (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks
 {
 	return  @[//PKPaymentNetworkAmex,
 			  //PKPaymentNetworkChinaUnionPay,
-			  //PKPaymentNetworkDiscover,
+			  PKPaymentNetworkDiscover,
 			  //PKPaymentNetworkInterac,
 			  PKPaymentNetworkMasterCard,
 			  //PKPaymentNetworkPrivateLabel,

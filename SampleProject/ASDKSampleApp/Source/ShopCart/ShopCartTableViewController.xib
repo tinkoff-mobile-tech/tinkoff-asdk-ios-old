@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="bottomContainerView" destination="V75-wz-MNT" id="Mkh-VR-MnQ"/>
                 <outlet property="buttonApplePay" destination="i2p-cS-aQ5" id="3ZO-O7-WoO"/>
+                <outlet property="labelContentStatus" destination="I90-Rx-0Vb" id="tPE-IR-Prh"/>
                 <outlet property="myTableView" destination="EoR-kM-Pr8" id="5H9-uz-FXM"/>
                 <outlet property="payButton" destination="jCP-z5-q8o" id="w2M-st-2o5"/>
                 <outlet property="totalLabel" destination="eeX-zR-ve8" id="Ps9-jL-Dhw"/>
@@ -71,16 +72,24 @@
                         <outlet property="delegate" destination="-1" id="UXv-00-uhs"/>
                     </connections>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I90-Rx-0Vb">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="I90-Rx-0Vb" firstAttribute="leading" secondItem="bUa-n4-xep" secondAttribute="leading" constant="16" id="Nec-ln-4hl"/>
                 <constraint firstItem="V75-wz-MNT" firstAttribute="leading" secondItem="bUa-n4-xep" secondAttribute="leading" id="RwB-8R-rEz"/>
                 <constraint firstAttribute="trailing" secondItem="V75-wz-MNT" secondAttribute="trailing" id="VTe-wZ-5yP"/>
                 <constraint firstItem="EoR-kM-Pr8" firstAttribute="top" secondItem="bUa-n4-xep" secondAttribute="top" id="Zvu-au-55p"/>
                 <constraint firstItem="V75-wz-MNT" firstAttribute="top" secondItem="EoR-kM-Pr8" secondAttribute="bottom" id="a8k-Rx-yRO"/>
+                <constraint firstItem="I90-Rx-0Vb" firstAttribute="centerY" secondItem="bUa-n4-xep" secondAttribute="centerY" id="adt-eB-4f5"/>
                 <constraint firstAttribute="trailing" secondItem="EoR-kM-Pr8" secondAttribute="trailing" id="f3c-77-btT"/>
                 <constraint firstAttribute="bottom" secondItem="V75-wz-MNT" secondAttribute="bottom" id="htC-K6-JTT"/>
                 <constraint firstItem="EoR-kM-Pr8" firstAttribute="leading" secondItem="bUa-n4-xep" secondAttribute="leading" id="k3Q-3o-8rF"/>
+                <constraint firstAttribute="trailing" secondItem="I90-Rx-0Vb" secondAttribute="trailing" constant="16" id="yv3-Qd-1OU"/>
             </constraints>
             <point key="canvasLocation" x="-78.5" y="11.5"/>
         </view>
