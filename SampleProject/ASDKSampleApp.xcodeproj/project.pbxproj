@@ -381,6 +381,9 @@
 						DevelopmentTeam = 8SEFGGQX9M;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 1;
 							};
