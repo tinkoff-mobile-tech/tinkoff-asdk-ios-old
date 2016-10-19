@@ -339,8 +339,8 @@ typedef enum
 	self.textFieldCardNumber = [[ASDKTextField alloc] init];
 	[self.textFieldCardNumber setInputMask:@"____ ____ ____ _____"];
 	[self.textFieldCardNumber setShowInputMask:NO];
-	[self.textFieldCardNumber setDisablePaste:YES];
-	[self.textFieldCardNumber setDisableCopy:YES];
+	//[self.textFieldCardNumber setDisablePaste:YES];
+	//[self.textFieldCardNumber setDisableCopy:YES];
 	[self.textFieldCardNumber setKeyboardType:UIKeyboardTypeNumberPad];
 	[self.textFieldCardNumber setKeyboardAppearance:UIKeyboardAppearanceLight];
 	[self.textFieldCardNumber setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
