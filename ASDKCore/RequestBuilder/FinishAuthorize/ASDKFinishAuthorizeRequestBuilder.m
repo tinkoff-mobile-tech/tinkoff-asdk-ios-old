@@ -24,16 +24,18 @@
 @property (nonatomic) NSString *sendEmail;
 @property (nonatomic, copy) NSString *cardData;
 @property (nonatomic, strong) NSString *infoEmail;
+@property (nonatomic, copy) NSString *encryptedPaymentData;
 
 @end
 
 @implementation ASDKFinishAuthorizeRequestBuilder
 
 + (ASDKFinishAuthorizeRequestBuilder *)builderWithPaymentId:(NSString *)paymentId
-                                                cardData:(NSString *)cardData
-                                               infoEmail:(NSString *)infoEmail
-                                             terminalKey:(NSString *)terminalKey
-                                                password:(NSString *)password
+												   cardData:(NSString *)cardData
+												  infoEmail:(NSString *)infoEmail
+												terminalKey:(NSString *)terminalKey
+												   password:(NSString *)password
+									   encryptedPaymentData:(NSString *)encryptedPaymentData
 {
     ASDKFinishAuthorizeRequestBuilder *builder = [[ASDKFinishAuthorizeRequestBuilder alloc] init];
     
@@ -45,6 +47,7 @@
         builder.infoEmail = infoEmail;
         builder.terminalKey = terminalKey;
         builder.password = password;
+		builder.encryptedPaymentData = encryptedPaymentData;
     }
     
     return builder;
@@ -75,7 +78,8 @@
                                                                                         sendEmail:self.sendEmail
                                                                                          cardData:self.cardData
                                                                                         infoEmail:self.infoEmail
-                                                                                            token:token];
+                                                                                            token:token
+																			 encryptedPaymentData:self.encryptedPaymentData];
     
     return request;
 }
@@ -101,7 +105,7 @@
     
 #define kASDKCardDataDescription @"Зашифрованные данные карты."
     NSString *cardData = self.cardData;
-    if (cardData.length == 0)
+    if (cardData.length == 0 && [self.encryptedPaymentData length] == 0)
     {
         validationError = [ASDKAcquringSdkError errorWithMessage:kASDKCardData details:[NSString stringWithFormat:@"%@",kASDKCardDataDescription] code:0];
         

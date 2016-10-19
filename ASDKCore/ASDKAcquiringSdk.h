@@ -67,6 +67,7 @@
                failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
 - (void)finishAuthorizeWithPaymentId:(NSString *)paymentId
+				encryptedPaymentData:(NSString *)encryptedPaymentData
                             cardData:(NSString *)cardData
                            infoEmail:(NSString *)infoEmail
                              success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success

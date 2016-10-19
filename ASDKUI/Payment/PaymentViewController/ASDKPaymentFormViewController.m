@@ -841,6 +841,7 @@ typedef enum
     __weak typeof(self) weakSelf = self;
     
     [self.acquiringSdk finishAuthorizeWithPaymentId:paymentId
+							   encryptedPaymentData:nil
                                            cardData:encryptedCardString
                                           infoEmail:emailString
                                             success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status)

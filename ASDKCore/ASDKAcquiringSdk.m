@@ -135,6 +135,7 @@
 }
 
 - (void)finishAuthorizeWithPaymentId:(NSString *)paymentId
+				encryptedPaymentData:(NSString *)encryptedPaymentData
                             cardData:(NSString *)cardData
                            infoEmail:(NSString *)infoEmail
                              success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
@@ -143,10 +144,11 @@
     ASDKAcquringSdkError *buildError;
     
     ASDKFinishAuthorizeRequestBuilder *builder = [ASDKFinishAuthorizeRequestBuilder builderWithPaymentId:paymentId
-                                                                                                     cardData:cardData
-                                                                                                    infoEmail:infoEmail
-                                                                                                  terminalKey:self.terminalKey
-                                                                                                     password:self.password];
+																								cardData:cardData
+																							   infoEmail:infoEmail
+																							 terminalKey:self.terminalKey
+																								password:self.password
+																					encryptedPaymentData:encryptedPaymentData];
     
     ASDKFinishAuthorizeRequest *request = (ASDKFinishAuthorizeRequest *)[builder buildError:&buildError];
     
@@ -176,9 +178,9 @@
     ASDKAcquringSdkError *buildError;
     
     ASDKChargeRequestBuilder *builder = [ASDKChargeRequestBuilder builderWithPaymentId:paymentId
-                                                                                   rebillId:rebillId
-                                                                                terminalKey:self.terminalKey
-                                                                                   password:self.password];
+																			  rebillId:rebillId
+																		   terminalKey:self.terminalKey
+																			  password:self.password];
     
     ASDKChargeRequest *request = (ASDKChargeRequest *)[builder buildError:&buildError];
     
