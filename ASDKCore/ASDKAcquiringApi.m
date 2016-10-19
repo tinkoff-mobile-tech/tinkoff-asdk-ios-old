@@ -236,20 +236,21 @@
                            success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                            failure:(void (^)(ASDKAcquringApiError *error))failure
 {
-    NSMutableDictionary *parameters = @{kASDKTerminalKey : request.terminalKey,
-                                        kASDKPaymentId   : request.paymentId,
-                                        kASDKCardData    : request.cardData,
-                                        kASDKSendEmail   : request.sendEmail,
-                                        kASDKToken       : request.token
-                                        }.mutableCopy;
-    
+	NSMutableDictionary *parameters = [NSMutableDictionary new];
+	
+	[parameters setObject:request.terminalKey forKey:kASDKTerminalKey];
+	[parameters setObject:request.paymentId forKey:kASDKPaymentId];
+	if ([request.cardData length] > 0) {[parameters setObject:request.cardData forKey:kASDKCardData];}
+	if ([request.sendEmail length] > 0) {[parameters setObject:request.sendEmail forKey:kASDKSendEmail];}
+	[parameters setObject:request.token forKey:kASDKToken];
+	if ([request.encryptedPaymentData length] > 0) {[parameters setObject:request.encryptedPaymentData forKey:@"EncryptedPaymentData"];}
+	
     if (request.infoEmail && [request.sendEmail boolValue])
     {
         [parameters setObject:request.infoEmail forKey:kASDKInfoEmail];
     }
-    
-    [self path:kASDKAPIPathFinishAuthorize
-    parameters:parameters
+
+    [self path:kASDKAPIPathFinishAuthorize parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
     {
         ASDKFinishAuthorizeResponse *responseObject = [[ASDKFinishAuthorizeResponse alloc] initWithDictionary:responseDictionary];

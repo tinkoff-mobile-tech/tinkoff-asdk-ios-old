@@ -35,6 +35,7 @@
 @property (nonatomic, strong) NSString *terminalKey;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) NSString *publicKeyAsString;
+
 @property (nonatomic, readwrite) BOOL debug;
 @property (nonatomic, strong) id<ASDKAcquiringSdkLoggerDelegate> logger;
 
@@ -42,10 +43,14 @@
 
 // ApplePay
 @property (nonatomic, weak) UIViewController *presentingViewControllerApplePay;
+@property (nonatomic, strong) NSString *paymentIdForApplePay;
 //
 @property (nonatomic, strong) void (^onSuccess)(NSString *paymentId);
 @property (nonatomic, strong) void (^onCancelled)();
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
+
+@property (nonatomic, strong) NSString *onCompleteSuccessPaymentId;
+@property (nonatomic, strong) ASDKAcquringSdkError *onCompleteError;
 
 @end
 
@@ -267,6 +272,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 
 	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:NO
 		success:^(ASDKInitResponse *response){
+			self.paymentIdForApplePay = response.paymentId;
+			
 			PKPaymentRequest *paymentRequest = [PKPaymentRequest new];
 			paymentRequest.merchantIdentifier = appleMerchantId;
 			paymentRequest.countryCode = @"RU";
@@ -328,18 +335,20 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 {
 	if (completion)
 	{
-		NSString *paymentDataString = [[NSString alloc] initWithData:payment.token.paymentData encoding:NSUTF8StringEncoding];
+		NSString *encryptedPaymentData = [[NSString alloc] initWithData:payment.token.paymentData encoding:NSUTF8StringEncoding];
+		//encryptedPaymentData = @"paymentId={\"version\":\"EC_v1\",\"data\":\"bhgLPJ+Wra1MlGtYd1M2dHHXC1QqZOcIXC7TwbsNcVlqUZBEEYFCdI0NSCGk+EkU6VKgB64qL6N+lfvQFXKPQdjY8m4w7jRXlKGWC8HpjAUKFggyjDjnEaJZ4eXOvtpn+D5MQb4+YMl+o3ECOKvLfjGWp7WkxFbpl+Gs1LkntofBFBZ4Hq3IWRysfLUcTeRqDGgNk7LiHwVLzj9FTqh6TpFfQoDaQtJ1Ga/k3j/gMAJVtlwZ6CGGM9yjLtr3pjTWDp4tUieSeWsbAMMkB/0J9zK1V0L3rZ4tmY5DU6Xewl4dmQBxNXQ8MoqTdKQlqcrN9qRhlpUtiEJJEOBOMu2PmiShp+TZnjRb09Jva9rqeGIdGT57GlpXBVEEe8xgh62aMbxpWKVCEzTEsiI0fcw4\",\"signature\":\"MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCAMIID4jCCA4igAwIBAgIIJEPyqAad9XcwCgYIKoZIzj0EAwIwejEuMCwGA1UEAwwlQXBwbGUgQXBwbGljYXRpb24gSW50ZWdyYXRpb24gQ0EgLSBHMzEmMCQGA1UECwwdQXBwbGUgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTE0MDkyNTIyMDYxMVoXDTE5MDkyNDIyMDYxMVowXzElMCMGA1UEAwwcZWNjLXNtcC1icm9rZXItc2lnbl9VQzQtUFJPRDEUMBIGA1UECwwLaU9TIFN5c3RlbXMxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEwhV37evWx7Ihj2jdcJChIY3HsL1vLCg9hGCV2Ur0pUEbg0IO2BHzQH6DMx8cVMP36zIg1rrV1O/0komJPnwPE";
 		
-		[self.acquiringSdk finishAuthorizeWithPaymentId:paymentDataString
-											   cardData:@""
+		[self.acquiringSdk finishAuthorizeWithPaymentId:self.paymentIdForApplePay
+								   encryptedPaymentData:encryptedPaymentData
+											   cardData:nil
 											  infoEmail:payment.billingContact.emailAddress
 												success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
 													completion(PKPaymentAuthorizationStatusSuccess);
-													self.onSuccess(paymentDataString);
+													self.onCompleteSuccessPaymentId = paymentInfo.paymentId;
 												}
 												failure:^(ASDKAcquringSdkError *error) {
 													completion(PKPaymentAuthorizationStatusFailure);
-													self.onError(error);
+													self.onCompleteError = error;
 												}];
 	}
 }
@@ -347,7 +356,20 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 - (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller
 {
 	[self.presentingViewControllerApplePay dismissViewControllerAnimated:YES completion:^{
-		
+		if ([self.onCompleteSuccessPaymentId length] > 0 && self.onCompleteError == nil)
+		{
+			self.onSuccess(self.onCompleteSuccessPaymentId);
+			self.onCompleteSuccessPaymentId = nil;
+		}
+		else if ([self.onCompleteSuccessPaymentId length] == 0 && self.onCompleteError == nil)
+		{
+			self.onCancelled();
+		}
+		else if (self.onCompleteError != nil)
+		{
+			self.onError(self.onCompleteError);
+			self.onCompleteError = nil;
+		}
 	}];
 }
 
