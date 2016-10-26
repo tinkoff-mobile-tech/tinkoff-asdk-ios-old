@@ -22,7 +22,7 @@
 "Books" = "Books";
 "ALotOfBooks" = "A lot of books";
 "BuyingSuccessful" = "Buying in the amount\n%@\nis successful";
-"ProductAddedToBag" = "Product added to cart";
+"ProductAddedToBag" = "Product added to bag";
 "ActiveTerminal" = "Active terminal";
 "UseSystemKeyboard" = "Use system keyboard";
 "UseSystemKeyboardDescription" = "digital keyboard to enter card requisites";
