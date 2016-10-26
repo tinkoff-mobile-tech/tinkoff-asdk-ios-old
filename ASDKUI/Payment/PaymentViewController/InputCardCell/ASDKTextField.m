@@ -339,8 +339,8 @@ NSMutableString *filteredPhoneStringFromStringWithFilter(NSString *string, NSStr
     if (action == @selector(copy:))// || action == @selector(cut:))
     return !self.disableCopy;
 	
-	if (action == @selector(cut:))
-		return NO;
+//	if (action == @selector(cut:))
+//		return NO;
 
     return [super canPerformAction:action withSender:sender];
 }

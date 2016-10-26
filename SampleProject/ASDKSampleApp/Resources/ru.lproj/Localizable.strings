@@ -21,7 +21,7 @@
 "Total" = "Итого: %@";
 "Books" = "Книги";
 "ALotOfBooks" = "Много книг";
-"BuyingSuccessful" = "Buying in the amount %@ is successful";
+"BuyingSuccessful" = "Покупка на сумму\n%@\nпрошла успешно";
 "ProductAddedToBag" = "Товар добавлен в корзину";
 "ActiveTerminal" = "Активный терминал";
 "UseSystemKeyboard" = "Использовать системную клавиатуру";

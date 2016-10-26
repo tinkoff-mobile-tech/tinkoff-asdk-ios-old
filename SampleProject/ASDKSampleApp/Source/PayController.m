@@ -19,7 +19,7 @@
 
 + (ASDKPaymentFormStarter *)paymentFormStarter
 {
-	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:[ASDKTestSettings testActiveTerminal]];
+	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:[ASDKTestSettings testPublicKey]];
 	ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:[ASDKTestSettings testActiveTerminal]
 																		   payType:nil//@"О"//@"T"
 																		  password:[ASDKTestSettings testTerminalPassword]

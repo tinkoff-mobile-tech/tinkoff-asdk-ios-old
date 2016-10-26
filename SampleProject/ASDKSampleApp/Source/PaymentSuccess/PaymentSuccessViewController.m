@@ -53,7 +53,7 @@ NSString *const kCurrencyRubSymbol = @"₽";
 - (void)updateAmountLabel
 {
     NSString *amountWithCurrency = [NSString stringWithFormat:@"%.2f %@", self.amount.doubleValue, kCurrencyRubSymbol];
-    NSString *amountFull = [NSString stringWithFormat:NSLocalizedString(@"BuyingSuccessful", @"Покупка на сумму %@\nпрошла успешно"), amountWithCurrency];
+    NSString *amountFull = [NSString stringWithFormat:NSLocalizedString(@"BuyingSuccessful", @"Покупка на сумму XXX прошла успешно"), amountWithCurrency];
     
     NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithString:amountFull];
     NSRange range = [resultString.string rangeOfString:amountWithCurrency];

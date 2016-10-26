@@ -21,7 +21,7 @@
 "Total" = "Total: %@";
 "Books" = "Books";
 "ALotOfBooks" = "A lot of books";
-"BuyingSuccessful" = "Buying in the amount %@ is successful";
+"BuyingSuccessful" = "Buying in the amount\n%@\nis successful";
 "ProductAddedToBag" = "Product added to cart";
 "ActiveTerminal" = "Active terminal";
 "UseSystemKeyboard" = "Use system keyboard";
