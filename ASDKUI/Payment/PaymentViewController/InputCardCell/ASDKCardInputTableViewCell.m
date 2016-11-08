@@ -650,7 +650,7 @@ typedef enum
 			if ([cardNumber length] >= 4)
 			{
 				NSString *headNumbers = [cardNumber substringToIndex:4];
-				if (headNumbers )
+				if ([headNumbers length] == 4)
 				{
 					NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:@"^220[0-4]" options:NSRegularExpressionCaseInsensitive error:nil];
 					

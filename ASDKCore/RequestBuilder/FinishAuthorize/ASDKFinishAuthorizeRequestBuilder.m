@@ -136,7 +136,11 @@
     {
         [parameters setObject:self.infoEmail forKey:kASDKInfoEmail];
     }
-    
+	if (self.encryptedPaymentData.length > 0)
+	{
+		[parameters setObject:self.encryptedPaymentData forKey:@"EncryptedPaymentData"];
+	}
+
     return parameters;
 }
 
