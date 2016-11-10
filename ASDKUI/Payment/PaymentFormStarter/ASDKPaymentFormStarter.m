@@ -244,7 +244,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 {
 	return  @[//PKPaymentNetworkAmex,
 			  //PKPaymentNetworkChinaUnionPay,
-			  PKPaymentNetworkDiscover,
+			  //PKPaymentNetworkDiscover,
 			  //PKPaymentNetworkInterac,
 			  PKPaymentNetworkMasterCard,
 			  //PKPaymentNetworkPrivateLabel,
