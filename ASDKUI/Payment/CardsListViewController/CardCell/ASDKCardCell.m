@@ -86,8 +86,14 @@
             imageName = @"psIconMaestro";
         }
             break;
+			
+		case ASDKCardTypeMIR:
+		{
+			imageName = @"psIconMir";
+		}
+			break;
     }
-    
+	
     [self.paymentSystemLogoImageView setImage:[UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil]];
 }
 

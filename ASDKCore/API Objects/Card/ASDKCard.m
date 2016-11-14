@@ -100,19 +100,38 @@
                 break;
             }
             case ASDKCardTypeMastercard:
-            {
                 _cardType = ASDKCardTypeMastercard;
-                break;
-            }
+			case ASDKCardTypeMIR:
+				if ([cardNumber length] >= 4)
+				{
+					NSString *headNumbers = [cardNumber substringToIndex:4];
+					if ([headNumbers length] == 4)
+					{
+						NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:@"^220[0-4]" options:NSRegularExpressionCaseInsensitive error:nil];
+						
+						__block NSTextCheckingType checkingType;
+						[regExp enumerateMatchesInString:cardNumber options:0 range:NSMakeRange(0, cardNumber.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop){
+						 checkingType = result.resultType;
+					 }];
+						
+						if (checkingType == NSTextCheckingTypeRegularExpression)
+						{
+							_cardType = ASDKCardTypeMIR;
+						}
+					}
+				}
+				break;
+				
             case ASDKCardTypeMaestro:
             {
                 _cardType = ASDKCardTypeMaestro;
                 break;
             }
-                
+
+				
         }
     }
-    
+	
     return _cardType;
 }
 
