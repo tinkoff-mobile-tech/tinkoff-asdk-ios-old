@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -8,7 +9,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShopCartTableViewController">
             <connections>
                 <outlet property="bottomContainerView" destination="V75-wz-MNT" id="Mkh-VR-MnQ"/>
-                <outlet property="labelContentStatus" destination="u2x-w9-Zdh" id="N32-2Q-t1a"/>
+                <outlet property="buttonApplePay" destination="i2p-cS-aQ5" id="3ZO-O7-WoO"/>
+                <outlet property="labelContentStatus" destination="I90-Rx-0Vb" id="tPE-IR-Prh"/>
                 <outlet property="myTableView" destination="EoR-kM-Pr8" id="5H9-uz-FXM"/>
                 <outlet property="payButton" destination="jCP-z5-q8o" id="w2M-st-2o5"/>
                 <outlet property="totalLabel" destination="eeX-zR-ve8" id="Ps9-jL-Dhw"/>
@@ -22,19 +24,10 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V75-wz-MNT" userLabel="ContainerView">
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeX-zR-ve8" userLabel="itemCostLabel">
-                            <constraints>
-                                <constraint firstAttribute="width" constant="99" id="3hW-eE-7h5"/>
-                                <constraint firstAttribute="height" constant="21" id="Re0-l9-RLF"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeX-zR-ve8" userLabel="itemCostLabel">
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="3hW-eE-7h5"/>
-                                </mask>
-                            </variation>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCP-z5-q8o">
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,15 +43,26 @@
                                 <action selector="buyAction:" destination="-1" eventType="touchUpInside" id="f82-V5-XM4"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i2p-cS-aQ5">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="140" id="dlX-bx-V0A"/>
+                                <constraint firstAttribute="height" constant="32" id="itO-6l-Ocm"/>
+                            </constraints>
+                            <state key="normal" image="ApplePayBTN"/>
+                            <connections>
+                                <action selector="buttonActionApplePay:" destination="-1" eventType="touchUpInside" id="0u1-fh-2ka"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.22352941179999999" green="0.55294117649999996" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="jCP-z5-q8o" secondAttribute="trailing" constant="16" id="4EI-LX-4Bi"/>
-                        <constraint firstItem="eeX-zR-ve8" firstAttribute="centerY" secondItem="V75-wz-MNT" secondAttribute="centerY" id="9m9-AW-jWN"/>
-                        <constraint firstItem="jCP-z5-q8o" firstAttribute="centerY" secondItem="V75-wz-MNT" secondAttribute="centerY" id="MoX-hh-8av"/>
-                        <constraint firstItem="jCP-z5-q8o" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eeX-zR-ve8" secondAttribute="trailing" constant="8" id="Q8E-6e-bL9"/>
+                        <constraint firstItem="eeX-zR-ve8" firstAttribute="centerY" secondItem="V75-wz-MNT" secondAttribute="centerY" constant="-20" id="9m9-AW-jWN"/>
+                        <constraint firstItem="jCP-z5-q8o" firstAttribute="centerY" secondItem="V75-wz-MNT" secondAttribute="centerY" constant="-20" id="MoX-hh-8av"/>
                         <constraint firstItem="eeX-zR-ve8" firstAttribute="leading" secondItem="V75-wz-MNT" secondAttribute="leading" constant="16" id="VGu-0t-1NE"/>
-                        <constraint firstAttribute="height" constant="60" id="thc-Ol-Ayg"/>
+                        <constraint firstAttribute="trailing" secondItem="i2p-cS-aQ5" secondAttribute="trailing" constant="16" id="ouI-oO-zUh"/>
+                        <constraint firstItem="i2p-cS-aQ5" firstAttribute="centerY" secondItem="V75-wz-MNT" secondAttribute="centerY" constant="20" id="pJy-09-feB"/>
+                        <constraint firstAttribute="height" constant="92" id="thc-Ol-Ayg"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="EoR-kM-Pr8">
@@ -68,7 +72,7 @@
                         <outlet property="delegate" destination="-1" id="UXv-00-uhs"/>
                     </connections>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2x-w9-Zdh">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I90-Rx-0Vb">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -76,17 +80,21 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="u2x-w9-Zdh" firstAttribute="centerY" secondItem="bUa-n4-xep" secondAttribute="centerY" id="EOo-2y-oCE"/>
+                <constraint firstItem="I90-Rx-0Vb" firstAttribute="leading" secondItem="bUa-n4-xep" secondAttribute="leading" constant="16" id="Nec-ln-4hl"/>
                 <constraint firstItem="V75-wz-MNT" firstAttribute="leading" secondItem="bUa-n4-xep" secondAttribute="leading" id="RwB-8R-rEz"/>
                 <constraint firstAttribute="trailing" secondItem="V75-wz-MNT" secondAttribute="trailing" id="VTe-wZ-5yP"/>
                 <constraint firstItem="EoR-kM-Pr8" firstAttribute="top" secondItem="bUa-n4-xep" secondAttribute="top" id="Zvu-au-55p"/>
                 <constraint firstItem="V75-wz-MNT" firstAttribute="top" secondItem="EoR-kM-Pr8" secondAttribute="bottom" id="a8k-Rx-yRO"/>
+                <constraint firstItem="I90-Rx-0Vb" firstAttribute="centerY" secondItem="bUa-n4-xep" secondAttribute="centerY" id="adt-eB-4f5"/>
                 <constraint firstAttribute="trailing" secondItem="EoR-kM-Pr8" secondAttribute="trailing" id="f3c-77-btT"/>
-                <constraint firstItem="u2x-w9-Zdh" firstAttribute="centerX" secondItem="bUa-n4-xep" secondAttribute="centerX" id="fS2-aJ-agS"/>
                 <constraint firstAttribute="bottom" secondItem="V75-wz-MNT" secondAttribute="bottom" id="htC-K6-JTT"/>
                 <constraint firstItem="EoR-kM-Pr8" firstAttribute="leading" secondItem="bUa-n4-xep" secondAttribute="leading" id="k3Q-3o-8rF"/>
+                <constraint firstAttribute="trailing" secondItem="I90-Rx-0Vb" secondAttribute="trailing" constant="16" id="yv3-Qd-1OU"/>
             </constraints>
-            <point key="canvasLocation" x="-25" y="76"/>
+            <point key="canvasLocation" x="-78.5" y="11.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="ApplePayBTN" width="140" height="32"/>
+    </resources>
 </document>

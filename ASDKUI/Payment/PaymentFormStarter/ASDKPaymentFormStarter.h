@@ -21,6 +21,7 @@
 #import <UIKit/UIKit.h>
 #import <ASDKCore/ASDKCore.h>
 #import "ASDKDesignConfiguration.h"
+#import <PassKit/PassKit.h>
 
 @protocol ASDKAcquiringSdkCardScanner <NSObject>
 /*!
@@ -66,8 +67,25 @@
                                        email:(NSString *)email
                               customKeyboard:(BOOL)keyboard
                                  customerKey:(NSString *)customerKey
-                                     success:(void (^)(NSNumber *paymentId))onSuccess
+                                     success:(void (^)(NSString *paymentId))onSuccess
                                    cancelled:(void (^)())onCancelled
-                                       error:(void(^)(ASDKAcquringSdkError *error))onError;
+                                       error:(void (^)(ASDKAcquringSdkError *error))onError;
+
++ (BOOL)isPayWithAppleAvailable;
++ (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks;
+
+- (void)payWithApplePayFromViewController:(UIViewController *)presentingViewController
+								   amount:(NSNumber *)amount
+								  orderId:(NSString *)orderId
+							  description:(NSString *)description
+							  customerKey:(NSString *)customerKey
+								sendEmail:(BOOL)sendEmail
+									email:(NSString *)email
+						  appleMerchantId:(NSString *)appleMerchantId
+						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
+						  shippingContact:(PKContact *)shippingContact
+								  success:(void (^)(NSString *paymentId))onSuccess
+								cancelled:(void (^)())onCancelled
+									error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 @end

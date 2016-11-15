@@ -22,10 +22,11 @@
 
 @interface ASDKFinishAuthorizeRequestBuilder : ASDKRequestBuilder
 
-+ (ASDKFinishAuthorizeRequestBuilder *)builderWithPaymentId:(NSNumber *)paymentId
-                                                cardData:(NSString *)cardData
-                                               infoEmail:(NSString *)infoEmail
-                                             terminalKey:(NSString *)terminalKey
-                                                password:(NSString *)password;
++ (ASDKFinishAuthorizeRequestBuilder *)builderWithPaymentId:(NSString *)paymentId
+												   cardData:(NSString *)cardData
+												  infoEmail:(NSString *)infoEmail
+												terminalKey:(NSString *)terminalKey
+												   password:(NSString *)password
+									   encryptedPaymentData:(NSString *)encryptedPaymentData;
 
 @end

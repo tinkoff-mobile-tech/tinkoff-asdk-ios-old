@@ -35,10 +35,10 @@
 
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 @property (nonatomic, strong) ASDKThreeDsData *threeDsData;
 
-@property (nonatomic, strong) void (^onSuccess)(NSNumber *paymentId);
+@property (nonatomic, strong) void (^onSuccess)(NSString *paymentId);
 @property (nonatomic, strong) void (^onCancelled)();
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
@@ -55,7 +55,7 @@
     NSLog(@"DALLOC %@",NSStringFromClass([self class]));
 }
 
-- (instancetype)initWithPaymentId:(NSNumber *)paymentId
+- (instancetype)initWithPaymentId:(NSString *)paymentId
                       threeDsData:(ASDKThreeDsData *)data
                      acquiringSdk:(ASDKAcquiringSdk *)acquiringSdk
 {
@@ -71,7 +71,7 @@
 }
 
 - (void)showFromViewController:(UIViewController *)viewController
-                       success:(void (^)(NSNumber *paymentId))success
+                       success:(void (^)(NSString *paymentId))success
                        failure:(void (^)(ASDKAcquringSdkError *statusError))failure
                         cancel:(void (^)())cancel
 {

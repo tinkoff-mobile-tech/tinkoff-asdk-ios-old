@@ -24,8 +24,9 @@
 
 + (ASDKInitRequestBuilder *)builderWithAmount:(NSNumber *)amount
                                       orderId:(NSString *)orderId
-                                  description:(NSString *)description
+								  description:(NSString *)description
                                       payForm:(NSString *)payForm
+									  payType:(NSString *)payType
                                   customerKey:(NSString *)customerKey
                                     recurrent:(BOOL)recurrent
                                   terminalKey:(NSString *)terminalKey

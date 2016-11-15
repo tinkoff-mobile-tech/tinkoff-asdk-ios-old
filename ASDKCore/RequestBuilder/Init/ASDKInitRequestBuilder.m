@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSString *customerKey;
 @property (nonatomic, copy) NSString *requestDescription;
 @property (nonatomic, copy) NSString *payForm;
+@property (nonatomic, copy) NSString *payType;
 @property (nonatomic) BOOL recurrent;
 
 @end
@@ -35,6 +36,7 @@
                                       orderId:(NSString *)orderId
                                   description:(NSString *)description
                                       payForm:(NSString *)payForm
+									  payType:(NSString *)payType
                                   customerKey:(NSString *)customerKey
                                     recurrent:(BOOL)recurrent
                                   terminalKey:(NSString *)terminalKey
@@ -47,6 +49,7 @@
         builder.amount = [NSNumber numberWithDouble:[NSString stringWithFormat:@"%.2f",amount.doubleValue].doubleValue];
         builder.orderId = orderId;
         builder.requestDescription = description;
+		builder.payType = payType;
         builder.payForm = payForm;
         builder.customerKey = customerKey;
         builder.recurrent = recurrent;
@@ -72,12 +75,13 @@
     
     NSString *token = [self makeToken];
     
-    ASDKInitRequest *request = [[ASDKInitRequest alloc] initWithTerminalKey:self.terminalKey
+	ASDKInitRequest *request = [[ASDKInitRequest alloc] initWithTerminalKey:self.terminalKey
                                                                      amount:self.amount
                                                                     orderId:self.orderId
                                                                 description:self.requestDescription
                                                                       token:token
                                                                     payForm:self.payForm
+																	payType:self.payType
                                                                 customerKey:self.customerKey
                                                                   recurrent:self.recurrent];
     
@@ -182,7 +186,12 @@
     {
         [parameters setObject:self.payForm forKey:kASDKPayForm];
     }
-    
+
+	if (self.payType.length > 0)
+	{
+		[parameters setObject:self.payType forKey:kASDKPayType];
+	}
+
     if (self.customerKey.length > 0)
     {
         [parameters setObject:self.customerKey forKey:kASDKCustomerKey];

@@ -10,6 +10,7 @@
 #import "LocalConstants.h"
 
 NSString *const kDetailsInfoNotification = @"kDetailsInfoNotification";
+
 #define kSeparatorLineHeight		1.0f / [[UIScreen mainScreen] scale]
 
 @interface BookItemCell ()
@@ -33,11 +34,14 @@ NSString *const kDetailsInfoNotification = @"kDetailsInfoNotification";
 
 - (void)awakeFromNib
 {
+	[super awakeFromNib];
+	
     self.itemCostLabel.textColor = kMainBlueColor;
     [self.imageItemContainerView.layer setBorderColor:[UIColor grayColor].CGColor];
     [self.imageItemContainerView.layer setBorderWidth:kSeparatorLineHeight];
     [self.imageItemContainerView.layer setCornerRadius:3.0f];
-    
+	
+	[self.itemDetailsButton setTitle:NSLocalizedString(@"Details", @"ПОДРОБНЕЕ") forState:UIControlStateNormal];
     [self.itemDetailsButton.layer setCornerRadius:3.0f];
     
     for (NSLayoutConstraint *heightConstraint in self.bordersHeightConstraint)

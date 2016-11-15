@@ -24,6 +24,6 @@
 
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, copy) NSString *orderId;
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 
 @end

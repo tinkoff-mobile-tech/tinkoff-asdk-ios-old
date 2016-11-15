@@ -31,7 +31,8 @@ typedef enum
 {
     ASDKCardTypeVisa = '4',
     ASDKCardTypeMastercard = '5',
-    ASDKCardTypeMaestro = '6'
+    ASDKCardTypeMaestro = '6',
+	ASDKCardTypeMIR = '2'
 } ASDKCardType;
 
 @interface ASDKCard : ASDKBaseObject

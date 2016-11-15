@@ -6,9 +6,9 @@
 //  Copyright © 2016 TCS Bank. All rights reserved.
 //
 
-#import "ASDKCardIOScanner.h"
-#import <CardIO/CardIO.h>
 #import <AVFoundation/AVFoundation.h>
+#import "CardIO.h"
+#import "ASDKCardIOScanner.h"
 
 @interface ASDKCardIOScanner () <CardIOPaymentViewControllerDelegate>
 

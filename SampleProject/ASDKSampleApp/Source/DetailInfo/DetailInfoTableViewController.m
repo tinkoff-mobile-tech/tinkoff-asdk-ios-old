@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UIButton *addToCartButton;
+@property (weak, nonatomic) IBOutlet UIButton *buttonApplePay;
 @property (nonatomic, weak) IBOutlet UILabel *itemCostLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomContainerView;
@@ -46,11 +47,11 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Интернет магазин";
+	self.title = NSLocalizedString(@"OnlineShop", @"Интернет магазин");
     
     [self.myTableView registerNib:[UINib nibWithNibName:NSStringFromClass([BookItemCell class]) bundle:[NSBundle mainBundle]] forCellReuseIdentifier:NSStringFromClass([BookItemCell class])];
     
-    UIBarButtonItem *shopCartButton = [[UIBarButtonItem alloc] initWithTitle:@"Корзина"
+    UIBarButtonItem *shopCartButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Bag", @"Корзина")
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(openShopCart:)];
@@ -60,14 +61,18 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self.buyButton.layer setCornerRadius:3.0f];
+	[self.buyButton setTitle:NSLocalizedString(@"Buy", @"КУПИТЬ") forState:UIControlStateNormal];
     [self.addToCartButton.layer setCornerRadius:3.0f];
-    
+	[self.addToCartButton setTitle:NSLocalizedString(@"AddToBag", @"В КОРЗИНУ") forState:UIControlStateNormal];
+	
     [self.buyButton addTarget:self action:@selector(buyItem) forControlEvents:UIControlEventTouchUpInside];
     [self.addToCartButton addTarget:self action:@selector(addItemToCart) forControlEvents:UIControlEventTouchUpInside];
     
     [self.itemCostLabel setText:[_item amountAsString]];
     
     self.bottomContainerView.backgroundColor = kMainBlueColor;
+	
+	[self.buttonApplePay setEnabled:[PayController isPayWithAppleAvailable]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -133,10 +138,10 @@
 {
     [[ShopCart sharedInstance] addItem:self.item.copy];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Товар добавлен в корзину" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"ProductAddedToBag", @"Товар добавлен в корзину") message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction
-                                   actionWithTitle:@"Закрыть"
+                                   actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
                                    style:UIAlertActionStyleCancel
                                    handler:^(UIAlertAction *action)
                                    {
@@ -154,7 +159,7 @@
                        description:self.item.bookDescription
                             amount:self.item.cost
                 fromViewController:self
-                           success:^(NSNumber *paymentId)
+                           success:^(NSString *paymentId)
      {
          NSLog(@"%@",paymentId);
      }
@@ -168,5 +173,32 @@
      }];
 }
 
+- (IBAction)buttonActionApplePay:(UIButton *)sender
+{
+	if ([PayController isPayWithAppleAvailable])
+	{
+		PKContact *shippingContact = [[PKContact alloc] init];
+		shippingContact.emailAddress = @"test@gmail.com";
+		shippingContact.phoneNumber = [CNPhoneNumber phoneNumberWithStringValue:@"+74956481000"];
+		CNMutablePostalAddress *postalAddress = [[CNMutablePostalAddress alloc] init];
+		[postalAddress setStreet:@"Головинское шоссе, дом 5, корп. 1,"];
+		[postalAddress setCountry:@"Россия"];
+		[postalAddress setCity:@"Москва"];
+		[postalAddress setPostalCode:@"125212"];
+		[postalAddress setISOCountryCode:@"643"];
+		shippingContact.postalAddress = [postalAddress copy];
+		
+		[PayController buyWithApplePayAmount:self.item.cost
+								 description:self.item.title
+									   email:shippingContact.emailAddress
+							 appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
+							 shippingMethods:nil//@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
+							 shippingContact:shippingContact
+						  fromViewController:self
+									 success:^(NSString *paymentId) { NSLog(@"%@", paymentId); }
+								   cancelled:^{ NSLog(@"Canceled"); }
+									   error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@", error); }];
+	}
+}
 
 @end

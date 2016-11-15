@@ -7,17 +7,8 @@
 //
 
 #import "ViewController.h"
-#import <ASDKCore/ASDKCore.h>
-#import <ASDKUI/ASDKUI.h>
-
-#import "ASDKCardIOScanner.h"
-
-#import "ASDKTestKeys.h"
-
 
 @interface ViewController ()
-
-@property (nonatomic, strong) ASDKCardIOScanner *scannerObject;
 
 @end
 

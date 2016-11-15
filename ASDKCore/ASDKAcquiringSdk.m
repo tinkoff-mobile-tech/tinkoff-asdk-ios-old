@@ -31,6 +31,7 @@
 
 @property (nonatomic, strong) ASDKAcquiringApi *acquiringApi;
 
+@property (nonatomic, strong) NSString *payType;
 @property (nonatomic, strong) NSString *terminalKey;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) id<ASDKAcquiringSdkPublicKeyDataSource> publicKeyDataSource;
@@ -43,6 +44,7 @@
 @implementation ASDKAcquiringSdk
 
 + (ASDKAcquiringSdk *)acquiringSdkWithTerminalKey:(NSString *)terminalKey
+										  payType:(NSString *)payType
                                          password:(NSString *)password
                               publicKeyDataSource:(id<ASDKAcquiringSdkPublicKeyDataSource>)publicKeyDataSource
 {
@@ -51,6 +53,7 @@
     if (acquiringSdk)
     {
         acquiringSdk.terminalKey = terminalKey;
+		acquiringSdk.payType = payType;
         acquiringSdk.password = password;
         acquiringSdk.publicKeyDataSource = publicKeyDataSource;
         acquiringSdk.acquiringApi = [ASDKAcquiringApi acquiringApiWithDomainPath:[acquiringSdk domainPath]];
@@ -102,13 +105,14 @@
     ASDKAcquringSdkError *buildError;
     
     ASDKInitRequestBuilder *builder = [ASDKInitRequestBuilder builderWithAmount:amount
-                                                                             orderId:orderId
-                                                                         description:description
-                                                                             payForm:payForm
-                                                                         customerKey:customerKey
-                                                                           recurrent:recurrent
-                                                                         terminalKey:self.terminalKey
-                                                                            password:self.password];
+																		orderId:orderId
+																	description:description
+																		payForm:payForm
+																		payType:self.payType
+																	customerKey:customerKey
+																	  recurrent:recurrent
+																	terminalKey:self.terminalKey
+																	   password:self.password];
     
     ASDKInitRequest *request = (ASDKInitRequest *)[builder buildError:&buildError];
     
@@ -130,7 +134,8 @@
     }
 }
 
-- (void)finishAuthorizeWithPaymentId:(NSNumber *)paymentId
+- (void)finishAuthorizeWithPaymentId:(NSString *)paymentId
+				encryptedPaymentData:(NSString *)encryptedPaymentData
                             cardData:(NSString *)cardData
                            infoEmail:(NSString *)infoEmail
                              success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
@@ -139,10 +144,11 @@
     ASDKAcquringSdkError *buildError;
     
     ASDKFinishAuthorizeRequestBuilder *builder = [ASDKFinishAuthorizeRequestBuilder builderWithPaymentId:paymentId
-                                                                                                     cardData:cardData
-                                                                                                    infoEmail:infoEmail
-                                                                                                  terminalKey:self.terminalKey
-                                                                                                     password:self.password];
+																								cardData:cardData
+																							   infoEmail:infoEmail
+																							 terminalKey:self.terminalKey
+																								password:self.password
+																					encryptedPaymentData:encryptedPaymentData];
     
     ASDKFinishAuthorizeRequest *request = (ASDKFinishAuthorizeRequest *)[builder buildError:&buildError];
     
@@ -164,7 +170,7 @@
     }
 }
 
-- (void)chargeWithPaymentId:(NSNumber *)paymentId
+- (void)chargeWithPaymentId:(NSString *)paymentId
                    rebillId:(NSNumber *)rebillId
                     success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo))success
                     failure:(void (^)(ASDKAcquringSdkError *error))failure
@@ -172,9 +178,9 @@
     ASDKAcquringSdkError *buildError;
     
     ASDKChargeRequestBuilder *builder = [ASDKChargeRequestBuilder builderWithPaymentId:paymentId
-                                                                                   rebillId:rebillId
-                                                                                terminalKey:self.terminalKey
-                                                                                   password:self.password];
+																			  rebillId:rebillId
+																		   terminalKey:self.terminalKey
+																			  password:self.password];
     
     ASDKChargeRequest *request = (ASDKChargeRequest *)[builder buildError:&buildError];
     
@@ -197,7 +203,7 @@
     
 }
 
-- (void)getStateWithPaymentId:(NSNumber *)paymentId
+- (void)getStateWithPaymentId:(NSString *)paymentId
                       success:(void (^)(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                       failure:(void (^)(ASDKAcquringSdkError *error))failure
 {

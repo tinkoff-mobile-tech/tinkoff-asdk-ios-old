@@ -20,20 +20,22 @@
 
 @interface ASDKFinishAuthorizeRequestBuilder ()
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 @property (nonatomic) NSString *sendEmail;
 @property (nonatomic, copy) NSString *cardData;
 @property (nonatomic, strong) NSString *infoEmail;
+@property (nonatomic, copy) NSString *encryptedPaymentData;
 
 @end
 
 @implementation ASDKFinishAuthorizeRequestBuilder
 
-+ (ASDKFinishAuthorizeRequestBuilder *)builderWithPaymentId:(NSNumber *)paymentId
-                                                cardData:(NSString *)cardData
-                                               infoEmail:(NSString *)infoEmail
-                                             terminalKey:(NSString *)terminalKey
-                                                password:(NSString *)password
++ (ASDKFinishAuthorizeRequestBuilder *)builderWithPaymentId:(NSString *)paymentId
+												   cardData:(NSString *)cardData
+												  infoEmail:(NSString *)infoEmail
+												terminalKey:(NSString *)terminalKey
+												   password:(NSString *)password
+									   encryptedPaymentData:(NSString *)encryptedPaymentData
 {
     ASDKFinishAuthorizeRequestBuilder *builder = [[ASDKFinishAuthorizeRequestBuilder alloc] init];
     
@@ -45,6 +47,7 @@
         builder.infoEmail = infoEmail;
         builder.terminalKey = terminalKey;
         builder.password = password;
+		builder.encryptedPaymentData = encryptedPaymentData;
     }
     
     return builder;
@@ -75,7 +78,8 @@
                                                                                         sendEmail:self.sendEmail
                                                                                          cardData:self.cardData
                                                                                         infoEmail:self.infoEmail
-                                                                                            token:token];
+                                                                                            token:token
+																			 encryptedPaymentData:self.encryptedPaymentData];
     
     return request;
 }
@@ -86,7 +90,7 @@
     
 #define kASDKPaymentIdDescription @"Уникальный идентификатор транзакции в системе Банка, полученный в ответе на вызов метода Init."
 #define kASDKPaymentIdMaxLength 20
-    NSString *paymentId = self.paymentId.stringValue;
+    NSString *paymentId = self.paymentId;
     NSLog(@"paymentId=%@\nrealPaymentId=%@",paymentId,self.paymentId);
     if (paymentId.length > kASDKPaymentIdMaxLength || paymentId.length == 0)
     {
@@ -101,7 +105,7 @@
     
 #define kASDKCardDataDescription @"Зашифрованные данные карты."
     NSString *cardData = self.cardData;
-    if (cardData.length == 0)
+    if (cardData.length == 0 && [self.encryptedPaymentData length] == 0)
     {
         validationError = [ASDKAcquringSdkError errorWithMessage:kASDKCardData details:[NSString stringWithFormat:@"%@",kASDKCardDataDescription] code:0];
         
@@ -132,7 +136,11 @@
     {
         [parameters setObject:self.infoEmail forKey:kASDKInfoEmail];
     }
-    
+	if (self.encryptedPaymentData.length > 0)
+	{
+		[parameters setObject:self.encryptedPaymentData forKey:@"EncryptedPaymentData"];
+	}
+
     return parameters;
 }
 

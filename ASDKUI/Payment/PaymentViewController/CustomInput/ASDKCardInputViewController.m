@@ -61,13 +61,12 @@
     return self;
 }
 
-
 #pragma mark - View Controller Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UINib *numberCellNib = [UINib nibWithNibName:NSStringFromClass([ASDKNumberCell class]) bundle:[NSBundle bundleForClass:[ASDKNumberCell class]]];
     [self.keyboardCollectionView registerNib:numberCellNib forCellWithReuseIdentifier:NSStringFromClass([ASDKNumberCell class])];
     
@@ -156,9 +155,9 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = _keyboardSize.height / kRowsNumber;
-    CGFloat width = _keyboardSize.width / kColumnsNumber;
-    
+	CGFloat height = collectionView.frame.size.height / kRowsNumber;//_keyboardSize.height / kRowsNumber;
+	CGFloat width = collectionView.frame.size.width / kColumnsNumber;//_keyboardSize.width / kColumnsNumber;
+
     return CGSizeMake(width, height);
 }
 

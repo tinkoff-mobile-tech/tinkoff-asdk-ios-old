@@ -22,11 +22,11 @@
 
 @interface ASDKChargeRequest : ASDKAcquiringRequest
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 @property (nonatomic, strong) NSNumber *rebillId;
 
 - (ASDKChargeRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                 paymentId:(NSNumber *)paymentId
+                                 paymentId:(NSString *)paymentId
                                   rebillId:(NSNumber *)rebillId
                                      token:(NSString *)token;
 

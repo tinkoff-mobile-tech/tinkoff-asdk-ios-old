@@ -6,7 +6,8 @@
 target 'ASDKSampleApp' do
 
 pod 'CardIO'
-pod 'ASDKUI'
+pod 'ASDKCore', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/ASDKCore.podspec"
+pod 'ASDKUI', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/ASDKUI.podspec"
 
 end
 

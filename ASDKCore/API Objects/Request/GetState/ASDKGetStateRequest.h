@@ -22,10 +22,10 @@
 
 @interface ASDKGetStateRequest : ASDKAcquiringRequest
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 
 - (ASDKGetStateRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                   paymentId:(NSNumber *)paymentId
+                                   paymentId:(NSString *)paymentId
                                        token:(NSString *)token;
 
 @end

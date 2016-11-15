@@ -28,6 +28,7 @@
                              description:(NSString *)description
                                    token:(NSString *)token
                                  payForm:(NSString *)payForm
+								 payType:(NSString *)payType
                              customerKey:(NSString *)customerKey
                                recurrent:(BOOL)recurrent
 {
@@ -36,11 +37,13 @@
     if (request)
     {
         request.terminalKey = terminalKey;
+		request.payType = payType;
         request.amount = amount;
         request.orderId = orderId;
         request.requestDescription = description;
         request.token = token;
         request.payForm = payForm;
+		request.payType = payType;
         request.customerKey = customerKey;
         request.recurrent = recurrent;
     }

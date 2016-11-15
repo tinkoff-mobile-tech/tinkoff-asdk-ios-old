@@ -14,9 +14,12 @@
 
 - (void)awakeFromNib
 {
+	[super awakeFromNib];
     // Initialization code
     self.itemCostLabel.textColor = kMainBlueColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+	[self.deleteButton setTitle:NSLocalizedString(@"Delete", @"УДАЛИТЬ") forState:UIControlStateNormal];
+	
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

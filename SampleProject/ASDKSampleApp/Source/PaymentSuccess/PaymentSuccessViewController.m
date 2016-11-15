@@ -24,9 +24,9 @@ NSString *const kCurrencyRubSymbol = @"₽";
 {
     [super viewDidLoad];
     
-    self.title = @"Интернет магазин";
+    self.title = NSLocalizedString(@"OnlineShop", @"Интернет магазин");
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Готово"
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Готово")
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
                                                                       action:@selector(closeSelf)];
@@ -53,7 +53,7 @@ NSString *const kCurrencyRubSymbol = @"₽";
 - (void)updateAmountLabel
 {
     NSString *amountWithCurrency = [NSString stringWithFormat:@"%.2f %@", self.amount.doubleValue, kCurrencyRubSymbol];
-    NSString *amountFull = [NSString stringWithFormat:@"Покупка на сумму %@\nпрошла успешно", amountWithCurrency];
+    NSString *amountFull = [NSString stringWithFormat:NSLocalizedString(@"BuyingSuccessful", @"Покупка на сумму XXX прошла успешно"), amountWithCurrency];
     
     NSMutableAttributedString *resultString = [[NSMutableAttributedString alloc] initWithString:amountFull];
     NSRange range = [resultString.string rangeOfString:amountWithCurrency];

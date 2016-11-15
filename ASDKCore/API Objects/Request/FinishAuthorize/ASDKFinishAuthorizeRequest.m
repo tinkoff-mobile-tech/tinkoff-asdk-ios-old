@@ -23,11 +23,12 @@
 @implementation ASDKFinishAuthorizeRequest
 
 - (ASDKFinishAuthorizeRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                          paymentId:(NSNumber *)paymentId
+                                          paymentId:(NSString *)paymentId
                                           sendEmail:(NSString *)sendEmail
                                            cardData:(NSString *)cardData
                                           infoEmail:(NSString *)infoEmail
-                                              token:(NSString *)token
+											  token:(NSString *)token
+							   encryptedPaymentData:(NSString *)encryptedPaymentData
 {
     ASDKFinishAuthorizeRequest *request = [[ASDKFinishAuthorizeRequest alloc] init];
     
@@ -39,8 +40,9 @@
         request.cardData = cardData;
         request.infoEmail = infoEmail;
         request.token = token;
+		request.encryptedPaymentData = encryptedPaymentData;
     }
-    
+
     return request;
 }
 

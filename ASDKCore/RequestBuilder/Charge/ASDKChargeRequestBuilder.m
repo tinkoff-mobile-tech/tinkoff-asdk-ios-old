@@ -20,14 +20,14 @@
 
 @interface ASDKChargeRequestBuilder ()
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 @property (nonatomic, strong) NSNumber *rebillId;
 
 @end
 
 @implementation ASDKChargeRequestBuilder
 
-+ (ASDKChargeRequestBuilder *)builderWithPaymentId:(NSNumber *)paymentId
++ (ASDKChargeRequestBuilder *)builderWithPaymentId:(NSString *)paymentId
                                        rebillId:(NSNumber *)rebillId
                                     terminalKey:(NSString *)terminalKey
                                        password:(NSString *)password
@@ -74,7 +74,7 @@
     
 #define kASDKPaymentIdDescription @"Уникальный идентификатор транзакции в системе Банка, полученный в ответе на вызов метода Init."
 #define kASDKPaymentIdMaxLength 20
-    NSString *paymentId = self.paymentId.stringValue;
+    NSString *paymentId = self.paymentId;
     if (paymentId.length > kASDKPaymentIdMaxLength || paymentId.length == 0)
     {
         validationError = [ASDKAcquringSdkError errorWithMessage:kASDKPaymentId details:[NSString stringWithFormat:@"%@ %@ %d",kASDKPaymentIdDescription, kASDKValidationErrorMaxLengthString, kASDKPaymentIdMaxLength] code:0];

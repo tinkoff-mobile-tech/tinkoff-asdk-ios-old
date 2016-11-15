@@ -23,7 +23,7 @@
 @implementation ASDKChargeRequest
 
 - (ASDKChargeRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                 paymentId:(NSNumber *)paymentId
+                                 paymentId:(NSString *)paymentId
                                   rebillId:(NSNumber *)rebillId
                                      token:(NSString *)token
 {

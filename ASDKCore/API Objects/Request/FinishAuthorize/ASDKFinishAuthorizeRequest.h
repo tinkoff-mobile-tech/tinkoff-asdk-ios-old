@@ -22,16 +22,18 @@
 
 @interface ASDKFinishAuthorizeRequest : ASDKAcquiringRequest
 
-@property (nonatomic, strong) NSNumber *paymentId;
+@property (nonatomic, strong) NSString *paymentId;
 @property (nonatomic, strong) NSString *sendEmail;
 @property (nonatomic, strong) NSString *cardData;
 @property (nonatomic, strong) NSString *infoEmail;
+@property (nonatomic, strong) NSString *encryptedPaymentData;
 
 - (ASDKFinishAuthorizeRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                          paymentId:(NSNumber *)paymentId
+                                          paymentId:(NSString *)paymentId
                                           sendEmail:(NSString *)sendEmail
                                            cardData:(NSString *)cardData
                                           infoEmail:(NSString *)infoEmail
-                                              token:(NSString *)token;
+											  token:(NSString *)token
+							   encryptedPaymentData:(NSString *)encryptedPaymentData;
 
 @end

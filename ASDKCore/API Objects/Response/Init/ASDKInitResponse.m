@@ -29,16 +29,16 @@
     _orderId = nil;
 }
 
-- (NSNumber *)paymentId
+- (NSString *)paymentId
 {
     if (!_paymentId)
     {
-        _paymentId =_dictionary[kASDKPaymentId];
-        
-        if (![_paymentId isKindOfClass:[NSNumber class]])
-        {
-            _paymentId = [NSNumber numberWithDouble:_paymentId.doubleValue];
-        }
+        _paymentId =[_dictionary objectForKey:kASDKPaymentId];
+
+        //if (![_paymentId isKindOfClass:[NSNumber class]])
+        //{
+        //    _paymentId = [NSNumber numberWithDouble:_paymentId.doubleValue];
+        //}
     }
     
     return _paymentId;

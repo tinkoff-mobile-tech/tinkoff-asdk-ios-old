@@ -23,7 +23,7 @@
 @implementation ASDKGetStateRequest
 
 - (ASDKGetStateRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                   paymentId:(NSNumber *)paymentId
+                                   paymentId:(NSString *)paymentId
                                        token:(NSString *)token
 {
     ASDKGetStateRequest *request = [[ASDKGetStateRequest alloc] init];
