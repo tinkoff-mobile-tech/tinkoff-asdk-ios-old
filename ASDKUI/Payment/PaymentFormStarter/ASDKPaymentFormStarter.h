@@ -65,7 +65,6 @@
                                  description:(NSString *)description
                                       cardId:(NSString *)cardId
                                        email:(NSString *)email
-                              customKeyboard:(BOOL)keyboard
                                  customerKey:(NSString *)customerKey
                                      success:(void (^)(NSString *paymentId))onSuccess
                                    cancelled:(void (^)())onCancelled

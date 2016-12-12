@@ -13,7 +13,6 @@
 
 typedef NS_ENUM(NSUInteger, SectionType)
 {
-	SectionTypeKeyboard,
 	SectionTypeTerminal
 };
 
@@ -42,8 +41,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 	[self.tableView setRowHeight:UITableViewAutomaticDimension];
 	[self.tableView setEstimatedRowHeight:50];
 	
-	self.tableViewDataSource = @[@{@(SectionTypeKeyboard):@[@(CellTypeKeyboard)]},
-								 @{@(SectionTypeTerminal):@[@(CellTypeTerminal)]}];
+	self.tableViewDataSource = @[@{@(SectionTypeTerminal):@[@(CellTypeTerminal)]}];
 	
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Закрыть")
 																	 style:UIBarButtonItemStylePlain
@@ -109,10 +107,6 @@ typedef NS_ENUM(NSUInteger, CellType)
 			result = NSLocalizedString(@"ActiveTerminal", @"Активный терминал");
 			break;
 			
-		case SectionTypeKeyboard:
-			result = @"";
-			break;
-			
 		default:
 			break;
 	}
@@ -128,10 +122,6 @@ typedef NS_ENUM(NSUInteger, CellType)
 	{
 		case SectionTypeTerminal:
 			//
-			break;
-			
-		case SectionTypeKeyboard:
-			result = NSLocalizedString(@"UseSystemKeyboardDescription", @"цифровая клаиатура для ввода реквизитов карты");
 			break;
 			
 		default:
@@ -154,24 +144,11 @@ typedef NS_ENUM(NSUInteger, CellType)
 			[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:[ASDKTestSettings testActiveTerminal]];
 			break;
 
-		case CellTypeKeyboard:
-			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSwitch class])];
-			[(TableViewCellSwitch *)cell setTitle:NSLocalizedString(@"UseSystemKeyboard", @"Использовать системную клавиатуру")];
-			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(useSystemKeyboard:) forControlEvents:UIControlEventValueChanged];
-			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings useSystemKeyboard]];
-			break;
-			
   		default:
 			break;
 	}
 	
     return cell;
-}
-
-- (void)useSystemKeyboard:(UISwitch *)sender
-{
-	NSLog(@"%@", @(sender.isOn));
-	[ASDKTestSettings setUseSystemKeyboard:sender.isOn];
 }
 
 - (void)terminalSourceChanged:(UISegmentedControl *)sender

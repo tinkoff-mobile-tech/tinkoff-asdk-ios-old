@@ -64,7 +64,6 @@
                                                  description:description
                                                       cardId:nil
                                                        email:nil
-                                              customKeyboard:YES
                                                  customerKey:[PayController customerKey]
                                                      success:^(NSString *paymentId)
 
