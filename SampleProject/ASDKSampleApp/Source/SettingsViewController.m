@@ -145,6 +145,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 			break;
 
   		default:
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellDefault"];
 			break;
 	}
 	

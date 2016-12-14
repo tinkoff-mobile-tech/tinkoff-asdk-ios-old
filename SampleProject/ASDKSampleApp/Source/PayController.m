@@ -155,10 +155,10 @@
 													  onSuccess(paymentId);
 												  }
 												cancelled:^{
-													  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Оплата отменена" message:nil preferredStyle:UIAlertControllerStyleAlert];
+													  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"CanceledPayment", @"Оплата отменена") message:nil preferredStyle:UIAlertControllerStyleAlert];
 													  
 													  UIAlertAction *cancelAction = [UIAlertAction
-																					 actionWithTitle:@"Закрыть"
+																					 actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
 																					 style:UIAlertActionStyleCancel
 																					 handler:^(UIAlertAction *action)
 																					 {
@@ -177,7 +177,7 @@
 														  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.errorMessage message:error.errorDetails preferredStyle:UIAlertControllerStyleAlert];
 														  
 														  UIAlertAction *cancelAction = [UIAlertAction
-																						 actionWithTitle:@"Закрыть"
+																						 actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
 																						 style:UIAlertActionStyleCancel
 																						 handler:^(UIAlertAction *action)
 																						 {

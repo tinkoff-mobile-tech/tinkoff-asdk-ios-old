@@ -27,6 +27,7 @@
 "PaymentForm.payButtonTitle" = "Оплатить";
 "PaymentForm.summCellTitle" = "На сумму:";
 "PaymentForm.changeCard" = "Изменить";
+"Transfer.CardDate.placeholder" = "ММ/ГГ";
 
 "CardsList.AddNewCard" = "Ввести данные новой карты";
 
