@@ -67,7 +67,7 @@
 
 - (void)setPaymentSystemLogoImageWithCardType:(ASDKCardType)type
 {
-    NSString *imageName = [NSString string];
+    NSString *imageName = nil;
     
     switch (type)
     {
@@ -91,6 +91,10 @@
 		{
 			imageName = @"psIconMir";
 		}
+			break;
+			
+		default:
+			imageName = @"psIconMastercard";
 			break;
     }
 	

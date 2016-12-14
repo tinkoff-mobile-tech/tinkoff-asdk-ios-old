@@ -27,6 +27,7 @@
 "PaymentForm.payButtonTitle" = "Pay";
 "PaymentForm.summCellTitle" = "Total sum:";
 "PaymentForm.changeCard" = "сhange";
+"Transfer.CardDate.placeholder" = "MM/YY";
 
 "CardsList.AddNewCard" = "New card number";
 
@@ -34,7 +35,7 @@
 
 "externalCardsCell.savedCard" = "Saved card";
 "externalCardsCell.newCard" = "New card";
-
+@"ММ/ГГ"
 "emailCell.placeholder" = "E-mail for  receipt";
 
 "NSPhotoLibraryUsageDescription" = "";

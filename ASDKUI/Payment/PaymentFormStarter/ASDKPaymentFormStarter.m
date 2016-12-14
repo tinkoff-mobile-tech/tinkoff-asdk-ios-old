@@ -114,7 +114,6 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                  description:(NSString *)description
                                       cardId:(NSString *)cardId
                                        email:(NSString *)email
-                              customKeyboard:(BOOL)keyboard
                                  customerKey:(NSString *)customerKey
                                      success:(void (^)(NSString *paymentId))onSuccess
                                    cancelled:(void (^)())onCancelled
@@ -129,7 +128,6 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                                                                        cardId:cardId
                                                                                         email:email
                                                                                   customerKey:customerKey
-                                                                               customKeyboard:keyboard
                                                                                       success:^(NSString *paymentId)
                                          {
                                              [ASDKPaymentFormStarter resetSharedInstance];

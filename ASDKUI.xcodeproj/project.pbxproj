@@ -80,9 +80,6 @@
 		BE7E02831C7354F900DF6230 /* ASDKAddNewCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE7E02801C7354F900DF6230 /* ASDKAddNewCardCell.xib */; };
 		BEB3F8C41C7DF171003771A4 /* ASDKCardsListDataController.h in Headers */ = {isa = PBXBuildFile; fileRef = BEB3F8C21C7DF171003771A4 /* ASDKCardsListDataController.h */; };
 		BEB3F8C51C7DF171003771A4 /* ASDKCardsListDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB3F8C31C7DF171003771A4 /* ASDKCardsListDataController.m */; };
-		BEDEFF851C75A4CF0026D454 /* ASDKCardInputViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BEDEFF821C75A4CF0026D454 /* ASDKCardInputViewController.h */; };
-		BEDEFF861C75A4CF0026D454 /* ASDKCardInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDEFF831C75A4CF0026D454 /* ASDKCardInputViewController.m */; };
-		BEDEFF871C75A4CF0026D454 /* ASDKCardInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF841C75A4CF0026D454 /* ASDKCardInputViewController.xib */; };
 		BEDEFF8C1C75A6780026D454 /* ASDKNumberCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BEDEFF891C75A6780026D454 /* ASDKNumberCell.h */; };
 		BEDEFF8D1C75A6780026D454 /* ASDKNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDEFF8A1C75A6780026D454 /* ASDKNumberCell.m */; };
 		BEDEFF8E1C75A6780026D454 /* ASDKNumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF8B1C75A6780026D454 /* ASDKNumberCell.xib */; };
@@ -191,9 +188,6 @@
 		BE7E02801C7354F900DF6230 /* ASDKAddNewCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKAddNewCardCell.xib; sourceTree = "<group>"; };
 		BEB3F8C21C7DF171003771A4 /* ASDKCardsListDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCardsListDataController.h; sourceTree = "<group>"; };
 		BEB3F8C31C7DF171003771A4 /* ASDKCardsListDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCardsListDataController.m; sourceTree = "<group>"; };
-		BEDEFF821C75A4CF0026D454 /* ASDKCardInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCardInputViewController.h; sourceTree = "<group>"; };
-		BEDEFF831C75A4CF0026D454 /* ASDKCardInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCardInputViewController.m; sourceTree = "<group>"; };
-		BEDEFF841C75A4CF0026D454 /* ASDKCardInputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKCardInputViewController.xib; sourceTree = "<group>"; };
 		BEDEFF891C75A6780026D454 /* ASDKNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKNumberCell.h; sourceTree = "<group>"; };
 		BEDEFF8A1C75A6780026D454 /* ASDKNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKNumberCell.m; sourceTree = "<group>"; };
 		BEDEFF8B1C75A6780026D454 /* ASDKNumberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKNumberCell.xib; sourceTree = "<group>"; };
@@ -473,9 +467,6 @@
 				BEDEFFA61C761C370026D454 /* HighlightedButton */,
 				BEDEFF911C75FC1C0026D454 /* DeleteCell */,
 				BEDEFF881C75A6660026D454 /* NumberCell */,
-				BEDEFF821C75A4CF0026D454 /* ASDKCardInputViewController.h */,
-				BEDEFF831C75A4CF0026D454 /* ASDKCardInputViewController.m */,
-				BEDEFF841C75A4CF0026D454 /* ASDKCardInputViewController.xib */,
 			);
 			path = CustomInput;
 			sourceTree = "<group>";
@@ -564,7 +555,6 @@
 				83E156611C720A20000BBD57 /* ASDKLoaderViewController.h in Headers */,
 				BE4029E11C731DA1003FFBDD /* ASDKCardsListViewController.h in Headers */,
 				83E1567D1C737439000BBD57 /* ASDKFooterCell.h in Headers */,
-				BEDEFF851C75A4CF0026D454 /* ASDKCardInputViewController.h in Headers */,
 				83E1564F1C71B201000BBD57 /* ASDKBaseTableViewController.h in Headers */,
 				CA82FD261C70F811005FD294 /* ASDKPaymentFormSummCell.h in Headers */,
 				83E1565B1C7201AA000BBD57 /* ASDKNavigationController.h in Headers */,
@@ -670,7 +660,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEDEFF871C75A4CF0026D454 /* ASDKCardInputViewController.xib in Resources */,
 				BEDEFF8E1C75A6780026D454 /* ASDKNumberCell.xib in Resources */,
 				83E156641C720A31000BBD57 /* ASDKLoaderViewController.xib in Resources */,
 				CA82FD211C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib in Resources */,
@@ -712,7 +701,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEDEFF861C75A4CF0026D454 /* ASDKCardInputViewController.m in Sources */,
 				BEDEFF8D1C75A6780026D454 /* ASDKNumberCell.m in Sources */,
 				CAB1A6921C70FCBF00D2A252 /* ASDKPayButtonCell.m in Sources */,
 				83E1564C1C71B17B000BBD57 /* ASDKBaseViewController.m in Sources */,
@@ -815,7 +803,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -862,7 +850,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
@@ -891,7 +879,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ASDKUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKUI;
@@ -918,7 +906,7 @@
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ASDKUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKUI;

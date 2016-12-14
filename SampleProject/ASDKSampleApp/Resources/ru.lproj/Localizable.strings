@@ -24,5 +24,3 @@
 "BuyingSuccessful" = "Покупка на сумму\n%@\nпрошла успешно";
 "ProductAddedToBag" = "Товар добавлен в корзину";
 "ActiveTerminal" = "Активный терминал";
-"UseSystemKeyboard" = "Использовать системную клавиатуру";
-"UseSystemKeyboardDescription" = "цифровая клаиатура для ввода реквизитов карты";

@@ -45,12 +45,9 @@
 
 #import "ASDKBarButtonItem.h"
 
-#import "ASDKCardInputViewController.h"
 #import "ASDKCardsListDataController.h"
 
 #define kASDKEmailRegexp @"[\\w_.-]+@[\\w_.-]+\\.[a-zA-Z]+"
-#define kFixedKeyboardHeight 216.0f
-
 
 NSString * const kTCSRubNoDotCap = @"₽";
 NSString * const kCurrencyCode = @"RUB";
@@ -64,7 +61,7 @@ typedef enum
     ASDKPaymentViewControllerSectionFooter
 } ASDKPaymentViewControllerSection;
 
-@interface ASDKPaymentFormViewController () <UITextFieldDelegate, ASDKCardsListDelegate, ASDKCustomKeyboardInputDelegate>
+@interface ASDKPaymentFormViewController () <UITextFieldDelegate, ASDKCardsListDelegate>
 {
     NSNumber *_amount;
     NSString *_orderId;
@@ -73,25 +70,17 @@ typedef enum
     NSString *_cardId;
     NSString *_email;
     NSString *_customerKey;
-    BOOL _useCustomKeyboard;
-    
+	
     BOOL _shouldShowKeyboardWhenNewCardSelected;
 }
 
 @property (nonatomic, strong) ASDKPaymentFormHeaderCell *headerCell;
 @property (nonatomic, strong) ASDKPaymentFormSummCell *summCell;
-
 @property (nonatomic, strong) ASDKExternalCardsCell *externalCardsCell;
 @property (nonatomic, strong) ASDKCardInputTableViewCell *cardRequisitesCell;
 @property (nonatomic, strong) ASDKEmailCell *emailCell;
-
 @property (nonatomic, strong) ASDKPayButtonCell *paymentButtonCell;
-
 @property (nonatomic, strong) ASDKFooterCell *footerCell;
-@property (nonatomic, strong) ASDKCardInputViewController *cardInputController;
-@property (nonatomic, strong) ASDKCardInputViewController *cardInputControllerCopy;
-@property (nonatomic) CGSize keyboardSize;
-
 
 @property (nonatomic, strong) void (^onSuccess)(NSString *paymentId);
 @property (nonatomic, strong) void (^onCancelled)();
@@ -117,7 +106,6 @@ typedef enum
                         cardId:(NSString *)cardId
                          email:(NSString *)email
                    customerKey:(NSString *)customerKey
-                customKeyboard:(BOOL)keyboard
                        success:(void (^)(NSString *paymentId))success
                      cancelled:(void (^)())cancelled
                          error:(void(^)(ASDKAcquringSdkError *error))error
@@ -132,7 +120,6 @@ typedef enum
         _paymentDescription = description;
         _cardId = cardId;
         _email = email;
-        _useCustomKeyboard = keyboard;
         _onSuccess = success;
         _onCancelled = cancelled;
         _onError = error;
@@ -162,38 +149,6 @@ typedef enum
     [self.navigationItem setLeftBarButtonItem:cancelButton];
     
     [self updateExternalCardsList];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (_useCustomKeyboard)
-    {
-        [self addKeyboardObservers];
-    }
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
-    if (_useCustomKeyboard)
-    {
-        [self removeKeyboardObservers];
-    }
-}
-
-- (void)addKeyboardObservers
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowNotification:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)removeKeyboardObservers
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)updateExternalCardsList
@@ -248,111 +203,6 @@ typedef enum
         
         [self.tableView reloadData];
     }
-}
-
-
-
-#pragma mark - Custom keyboard
-
-- (void)keyboardWillShowNotification:(NSNotification *)notification
-{
-    NSLog(@"%@",notification.userInfo);
-    
-    UIWindow *window = [self keyboardWindow];
-    
-    _keyboardSize = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    CGRect frame = CGRectMake(0, 0, _keyboardSize.width, _keyboardSize.height);
-    
-    UIView *customInputView = self.cardInputControllerCopy.view;
-    
-    UIView *keyboardView = window.subviews[0].subviews[0];
-    
-    if (!customInputView.superview)
-    {
-        [customInputView setFrame:frame];
-        
-        [keyboardView addSubview:customInputView];
-        [keyboardView bringSubviewToFront:customInputView];
-    }
-    
-    [customInputView.superview bringSubviewToFront:customInputView];
-    
-    if ([self shouldShowCustomKeyboardOnKeyboardNotification])
-    {
-        customInputView.hidden = NO;
-    }
-    else
-    {
-        customInputView.hidden = YES;
-    }
-}
-
-- (void)keyboardDidShowNotification:(NSNotification *)notification
-{
-    UIWindow *window = [self keyboardWindow];
-    
-    _keyboardSize = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    CGRect frame = CGRectMake(0, self.view.frame.size.height + 64 - _keyboardSize.height, _keyboardSize.width, _keyboardSize.height);
-    
-    UIView *customInputView = self.cardInputController.view;
-    if (!customInputView.superview)
-    {
-        [customInputView setFrame:frame];
-        
-        UIView *containerView = window.subviews[0];
-        
-        [containerView addSubview:customInputView];
-    }
-    
-    [customInputView.superview bringSubviewToFront:customInputView];
-    
-    if ([self shouldShowCustomKeyboardOnKeyboardNotification])
-    {
-        customInputView.hidden = NO;
-    }
-    else
-    {
-        customInputView.hidden = YES;
-    }
-}
-
-- (void)keyboardWillHideNotification:(NSNotification *)notification
-{
-    UIView *customInputView = self.cardInputController.view;
-
-    if ([self shouldShowCustomKeyboardOnKeyboardNotification])
-    {
-        customInputView.hidden = YES;
-        [customInputView removeFromSuperview];
-    }
-}
-
-- (UIWindow *)keyboardWindow
-{
-    NSUInteger windowCount = [[[UIApplication sharedApplication] windows] count];
-    
-    if (windowCount < 2)
-    {
-        return nil;
-    }
-    
-    UIWindow *keyboardWindow = nil;
-    
-    NSArray *windows = [UIApplication sharedApplication].windows;
-    
-    for (UIWindow *tempWindow in windows)
-    {
-        for (UIView *view in tempWindow.subviews)
-        {
-            if ([[view description] hasPrefix:@"<UIInputSetContainerView"])
-            {
-                keyboardWindow = tempWindow;
-                break;
-            }
-        }
-    }
-    
-    return keyboardWindow;
 }
 
 #pragma mark - ASDKCustomKeyboardInputDelegate
@@ -575,28 +425,6 @@ typedef enum
     
     return _footerCell;
 }
-
-- (ASDKCardInputViewController *)cardInputController
-{
-    if (!_cardInputController)
-    {
-        _cardInputController = [[ASDKCardInputViewController alloc] initWithCustomInputKeyboardSize:_keyboardSize];
-        [_cardInputController setCustomKeyboardInputDelegate:self];
-    }
-    
-    return _cardInputController;
-}
-
-- (ASDKCardInputViewController *)cardInputControllerCopy
-{
-    if (!_cardInputControllerCopy)
-    {
-        _cardInputControllerCopy = [[ASDKCardInputViewController alloc] initWithCustomInputKeyboardSize:_keyboardSize];
-    }
-    
-    return _cardInputControllerCopy;
-}
-
 
 #pragma mark - UITextField Delegate
 
@@ -1020,15 +848,11 @@ typedef enum
 {
     [self.view endEditing:YES];
     
-    [self dismissViewControllerAnimated:YES completion:^
-     {
+    [self dismissViewControllerAnimated:YES completion:^{
          if (completion)
          {
              completion();
          }
-         
-         [self.cardInputController.view removeFromSuperview];
-         [self.cardInputControllerCopy.view removeFromSuperview];
      }];
 }
 
@@ -1097,19 +921,18 @@ typedef enum
 {
     NSNumberFormatter *summFormatter = [[NSNumberFormatter alloc] init];
     summFormatter.formatterBehavior = NSNumberFormatterBehavior10_4;
-    
     summFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
-    summFormatter.currencySymbol = kTCSRubNoDotCap;
-    summFormatter.currencyDecimalSeparator = kDecimalSeparator;
-    
+
     summFormatter.usesGroupingSeparator = YES;
     summFormatter.groupingSeparator = @" ";
     summFormatter.groupingSize = 3;
-    
-    summFormatter.currencyCode = kCurrencyCode;
     summFormatter.maximumFractionDigits = 2;
-    summFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"ru_RU"];
-    
+	
+	summFormatter.currencyCode = kCurrencyCode;
+	summFormatter.currencySymbol = kTCSRubNoDotCap;
+	summFormatter.currencyDecimalSeparator = kDecimalSeparator;
+	summFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"ru_RU"];
+
     return [summFormatter stringFromNumber:amount];
 }
 

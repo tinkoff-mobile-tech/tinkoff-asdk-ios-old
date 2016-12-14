@@ -842,7 +842,7 @@ typedef enum
 	NSDictionary *cardCVCAttributes = _cvcValidationFailed ? self.invalidPlaceholderAttributes : self.placeholderAttributes;
 	
 	[self.textFieldCardNumber setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:placeholderText attributes:cardNumberAttributes]];
-	[self.textFieldCardDate setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"ММ/ГГ" attributes:cardDateAttributes]];
+	[self.textFieldCardDate setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:LOC(@"Transfer.CardDate.placeholder") attributes:cardDateAttributes]];
 	[self.textFieldCardCVC setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:cvcPlaceholderText attributes:cardCVCAttributes]];
     [self.secretCVVTextField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:cvcPlaceholderText attributes:cardCVCAttributes]];
 }

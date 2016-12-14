@@ -16,7 +16,4 @@
 + (NSString *)testTerminalPassword;
 + (NSString *)testPublicKey;
 
-+ (BOOL)useSystemKeyboard;
-+ (void)setUseSystemKeyboard:(BOOL)value;
-
 @end

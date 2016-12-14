@@ -39,9 +39,19 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (NSString *)bundleVersion
+{
+	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+}
+
 - (NSString *)sdkVersionString
-{    
-    return @"Tinkoff Acquiring SDK v 1.1.0";
+{
+	NSMutableString *result = [NSMutableString stringWithFormat:@"Tinkoff Acquiring SDK v %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+
+#if DEBUG
+	[result appendString:[NSString stringWithFormat:@"(%@)", [self bundleVersion]]];
+#endif
+	return [result copy];
 }
 
 @end

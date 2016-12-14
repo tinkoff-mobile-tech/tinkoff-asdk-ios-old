@@ -168,7 +168,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nonnull NSError *)error
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
     

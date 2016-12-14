@@ -10,7 +10,6 @@
 #import "ASDKTestKeys.h"
 
 #define kActiveTerminal @"activeTerminal"
-#define kUseSystemKeyboard @"useSystemKeyboard"
 
 @implementation ASDKTestSettings
 
@@ -43,27 +42,6 @@
 + (NSString *)testPublicKey
 {
 	return kASDKTestPublicKey;
-}
-
-+ (BOOL)useSystemKeyboard
-{
-	BOOL result = NO;
- 
-	if ([ASDKTestSettings valueForKey:kUseSystemKeyboard])
-	{
-		result = [[ASDKTestSettings valueForKey:kUseSystemKeyboard] boolValue];
-	}
-	else
-	{
-		[ASDKTestSettings saveValue:@(NO) forKey:kUseSystemKeyboard];
-	}
-
-	return result;
-}
-
-+ (void)setUseSystemKeyboard:(BOOL)value
-{
-	[ASDKTestSettings saveValue:@(value) forKey:kUseSystemKeyboard];
 }
 
 + (void)saveValue:(id)value forKey:(NSString *)key

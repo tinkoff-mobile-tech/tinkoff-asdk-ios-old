@@ -149,6 +149,9 @@ typedef enum
             cell = [self addNewCardCell];
         }
             break;
+			
+		default:
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellDefault"];
     }
     
     return cell;

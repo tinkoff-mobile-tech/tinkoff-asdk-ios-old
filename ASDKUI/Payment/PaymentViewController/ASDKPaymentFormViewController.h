@@ -33,7 +33,6 @@
                         cardId:(NSString *)cardId
                          email:(NSString *)email
                    customerKey:(NSString *)customerKey
-                customKeyboard:(BOOL)keyboard
                        success:(void (^)(NSString *paymentId))success
                      cancelled:(void (^)())cancelled
                          error:(void(^)(ASDKAcquringSdkError *error))error;
