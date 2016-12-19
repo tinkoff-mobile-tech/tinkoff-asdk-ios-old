@@ -99,6 +99,7 @@
                payForm:(NSString *)payForm
            customerKey:(NSString *)customerKey
              recurrent:(BOOL)recurrent
+ additionalPaymentData:(NSDictionary *)data
                success:(void (^)(ASDKInitResponse *response))success
                failure:(void (^)(ASDKAcquringSdkError *error))failure
 {
@@ -112,7 +113,8 @@
 																	customerKey:customerKey
 																	  recurrent:recurrent
 																	terminalKey:self.terminalKey
-																	   password:self.password];
+																	   password:self.password
+														  additionalPaymentData:data];
     
     ASDKInitRequest *request = (ASDKInitRequest *)[builder buildError:&buildError];
     

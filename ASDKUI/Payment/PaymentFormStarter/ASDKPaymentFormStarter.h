@@ -66,6 +66,7 @@
                                       cardId:(NSString *)cardId
                                        email:(NSString *)email
                                  customerKey:(NSString *)customerKey
+					   additionalPaymentData:(NSDictionary *)data
                                      success:(void (^)(NSString *paymentId))onSuccess
                                    cancelled:(void (^)())onCancelled
                                        error:(void (^)(ASDKAcquringSdkError *error))onError;
@@ -83,6 +84,7 @@
 						  appleMerchantId:(NSString *)appleMerchantId
 						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 						  shippingContact:(PKContact *)shippingContact
+					additionalPaymentData:(NSDictionary *)data
 								  success:(void (^)(NSString *paymentId))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError;

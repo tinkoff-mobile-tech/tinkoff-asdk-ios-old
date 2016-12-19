@@ -158,6 +158,7 @@
     [PayController buyItemWithName:self.item.title
                        description:self.item.bookDescription
                             amount:self.item.cost
+			 additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
                 fromViewController:self
                            success:^(NSString *paymentId)
      {
@@ -194,6 +195,7 @@
 							 appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
 							 shippingMethods:nil//@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
 							 shippingContact:shippingContact
+					   additionalPaymentData:nil
 						  fromViewController:self
 									 success:^(NSString *paymentId) { NSLog(@"%@", paymentId); }
 								   cancelled:^{ NSLog(@"Canceled"); }

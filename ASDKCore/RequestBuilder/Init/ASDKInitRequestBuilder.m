@@ -27,6 +27,7 @@
 @property (nonatomic, copy) NSString *payForm;
 @property (nonatomic, copy) NSString *payType;
 @property (nonatomic) BOOL recurrent;
+@property (nonatomic, strong) NSDictionary *additionalPaymentData;
 
 @end
 
@@ -41,6 +42,7 @@
                                     recurrent:(BOOL)recurrent
                                   terminalKey:(NSString *)terminalKey
                                      password:(NSString *)password
+						additionalPaymentData:(NSDictionary *)data
 {
     ASDKInitRequestBuilder *builder = [[ASDKInitRequestBuilder alloc] init];
     
@@ -55,8 +57,9 @@
         builder.recurrent = recurrent;
         builder.terminalKey = terminalKey;
         builder.password = password;
+		builder.additionalPaymentData = data;
     }
-    
+
     return builder;
 }
 
@@ -83,8 +86,9 @@
                                                                     payForm:self.payForm
 																	payType:self.payType
                                                                 customerKey:self.customerKey
-                                                                  recurrent:self.recurrent];
-    
+                                                                  recurrent:self.recurrent
+													  additionalPaymentData:self.additionalPaymentData];
+
     return request;
 }
 
@@ -163,6 +167,41 @@
         
         return;
     }
+	
+	if ([self.additionalPaymentData count] > 0)
+	{
+		if ([self.additionalPaymentData objectForKey:@"Email"] == nil)
+		{
+			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра Email" code:0];
+			
+			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
+			
+			*error = validationError;
+			
+			return;
+		}
+		
+		BOOL invalidAdditionalPaymentData = NO;
+		if ([[self.additionalPaymentData allKeys] count] > 20)
+		{
+			invalidAdditionalPaymentData = YES;
+		}
+		else for (NSString *key in [self.additionalPaymentData allKeys])
+		{
+			if ([key length] > 20 || [[self.additionalPaymentData objectForKey:key] length] > 100)
+			{
+				invalidAdditionalPaymentData = YES;
+				break;
+			}
+		}
+
+		if (invalidAdditionalPaymentData == YES)
+		{
+			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Ключ – 20 знаков, Значение – 100 знаков. Максимальное количество пар «ключ-значение» не может превышать 20." code:0];
+			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
+			*error = validationError;
+		}
+	}
 }
 
 - (NSDictionary *)parametersForToken
@@ -201,7 +240,12 @@
     {
         [parameters setObject:@"Y" forKey:kASDKRecurrent];
     }
-    
+
+	if ([self.additionalPaymentData count] > 0)
+	{
+		[parameters setObject:self.additionalPaymentData forKey:kASDKDATA];
+	}
+
     return parameters;
 }
 

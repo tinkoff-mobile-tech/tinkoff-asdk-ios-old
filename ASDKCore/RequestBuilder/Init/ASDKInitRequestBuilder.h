@@ -30,6 +30,7 @@
                                   customerKey:(NSString *)customerKey
                                     recurrent:(BOOL)recurrent
                                   terminalKey:(NSString *)terminalKey
-                                     password:(NSString *)password;
+                                     password:(NSString *)password
+						additionalPaymentData:(NSDictionary *)data;
 
 @end
