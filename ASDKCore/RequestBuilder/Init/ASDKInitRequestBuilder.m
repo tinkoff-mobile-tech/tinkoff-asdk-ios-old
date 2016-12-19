@@ -267,11 +267,18 @@
 
 - (NSString *)encodeURL:(NSString *)string
 {
-	NSString *newString = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-																								(__bridge CFStringRef)string,
-																								NULL,
-																								(CFStringRef)@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`",
-																								CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+//	NSMutableCharacterSet * characterSet = [NSMutableCharacterSet URLQueryAllowedCharacterSet];
+//	NSString *newString = [string stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
+	
+	NSMutableCharacterSet * characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"];
+	[characterSet invert];
+	NSString *newString = [string stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
+
+//	NSString *newString = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//																								(__bridge CFStringRef)string,
+//																								NULL,
+//																								(CFStringRef)@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`",
+//																								CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
 	if (newString)
 	{
 		return newString;
