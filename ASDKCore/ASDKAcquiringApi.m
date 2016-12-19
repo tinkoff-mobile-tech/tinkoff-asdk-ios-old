@@ -217,7 +217,12 @@
     {
         [parameters setObject:@"Y" forKey:kASDKRecurrent];
     }
-    
+	
+	if (request.additionalPaymentData)
+	{
+		[parameters setObject:request.additionalPaymentData forKey:kASDKDATA];
+	}
+	
     [self path:kASDKAPIPathInit
     parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)

@@ -27,7 +27,9 @@
 @property (nonatomic, copy) NSString *payForm;
 @property (nonatomic, copy) NSString *payType;
 @property (nonatomic) BOOL recurrent;
-@property (nonatomic, strong) NSDictionary *additionalPaymentData;
+@property (nonatomic, strong) NSString *additionalPaymentData;
+@property (nonatomic, strong) NSDictionary *additionalPaymentData_;
+
 
 @end
 
@@ -57,7 +59,8 @@
         builder.recurrent = recurrent;
         builder.terminalKey = terminalKey;
         builder.password = password;
-		builder.additionalPaymentData = data;
+		builder.additionalPaymentData_ = data;
+		builder.additionalPaymentData = nil;
     }
 
     return builder;
@@ -168,9 +171,9 @@
         return;
     }
 	
-	if ([self.additionalPaymentData count] > 0)
+	if ([self.additionalPaymentData_ count] > 0)
 	{
-		if ([self.additionalPaymentData objectForKey:@"Email"] == nil)
+		if ([self.additionalPaymentData_ objectForKey:@"Email"] == nil)
 		{
 			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра Email" code:0];
 			
@@ -182,13 +185,13 @@
 		}
 		
 		BOOL invalidAdditionalPaymentData = NO;
-		if ([[self.additionalPaymentData allKeys] count] > 20)
+		if ([[self.additionalPaymentData_ allKeys] count] > 20)
 		{
 			invalidAdditionalPaymentData = YES;
 		}
-		else for (NSString *key in [self.additionalPaymentData allKeys])
+		else for (NSString *key in [self.additionalPaymentData_ allKeys])
 		{
-			if ([key length] > 20 || [[self.additionalPaymentData objectForKey:key] length] > 100)
+			if ([key length] > 20 || [[self.additionalPaymentData_ objectForKey:key] length] > 100)
 			{
 				invalidAdditionalPaymentData = YES;
 				break;
@@ -241,12 +244,40 @@
         [parameters setObject:@"Y" forKey:kASDKRecurrent];
     }
 
-	if ([self.additionalPaymentData count] > 0)
+	if ([self.additionalPaymentData_ count] > 0)
 	{
-		[parameters setObject:self.additionalPaymentData forKey:kASDKDATA];
+
+		NSUInteger i = 0;
+		NSUInteger count = [[self.additionalPaymentData_ allKeys] count] - 1;
+		NSMutableString *strPostBody = [[NSMutableString alloc] init];
+		for (NSString *key in [self.additionalPaymentData_ allKeys])
+		{
+			NSString *data = [NSString stringWithFormat:@"%@=%@%@", [self encodeURL:key], [self encodeURL:[[self.additionalPaymentData_ objectForKey:key] description]], (i < count ?  @"|" : @"")];
+			[strPostBody appendString:data];
+			i++;
+		}
+		
+		self.additionalPaymentData = strPostBody;
+
+		[parameters setObject:strPostBody forKey:kASDKDATA];
 	}
 
     return parameters;
+}
+
+- (NSString *)encodeURL:(NSString *)string
+{
+	NSString *newString = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+																								(__bridge CFStringRef)string,
+																								NULL,
+																								(CFStringRef)@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`",
+																								CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+	if (newString)
+	{
+		return newString;
+	}
+	
+	return @"";
 }
 
 @end
