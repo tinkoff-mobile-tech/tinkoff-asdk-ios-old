@@ -57,9 +57,18 @@
         
         if (![parameterValue isKindOfClass:[NSString class]])
         {
-            parameterValue = [parameterValue stringValue];
-        }
-        
+			if ([parameterValue isKindOfClass:[NSDictionary class]] || [parameterValue isKindOfClass:[NSArray class]])
+			{
+				parameterValue = @"";
+				//NSData *data = [NSKeyedArchiver archivedDataWithRootObject:parameterValue];
+				//parameterValue = [NSString stringWithFormat:@"%@", data];
+			}
+			else
+			{
+				parameterValue = [NSString stringWithFormat:@"%@", parameterValue];
+			}
+		}
+
         [tokenString appendString:parameterValue];
     }
     

@@ -16,6 +16,7 @@
 + (void)buyItemWithName:(NSString *)name
             description:(NSString *)description
                  amount:(NSNumber *)amount
+  additionalPaymentData:(NSDictionary *)data
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(NSString *paymentId))onSuccess
               cancelled:(void (^)())onCancelled
@@ -28,6 +29,7 @@
 			  appleMerchantId:(NSString *)appleMerchantId
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 			  shippingContact:(PKContact *)shippingContact
+		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(NSString *paymentId))onSuccess
 					cancelled:(void (^)())onCancelled

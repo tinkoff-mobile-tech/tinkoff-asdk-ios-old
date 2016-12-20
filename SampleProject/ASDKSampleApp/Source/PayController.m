@@ -39,6 +39,7 @@
 + (void)buyItemWithName:(NSString *)name
             description:(NSString *)description
                  amount:(NSNumber *)amount
+  additionalPaymentData:(NSDictionary *)data
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(NSString *paymentId))onSuccess
               cancelled:(void (^)())onCancelled
@@ -63,8 +64,9 @@
                                                        title:name
                                                  description:description
                                                       cardId:nil
-                                                       email:nil
+                                                       email:nil 
                                                  customerKey:[PayController customerKey]
+									   additionalPaymentData:data
                                                      success:^(NSString *paymentId)
 
      {
@@ -129,6 +131,7 @@
 			  appleMerchantId:(NSString *)appleMerchantId
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 			  shippingContact:(PKContact *)shippingContact
+		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(NSString *paymentId))onSuccess
 					cancelled:(void (^)())onCancelled
@@ -145,6 +148,7 @@
 										  appleMerchantId:appleMerchantId
 										  shippingMethods:shippingMethods
 										  shippingContact:shippingContact
+									additionalPaymentData:data
 												  success:^(NSString *paymentId) {
 													  PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];
 													  vc.amount = amount;

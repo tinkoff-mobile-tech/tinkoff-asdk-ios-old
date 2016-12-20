@@ -29,6 +29,7 @@
 @property (nonatomic, copy) NSString *requestDescription;
 @property (nonatomic, copy) NSString *payForm;
 @property (nonatomic) BOOL recurrent;
+@property (nonatomic, strong) NSString *additionalPaymentData;
 
 - (ASDKInitRequest *)initWithTerminalKey:(NSString *)terminalKey
                                   amount:(NSNumber *)amount
@@ -38,6 +39,7 @@
                                  payForm:(NSString *)payForm
 								 payType:(NSString *)payType
                              customerKey:(NSString *)customerKey
-                               recurrent:(BOOL)recurrent;
+                               recurrent:(BOOL)recurrent
+				   additionalPaymentData:(NSString *)data;
 
 @end

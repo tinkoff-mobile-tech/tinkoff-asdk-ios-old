@@ -87,6 +87,7 @@ typedef enum
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
 @property (nonatomic, strong) ASDKCard *selectedCard;
+@property (nonatomic, strong) NSDictionary *additionalPaymentData;
 
 @end
 
@@ -105,7 +106,8 @@ typedef enum
                    description:(NSString *)description
                         cardId:(NSString *)cardId
                          email:(NSString *)email
-                   customerKey:(NSString *)customerKey
+				   customerKey:(NSString *)customerKey
+		 additionalPaymentData:(NSDictionary *)data
                        success:(void (^)(NSString *paymentId))success
                      cancelled:(void (^)())cancelled
                          error:(void(^)(ASDKAcquringSdkError *error))error
@@ -124,6 +126,7 @@ typedef enum
         _onCancelled = cancelled;
         _onError = error;
         _customerKey = customerKey;
+		_additionalPaymentData = data;
     }
     
     return self;
@@ -622,7 +625,8 @@ typedef enum
                           description:nil
 							  payForm:nil
                           customerKey:_customerKey
-                            recurrent:NO
+							recurrent:NO
+				additionalPaymentData:_additionalPaymentData
                               success:^(ASDKInitResponse *response)
     {
         __strong typeof(weakSelf) strongSelf = weakSelf;

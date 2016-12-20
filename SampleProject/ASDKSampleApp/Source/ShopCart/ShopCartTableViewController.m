@@ -193,6 +193,7 @@
     [PayController buyItemWithName:NSLocalizedString(@"Books", @"Книги")
                        description:NSLocalizedString(@"ALotOfBooks", @"Много книг")
                             amount:[NSNumber numberWithDouble:_total]
+			 additionalPaymentData:nil
                 fromViewController:self
                            success:^(NSString *paymentId)
      {

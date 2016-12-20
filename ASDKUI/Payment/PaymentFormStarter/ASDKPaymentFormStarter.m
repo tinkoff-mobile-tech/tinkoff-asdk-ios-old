@@ -115,6 +115,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                       cardId:(NSString *)cardId
                                        email:(NSString *)email
                                  customerKey:(NSString *)customerKey
+					   additionalPaymentData:(NSDictionary *)data
                                      success:(void (^)(NSString *paymentId))onSuccess
                                    cancelled:(void (^)())onCancelled
                                        error:(void(^)(ASDKAcquringSdkError *error))onError
@@ -128,6 +129,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                                                                        cardId:cardId
                                                                                         email:email
                                                                                   customerKey:customerKey
+																		additionalPaymentData:data
                                                                                       success:^(NSString *paymentId)
                                          {
                                              [ASDKPaymentFormStarter resetSharedInstance];
@@ -259,6 +261,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 						  appleMerchantId:(NSString *)appleMerchantId
 						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 						  shippingContact:(PKContact *)shippingContact
+					additionalPaymentData:(NSDictionary *)data
 								  success:(void (^)(NSString *paymentId))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError
@@ -268,7 +271,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	self.onError = onError;
 	self.onCancelled = onCancelled;
 
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:NO
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:NO additionalPaymentData:data
 		success:^(ASDKInitResponse *response){
 			self.paymentIdForApplePay = response.paymentId;
 			

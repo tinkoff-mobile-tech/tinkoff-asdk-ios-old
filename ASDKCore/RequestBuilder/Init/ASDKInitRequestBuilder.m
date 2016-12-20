@@ -27,6 +27,9 @@
 @property (nonatomic, copy) NSString *payForm;
 @property (nonatomic, copy) NSString *payType;
 @property (nonatomic) BOOL recurrent;
+@property (nonatomic, strong) NSString *additionalPaymentData;
+@property (nonatomic, strong) NSDictionary *additionalPaymentData_;
+
 
 @end
 
@@ -41,6 +44,7 @@
                                     recurrent:(BOOL)recurrent
                                   terminalKey:(NSString *)terminalKey
                                      password:(NSString *)password
+						additionalPaymentData:(NSDictionary *)data
 {
     ASDKInitRequestBuilder *builder = [[ASDKInitRequestBuilder alloc] init];
     
@@ -55,8 +59,10 @@
         builder.recurrent = recurrent;
         builder.terminalKey = terminalKey;
         builder.password = password;
+		builder.additionalPaymentData_ = data;
+		builder.additionalPaymentData = nil;
     }
-    
+
     return builder;
 }
 
@@ -83,8 +89,9 @@
                                                                     payForm:self.payForm
 																	payType:self.payType
                                                                 customerKey:self.customerKey
-                                                                  recurrent:self.recurrent];
-    
+                                                                  recurrent:self.recurrent
+													  additionalPaymentData:self.additionalPaymentData];
+
     return request;
 }
 
@@ -163,6 +170,41 @@
         
         return;
     }
+	
+	if ([self.additionalPaymentData_ count] > 0)
+	{
+		if ([self.additionalPaymentData_ objectForKey:@"Email"] == nil)
+		{
+			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра Email" code:0];
+			
+			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
+			
+			*error = validationError;
+			
+			return;
+		}
+		
+		BOOL invalidAdditionalPaymentData = NO;
+		if ([[self.additionalPaymentData_ allKeys] count] > 20)
+		{
+			invalidAdditionalPaymentData = YES;
+		}
+		else for (NSString *key in [self.additionalPaymentData_ allKeys])
+		{
+			if ([key length] > 20 || [[self.additionalPaymentData_ objectForKey:key] length] > 100)
+			{
+				invalidAdditionalPaymentData = YES;
+				break;
+			}
+		}
+
+		if (invalidAdditionalPaymentData == YES)
+		{
+			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Ключ – 20 знаков, Значение – 100 знаков. Максимальное количество пар «ключ-значение» не может превышать 20." code:0];
+			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
+			*error = validationError;
+		}
+	}
 }
 
 - (NSDictionary *)parametersForToken
@@ -201,8 +243,48 @@
     {
         [parameters setObject:@"Y" forKey:kASDKRecurrent];
     }
-    
+
+	if ([self.additionalPaymentData_ count] > 0)
+	{
+
+		NSUInteger i = 0;
+		NSUInteger count = [[self.additionalPaymentData_ allKeys] count] - 1;
+		NSMutableString *strPostBody = [[NSMutableString alloc] init];
+		for (NSString *key in [self.additionalPaymentData_ allKeys])
+		{
+			NSString *data = [NSString stringWithFormat:@"%@=%@%@", [self encodeURL:key], [self encodeURL:[[self.additionalPaymentData_ objectForKey:key] description]], (i < count ?  @"|" : @"")];
+			[strPostBody appendString:data];
+			i++;
+		}
+		
+		self.additionalPaymentData = strPostBody;
+
+		[parameters setObject:strPostBody forKey:kASDKDATA];
+	}
+
     return parameters;
+}
+
+- (NSString *)encodeURL:(NSString *)string
+{
+//	NSMutableCharacterSet * characterSet = [NSMutableCharacterSet URLQueryAllowedCharacterSet];
+//	NSString *newString = [string stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
+	
+	NSMutableCharacterSet * characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"];
+	[characterSet invert];
+	NSString *newString = [string stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
+
+//	NSString *newString = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+//																								(__bridge CFStringRef)string,
+//																								NULL,
+//																								(CFStringRef)@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`",
+//																								CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
+	if (newString)
+	{
+		return newString;
+	}
+	
+	return @"";
 }
 
 @end
