@@ -71,8 +71,8 @@
                                    cancelled:(void (^)())onCancelled
                                        error:(void (^)(ASDKAcquringSdkError *error))onError;
 
-+ (BOOL)isPayWithAppleAvailable NS_AVAILABLE_IOS(10_2) __WATCHOS_AVAILABLE(3.0);
-+ (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks NS_AVAILABLE_IOS(10_2) __WATCHOS_AVAILABLE(3.0);
++ (BOOL)isPayWithAppleAvailable NS_AVAILABLE_IOS(9_0);
++ (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks NS_AVAILABLE_IOS(9_0);
 
 - (void)payWithApplePayFromViewController:(UIViewController *)presentingViewController
 								   amount:(NSNumber *)amount
@@ -87,6 +87,6 @@
 					additionalPaymentData:(NSDictionary *)data
 								  success:(void (^)(NSString *paymentId))onSuccess
 								cancelled:(void (^)())onCancelled
-									error:(void (^)(ASDKAcquringSdkError *error))onError NS_AVAILABLE_IOS(10_2) __WATCHOS_AVAILABLE(3.0);
+									error:(void (^)(ASDKAcquringSdkError *error))onError NS_AVAILABLE_IOS(9_0);
 
 @end
