@@ -235,20 +235,36 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 + (BOOL)isPayWithAppleAvailable
 {
 	BOOL canMakePayments = [PKPaymentAuthorizationViewController canMakePayments];
-	BOOL canMakePaymentsUsingNetworks = [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:[ASDKPaymentFormStarter payWithAppleSupportedNetworks]];
-	
+	BOOL canMakePaymentsUsingNetworks = NO;
+ 
+	if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_9_0)
+	{
+		canMakePaymentsUsingNetworks = [PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:[ASDKPaymentFormStarter payWithAppleSupportedNetworks]];
+	}
+
 	return canMakePayments && canMakePaymentsUsingNetworks;
 }
 
 + (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks
 {
-	return  @[//PKPaymentNetworkAmex,
-			  //PKPaymentNetworkChinaUnionPay,
-			  //PKPaymentNetworkDiscover,
-			  //PKPaymentNetworkInterac,
-			  PKPaymentNetworkMasterCard,
-			  //PKPaymentNetworkPrivateLabel,
-			  PKPaymentNetworkVisa];
+	NSArray<PKPaymentNetwork> *result = nil;
+	
+	if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_9_0)
+	{
+		result = @[//PKPaymentNetworkAmex,
+				   //PKPaymentNetworkChinaUnionPay,
+				   //PKPaymentNetworkDiscover,
+				   //PKPaymentNetworkInterac,
+				   PKPaymentNetworkMasterCard,
+				   //PKPaymentNetworkPrivateLabel,
+				   PKPaymentNetworkVisa];
+	}
+	else
+	{
+		result = @[PKPaymentNetworkMasterCard, PKPaymentNetworkVisa];
+	}
+
+	return result;
 }
 
 - (void)payWithApplePayFromViewController:(UIViewController *)presentingViewController

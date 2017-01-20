@@ -560,6 +560,10 @@ typedef enum
         {
             return [self shouldShowExternalCardsCell] ? [super tableView:tableView heightForRowAtIndexPath:indexPath] : .01f;
         }
+		if (indexPath.row == 2)
+		{
+			return 44.0f;
+		}
     }
     
     return [super tableView:tableView heightForRowAtIndexPath:indexPath];

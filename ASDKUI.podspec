@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license      = "{ :type => 'Apache 2.0' }"  
   s.author       = { "d.tarasov" => "d.tarasov@tinkoff.ru" } 
   s.platform     = :ios
-  s.ios.deployment_target = "9.0"
+  s.ios.deployment_target = "8.0"
   s.source       = { :git => "https://github.com/TinkoffCreditSystems/tinkoff-asdk-ios.git", :tag => "#{s.version}" }
 
   s.source_files  = "ASDKUI", "ASDKUI/**/*.{h,m}"
