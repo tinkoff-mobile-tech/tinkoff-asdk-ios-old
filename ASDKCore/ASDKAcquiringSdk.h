@@ -46,6 +46,7 @@
 @interface ASDKAcquiringSdk : NSObject
 
 @property (nonatomic, readwrite) BOOL debug;
+@property (nonatomic, readwrite) BOOL testDomain;
 
 @property (nonatomic, weak) id<ASDKAcquiringSdkLoggerDelegate> logger;
 

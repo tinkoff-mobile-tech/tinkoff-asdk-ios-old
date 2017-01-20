@@ -72,7 +72,7 @@
 
 - (NSString *)domainPath
 {
-    return [self debug] ? kASDKTestDomainName : kASDKDomainName;
+    return [self testDomain] ? kASDKTestDomainName : kASDKDomainName;
 }
 
 - (SecKeyRef)publicKeyRef
@@ -84,13 +84,12 @@
     return publicKeyRef;
 }
 
-- (void)setDebug:(BOOL)debug
+- (void)setTestDomain:(BOOL)value
 {
-    _debug = debug;
-    
-    self.acquiringApi.domainPath = [self domainPath];
+	_testDomain = value;
+	
+	self.acquiringApi.domainPath = [self domainPath];
 }
-
 
 
 - (void)initWithAmount:(NSNumber *)amount

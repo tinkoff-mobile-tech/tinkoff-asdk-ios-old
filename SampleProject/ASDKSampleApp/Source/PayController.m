@@ -26,6 +26,7 @@
 															   publicKeyDataSource:stringKeyCreator];
 	
 	[acquiringSdk setDebug:YES];
+	[acquiringSdk setTestDomain:YES];
 	[acquiringSdk setLogger:nil];
 	
 	return [ASDKPaymentFormStarter paymentFormStarterWithAcquiringSdk:acquiringSdk];
