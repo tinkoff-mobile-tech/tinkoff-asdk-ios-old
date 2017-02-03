@@ -261,6 +261,12 @@
 
 		[parameters setObject:strPostBody forKey:kASDKDATA];
 	}
+	
+	//NSLog(@"%@", [[NSLocale currentLocale] objectForKey:NSLocaleIdentifier]);
+	if ([[[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString] rangeOfString:@"ru"].location == NSNotFound)
+	{
+		[parameters setObject:@"en" forKey:@"language"];
+	}
 
     return parameters;
 }

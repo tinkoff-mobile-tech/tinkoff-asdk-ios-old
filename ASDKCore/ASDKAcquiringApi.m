@@ -223,6 +223,11 @@
 		[parameters setObject:request.additionalPaymentData forKey:kASDKDATA];
 	}
 	
+	if ([[[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString] rangeOfString:@"ru"].location == NSNotFound)
+	{
+		[parameters setObject:@"en" forKey:@"Language"];
+	}
+
     [self path:kASDKAPIPathInit
     parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
