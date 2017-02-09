@@ -72,6 +72,32 @@ static ASDKCardsListDataController * __cardsListDataController = nil;
     }
 }
 
+- (NSNumber *)rebillId
+{
+	for (ASDKCard *card in self.externalCards)
+	{
+		if (card.rebillId != nil)
+		{
+			return card.rebillId;
+		}
+	}
+	
+	return nil;
+}
+
+- (ASDKCard *)cardWithRebillId
+{
+	for (ASDKCard *card in self.externalCards)
+	{
+		if (card.rebillId != nil)
+		{
+			return card;
+		}
+	}
+
+	return nil;
+}
+
 - (void)updateCardsListWithSuccessBlock:(void (^)())onSuccess
                              errorBlock:(void (^)(ASDKAcquringSdkError *error))onError
 {
@@ -87,6 +113,7 @@ static ASDKCardsListDataController * __cardsListDataController = nil;
              if (strongSelf)
              {
                  strongSelf.externalCards = response.cards;
+				 
              }
              if (onSuccess)
              {

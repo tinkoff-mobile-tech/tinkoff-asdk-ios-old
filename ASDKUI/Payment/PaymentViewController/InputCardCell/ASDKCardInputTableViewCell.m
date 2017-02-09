@@ -309,7 +309,9 @@ typedef enum
         self.secretCardNumberLabel.text = [NSString stringWithFormat:@"%@",[self.cardNumber substringFromIndex:self.cardNumber.length - 4]];
         self.secretCVVTextField.text = @"";
     }
-    
+
+	[self setScanButtonHidden:!_showSecretContainer animated:NO];
+
     self.secretContainerView.hidden = !_showSecretContainer;
 }
 

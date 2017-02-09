@@ -21,6 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2C352DAB1E4B1707008215A5 /* ASDKCancelRequestBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C352DA91E4B1707008215A5 /* ASDKCancelRequestBuilder.h */; };
+		2C352DAC1E4B1707008215A5 /* ASDKCancelRequestBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C352DAA1E4B1707008215A5 /* ASDKCancelRequestBuilder.m */; };
+		2C352DAF1E4B17A5008215A5 /* ASDKCancelRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C352DAD1E4B17A5008215A5 /* ASDKCancelRequest.h */; };
+		2C352DB01E4B17A5008215A5 /* ASDKCancelRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C352DAE1E4B17A5008215A5 /* ASDKCancelRequest.m */; };
+		2C352DB31E4B1A66008215A5 /* ASDKCancelResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C352DB11E4B1A66008215A5 /* ASDKCancelResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C352DB41E4B1A66008215A5 /* ASDKCancelResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C352DB21E4B1A66008215A5 /* ASDKCancelResponse.m */; };
 		83166ED71C63984E00533D85 /* ASDKCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166ED61C63984E00533D85 /* ASDKCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83166F2F1C63988F00533D85 /* ASDKBaseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EE11C63988F00533D85 /* ASDKBaseObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83166F301C63988F00533D85 /* ASDKBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE21C63988F00533D85 /* ASDKBaseObject.m */; };
@@ -94,6 +100,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C352DA91E4B1707008215A5 /* ASDKCancelRequestBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCancelRequestBuilder.h; sourceTree = "<group>"; };
+		2C352DAA1E4B1707008215A5 /* ASDKCancelRequestBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCancelRequestBuilder.m; sourceTree = "<group>"; };
+		2C352DAD1E4B17A5008215A5 /* ASDKCancelRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCancelRequest.h; sourceTree = "<group>"; };
+		2C352DAE1E4B17A5008215A5 /* ASDKCancelRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCancelRequest.m; sourceTree = "<group>"; };
+		2C352DB11E4B1A66008215A5 /* ASDKCancelResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKCancelResponse.h; sourceTree = "<group>"; };
+		2C352DB21E4B1A66008215A5 /* ASDKCancelResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKCancelResponse.m; sourceTree = "<group>"; };
 		83166ED31C63984E00533D85 /* ASDKCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ASDKCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83166ED61C63984E00533D85 /* ASDKCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKCore.h; sourceTree = "<group>"; };
 		83166ED81C63984E00533D85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,6 +253,8 @@
 			children = (
 				83166EE71C63988F00533D85 /* ASDKAcquiringRequest.h */,
 				83166EE81C63988F00533D85 /* ASDKAcquiringRequest.m */,
+				2C352DAD1E4B17A5008215A5 /* ASDKCancelRequest.h */,
+				2C352DAE1E4B17A5008215A5 /* ASDKCancelRequest.m */,
 				83166EE91C63988F00533D85 /* Charge */,
 				83166EEC1C63988F00533D85 /* FinishAuthorize */,
 				83166EEF1C63988F00533D85 /* GetCardList */,
@@ -310,6 +324,8 @@
 			children = (
 				83166EFC1C63988F00533D85 /* ASDKAcquiringResponse.h */,
 				83166EFD1C63988F00533D85 /* ASDKAcquiringResponse.m */,
+				2C352DB11E4B1A66008215A5 /* ASDKCancelResponse.h */,
+				2C352DB21E4B1A66008215A5 /* ASDKCancelResponse.m */,
 				943FC8691C6881550044C707 /* PaymentInfo */,
 				943FC86A1C6881550044C707 /* ThreeDsData */,
 				83166EFE1C63988F00533D85 /* Charge */,
@@ -396,6 +412,8 @@
 			children = (
 				83166F191C63988F00533D85 /* ASDKRequestBuilder.h */,
 				83166F1A1C63988F00533D85 /* ASDKRequestBuilder.m */,
+				2C352DA91E4B1707008215A5 /* ASDKCancelRequestBuilder.h */,
+				2C352DAA1E4B1707008215A5 /* ASDKCancelRequestBuilder.m */,
 				83166F1B1C63988F00533D85 /* Charge */,
 				83166F1E1C63988F00533D85 /* FinishAuthorize */,
 				83166F211C63988F00533D85 /* GetCardList */,
@@ -518,11 +536,13 @@
 				BE7E027C1C73407600DF6230 /* ASDKCard.h in Headers */,
 				83166F411C63988F00533D85 /* ASDKAcquiringResponse.h in Headers */,
 				946C399E1C648F940036D1AF /* ASDKCardData.h in Headers */,
+				2C352DAB1E4B1707008215A5 /* ASDKCancelRequestBuilder.h in Headers */,
 				943FC86D1C6881650044C707 /* ASDKPaymentInfo.h in Headers */,
 				83166F4F1C63988F00533D85 /* ASDKAcquiringApi.h in Headers */,
 				943FC8711C6881F10044C707 /* ASDKThreeDsData.h in Headers */,
 				83166F451C63988F00533D85 /* ASDKFinishAuthorizeResponse.h in Headers */,
 				83166ED71C63984E00533D85 /* ASDKCore.h in Headers */,
+				2C352DB31E4B1A66008215A5 /* ASDKCancelResponse.h in Headers */,
 				83166F431C63988F00533D85 /* ASDKChargeResponse.h in Headers */,
 				83166F3F1C63988F00533D85 /* ASDKRemoveCardRequest.h in Headers */,
 				946C39A31C64921A0036D1AF /* ASDKApiKeys.h in Headers */,
@@ -532,6 +552,7 @@
 				83166F3D1C63988F00533D85 /* ASDKInitRequest.h in Headers */,
 				83166F491C63988F00533D85 /* ASDKGetStateResponse.h in Headers */,
 				83871B7F1C6CC5EF00D69603 /* ASDKStringKeyCreator.h in Headers */,
+				2C352DAF1E4B17A5008215A5 /* ASDKCancelRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,11 +648,13 @@
 				9483E8E71C69C9A2007F029A /* RSA.m in Sources */,
 				83166F591C63988F00533D85 /* ASDKChargeRequestBuilder.m in Sources */,
 				83166F5B1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.m in Sources */,
+				2C352DB41E4B1A66008215A5 /* ASDKCancelResponse.m in Sources */,
 				943FC8721C6881F10044C707 /* ASDKThreeDsData.m in Sources */,
 				83166F4E1C63988F00533D85 /* ASDKRemoveCardResponse.m in Sources */,
 				943FC86E1C6881650044C707 /* ASDKPaymentInfo.m in Sources */,
 				83166F461C63988F00533D85 /* ASDKFinishAuthorizeResponse.m in Sources */,
 				83166F571C63988F00533D85 /* ASDKRequestBuilder.m in Sources */,
+				2C352DAC1E4B1707008215A5 /* ASDKCancelRequestBuilder.m in Sources */,
 				83166F401C63988F00533D85 /* ASDKRemoveCardRequest.m in Sources */,
 				BE15553B1C77690400BEA6E1 /* ASDKAcquringApiError.m in Sources */,
 				83166F3A1C63988F00533D85 /* ASDKGetCardListRequest.m in Sources */,
@@ -639,6 +662,7 @@
 				83166F521C63988F00533D85 /* ASDKAcquiringSdk.m in Sources */,
 				83166F3E1C63988F00533D85 /* ASDKInitRequest.m in Sources */,
 				946C399F1C648F940036D1AF /* ASDKCardData.m in Sources */,
+				2C352DB01E4B17A5008215A5 /* ASDKCancelRequest.m in Sources */,
 				83166F441C63988F00533D85 /* ASDKChargeResponse.m in Sources */,
 				83166F631C63988F00533D85 /* ASDKRemoveCardRequestBuilder.m in Sources */,
 				83166F341C63988F00533D85 /* ASDKAcquiringRequest.m in Sources */,

@@ -51,4 +51,6 @@ typedef enum
 @property (nonatomic, copy) NSString *message;
 @property (nonatomic, copy) NSString *details;
 
++ (NSString *)localizedStatus:(ASDKPaymentStatus)status;
+
 @end

@@ -40,7 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+	
+	
     self.title = NSLocalizedString(@"Bag", @"Корзина");
     
     [self.myTableView setRowHeight:117.0f];
@@ -195,9 +196,9 @@
                             amount:[NSNumber numberWithDouble:_total]
 			 additionalPaymentData:nil
                 fromViewController:self
-                           success:^(NSString *paymentId)
+                           success:^(ASDKPaymentInfo *paymentInfo)
      {
-         NSLog(@"%@",paymentId);
+         NSLog(@"%@",paymentInfo.paymentId);
          
          [[ShopCart sharedInstance] deleteAllItems];
      }

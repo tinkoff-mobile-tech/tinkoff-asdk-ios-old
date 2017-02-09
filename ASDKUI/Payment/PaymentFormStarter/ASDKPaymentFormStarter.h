@@ -67,7 +67,7 @@
                                        email:(NSString *)email
                                  customerKey:(NSString *)customerKey
 					   additionalPaymentData:(NSDictionary *)data
-                                     success:(void (^)(NSString *paymentId))onSuccess
+                                     success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
                                    cancelled:(void (^)())onCancelled
                                        error:(void (^)(ASDKAcquringSdkError *error))onError;
 
@@ -85,8 +85,16 @@
 						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 						  shippingContact:(PKContact *)shippingContact
 					additionalPaymentData:(NSDictionary *)data
-								  success:(void (^)(NSString *paymentId))onSuccess
+								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError NS_AVAILABLE_IOS(9_0);
+
+- (void)checkStatusTransaction:(NSString *)paymentId
+					   success:(void (^)(ASDKPaymentStatus status))onSuccess
+						 error:(void (^)(ASDKAcquringSdkError *error))onError;
+
+- (void)refundTransaction:(NSString *)paymentId
+				  success:(void (^)())onSuccess
+					error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 @end

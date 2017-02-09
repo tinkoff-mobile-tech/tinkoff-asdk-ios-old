@@ -17,6 +17,8 @@ replace this constants:
 */
 #warning FIX ME!!!
 
+//testmerchant01
+
 #define kASDKTestTerminalKey1 @"TestSDK"
 #define kASDKTestTerminalKey2 @"sdk3DS"
 #define kASDKTestTerminalKey3 @"sdkNon3DS"

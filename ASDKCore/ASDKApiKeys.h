@@ -26,6 +26,7 @@
 #define kASDKAPIPathInit                    @"Init"
 #define kASDKAPIPathFinishAuthorize         @"FinishAuthorize"
 #define kASDKAPIPathCharge                  @"Charge"
+#define kASDKAPIPathCancel                  @"Cancel"
 #define kASDKAPIPathGetState                @"GetState"
 #define kASDKAPIPathGetCardList             @"GetCardList"
 #define kASDKAPIPathRemoveCard              @"RemoveCard"

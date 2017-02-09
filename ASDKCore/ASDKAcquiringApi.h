@@ -44,6 +44,9 @@
 #import "ASDKThreeDsData.h"
 #import "ASDKPaymentInfo.h"
 
+#import "ASDKCancelRequest.h"
+#import "ASDKCancelResponse.h"
+
 @protocol ASDKAcquiringApiLoggerDelegate <NSObject>
 
 - (void)print:(NSString *)logString;
@@ -67,7 +70,7 @@
                            failure:(void (^)(ASDKAcquringApiError *error))failure;
 
 - (void)chargeWithRequest:(ASDKChargeRequest *)request
-                             success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo))success
+                             success:(void (^)(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                              failure:(void (^)(ASDKAcquringApiError *error))failure;
 
 - (void)getStateWithRequest:(ASDKGetStateRequest *)request
@@ -81,5 +84,9 @@
 - (void)removeCardWithRequest:(ASDKRemoveCardRequest *)request
                       success:(void (^)(ASDKRemoveCardResponse *response))success
                       failure:(void (^)(ASDKAcquringApiError *error))failure;
+
+- (void)cancelWithRequest:(ASDKCancelRequest *)request
+				  success:(void (^)(ASDKCancelResponse *data))success
+				  failure:(void (^)(ASDKAcquringApiError *error))failure;
 
 @end

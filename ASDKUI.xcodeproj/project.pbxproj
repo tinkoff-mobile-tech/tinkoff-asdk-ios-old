@@ -383,9 +383,9 @@
 		94C86A0D1C6B304900046F0E /* PaymentViewController */ = {
 			isa = PBXGroup;
 			children = (
-				BEDEFF791C75A4400026D454 /* CustomInput */,
 				94C86A0E1C6B304900046F0E /* ASDKPaymentFormViewController.h */,
 				94C86A0F1C6B304900046F0E /* ASDKPaymentFormViewController.m */,
+				BEDEFF791C75A4400026D454 /* CustomInput */,
 				CA82FD191C70ECFA005FD294 /* HeaderCell */,
 				CA82FD221C70F7D7005FD294 /* SummCell */,
 				83E1566A1C731C50000BBD57 /* ExternalCardsCell */,

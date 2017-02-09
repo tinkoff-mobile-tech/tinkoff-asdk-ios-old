@@ -296,7 +296,7 @@
 }
 
 - (void)chargeWithRequest:(ASDKChargeRequest *)request
-                  success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo))success
+                  success:(void (^)(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                   failure:(void (^)(ASDKAcquringApiError *error))failure
 {
     NSMutableDictionary *parameters = @{kASDKTerminalKey : request.terminalKey,
@@ -309,15 +309,13 @@
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
      {
          ASDKChargeResponse *responseObject = [[ASDKChargeResponse alloc] initWithDictionary:responseDictionary];
-         
-         success(responseObject.threeDsData, responseObject.paymentInfo);
+         success(responseObject.paymentInfo, responseObject.status);
      }
        failure:^(ASDKAcquringApiError *error)
      {
          failure(error);
      }];
 }
-
 
 - (void)getCardListWithRequest:(ASDKGetCardListRequest *)request
                        success:(void (^)(ASDKGetCardListResponse *response))success
@@ -362,6 +360,25 @@
      {
          failure(error);
      }];
+}
+
+- (void)cancelWithRequest:(ASDKCancelRequest *)request
+				  success:(void (^)(ASDKCancelResponse *data))success
+				  failure:(void (^)(ASDKAcquringApiError *error))failure
+{
+	NSDictionary *parameters = @{kASDKTerminalKey : request.terminalKey,
+								kASDKPaymentId   : request.paymentId,
+								kASDKToken       : request.token};
+	
+	[self path:kASDKAPIPathCancel parameters:parameters
+	   success:^(NSDictionary *responseDictionary, NSURLResponse *response) {
+		   ASDKCancelResponse *responseObject = [[ASDKCancelResponse alloc] initWithDictionary:responseDictionary];
+		   
+		   success(responseObject);
+	   }
+	   failure:^(ASDKAcquringApiError *error) {
+		   failure(error);
+	   }];
 }
 
 @end

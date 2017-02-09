@@ -24,3 +24,4 @@
 "BuyingSuccessful" = "Покупка на сумму\n%@\nпрошла успешно";
 "ProductAddedToBag" = "Товар добавлен в корзину";
 "ActiveTerminal" = "Активный терминал";
+"Purchasehistory" = "История покупок";

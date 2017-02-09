@@ -15,11 +15,14 @@
 
 #import "AboutViewController.h"
 #import "SettingsViewController.h"
+#import "TransactionHistoryViewController.h"
 
 @interface ItemsListTableViewController ()
 
 @property (nonatomic, strong) NSArray *itemsArray;
 @property (nonatomic, strong) BookItemCell *sizingCell;
+
+@property (strong, nonatomic) NSMutableArray *history;
 
 @end
 
@@ -53,9 +56,15 @@
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
                                                                       action:@selector(openShopCart:)];
-    
-    [self.navigationItem setRightBarButtonItem:shopCartButton];
-    
+	
+	UIBarButtonItem *shopHistoryButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"History", @"История")
+																	   style:UIBarButtonItemStylePlain
+																	  target:self
+																	  action:@selector(openHistory:)];
+
+	
+    [self.navigationItem setRightBarButtonItems:@[shopCartButton, shopHistoryButton]];
+	
     UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [infoButton addTarget:self action:@selector(showInfo) forControlEvents:UIControlEventTouchUpInside];
     
@@ -84,6 +93,12 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:shopCartController];
     
     [self.navigationController presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (IBAction)openHistory:(id)sender
+{
+	TransactionHistoryViewController *viewController = [[TransactionHistoryViewController alloc] initWithNibName:@"TransactionHistoryViewController" bundle:[NSBundle mainBundle]];
+	[self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)showInfo

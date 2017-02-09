@@ -14,6 +14,8 @@
 #import "PayController.h"
 
 #import "LocalConstants.h"
+#import "TransactionHistoryViewController.h"
+#import "TransactionHistoryModelController.h"
 
 @interface DetailInfoTableViewController ()
 
@@ -160,9 +162,9 @@
                             amount:self.item.cost
 			 additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
                 fromViewController:self
-                           success:^(NSString *paymentId)
+                           success:^(ASDKPaymentInfo *paymentInfo)
      {
-         NSLog(@"%@",paymentId);
+         NSLog(@"%@",paymentInfo.paymentId);
      }
                          cancelled:^
      {
@@ -197,7 +199,9 @@
 							 shippingContact:shippingContact
 					   additionalPaymentData:nil
 						  fromViewController:self
-									 success:^(NSString *paymentId) { NSLog(@"%@", paymentId); }
+									 success:^(ASDKPaymentInfo *paymentIfo) {
+										 NSLog(@"%@", paymentIfo.paymentId);
+									 }
 								   cancelled:^{ NSLog(@"Canceled"); }
 									   error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@", error); }];
 	}

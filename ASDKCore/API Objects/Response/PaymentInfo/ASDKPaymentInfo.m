@@ -65,4 +65,9 @@
     _amount = nil;
 }
 
+- (NSString *)status
+{
+	return [_dictionary objectForKey:kASDKStatus];
+}
+
 @end

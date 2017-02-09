@@ -132,5 +132,76 @@
     return _details;
 }
 
++ (NSString *)localizedStatus:(ASDKPaymentStatus)status
+{
+	NSString *result = @"";
+
+	if (status == ASDKPaymentStatus_NEW)
+	{
+		result = kASDKPaymentStatusNew;
+	}
+	else if (status == ASDKPaymentStatus_CANCELLED)
+	{
+		result = kASDKPaymentStatusCancelled;
+	}
+	else if (status == ASDKPaymentStatus_PREAUTHORIZING)
+	{
+		result = kASDKPaymentStatusPreauthorizing;
+	}
+	else if (status == ASDKPaymentStatus_FORMSHOWED)
+	{
+		result = kASDKPaymentStatusFormshowed;
+	}
+	else if (status == ASDKPaymentStatus_AUTHORIZING)
+	{
+		result = kASDKPaymentStatusAuthorizing;
+	}
+	else if (status == ASDKPaymentStatus_3DS_CHECKING)
+	{
+		result = kASDKPaymentStatus3DSChecking;
+	}
+	else if (status == ASDKPaymentStatus_3DS_CHECKED)
+	{
+		result = kASDKPaymentStatus3DSChecked;
+	}
+	else if (status == ASDKPaymentStatus_AUTHORIZED)
+	{
+		result = kASDKPaymentStatusAuthorized;
+	}
+	else if (status == ASDKPaymentStatus_REVERSING)
+	{
+		result = kASDKPaymentStatusReversing;
+	}
+	else if (status == ASDKPaymentStatus_REVERSED)
+	{
+		result = kASDKPaymentStatusReversed;
+	}
+	else if (status == ASDKPaymentStatus_CONFIRMING)
+	{
+		result = kASDKPaymentStatusConfirming;
+	}
+	else if (status == ASDKPaymentStatus_CONFIRMED)
+	{
+		result = kASDKPaymentStatusConfirmed;
+	}
+	else if (status == ASDKPaymentStatus_REFUNDING)
+	{
+		result = kASDKPaymentStatusRefunding;
+	}
+	else if (status == ASDKPaymentStatus_REFUNDED)
+	{
+		result = kASDKPaymentStatusRefunded;
+	}
+	else if (status == ASDKPaymentStatus_REJECTED)
+	{
+		result = kASDKPaymentStatusRejected;
+	}
+	else if (status == ASDKPaymentStatus_UNKNOWN)
+	{
+		result = kASDKPaymentStatusUnknown;
+	}
+
+	return result;
+}
 
 @end

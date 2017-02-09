@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "ItemsListTableViewController.h"
 #import "LocalConstants.h"
+#import "TransactionHistoryModelController.h"
 
 @interface AppDelegate ()
 
@@ -37,8 +38,9 @@
         [books addObject:bookItem];
     }
     
-    
+	
     ItemsListTableViewController *rootViewController = [[ItemsListTableViewController alloc] initWithItems:books];
+	//TransactionsTableViewController *rootViewController = [[TransactionsTableViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
     
     self.window.rootViewController = navigationController;

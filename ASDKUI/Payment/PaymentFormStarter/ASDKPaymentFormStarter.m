@@ -24,7 +24,6 @@
 #import "ASDKBarButtonItem.h"
 #import "ASDKCardsListDataController.h"
 
-
 @interface ASDKPaymentFormStarter () <PKPaymentAuthorizationViewControllerDelegate>
 {
     UIStatusBarStyle _oldStatusBarStyle;
@@ -45,11 +44,11 @@
 @property (nonatomic, weak) UIViewController *presentingViewControllerApplePay;
 @property (nonatomic, strong) NSString *paymentIdForApplePay;
 //
-@property (nonatomic, strong) void (^onSuccess)(NSString *paymentId);
+@property (nonatomic, strong) void (^onSuccess)(ASDKPaymentInfo *paymentInfo);
 @property (nonatomic, strong) void (^onCancelled)();
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
-@property (nonatomic, strong) NSString *onCompleteSuccessPaymentId;
+@property (nonatomic, strong) ASDKPaymentInfo *onCompleteSuccessPaymentInfo;
 @property (nonatomic, strong) ASDKAcquringSdkError *onCompleteError;
 
 @end
@@ -116,7 +115,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                        email:(NSString *)email
                                  customerKey:(NSString *)customerKey
 					   additionalPaymentData:(NSDictionary *)data
-                                     success:(void (^)(NSString *paymentId))onSuccess
+                                     success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
                                    cancelled:(void (^)())onCancelled
                                        error:(void(^)(ASDKAcquringSdkError *error))onError
 {
@@ -130,11 +129,11 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                                                                         email:email
                                                                                   customerKey:customerKey
 																		additionalPaymentData:data
-                                                                                      success:^(NSString *paymentId)
+                                                                                      success:^(ASDKPaymentInfo *paymentInfo)
                                          {
                                              [ASDKPaymentFormStarter resetSharedInstance];
                                              
-                                             onSuccess(paymentId);
+                                             onSuccess(paymentInfo);
                                          }
                                                                                     cancelled:^
                                          {
@@ -278,7 +277,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 						  shippingContact:(PKContact *)shippingContact
 					additionalPaymentData:(NSDictionary *)data
-								  success:(void (^)(NSString *paymentId))onSuccess
+								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError
 {
@@ -287,8 +286,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	self.onError = onError;
 	self.onCancelled = onCancelled;
 
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:NO additionalPaymentData:data
-		success:^(ASDKInitResponse *response){
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:YES additionalPaymentData:data
+		success:^(ASDKInitResponse *response) {
 			self.paymentIdForApplePay = response.paymentId;
 			
 			PKPaymentRequest *paymentRequest = [PKPaymentRequest new];
@@ -344,6 +343,55 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	 ];
 }
 
+- (void)checkStatusTransaction:(NSString *)paymentId
+					   success:(void (^)(ASDKPaymentStatus status))onSuccess
+						 error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+	[self.acquiringSdk getStateWithPaymentId:paymentId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+		onSuccess(status);
+	} failure:^(ASDKAcquringSdkError *error) {
+		onError(error);
+	}];
+}
+
+- (void)refundTransaction:(NSString *)paymentId
+				  success:(void (^)())onSuccess
+					error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+	[self.acquiringSdk rejectTrancastionWithPaymentId:paymentId success:^(ASDKCancelResponse *response) {
+		onSuccess();
+	} failure:^(ASDKAcquringSdkError *error) {
+		onError(error);
+	}];
+}
+
+- (void)chargeFromViewController:(UIViewController *)presentingViewController
+						  amount:(NSNumber *)amount
+						 orderId:(NSString *)orderId
+					 description:(NSString *)description
+					 customerKey:(NSString *)customerKey
+					   sendEmail:(BOOL)sendEmail
+						   email:(NSString *)email
+						rebillId:(NSNumber *)rebillId
+		   additionalPaymentData:(NSDictionary *)data
+						 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+					   cancelled:(void (^)())onCancelled
+						   error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:NO additionalPaymentData:data
+	 success:^(ASDKInitResponse *response) {
+		 [self.acquiringSdk chargeWithPaymentId:response.paymentId rebillId:rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+			 [ASDKPaymentFormStarter resetSharedInstance];
+			 onSuccess(paymentInfo);
+		 } failure:^(ASDKAcquringSdkError *error) {
+			 [ASDKPaymentFormStarter resetSharedInstance];
+			 onError(error);
+		 }];
+	 } failure:^(ASDKAcquringSdkError *error) {
+		 onError(error);
+	 }];
+}
+
 #pragma mark - PKPaymentAuthorizationViewControllerDelegate
 
 - (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
@@ -364,12 +412,12 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 											   cardData:nil
 											  infoEmail:payment.billingContact.emailAddress
 												success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+													self.onCompleteSuccessPaymentInfo = paymentInfo;
 													completion(PKPaymentAuthorizationStatusSuccess);
-													self.onCompleteSuccessPaymentId = paymentInfo.paymentId;
 												}
 												failure:^(ASDKAcquringSdkError *error) {
-													completion(PKPaymentAuthorizationStatusFailure);
 													self.onCompleteError = error;
+													completion(PKPaymentAuthorizationStatusFailure);
 												}];
 	}
 }
@@ -377,12 +425,12 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 - (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller
 {
 	[self.presentingViewControllerApplePay dismissViewControllerAnimated:YES completion:^{
-		if ([self.onCompleteSuccessPaymentId length] > 0 && self.onCompleteError == nil)
+		if (self.onCompleteSuccessPaymentInfo != nil && self.onCompleteError == nil)
 		{
-			self.onSuccess(self.onCompleteSuccessPaymentId);
-			self.onCompleteSuccessPaymentId = nil;
+			self.onSuccess(self.onCompleteSuccessPaymentInfo);
+			self.onCompleteSuccessPaymentInfo = nil;
 		}
-		else if ([self.onCompleteSuccessPaymentId length] == 0 && self.onCompleteError == nil)
+		else if (self.onCompleteSuccessPaymentInfo == nil && self.onCompleteError == nil)
 		{
 			self.onCancelled();
 		}

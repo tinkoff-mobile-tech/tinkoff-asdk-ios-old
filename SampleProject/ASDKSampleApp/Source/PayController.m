@@ -14,6 +14,8 @@
 #import "ASDKCardIOScanner.h"
 
 #import "PaymentSuccessViewController.h"
+#import "TransactionHistoryModelController.h"
+#import "ASDKCardsListDataController.h"
 
 @implementation PayController
 
@@ -42,7 +44,7 @@
                  amount:(NSNumber *)amount
   additionalPaymentData:(NSDictionary *)data
      fromViewController:(UIViewController *)viewController
-                success:(void (^)(NSString *paymentId))onSuccess
+                success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)())onCancelled
                   error:(void(^)(ASDKAcquringSdkError *error))onError
 {
@@ -58,8 +60,8 @@
 //Настройка сканнера карт
 
     paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
-    
-    [paymentFormStarter presentPaymentFormFromViewController:viewController
+
+	[paymentFormStarter presentPaymentFormFromViewController:viewController
                                                      orderId:[NSNumber numberWithDouble:randomOrderId].stringValue
                                                       amount:amount
                                                        title:name
@@ -68,16 +70,17 @@
                                                        email:nil 
                                                  customerKey:[PayController customerKey]
 									   additionalPaymentData:data
-                                                     success:^(NSString *paymentId)
-
+                                                     success:^(ASDKPaymentInfo *paymentInfo)
      {
+		 [[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":description, kASDKStatus:paymentInfo.status}];
+
          PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];
          vc.amount = amount;
          UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
          
          [viewController presentViewController:nc animated:YES completion:nil];
          
-         onSuccess(paymentId);
+         onSuccess(paymentInfo);
      }
                                                    cancelled:^
      {
@@ -134,7 +137,7 @@
 			  shippingContact:(PKContact *)shippingContact
 		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
-					  success:(void (^)(NSString *paymentId))onSuccess
+					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)())onCancelled
 						error:(void(^)(ASDKAcquringSdkError *error))onError
 {
@@ -150,14 +153,15 @@
 										  shippingMethods:shippingMethods
 										  shippingContact:shippingContact
 									additionalPaymentData:data
-												  success:^(NSString *paymentId) {
+												  success:^(ASDKPaymentInfo *paymentInfo) {
+													  [[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":description, kASDKStatus:paymentInfo.status}];
 													  PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];
 													  vc.amount = amount;
 													  UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
 													  
 													  [viewController presentViewController:nc animated:YES completion:nil];
 													  
-													  onSuccess(paymentId);
+													  onSuccess(paymentInfo);
 												  }
 												cancelled:^{
 													  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"CanceledPayment", @"Оплата отменена") message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -197,6 +201,50 @@
 													  onError(error);
 												  }];
 	//
+}
+
++ (void)checkStatusTransaction:(NSString *)paymentId
+	   fromViewController:(UIViewController *)viewController
+				  success:(void (^)(ASDKPaymentStatus status))onSuccess
+					error:(void(^)(ASDKAcquringSdkError *error))onError
+{
+	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
+	
+	[paymentFormStarter checkStatusTransaction:paymentId success:^(ASDKPaymentStatus status) {
+		onSuccess(status);
+	} error:^(ASDKAcquringSdkError *error) {
+		onError(error);
+	}];
+}
+
++ (void)refundTransaction:(NSString *)paymentId
+	   fromViewController:(UIViewController *)viewController
+				  success:(void (^)())onSuccess
+					error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
+	
+	[paymentFormStarter refundTransaction:paymentId success:^{
+		 onSuccess();
+	} error:^(ASDKAcquringSdkError *error) {
+		NSString *errorTitle = [error.errorMessage length] > 0 ? error.errorMessage: @"Reject error";
+
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:errorTitle message:error.errorDetails preferredStyle:UIAlertControllerStyleAlert];
+		
+		UIAlertAction *cancelAction = [UIAlertAction
+									   actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
+									   style:UIAlertActionStyleCancel
+									   handler:^(UIAlertAction *action)
+									   {
+										   [alertController dismissViewControllerAnimated:YES completion:nil];
+									   }];
+		
+		[alertController addAction:cancelAction];
+		
+		[viewController presentViewController:alertController animated:YES completion:nil];
+		
+		onError(error);
+	}];
 }
 
 @end

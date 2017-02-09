@@ -52,7 +52,10 @@
 {
     if (!_rebillId)
     {
-        _rebillId = _dictionary[kASDKRebillId];
+		if ([_dictionary objectForKey:kASDKRebillId])
+		{
+			_rebillId = [[NSNumberFormatter new] numberFromString:[_dictionary objectForKey:kASDKRebillId]];
+		}
     }
     
     return _rebillId;

@@ -24,3 +24,4 @@
 "BuyingSuccessful" = "Buying in the amount\n%@\nis successful";
 "ProductAddedToBag" = "Product added to bag";
 "ActiveTerminal" = "Active terminal";
+"Purchasehistory" = "Purchase history";

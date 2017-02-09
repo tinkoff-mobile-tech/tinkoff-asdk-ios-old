@@ -82,7 +82,7 @@ typedef enum
 @property (nonatomic, strong) ASDKPayButtonCell *paymentButtonCell;
 @property (nonatomic, strong) ASDKFooterCell *footerCell;
 
-@property (nonatomic, strong) void (^onSuccess)(NSString *paymentId);
+@property (nonatomic, strong) void (^onSuccess)(ASDKPaymentInfo *paymentInfo);
 @property (nonatomic, strong) void (^onCancelled)();
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
@@ -108,7 +108,7 @@ typedef enum
                          email:(NSString *)email
 				   customerKey:(NSString *)customerKey
 		 additionalPaymentData:(NSDictionary *)data
-                       success:(void (^)(NSString *paymentId))success
+                       success:(void (^)(ASDKPaymentInfo *paymentInfo))success
                      cancelled:(void (^)())cancelled
                          error:(void(^)(ASDKAcquringSdkError *error))error
 {
@@ -198,8 +198,12 @@ typedef enum
 {
     if ([[ASDKCardsListDataController instance] externalCards].count > 0)
     {
-        ASDKCard *card = [[[ASDKCardsListDataController instance] externalCards] firstObject];
-        
+		ASDKCard *card = [[ASDKCardsListDataController instance] cardWithRebillId];
+		if (card == nil)
+		{
+			card = [[[ASDKCardsListDataController instance] externalCards] firstObject];
+		}
+		
         [self setSelectedCard:card];
         
         _shouldShowKeyboardWhenNewCardSelected = YES;
@@ -274,11 +278,19 @@ typedef enum
     if (_selectedCard)
     {
         NSString *cardNumber = _selectedCard.pan;
-        
-        [self updateCardRequisitesCellWithCardNumber:cardNumber];
-        
-        [self cardRequisitesCell].showSecretContainer = YES;
-        
+		
+		if (_selectedCard.rebillId != nil)
+		{
+			[self cardRequisitesCell].showSecretContainer = NO;
+			[[self cardRequisitesCell] setCardNumber:cardNumber];
+			[[[self cardRequisitesCell] textFieldCardNumber] setText:cardNumber];// updateCardRequisitesCellWithCardNumber:[cardNumber substringFromIndex:cardNumber.length - 4]];
+		}
+		else
+		{
+			[self updateCardRequisitesCellWithCardNumber:cardNumber];
+			[self cardRequisitesCell].showSecretContainer = YES;
+		}
+		
         [self externalCardsCell].titleLabel.text = LOC(@"externalCardsCell.savedCard");
         
         if (_shouldShowKeyboardWhenNewCardSelected)
@@ -287,7 +299,7 @@ typedef enum
         }
         else
         {
-            _shouldShowKeyboardWhenNewCardSelected = YES;
+            //_shouldShowKeyboardWhenNewCardSelected = YES;
         }
     }
     else
@@ -497,9 +509,9 @@ typedef enum
     {
         if (indexPath.row == 1)
         {
-            [self cardRequisitesCell].shouldShowTopSeparator = ![self shouldShowExternalCardsCell];
-            
-            return [self cardRequisitesCell];
+			[self cardRequisitesCell].shouldShowTopSeparator = ![self shouldShowExternalCardsCell];
+				
+			return [self cardRequisitesCell];
         }
         else if (indexPath.row == 2)
         {
@@ -637,7 +649,7 @@ typedef enum
         
         if (strongSelf)
         {
-            [strongSelf performFinishAuthorizeRequestWithPaymentId:response.paymentId];
+            [strongSelf performFinishAuthorizeRequestWithPaymentId:response];
         }
     }
                               failure:^(ASDKAcquringSdkError *error)
@@ -655,156 +667,182 @@ typedef enum
     }];
 }
 
-- (void)performFinishAuthorizeRequestWithPaymentId:(NSString *)paymentId
+- (void)performFinishAuthorizeRequestWithPaymentId:(ASDKInitResponse *)payment
 {
-    NSString *cardNumber = [self cardRequisitesCell].cardNumber;
-    NSString *date = [self cardRequisitesCell].cardExpirationDate;
-    date = [date stringByReplacingOccurrencesOfString:@"/" withString:@""];
-    NSString *cvv = [self cardRequisitesCell].cardCVC;
-        
-    NSString *emailString = [self emailCell].emailTextField.text;
-    
-    NSLog(@"QQQQ %@",self.acquiringSdk);
-    
-    ASDKCardData *cardData = [[ASDKCardData alloc] initWithPan:cardNumber
-                                                    expiryDate:date
-                                                  securityCode:cvv
-                                                        cardId:self.selectedCard.cardId
-                                                  publicKeyRef:[self.acquiringSdk publicKeyRef]];
-    
-    NSString *encryptedCardString = cardData.cardData;
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [self.acquiringSdk finishAuthorizeWithPaymentId:paymentId
-							   encryptedPaymentData:nil
-                                           cardData:encryptedCardString
-                                          infoEmail:emailString
-                                            success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status)
-     {
-         NSLog(@"success\nData: %@\n PaymentInfo: %@, Status: %u", data.ACSUrl, paymentInfo, status);
-         
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         
-         if (status == ASDKPaymentStatus_3DS_CHECKING)
-         {
-             if (strongSelf)
-             {
-                 ASDK3DSViewController *threeDsController = [[ASDK3DSViewController alloc] initWithPaymentId:paymentInfo.paymentId
-                                                                                                 threeDsData:data
-                                                                                                acquiringSdk:strongSelf.acquiringSdk];
-                 
-                 [threeDsController showFromViewController:strongSelf
-                                                   success:^(NSString *paymentId)
-                  {
-                      NSLog(@"\n\n\nPAYMENT SUCCESS AFTER 3DS\n\n\n");
-                      
-                      __strong typeof(weakSelf) strongSelf1 = weakSelf;
-                      
-                      if (strongSelf1)
-                      {
-                          [strongSelf1 manageSuccessWithPaymentId:paymentId];
-                      }
-                  }
-                                                   failure:^(ASDKAcquringSdkError *statusError)
-                  {
-                      NSLog(@"\n\n\nPAYMENT ERROR AFTER 3DS\n\n\n");
-                      
-                      __strong typeof(weakSelf) strongSelf1 = weakSelf;
-                      
-                      if (strongSelf1)
-                      {
-                          [strongSelf1 manageError:statusError];
-                      }
-                  }
-                                                    cancel:^()
-                  {
-                      NSLog(@"\n\n\nPAYMENT 3DS CANCELED\n\n\n");
-                      
-                      __strong typeof(weakSelf) strongSelf1 = weakSelf;
-                      
-                      if (strongSelf1)
-                      {
-                          [strongSelf1 closeSelfWithCompletion:self.onCancelled];
-                      }
-                  }];
-             }
-         }
-         else if (status == ASDKPaymentStatus_CONFIRMED || status == ASDKPaymentStatus_AUTHORIZED)
-         {
-             [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-             
-             if (strongSelf)
-             {
-                 [strongSelf manageSuccessWithPaymentId:paymentId];
-             }
-         }
-         else
-         {
-             [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-             
-             NSLog(@"\n\n\nPAYMENT FINISHED WITH ERROR STATE\n\n\n");
-             
-             NSString *message = @"Payment state error";
-             NSString *details = [NSString stringWithFormat:@"%@",paymentInfo];
-             
-             ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:message
-                                                                          details:details
-                                                                             code:0];
-             
-             if (strongSelf)
-             {
-                 [strongSelf manageError:error];
-             }
-         }
-     }
-                                            failure:^(ASDKAcquringSdkError *error)
-     {
-         NSLog(@"failure %@, message %@, details %@", error, error.errorMessage, error.errorDetails);
-         
-         [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-         
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         
-         if (strongSelf)
-         {
-             [strongSelf manageError:error];
-         }
-     }];
+	if (_selectedCard && _selectedCard.rebillId)
+	{
+		 __weak typeof(self) weakSelf = self;
+		[self.acquiringSdk chargeWithPaymentId:payment.paymentId rebillId:_selectedCard.rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+			__strong typeof(weakSelf) strongSelf1 = weakSelf;
+			if (strongSelf1)
+			{
+				[strongSelf1 manageSuccessWithPaymentInfo:paymentInfo];
+			}
+		} failure:^(ASDKAcquringSdkError *error) {
+			__strong typeof(weakSelf) strongSelf = weakSelf;
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+		
+			NSLog(@"\n\n\nPAYMENT FINISHED WITH ERROR STATE\n\n\n");
+
+			if (strongSelf)
+			{
+				[strongSelf manageError:error];
+			}
+		}];
+	}
+	else
+	{
+		NSString *cardNumber = [self cardRequisitesCell].cardNumber;
+		NSString *date = [self cardRequisitesCell].cardExpirationDate;
+		date = [date stringByReplacingOccurrencesOfString:@"/" withString:@""];
+		NSString *cvv = [self cardRequisitesCell].cardCVC;
+		
+		NSString *emailString = [self emailCell].emailTextField.text;
+		
+		NSLog(@"QQQQ %@",self.acquiringSdk);
+		
+		ASDKCardData *cardData = [[ASDKCardData alloc] initWithPan:cardNumber
+														expiryDate:date
+													  securityCode:cvv
+															cardId:self.selectedCard.cardId
+													  publicKeyRef:[self.acquiringSdk publicKeyRef]];
+		
+		NSString *encryptedCardString = cardData.cardData;
+		
+		__weak typeof(self) weakSelf = self;
+		
+		[self.acquiringSdk finishAuthorizeWithPaymentId:payment.paymentId
+								   encryptedPaymentData:nil
+											   cardData:encryptedCardString
+											  infoEmail:emailString
+												success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status)
+		 {
+			 NSLog(@"success\nData: %@\n PaymentInfo: %@, Status: %u", data.ACSUrl, paymentInfo, status);
+			 
+			 __strong typeof(weakSelf) strongSelf = weakSelf;
+			 
+			 if (status == ASDKPaymentStatus_3DS_CHECKING)
+			 {
+				 if (strongSelf)
+				 {
+					 ASDK3DSViewController *threeDsController = [[ASDK3DSViewController alloc] initWithPaymentId:paymentInfo.paymentId
+																									 threeDsData:data
+																									acquiringSdk:strongSelf.acquiringSdk];
+					 
+					 [threeDsController showFromViewController:strongSelf
+													   success:^(NSString *paymentId)
+					  {
+						  NSLog(@"\n\n\nPAYMENT SUCCESS AFTER 3DS\n\n\n");
+						  
+						  __strong typeof(weakSelf) strongSelf1 = weakSelf;
+						  
+						  if (strongSelf1)
+						  {
+							  [strongSelf1 manageSuccessWithPaymentInfo:paymentInfo];
+						  }
+					  }
+													   failure:^(ASDKAcquringSdkError *statusError)
+					  {
+						  NSLog(@"\n\n\nPAYMENT ERROR AFTER 3DS\n\n\n");
+						  
+						  __strong typeof(weakSelf) strongSelf1 = weakSelf;
+						  
+						  if (strongSelf1)
+						  {
+							  [strongSelf1 manageError:statusError];
+						  }
+					  }
+														cancel:^()
+					  {
+						  NSLog(@"\n\n\nPAYMENT 3DS CANCELED\n\n\n");
+						  
+						  __strong typeof(weakSelf) strongSelf1 = weakSelf;
+						  
+						  if (strongSelf1)
+						  {
+							  [strongSelf1 closeSelfWithCompletion:self.onCancelled];
+						  }
+					  }];
+				 }
+			 }
+			 else if (status == ASDKPaymentStatus_CONFIRMED || status == ASDKPaymentStatus_AUTHORIZED)
+			 {
+				 [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+				 
+				 if (strongSelf)
+				 {
+					 [strongSelf manageSuccessWithPaymentInfo:paymentInfo];
+				 }
+			 }
+			 else
+			 {
+				 [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+				 
+				 NSLog(@"\n\n\nPAYMENT FINISHED WITH ERROR STATE\n\n\n");
+				 
+				 NSString *message = @"Payment state error";
+				 NSString *details = [NSString stringWithFormat:@"%@",paymentInfo];
+				 
+				 ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:message
+																			  details:details
+																				 code:0];
+				 
+				 if (strongSelf)
+				 {
+					 [strongSelf manageError:error];
+				 }
+			 }
+		 }
+												failure:^(ASDKAcquringSdkError *error)
+		 {
+			 NSLog(@"failure %@, message %@, details %@", error, error.errorMessage, error.errorDetails);
+			 
+			 [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+			 
+			 __strong typeof(weakSelf) strongSelf = weakSelf;
+			 
+			 if (strongSelf)
+			 {
+				 [strongSelf manageError:error];
+			 }
+		 }];
+	}
 }
 
 - (void)performPayment
 {
     [self.view endEditing:YES];
-    
+	
     if (![self validateForm])
     {
         return;
     }
-    
+	
     [self performInitRequest];
 }
 
-- (void)manageSuccessWithPaymentId:(NSString *)paymentId
+- (void)manageSuccessWithPaymentInfo:(ASDKPaymentInfo *)paymentInfo
 {
     __weak typeof(self) weakSelf = self;
-    
+	
     void (^paymentSuccessBlock)() = ^
     {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        
+		
         if (strongSelf)
         {
             [strongSelf closeSelfWithCompletion:^
              {
                  if (strongSelf.onSuccess)
                  {
-                     strongSelf.onSuccess(paymentId);
+                     strongSelf.onSuccess(paymentInfo);
                  }
              }];
         }
     };
-    
+	
     if (!self.selectedCard)
     {
         [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^
@@ -889,7 +927,12 @@ typedef enum
 
 - (BOOL)validateCard
 {
-    return [[self cardRequisitesCell] validateForm];
+	if (_selectedCard && _selectedCard.rebillId)
+	{
+		return YES;
+	}
+	
+    return  [[self cardRequisitesCell] validateForm];
 }
 
 - (BOOL)validateEmail

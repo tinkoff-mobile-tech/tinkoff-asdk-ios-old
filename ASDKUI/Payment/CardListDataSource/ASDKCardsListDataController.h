@@ -29,6 +29,9 @@
                                             customerKey:(NSString *)customerKey;
 + (void)resetAcquiringSdk;
 
+- (NSNumber *)rebillId;
+- (ASDKCard *)cardWithRebillId;
+
 - (void)updateCardsListWithSuccessBlock:(void (^)())onSuccess
                              errorBlock:(void (^)(ASDKAcquringSdkError *error))onError;
 

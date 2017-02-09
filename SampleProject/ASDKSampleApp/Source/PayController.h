@@ -18,7 +18,7 @@
                  amount:(NSNumber *)amount
   additionalPaymentData:(NSDictionary *)data
      fromViewController:(UIViewController *)viewController
-                success:(void (^)(NSString *paymentId))onSuccess
+                success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)())onCancelled
                   error:(void(^)(ASDKAcquringSdkError *error))onError;
 
@@ -31,8 +31,18 @@
 			  shippingContact:(PKContact *)shippingContact
 		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
-					  success:(void (^)(NSString *paymentId))onSuccess
+					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)())onCancelled
 						error:(void(^)(ASDKAcquringSdkError *error))onError;
+
++ (void)checkStatusTransaction:(NSString *)paymentId
+	   fromViewController:(UIViewController *)viewController
+				  success:(void (^)(ASDKPaymentStatus status))onSuccess
+					error:(void(^)(ASDKAcquringSdkError *error))onError;
+
++ (void)refundTransaction:(NSString *)paymentId
+	   fromViewController:(UIViewController *)viewController
+				  success:(void (^)())onSuccess
+					error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 @end

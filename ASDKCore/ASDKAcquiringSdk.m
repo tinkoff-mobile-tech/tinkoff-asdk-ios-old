@@ -26,6 +26,7 @@
 #import "ASDKGetStateRequestBuilder.h"
 #import "ASDKGetCardListRequestBuilder.h"
 #import "ASDKRemoveCardRequestBuilder.h"
+#import "ASDKCancelRequestBuilder.h"
 
 @interface ASDKAcquiringSdk () <ASDKAcquiringApiLoggerDelegate>
 
@@ -173,7 +174,7 @@
 
 - (void)chargeWithPaymentId:(NSString *)paymentId
                    rebillId:(NSNumber *)rebillId
-                    success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo))success
+                    success:(void (^)(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                     failure:(void (^)(ASDKAcquringSdkError *error))failure
 {
     ASDKAcquringSdkError *buildError;
@@ -192,9 +193,9 @@
     else
     {
         [self.acquiringApi chargeWithRequest:request
-                                    success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo)
+                                    success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status)
         {
-            success(data, paymentInfo);
+            success(paymentInfo, status);
         }
                                     failure:^(ASDKAcquringApiError *error)
         {
@@ -296,10 +297,38 @@
     }
 }
 
+- (void)rejectTrancastionWithPaymentId:(NSString *)paymentId
+							   success:(void (^)(ASDKCancelResponse *response))success
+							   failure:(void (^)(ASDKAcquringSdkError *error))failure
+{
+	ASDKAcquringSdkError *buildError;
+	
+	ASDKCancelRequestBuilder *builder = [ASDKCancelRequestBuilder builderWithPaymentId:paymentId
+																		   terminalKey:self.terminalKey
+																			  password:self.password];
+	
+	ASDKCancelRequest *request = (ASDKCancelRequest *)[builder buildError:&buildError];
+	
+	if (buildError)
+	{
+		failure(buildError);
+	}
+	else
+	{
+		[self.acquiringApi cancelWithRequest:request
+									 success:^(ASDKCancelResponse *data) {
+			success(data);
+		}
+									 failure:^(ASDKAcquringApiError *error) {
+			failure(error);
+		}];
+	}
+}
+
 + (void)getUrlWithSuccess:(void (^)(NSURL *url))success
                   failure:(void (^)(ASDKAcquringSdkError *error))failure
 {
-    
+	
 }
 
 #pragma mark - ASDKAcquiringApiLoggerDelegate

@@ -34,7 +34,7 @@
                          email:(NSString *)email
                    customerKey:(NSString *)customerKey
 		 additionalPaymentData:(NSDictionary *)data
-                       success:(void (^)(NSString *paymentId))success
+                       success:(void (^)(ASDKPaymentInfo *paymentInfo))success
                      cancelled:(void (^)())cancelled
                          error:(void(^)(ASDKAcquringSdkError *error))error;
 

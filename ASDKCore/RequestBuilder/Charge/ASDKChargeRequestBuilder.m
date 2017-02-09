@@ -86,10 +86,10 @@
         return;
     }
     
-#define kASDKRebillIdDescription @"Зашифрованные данные карты."
+#define kASDKRebillIdDescription @"Идентификатор рекуррентного платежа."
 #define kASDKRebillIdMaxLength 20
     NSString *rebillId = self.rebillId.stringValue;
-    if (rebillId.length > kASDKRebillIdMaxLength || rebillId.length > 0)
+    if (rebillId.length > kASDKRebillIdMaxLength || rebillId.length == 0)
     {
         validationError = [ASDKAcquringSdkError errorWithMessage:kASDKRebillId details:[NSString stringWithFormat:@"%@ %@ %d",kASDKRebillIdDescription, kASDKValidationErrorMaxLengthString, kASDKRebillIdMaxLength] code:0];
         

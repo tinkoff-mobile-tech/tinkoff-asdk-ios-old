@@ -26,6 +26,7 @@
 #import "ASDKGetStateResponse.h"
 #import "ASDKGetCardListResponse.h"
 #import "ASDKRemoveCardResponse.h"
+#import "ASDKCancelResponse.h"
 
 #import "ASDKCardData.h"
 #import "ASDKCard.h"
@@ -77,7 +78,7 @@
 
 - (void)chargeWithPaymentId:(NSString *)paymentId
                    rebillId:(NSNumber *)rebillId
-                    success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo))success
+                    success:(void (^)(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                     failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
 - (void)getStateWithPaymentId:(NSString *)paymentId
@@ -96,5 +97,8 @@
 //- (void)getUrlWithSuccess:(void (^)(NSURL *url))success
 //                  failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
+- (void)rejectTrancastionWithPaymentId:(NSString *)paymentId
+							   success:(void (^)(ASDKCancelResponse *response))success
+							   failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
 @end

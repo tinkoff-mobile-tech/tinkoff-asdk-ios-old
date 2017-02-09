@@ -37,7 +37,7 @@
 {
     if (!_paymentInfo)
     {
-        _paymentInfo = [[ASDKPaymentInfo alloc] initWithDictionary:_dictionary[kASDKPaymentInfo]];
+        _paymentInfo = [[ASDKPaymentInfo alloc] initWithDictionary:_dictionary];
     }
     
     return _paymentInfo;
