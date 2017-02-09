@@ -173,9 +173,9 @@
 	
 	if ([self.additionalPaymentData_ count] > 0)
 	{
-		if ([self.additionalPaymentData_ objectForKey:@"Email"] == nil)
+		if ([self.additionalPaymentData_ objectForKey:@"Email"] == nil && [self.additionalPaymentData_ objectForKey:@"email"] == nil)
 		{
-			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра Email" code:0];
+			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра 'Email'" code:0];
 			
 			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
 			
@@ -183,7 +183,7 @@
 			
 			return;
 		}
-		
+
 		BOOL invalidAdditionalPaymentData = NO;
 		if ([[self.additionalPaymentData_ allKeys] count] > 20)
 		{
