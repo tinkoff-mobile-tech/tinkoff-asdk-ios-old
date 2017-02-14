@@ -28,7 +28,7 @@
 															   publicKeyDataSource:stringKeyCreator];
 	
 	[acquiringSdk setDebug:YES];
-	[acquiringSdk setTestDomain:YES];
+	[acquiringSdk setTestDomain:NO];
 	[acquiringSdk setLogger:nil];
 	
 	return [ASDKPaymentFormStarter paymentFormStarterWithAcquiringSdk:acquiringSdk];
@@ -36,7 +36,8 @@
 
 + (NSString *)customerKey
 {
-	return @"testCustomerKey1@gmail.com";
+	return @"testMerchantApplePay";
+//	return @"testCustomerKey1@gmail.com";
 }
 
 + (void)buyItemWithName:(NSString *)name

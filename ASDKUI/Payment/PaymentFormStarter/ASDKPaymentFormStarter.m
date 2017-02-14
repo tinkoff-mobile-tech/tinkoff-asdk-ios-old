@@ -295,7 +295,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			paymentRequest.countryCode = @"RU";
 			paymentRequest.currencyCode = @"RUB";
 			paymentRequest.supportedNetworks = [ASDKPaymentFormStarter payWithAppleSupportedNetworks];
-			paymentRequest.merchantCapabilities = PKMerchantCapability3DS;
+			paymentRequest.merchantCapabilities = PKMerchantCapability3DS|PKMerchantCapabilityCredit|PKMerchantCapabilityDebit;
 			//paymentSummaryItems
 			NSMutableArray *paymentSummaryItems = [NSMutableArray new];//
 			[paymentSummaryItems addObject:[PKPaymentSummaryItem summaryItemWithLabel:description amount:[NSDecimalNumber decimalNumberWithDecimal:[amount decimalValue]]]];
