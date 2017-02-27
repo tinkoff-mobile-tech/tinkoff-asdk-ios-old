@@ -265,7 +265,7 @@
 	NSString *location = [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
 	if ([location rangeOfString:@"ru_"].location == NSNotFound)
 	{
-		[parameters setObject:@"en" forKey:@"language"];
+		[parameters setObject:@"en" forKey:@"Language"];
 	}
 
     return parameters;
