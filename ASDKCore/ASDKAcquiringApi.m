@@ -208,6 +208,11 @@
         [parameters setObject:request.payForm forKey:kASDKPayForm];
     }
     
+    if (request.payType.length > 0)
+    {
+        [parameters setObject:request.payType forKey:kASDKPayType];
+    }
+    
     if (request.customerKey.length > 0)
     {
         [parameters setObject:request.customerKey forKey:kASDKCustomerKey];
