@@ -72,7 +72,7 @@
         [tokenString appendString:parameterValue];
     }
     
-    NSLog(@"%@",tokenString);
+//    NSLog(@"%@",tokenString);
     
     NSString *encodedTokenString = [ASDKCryptoUtils sha256:tokenString];
     

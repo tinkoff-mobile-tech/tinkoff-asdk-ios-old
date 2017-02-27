@@ -21,7 +21,7 @@
 {
 	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:[ASDKTestSettings testPublicKey]];
 	ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:[ASDKTestSettings testActiveTerminal]
-																		   payType:nil//@"О"//@"T"
+																		   payType:nil//@"O"//@"T"
 																		  password:[ASDKTestSettings testTerminalPassword]
 															   publicKeyDataSource:stringKeyCreator];
 	
