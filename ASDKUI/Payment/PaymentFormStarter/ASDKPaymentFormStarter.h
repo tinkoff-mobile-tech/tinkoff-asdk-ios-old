@@ -74,17 +74,54 @@
 + (BOOL)isPayWithAppleAvailable NS_AVAILABLE_IOS(9_0);
 + (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks NS_AVAILABLE_IOS(9_0);
 
+/**
+ * @bref оплата с помощью ApplePay, онлайн документация https://oplata.tinkoff.ru/documentation/?section=Init
+ *
+ * @param amount - Сумма
+ * @param orderId - Номер заказа в системе Продавца
+ * @param description - Краткое описание товара
+ *
+ * @param customerKey - Идентификатор покупателя в системе Продавца. Если передается, то для данного покупателя будет осуществлена
+ * привязка карты к данному идентификатору клиента CustomerKey. В нотификации на AUTHORIZED будет передан параметр CardId, 
+ * подробнее см. метод GetGardList https://oplata.tinkoff.ru/documentation/?section=GetCardList
+ *
+ * @param appleMerchantId - берётся из Target->Capabilities->ApplePay Merchant IDs. 
+ * Создается в https://developer.apple.com/account/ios/identifier/merchant
+ * Настраивается в сертификате https://developer.apple.com/account/ios/identifier/bundle  iOS App IDs-> Edit -> Apple Pay
+ *
+ * @param shippingMethods - доставка и стоимость доставки, 
+ * например "доставка курьером стоимость 300руб." @[[PKShippingMethod summaryItemWithLabel:@"Доставка курьером" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
+ *
+ * @param shippingContact - кому доставить и адрес доставки
+ *
+ * @param shippingEditableFields - какие поля можно показывать и редактировть на форме оплаты Apple Pay, например
+ * PKAddressFieldNone - ни одного (и не показывать) 
+ * PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone - Адрес ФИО Email и Телефон
+ *
+ * @param additionalPaymentData - Ключ=значение дополнительных параметров через “|”, например Email=a@test.ru|Phone=+71234567890,
+ * если ключи или значения содержат в себе спец символы, то получившееся значение должно быть закодировано функцией urlencode.
+ * При этом, обязательным является наличие дополнительного параметра Email. Прочие можно добавлять по желанию.
+ * Данные параметры будут переданы на страницу оплаты (в случае ее кастомизации). Максимальная длина для каждого передаваемого параметра:
+ * Ключ – 20 знаков, Значение – 100 знаков. Максимальное количество пар «ключ-значение» не может превышать 20.
+ * Пример передачи данных в параметре DATA: DATA=Phone=+71234567890|Email=a@test.com
+ *
+ * @param onSuccess блок в случае успеха
+ * @param onCancelled блок в случае сканирования с ошибкой
+ * @param onError блок при отмене сканирования
+ */
+
 - (void)payWithApplePayFromViewController:(UIViewController *)presentingViewController
-								   amount:(NSNumber *)amount
-								  orderId:(NSString *)orderId
-							  description:(NSString *)description
-							  customerKey:(NSString *)customerKey
-								sendEmail:(BOOL)sendEmail
+								   amount:(NSNumber *)amount // цена товара
+								  orderId:(NSString *)orderId // идентификатор товара
+							  description:(NSString *)description // описание
+							  customerKey:(NSString *)customerKey // идетинификатор пользователя (для сохранеиня платежей)
+								sendEmail:(BOOL)sendEmail // отправлять чек на почту
 									email:(NSString *)email
-						  appleMerchantId:(NSString *)appleMerchantId
-						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
-						  shippingContact:(PKContact *)shippingContact
-					additionalPaymentData:(NSDictionary *)data
+						  appleMerchantId:(NSString *)appleMerchantId // берётся из Target->Capabilities->ApplePay Merchant IDs
+						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods //доставка и стоимость доставки
+						  shippingContact:(PKContact *)shippingContact //кому доставить и адрес доставки
+				   shippingEditableFields:(PKAddressField)shippingEditableFields //какие поля можно показывать и редактировть на форме оплаты ApplePay
+					additionalPaymentData:(NSDictionary *)additionalPaymentData // Ключ=значение дополнительных параметров через “|”, например Email=a@test.ru|Phone=+71234567890
 								  success:(void (^)(NSString *paymentId))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError NS_AVAILABLE_IOS(9_0);

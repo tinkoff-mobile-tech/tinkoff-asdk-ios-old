@@ -193,8 +193,9 @@
 								 description:self.item.title
 									   email:shippingContact.emailAddress
 							 appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
-							 shippingMethods:nil//@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
+							 shippingMethods:nil //@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
 							 shippingContact:shippingContact
+					  shippingEditableFields:PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone //PKAddressFieldNone
 					   additionalPaymentData:nil
 						  fromViewController:self
 									 success:^(NSString *paymentId) { NSLog(@"%@", paymentId); }

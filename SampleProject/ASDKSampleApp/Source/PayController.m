@@ -132,6 +132,7 @@
 			  appleMerchantId:(NSString *)appleMerchantId
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 			  shippingContact:(PKContact *)shippingContact
+	   shippingEditableFields:(PKAddressField)shippingEditableFields
 		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(NSString *paymentId))onSuccess
@@ -149,6 +150,7 @@
 										  appleMerchantId:appleMerchantId
 										  shippingMethods:shippingMethods
 										  shippingContact:shippingContact
+								   shippingEditableFields:shippingEditableFields
 									additionalPaymentData:data
 												  success:^(NSString *paymentId) {
 													  PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];
