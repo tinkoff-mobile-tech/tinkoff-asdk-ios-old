@@ -102,7 +102,7 @@
 //ОБЯЗАТЕЛЬНЫЕ ПОЛЯ
 #define kASDKAmountDescription @"Сумма в копейках."
 #define kASDKAmountMaxLength 10
-    NSString *amount = [NSString stringWithFormat:@"%.2f",self.amount.doubleValue];
+    NSString *amount = [NSString stringWithFormat:@"%.0f",self.amount.doubleValue];
     if (amount.length > kASDKAmountMaxLength || self.amount.doubleValue <= 0)
     {
         validationError = [ASDKAcquringSdkError errorWithMessage:kASDKAmount details:[NSString stringWithFormat:@"%@ %@ %d",kASDKAmountDescription, kASDKValidationErrorMaxLengthString, kASDKAmountMaxLength] code:0];
