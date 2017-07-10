@@ -30,6 +30,7 @@
 			  appleMerchantId:(NSString *)appleMerchantId
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 			  shippingContact:(PKContact *)shippingContact
+	   shippingEditableFields:(PKAddressField)shippingEditableFields
 		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess

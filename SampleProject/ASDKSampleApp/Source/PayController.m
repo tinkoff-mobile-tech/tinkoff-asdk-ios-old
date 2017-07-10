@@ -23,7 +23,7 @@
 {
 	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:[ASDKTestSettings testPublicKey]];
 	ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:[ASDKTestSettings testActiveTerminal]
-																		   payType:nil//@"О"//@"T"
+																		   payType:nil//@"O"//@"T"
 																		  password:[ASDKTestSettings testTerminalPassword]
 															   publicKeyDataSource:stringKeyCreator];
 	
@@ -138,6 +138,7 @@
 			  appleMerchantId:(NSString *)appleMerchantId
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 			  shippingContact:(PKContact *)shippingContact
+	   shippingEditableFields:(PKAddressField)shippingEditableFields
 		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
@@ -155,6 +156,7 @@
 										  appleMerchantId:appleMerchantId
 										  shippingMethods:shippingMethods
 										  shippingContact:shippingContact
+								   shippingEditableFields:shippingEditableFields
 									additionalPaymentData:data
 												  success:^(ASDKPaymentInfo *paymentInfo) {
 													  [[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":description, kASDKStatus:paymentInfo.status}];

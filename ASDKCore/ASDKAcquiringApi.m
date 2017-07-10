@@ -208,6 +208,11 @@
         [parameters setObject:request.payForm forKey:kASDKPayForm];
     }
     
+    if (request.payType.length > 0)
+    {
+        [parameters setObject:request.payType forKey:kASDKPayType];
+    }
+    
     if (request.customerKey.length > 0)
     {
         [parameters setObject:request.customerKey forKey:kASDKCustomerKey];
@@ -223,7 +228,8 @@
 		[parameters setObject:request.additionalPaymentData forKey:kASDKDATA];
 	}
 	
-	if ([[[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString] rangeOfString:@"ru"].location == NSNotFound)
+	NSString *location = [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
+	if ([location rangeOfString:@"ru_"].location == NSNotFound)
 	{
 		[parameters setObject:@"en" forKey:@"Language"];
 	}

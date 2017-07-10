@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ASDKCore"
-  s.version      = "1.1.4"
+  s.version      = "1.1.9"
   s.summary      = "Core library that allows you to use internet acquiring from Tinkoff Bank in your app"
   s.description  = "Core library that allows you to use internet acquiring from Tinkoff Bank in your app!"
 

@@ -278,7 +278,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 						  appleMerchantId:(NSString *)appleMerchantId
 						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 						  shippingContact:(PKContact *)shippingContact
-					additionalPaymentData:(NSDictionary *)data
+				   shippingEditableFields:(PKAddressField)shippingEditableFields
+					additionalPaymentData:(NSDictionary *)additionalPaymentData
 								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError
@@ -288,8 +289,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	self.onError = onError;
 	self.onCancelled = onCancelled;
 
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:YES additionalPaymentData:data
-		success:^(ASDKInitResponse *response) {
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:YES additionalPaymentData:additionalPaymentData
+		success:^(ASDKInitResponse *response){
 			self.paymentIdForApplePay = response.paymentId;
 			
 			PKPaymentRequest *paymentRequest = [PKPaymentRequest new];
@@ -316,13 +317,13 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			paymentRequest.requiredBillingAddressFields = addressFieldBilling;
 			
 			//
-			PKAddressField addressFieldShipping = PKAddressFieldNone;
-			if (shippingContact.postalAddress) { addressFieldShipping |= PKAddressFieldPostalAddress; }
-			if (shippingContact.name) { addressFieldShipping |= PKAddressFieldName; }
-			if (shippingContact.emailAddress) { addressFieldShipping |= PKAddressFieldEmail; }
-			if (shippingContact.phoneNumber) { addressFieldShipping |= PKAddressFieldPhone; }
+			//PKAddressField shippingEditableFields = PKAddressFieldNone;
+			//if (shippingContact.postalAddress) { shippingEditableFields |= PKAddressFieldPostalAddress; }
+			//if (shippingContact.name) { shippingEditableFields |= PKAddressFieldName; }
+			//if (shippingContact.emailAddress) { shippingEditableFields |= PKAddressFieldEmail; }
+			//if (shippingContact.phoneNumber) { shippingEditableFields |= PKAddressFieldPhone; }
+			paymentRequest.requiredShippingAddressFields = shippingEditableFields;
 			paymentRequest.shippingContact = shippingContact;
-			paymentRequest.requiredShippingAddressFields = addressFieldShipping;
 			
 			//paymentRequest.shippingMethods = shippingMethods;
 			

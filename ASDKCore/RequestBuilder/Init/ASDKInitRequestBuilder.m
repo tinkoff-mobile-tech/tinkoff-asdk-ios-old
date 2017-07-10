@@ -102,7 +102,7 @@
 //ОБЯЗАТЕЛЬНЫЕ ПОЛЯ
 #define kASDKAmountDescription @"Сумма в копейках."
 #define kASDKAmountMaxLength 10
-    NSString *amount = [NSString stringWithFormat:@"%.2f",self.amount.doubleValue];
+    NSString *amount = [NSString stringWithFormat:@"%.0f",self.amount.doubleValue];
     if (amount.length > kASDKAmountMaxLength || self.amount.doubleValue <= 0)
     {
         validationError = [ASDKAcquringSdkError errorWithMessage:kASDKAmount details:[NSString stringWithFormat:@"%@ %@ %d",kASDKAmountDescription, kASDKValidationErrorMaxLengthString, kASDKAmountMaxLength] code:0];
@@ -173,9 +173,9 @@
 	
 	if ([self.additionalPaymentData_ count] > 0)
 	{
-		if ([self.additionalPaymentData_ objectForKey:@"Email"] == nil)
+		if ([self.additionalPaymentData_ objectForKey:@"Email"] == nil && [self.additionalPaymentData_ objectForKey:@"email"] == nil)
 		{
-			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра Email" code:0];
+			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра 'Email'" code:0];
 			
 			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
 			
@@ -183,7 +183,7 @@
 			
 			return;
 		}
-		
+
 		BOOL invalidAdditionalPaymentData = NO;
 		if ([[self.additionalPaymentData_ allKeys] count] > 20)
 		{
@@ -262,10 +262,10 @@
 		[parameters setObject:strPostBody forKey:kASDKDATA];
 	}
 	
-	//NSLog(@"%@", [[NSLocale currentLocale] objectForKey:NSLocaleIdentifier]);
-	if ([[[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString] rangeOfString:@"ru"].location == NSNotFound)
+	NSString *location = [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
+	if ([location rangeOfString:@"ru_"].location == NSNotFound)
 	{
-		[parameters setObject:@"en" forKey:@"language"];
+		[parameters setObject:@"en" forKey:@"Language"];
 	}
 
     return parameters;
