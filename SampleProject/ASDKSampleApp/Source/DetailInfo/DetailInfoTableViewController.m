@@ -160,6 +160,7 @@
     [PayController buyItemWithName:self.item.title
                        description:self.item.bookDescription
                             amount:self.item.cost
+						 recurrent:NO
 			 additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
                 fromViewController:self
                            success:^(ASDKPaymentInfo *paymentInfo)

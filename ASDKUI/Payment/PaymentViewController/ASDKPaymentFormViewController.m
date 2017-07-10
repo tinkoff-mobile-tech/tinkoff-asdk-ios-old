@@ -70,6 +70,7 @@ typedef enum
     NSString *_cardId;
     NSString *_email;
     NSString *_customerKey;
+	BOOL	_requrent;
 	
     BOOL _shouldShowKeyboardWhenNewCardSelected;
 }
@@ -107,6 +108,7 @@ typedef enum
                         cardId:(NSString *)cardId
                          email:(NSString *)email
 				   customerKey:(NSString *)customerKey
+					 recurrent:(BOOL)recurrent
 		 additionalPaymentData:(NSDictionary *)data
                        success:(void (^)(ASDKPaymentInfo *paymentInfo))success
                      cancelled:(void (^)())cancelled
@@ -126,6 +128,7 @@ typedef enum
         _onCancelled = cancelled;
         _onError = error;
         _customerKey = customerKey;
+		_requrent = recurrent;
 		_additionalPaymentData = data;
     }
     
@@ -641,7 +644,7 @@ typedef enum
                           description:nil
 							  payForm:nil
                           customerKey:_customerKey
-							recurrent:NO
+							recurrent:_requrent
 				additionalPaymentData:_additionalPaymentData
                               success:^(ASDKInitResponse *response)
     {

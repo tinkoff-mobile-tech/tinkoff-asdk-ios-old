@@ -194,6 +194,7 @@
     [PayController buyItemWithName:NSLocalizedString(@"Books", @"Книги")
                        description:NSLocalizedString(@"ALotOfBooks", @"Много книг")
                             amount:[NSNumber numberWithDouble:_total]
+						 recurrent:NO
 			 additionalPaymentData:nil
                 fromViewController:self
                            success:^(ASDKPaymentInfo *paymentInfo)

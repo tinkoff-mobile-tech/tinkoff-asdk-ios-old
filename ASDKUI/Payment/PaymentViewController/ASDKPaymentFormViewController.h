@@ -33,6 +33,7 @@
                         cardId:(NSString *)cardId
                          email:(NSString *)email
                    customerKey:(NSString *)customerKey
+					 recurrent:(BOOL)recurrent
 		 additionalPaymentData:(NSDictionary *)data
                        success:(void (^)(ASDKPaymentInfo *paymentInfo))success
                      cancelled:(void (^)())cancelled

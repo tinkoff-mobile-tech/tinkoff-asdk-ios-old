@@ -43,6 +43,7 @@
 + (void)buyItemWithName:(NSString *)name
             description:(NSString *)description
                  amount:(NSNumber *)amount
+			  recurrent:(BOOL)recurrent
   additionalPaymentData:(NSDictionary *)data
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
@@ -70,6 +71,7 @@
                                                       cardId:nil
                                                        email:nil 
                                                  customerKey:[PayController customerKey]
+												   recurrent:recurrent
 									   additionalPaymentData:data
                                                      success:^(ASDKPaymentInfo *paymentInfo)
      {

@@ -114,6 +114,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                       cardId:(NSString *)cardId
                                        email:(NSString *)email
                                  customerKey:(NSString *)customerKey
+								   recurrent:(BOOL)recurrent
 					   additionalPaymentData:(NSDictionary *)data
                                      success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
                                    cancelled:(void (^)())onCancelled
@@ -128,6 +129,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                                                                        cardId:cardId
                                                                                         email:email
                                                                                   customerKey:customerKey
+																					recurrent:recurrent
 																		additionalPaymentData:data
                                                                                       success:^(ASDKPaymentInfo *paymentInfo)
                                          {

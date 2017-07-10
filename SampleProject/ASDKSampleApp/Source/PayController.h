@@ -16,6 +16,7 @@
 + (void)buyItemWithName:(NSString *)name
             description:(NSString *)description
                  amount:(NSNumber *)amount
+			  recurrent:(BOOL)recurrent
   additionalPaymentData:(NSDictionary *)data
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
