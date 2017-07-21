@@ -67,7 +67,7 @@ typedef enum
     NSString *_orderId;
     NSString *_paymentTitle;
     NSString *_paymentDescription;
-    NSString *_cardId;
+    NSString *_cardIdPriorityPass;
     NSString *_email;
     NSString *_customerKey;
 	BOOL	_requrent;
@@ -122,7 +122,7 @@ typedef enum
         _amount = amount;
         _orderId = orderId;
         _paymentDescription = description;
-        _cardId = cardId;
+        _cardIdPriorityPass = cardId;
         _email = email;
         _onSuccess = success;
         _onCancelled = cancelled;
@@ -153,7 +153,7 @@ typedef enum
     cancelButton.tintColor = [designConfiguration navigationBarItemsTextColor];
     
     [self.navigationItem setLeftBarButtonItem:cancelButton];
-    
+
     [self updateExternalCardsList];
 }
 
@@ -161,39 +161,32 @@ typedef enum
 {
     if (_customerKey.length > 0)
     {
-//        if ([[ASDKCardsListDataController instance] externalCards] == nil)
-//        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
-            
-            __weak typeof(self) weakSelf = self;
-            
-            [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^
-            {
-                [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-                
-                __strong typeof(self) strongSelf = weakSelf;
-                
-                if (strongSelf)
-                {
-                    [strongSelf updateSelectedExternalCardOnStart];
-                }
-            }
-                                                                         errorBlock:^(ASDKAcquringSdkError *error)
-            {
-                [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-                
-                __strong typeof(self) strongSelf = weakSelf;
-                
-                if (strongSelf)
-                {
-                    [strongSelf updateSelectedExternalCardOnStart];
-                }
-            }];
-//        }
-//        else
-//        {
-//            [self updateSelectedExternalCardOnStart];
-//        }
+		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
+		
+		__weak typeof(self) weakSelf = self;
+		
+		[[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^
+		{
+			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+			
+			__strong typeof(self) strongSelf = weakSelf;
+			
+			if (strongSelf)
+			{
+				[strongSelf updateSelectedExternalCardOnStart];
+			}
+		}
+																	 errorBlock:^(ASDKAcquringSdkError *error)
+		{
+			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+			
+			__strong typeof(self) strongSelf = weakSelf;
+			
+			if (strongSelf)
+			{
+				[strongSelf updateSelectedExternalCardOnStart];
+			}
+		}];
     }
 }
 
@@ -201,17 +194,32 @@ typedef enum
 {
     if ([[ASDKCardsListDataController instance] externalCards].count > 0)
     {
-		ASDKCard *card = [[ASDKCardsListDataController instance] cardWithRebillId];
-		if (card == nil)
+		ASDKCard *card = _selectedCard;
+
+		if (_selectedCard == nil)
 		{
-			card = [[[ASDKCardsListDataController instance] externalCards] firstObject];
+			if (_cardIdPriorityPass != nil)
+			{
+				card = [[ASDKCardsListDataController instance] cardWithIdentifier:_cardIdPriorityPass];
+				if (card == nil && [_cardIdPriorityPass length] == 0)
+				{
+					card = [[ASDKCardsListDataController instance] cardWithRebillId];
+					if (card == nil)
+					{
+						card = [[[ASDKCardsListDataController instance] externalCards] firstObject];
+					}
+				}
+			}
+
+			if (card != nil)
+			{
+				[self setSelectedCard:card];
+				
+				_shouldShowKeyboardWhenNewCardSelected = YES;
+				
+				[self.tableView reloadData];
+			}
 		}
-		
-        [self setSelectedCard:card];
-        
-        _shouldShowKeyboardWhenNewCardSelected = YES;
-        
-        [self.tableView reloadData];
     }
 }
 
@@ -284,12 +292,14 @@ typedef enum
 		
 		if (_selectedCard.rebillId != nil)
 		{
+			[[self cardRequisitesCell] setUserInteractionEnabled:NO];
 			[self cardRequisitesCell].showSecretContainer = NO;
 			[[self cardRequisitesCell] setCardNumber:cardNumber];
 			[[[self cardRequisitesCell] textFieldCardNumber] setText:cardNumber];// updateCardRequisitesCellWithCardNumber:[cardNumber substringFromIndex:cardNumber.length - 4]];
 		}
 		else
 		{
+			[[self cardRequisitesCell] setUserInteractionEnabled:YES];
 			[self updateCardRequisitesCellWithCardNumber:cardNumber];
 			[self cardRequisitesCell].showSecretContainer = YES;
 		}
@@ -1049,7 +1059,7 @@ typedef enum
     
     [self.tableView reloadData];
     
-    [self setSelectedCard:[[[ASDKCardsListDataController instance] externalCards] firstObject]];
+    //[self setSelectedCard:[[[ASDKCardsListDataController instance] externalCards] firstObject]];
 }
 
 @end

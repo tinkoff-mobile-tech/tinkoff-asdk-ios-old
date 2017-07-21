@@ -43,4 +43,5 @@
 - (UIColor *)payButtonPressedColor;
 - (UIColor *)payButtonTextColor;
 
+
 @end

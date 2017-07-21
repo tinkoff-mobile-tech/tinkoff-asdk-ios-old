@@ -98,6 +98,20 @@ static ASDKCardsListDataController * __cardsListDataController = nil;
 	return nil;
 }
 
+- (ASDKCard *)cardWithIdentifier:(NSString *)indentifier
+{
+	for (ASDKCard *card in self.externalCards)
+	{
+		if ([card.cardId isEqualToString:indentifier] == YES)
+		{
+			return card;
+		}
+	}
+
+	return nil;
+}
+
+
 - (void)updateCardsListWithSuccessBlock:(void (^)())onSuccess
                              errorBlock:(void (^)(ASDKAcquringSdkError *error))onError
 {
@@ -112,9 +126,18 @@ static ASDKCardsListDataController * __cardsListDataController = nil;
              
              if (strongSelf)
              {
-                 strongSelf.externalCards = response.cards;
+				 NSMutableArray *cards = [NSMutableArray new];
+				 for (ASDKCard *card in response.cards)
+				 {
+					 if ([card status] == ASDKCardStatusActive)
+					 {
+						 [cards addObject:card];
+					 }
+				 }
 				 
+                 strongSelf.externalCards = [cards copy];
              }
+			 
              if (onSuccess)
              {
                  onSuccess();

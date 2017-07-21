@@ -61,6 +61,8 @@
 //    paymentFormStarter.designConfiguration = designConfiguration;
 //Настройка сканнера карт
 
+
+	
     paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
 
 	[paymentFormStarter presentPaymentFormFromViewController:viewController
@@ -68,7 +70,7 @@
                                                       amount:amount
                                                        title:name
                                                  description:description
-                                                      cardId:nil
+                                                      cardId:nil// nil - новая, @"" - последняя,  @"836252" - карта по CardId
                                                        email:nil 
                                                  customerKey:[PayController customerKey]
 												   recurrent:recurrent
