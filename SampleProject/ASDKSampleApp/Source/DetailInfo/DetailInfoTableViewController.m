@@ -199,6 +199,7 @@
 							 shippingMethods:nil //@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
 							 shippingContact:shippingContact
 					  shippingEditableFields:PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone //PKAddressFieldNone
+								   recurrent:YES
 					   additionalPaymentData:nil
 						  fromViewController:self
 									 success:^(ASDKPaymentInfo *paymentIfo) {

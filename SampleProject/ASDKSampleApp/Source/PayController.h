@@ -31,6 +31,7 @@
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 			  shippingContact:(PKContact *)shippingContact
 	   shippingEditableFields:(PKAddressField)shippingEditableFields
+					recurrent:(BOOL)recurrent
 		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess

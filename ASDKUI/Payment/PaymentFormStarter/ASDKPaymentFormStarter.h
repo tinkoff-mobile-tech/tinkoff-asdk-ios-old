@@ -122,6 +122,7 @@
 						  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods //доставка и стоимость доставки
 						  shippingContact:(PKContact *)shippingContact //кому доставить и адрес доставки
 				   shippingEditableFields:(PKAddressField)shippingEditableFields //какие поля можно показывать и редактировть на форме оплаты ApplePay
+								recurrent:(BOOL)recurrent
 					additionalPaymentData:(NSDictionary *)additionalPaymentData // Ключ=значение дополнительных параметров через “|”, например Email=a@test.ru|Phone=+71234567890
 								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 								cancelled:(void (^)())onCancelled

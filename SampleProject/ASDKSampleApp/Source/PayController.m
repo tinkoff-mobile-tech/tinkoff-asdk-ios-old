@@ -139,6 +139,7 @@
 			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
 			  shippingContact:(PKContact *)shippingContact
 	   shippingEditableFields:(PKAddressField)shippingEditableFields
+					recurrent:(BOOL)recurrent
 		additionalPaymentData:(NSDictionary *)data
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
@@ -157,6 +158,7 @@
 										  shippingMethods:shippingMethods
 										  shippingContact:shippingContact
 								   shippingEditableFields:shippingEditableFields
+												recurrent:YES
 									additionalPaymentData:data
 												  success:^(ASDKPaymentInfo *paymentInfo) {
 													  [[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":description, kASDKStatus:paymentInfo.status}];
