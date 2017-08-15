@@ -90,6 +90,7 @@ typedef enum
 @property (nonatomic, strong) ASDKCard *selectedCard;
 @property (nonatomic, strong) NSDictionary *additionalPaymentData;
 
+@property (nonatomic, assign) BOOL updateCardCell;
 @end
 
 @implementation ASDKPaymentFormViewController
@@ -130,6 +131,7 @@ typedef enum
         _customerKey = customerKey;
 		_requrent = recurrent;
 		_additionalPaymentData = data;
+		_updateCardCell = NO;
     }
     
     return self;
@@ -155,6 +157,17 @@ typedef enum
     [self.navigationItem setLeftBarButtonItem:cancelButton];
 
     [self updateExternalCardsList];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	
+	if (self.updateCardCell == YES)
+	{
+		self.updateCardCell = NO;
+		[self updateSelectedExternalCardOnStart];
+	}
 }
 
 - (void)updateExternalCardsList
@@ -221,6 +234,11 @@ typedef enum
 			}
 		}
     }
+	else
+	{
+		[self setSelectedCard:nil];
+		[self.tableView reloadData];
+	}
 }
 
 #pragma mark - ASDKCustomKeyboardInputDelegate
@@ -682,10 +700,10 @@ typedef enum
 
 - (void)performFinishAuthorizeRequestWithPaymentId:(ASDKInitResponse *)payment
 {
-	if (_selectedCard && _selectedCard.rebillId)
+	if (self.selectedCard && self.selectedCard.rebillId)
 	{
 		 __weak typeof(self) weakSelf = self;
-		[self.acquiringSdk chargeWithPaymentId:payment.paymentId rebillId:_selectedCard.rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+		[self.acquiringSdk chargeWithPaymentId:payment.paymentId rebillId:self.selectedCard.rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
 			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 			__strong typeof(weakSelf) strongSelf1 = weakSelf;
 			if (strongSelf1)
@@ -1055,11 +1073,26 @@ typedef enum
 
 - (void)cardsListDidCancel
 {
-    [self.view endEditing:YES];
-    
-    [self.tableView reloadData];
-    
-    //[self setSelectedCard:[[[ASDKCardsListDataController instance] externalCards] firstObject]];
+	if (self.view.window == nil)
+	{
+		self.updateCardCell = YES;
+	}
+	else
+	{
+		[self updateSelectedExternalCardOnStart];
+	}
+}
+
+- (void)cardListDidChanged
+{
+	if (self.view.window == nil)
+	{
+		self.updateCardCell = YES;
+	}
+	else
+	{
+		[self updateSelectedExternalCardOnStart];
+	}
 }
 
 @end

@@ -845,8 +845,8 @@ typedef enum
 	
 	[self.textFieldCardNumber setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:placeholderText attributes:cardNumberAttributes]];
 	[self.textFieldCardDate setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:LOC(@"Transfer.CardDate.placeholder") attributes:cardDateAttributes]];
-	[self.textFieldCardCVC setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:cvcPlaceholderText attributes:cardCVCAttributes]];
-    [self.secretCVVTextField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:cvcPlaceholderText attributes:cardCVCAttributes]];
+	[self.textFieldCardCVC setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:LOC(cvcPlaceholderText) attributes:cardCVCAttributes]];
+    [self.secretCVVTextField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:LOC(cvcPlaceholderText) attributes:cardCVCAttributes]];
 }
 
 #pragma mark Button handling
@@ -878,9 +878,8 @@ typedef enum
 
 - (BOOL)validateForm
 {
+	[self resetValidationResults];
 	BOOL result = YES;
-    
-    [self resetValidationResults];
     
     if (self.showSecretContainer)
     {

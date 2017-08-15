@@ -23,6 +23,7 @@
 
 - (void)didSelectCard:(ASDKCard *)card;
 - (void)cardsListDidCancel;
+- (void)cardListDidChanged;
 
 @end
 

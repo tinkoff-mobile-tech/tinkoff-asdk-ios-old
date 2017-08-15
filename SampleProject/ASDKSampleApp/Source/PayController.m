@@ -28,7 +28,7 @@
 															   publicKeyDataSource:stringKeyCreator];
 	
 	[acquiringSdk setDebug:YES];
-	[acquiringSdk setTestDomain:NO];
+	[acquiringSdk setTestDomain:YES];
 	[acquiringSdk setLogger:nil];
 	
 	return [ASDKPaymentFormStarter paymentFormStarterWithAcquiringSdk:acquiringSdk];
@@ -36,8 +36,39 @@
 
 + (NSString *)customerKey
 {
-	return @"testMerchantApplePay";
-//	return @"testCustomerKey1@gmail.com";
+//	return @"testMerchantApplePay";
+	return @"testCustomerKey1@gmail.com";
+}
+
++ (UIAlertController *)alertWithError:(ASDKAcquringSdkError *)error
+{
+	NSString *alertTitle = error.errorMessage ? error.errorMessage : @"Ошибка";
+	NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
+	
+	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
+	
+	[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Close", @"Закрыть") style:UIAlertActionStyleCancel
+													  handler:^(UIAlertAction *action) {
+														  [alertController dismissViewControllerAnimated:YES completion:nil];
+													  }]];
+	return alertController;
+}
+
++ (UIAlertController *)alertForCancel
+{
+	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"CanceledPayment", @"Оплата отменена") message:nil preferredStyle:UIAlertControllerStyleAlert];
+	
+	UIAlertAction *cancelAction = [UIAlertAction
+								   actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
+								   style:UIAlertActionStyleCancel
+								   handler:^(UIAlertAction *action)
+								   {
+									   [alertController dismissViewControllerAnimated:YES completion:nil];
+								   }];
+	
+	[alertController addAction:cancelAction];
+	
+	return alertController;
 }
 
 + (void)buyItemWithName:(NSString *)name
@@ -60,8 +91,6 @@
 //    [designConfiguration setPayButtonColor:[UIColor greenColor] payButtonPressedColor:[UIColor blueColor] payButtonTextColor:[UIColor whiteColor]];
 //    paymentFormStarter.designConfiguration = designConfiguration;
 //Настройка сканнера карт
-
-
 	
     paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
 
@@ -70,7 +99,7 @@
                                                       amount:amount
                                                        title:name
                                                  description:description
-                                                      cardId:nil// nil - новая, @"" - последняя,  @"836252" - карта по CardId
+                                                      cardId:@""// nil - новая нужно вводить реквизиты карты, @"" - последняя сохраненная, @"836252" - карта по CardId
                                                        email:nil 
                                                  customerKey:[PayController customerKey]
 												   recurrent:recurrent
@@ -89,44 +118,46 @@
      }
                                                    cancelled:^
      {
-         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"CanceledPayment", @"Оплата отменена") message:nil preferredStyle:UIAlertControllerStyleAlert];
-         
-         UIAlertAction *cancelAction = [UIAlertAction
-                                        actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
-                                        style:UIAlertActionStyleCancel
-                                        handler:^(UIAlertAction *action)
-                                        {
-                                            [alertController dismissViewControllerAnimated:YES completion:nil];
-                                        }];
-         
-         [alertController addAction:cancelAction];
-         
-         [viewController presentViewController:alertController animated:YES completion:nil];
-
+         [viewController presentViewController:[PayController alertForCancel] animated:YES completion:nil];
          onCancelled();
      }
                                                        error:^(ASDKAcquringSdkError *error)
      {
-		 
-		 NSString *alertTitle = error.errorMessage ? error.errorMessage : @"Ошибка";
-		 NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
-		 
-         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
-         
-         UIAlertAction *cancelAction = [UIAlertAction
-                                        actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
-                                        style:UIAlertActionStyleCancel
-                                        handler:^(UIAlertAction *action)
-                                        {
-                                            [alertController dismissViewControllerAnimated:YES completion:nil];
-                                        }];
-         
-         [alertController addAction:cancelAction];
-         
-         [viewController presentViewController:alertController animated:YES completion:nil];
-         
+         [viewController presentViewController:[PayController alertWithError:error] animated:YES completion:nil];
          onError(error);
      }];
+}
+
++ (void)chargeWithRebillId:(NSNumber *)rebillId
+					amount:(NSNumber *)amount
+			   description:(NSString *)description
+	 additionalPaymentData:(NSDictionary *)data
+		fromViewController:(UIViewController *)viewController
+				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+					 error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
+
+	double randomOrderId = arc4random()%10000000;
+
+	paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
+
+	[paymentFormStarter chargeWithRebillId:rebillId amount:amount orderId:[NSNumber numberWithDouble:randomOrderId].stringValue description:description customerKey:[PayController customerKey] additionalPaymentData:data
+		success:^(ASDKPaymentInfo *paymentInfo) {
+			[[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":([description length] > 0 ? description: @""), kASDKStatus:paymentInfo.status}];
+
+			PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];
+			vc.amount = amount;
+
+			UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+
+			[viewController presentViewController:nc animated:YES completion:nil];
+
+			onSuccess(paymentInfo);
+		} error:^(ASDKAcquringSdkError *error) {
+			[viewController presentViewController:[PayController alertWithError:error] animated:YES completion:nil];
+			onError(error);
+		}];
 }
 
 + (BOOL)isPayWithAppleAvailable
@@ -173,38 +204,13 @@
 													  onSuccess(paymentInfo);
 												  }
 												cancelled:^{
-													  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"CanceledPayment", @"Оплата отменена") message:nil preferredStyle:UIAlertControllerStyleAlert];
-													  
-													  UIAlertAction *cancelAction = [UIAlertAction
-																					 actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
-																					 style:UIAlertActionStyleCancel
-																					 handler:^(UIAlertAction *action)
-																					 {
-																						 [alertController dismissViewControllerAnimated:YES completion:nil];
-																					 }];
-													  
-													  [alertController addAction:cancelAction];
-													  
-													  [viewController presentViewController:alertController animated:YES completion:nil];
-													  
+													  [viewController presentViewController:[PayController alertForCancel] animated:YES completion:nil];
 													  onCancelled();
 												  }
 													error:^(ASDKAcquringSdkError *error) {
 														if (error)
 														{
-														  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.errorMessage message:error.errorDetails preferredStyle:UIAlertControllerStyleAlert];
-														  
-														  UIAlertAction *cancelAction = [UIAlertAction
-																						 actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
-																						 style:UIAlertActionStyleCancel
-																						 handler:^(UIAlertAction *action)
-																						 {
-																							 [alertController dismissViewControllerAnimated:YES completion:nil];
-																						 }];
-														  
-														  [alertController addAction:cancelAction];
-														  
-														  [viewController presentViewController:alertController animated:YES completion:nil];
+															[viewController presentViewController:[PayController alertWithError:error] animated:YES completion:nil];
 														}
 
 													  onError(error);

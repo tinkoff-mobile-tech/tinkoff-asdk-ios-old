@@ -23,6 +23,14 @@
               cancelled:(void (^)())onCancelled
                   error:(void(^)(ASDKAcquringSdkError *error))onError;
 
++ (void)chargeWithRebillId:(NSNumber *)rebillId
+					amount:(NSNumber *)amount
+			   description:(NSString *)description
+	 additionalPaymentData:(NSDictionary *)data
+		fromViewController:(UIViewController *)viewController
+				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+					 error:(void (^)(ASDKAcquringSdkError *error))onError;
+
 + (BOOL)isPayWithAppleAvailable;
 + (void)buyWithApplePayAmount:(NSNumber *)amount
 				  description:(NSString *)description

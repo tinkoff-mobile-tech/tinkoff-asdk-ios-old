@@ -369,20 +369,16 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	}];
 }
 
-- (void)chargeFromViewController:(UIViewController *)presentingViewController
-						  amount:(NSNumber *)amount
-						 orderId:(NSString *)orderId
-					 description:(NSString *)description
-					 customerKey:(NSString *)customerKey
-					   sendEmail:(BOOL)sendEmail
-						   email:(NSString *)email
-						rebillId:(NSNumber *)rebillId
-		   additionalPaymentData:(NSDictionary *)data
-						 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
-					   cancelled:(void (^)())onCancelled
-						   error:(void (^)(ASDKAcquringSdkError *error))onError
+- (void)chargeWithRebillId:(NSNumber *)rebillId
+					amount:(NSNumber *)amount
+				   orderId:(NSString *)orderId
+			   description:(NSString *)description
+			   customerKey:(NSString *)customerKey
+	 additionalPaymentData:(NSDictionary *)data
+				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+					 error:(void (^)(ASDKAcquringSdkError *error))onError
 {
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:NO additionalPaymentData:data
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:description payForm:nil customerKey:customerKey recurrent:NO additionalPaymentData:data
 	 success:^(ASDKInitResponse *response) {
 		 [self.acquiringSdk chargeWithPaymentId:response.paymentId rebillId:rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
 			 [ASDKPaymentFormStarter resetSharedInstance];

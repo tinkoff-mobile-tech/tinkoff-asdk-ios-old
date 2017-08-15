@@ -72,6 +72,15 @@
                                    cancelled:(void (^)())onCancelled
                                        error:(void (^)(ASDKAcquringSdkError *error))onError;
 
+- (void)chargeWithRebillId:(NSNumber *)rebillId
+					amount:(NSNumber *)amount
+				   orderId:(NSString *)orderId
+			   description:(NSString *)description
+			   customerKey:(NSString *)customerKey
+	 additionalPaymentData:(NSDictionary *)data
+				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+					 error:(void (^)(ASDKAcquringSdkError *error))onError;
+
 + (BOOL)isPayWithAppleAvailable NS_AVAILABLE_IOS(9_0);
 + (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks NS_AVAILABLE_IOS(9_0);
 

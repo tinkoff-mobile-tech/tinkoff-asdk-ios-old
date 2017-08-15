@@ -37,8 +37,7 @@
                                              bookDescription:item[@"description"]];
         [books addObject:bookItem];
     }
-    
-	
+
     ItemsListTableViewController *rootViewController = [[ItemsListTableViewController alloc] initWithItems:books];
 	//TransactionsTableViewController *rootViewController = [[TransactionsTableViewController alloc] init];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
@@ -46,7 +45,7 @@
     self.window.rootViewController = navigationController;
     
     [self.window makeKeyAndVisible];
-    
+	
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setTranslucent:NO];
     [[UINavigationBar appearance] setBarTintColor:kMainBlueColor];

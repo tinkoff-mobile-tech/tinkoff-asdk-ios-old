@@ -198,6 +198,12 @@ typedef enum
 			 	[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 			 [tableView endUpdates];
 
+			id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
+			if (cardsListDelegate && [cardsListDelegate respondsToSelector:@selector(cardListDidChanged)])
+			{
+				[cardsListDelegate cardListDidChanged];
+			}
+			 
 			 _didRemoveCards = YES;
          }
                                                           errorBlock:^(ASDKAcquringSdkError *error)
@@ -240,6 +246,5 @@ typedef enum
     
     [self dismissViewControllerAnimated:YES completion:completion];
 }
-
 
 @end

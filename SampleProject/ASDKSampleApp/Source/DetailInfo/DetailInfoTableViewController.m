@@ -12,6 +12,7 @@
 #import "ShopCart.h"
 
 #import "PayController.h"
+#import "ASDKCardsListDataController.h"
 
 #import "LocalConstants.h"
 #import "TransactionHistoryViewController.h"
@@ -157,24 +158,32 @@
 
 - (void)buyItem
 {
-    [PayController buyItemWithName:self.item.title
-                       description:self.item.bookDescription
-                            amount:self.item.cost
-						 recurrent:NO
-			 additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
-                fromViewController:self
-                           success:^(ASDKPaymentInfo *paymentInfo)
-     {
-         NSLog(@"%@",paymentInfo.paymentId);
-     }
-                         cancelled:^
-     {
-         NSLog(@"Canceled");
-     }
-                             error:^(ASDKAcquringSdkError *error)
-     {
-         NSLog(@"%@",error);
-     }];
+	if ([[ASDKCardsListDataController instance] cardWithRebillId] != nil)
+	{
+		[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId] amount:self.item.cost description:nil additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"} fromViewController:self
+								  success:^(ASDKPaymentInfo *paymentInfo) {
+									  NSLog(@"%@",paymentInfo.paymentId);
+								  }
+									error:^(ASDKAcquringSdkError *error) {
+										NSLog(@"%@",error);
+									}];
+	}
+	else
+	{
+		[PayController buyItemWithName:self.item.title description:self.item.bookDescription amount:self.item.cost recurrent:YES additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"} fromViewController:self
+							   success:^(ASDKPaymentInfo *paymentInfo)
+									 {
+										 NSLog(@"%@",paymentInfo.paymentId);
+									 }
+							 cancelled:^
+									 {
+										 NSLog(@"Canceled");
+									 }
+								 error:^(ASDKAcquringSdkError *error)
+									{
+										NSLog(@"%@",error);
+									}];
+	}
 }
 
 - (IBAction)buttonActionApplePay:(UIButton *)sender
