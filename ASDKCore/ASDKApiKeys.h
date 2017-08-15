@@ -21,8 +21,14 @@
 
 #pragma mark - API Path
 
+////v1
 #define kASDKTestDomainName                 @"https://rest-api-test.tcsbank.ru/rest/"
 #define kASDKDomainName                     @"https://securepay.tinkoff.ru/rest/"
+
+//v2
+#define kASDKTestDomainName_v2                 @"https://rest-api-test.tcsbank.ru/rest/"
+#define kASDKDomainName_v2                     @"https://securepay.tinkoff.ru/v2/"
+
 #define kASDKAPIPathInit                    @"Init"
 #define kASDKAPIPathFinishAuthorize         @"FinishAuthorize"
 #define kASDKAPIPathCharge                  @"Charge"

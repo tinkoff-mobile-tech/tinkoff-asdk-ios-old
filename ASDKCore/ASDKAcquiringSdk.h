@@ -52,6 +52,7 @@
 @property (nonatomic, weak) id<ASDKAcquiringSdkLoggerDelegate> logger;
 
 - (NSString *)domainPath;
+- (NSString *)domainPath_v2;
 - (SecKeyRef)publicKeyRef;
 
 + (ASDKAcquiringSdk *)acquiringSdkWithTerminalKey:(NSString *)terminalKey

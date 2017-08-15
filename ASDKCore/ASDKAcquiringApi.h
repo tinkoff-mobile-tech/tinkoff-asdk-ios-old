@@ -58,6 +58,7 @@
 @property (nonatomic,weak) id<ASDKAcquiringApiLoggerDelegate> acquiringApiLoggerDelegate;
 
 @property (nonatomic, strong) NSString *domainPath;
+@property (nonatomic, strong) NSString *domainPath_v2;
 
 + (ASDKAcquiringApi *)acquiringApiWithDomainPath:(NSString *)domainPath;
 

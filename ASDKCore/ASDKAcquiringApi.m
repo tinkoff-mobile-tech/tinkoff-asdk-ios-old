@@ -20,11 +20,19 @@
 #import "ASDKApiKeys.h"
 #import "ASDKAcquringApiError.h"
 
+typedef NS_ENUM(NSInteger, APIVersion)
+{
+	APIVersion_v1 = 1,
+	APIVersion_v2 = 2
+};
+
 @interface ASDKAcquiringApi ()
 
 @end
 
 @implementation ASDKAcquiringApi
+
+
 
 - (void)dealloc
 {
@@ -40,20 +48,27 @@
     return acquiringApi;
 }
 
-- (void)path:(NSString *)path
-  parameters:(NSDictionary *)parameters
-     success:(void (^)(NSDictionary *responseDictionary, NSURLResponse *response))success
-     failure:(void (^)(ASDKAcquringApiError *error))failure
+- (void)apiVersion:(APIVersion)apiVersion path:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(NSDictionary *responseDictionary, NSURLResponse *response))success  failure:(void (^)(ASDKAcquringApiError *error))failure
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    
-    NSString *domainPath = self.domainPath;
-    NSString *urlString = [NSString stringWithFormat:@"%@%@",domainPath,path];
+	
+	NSString *domainPath = self.domainPath;
+	if (apiVersion == APIVersion_v2)
+	{
+		domainPath = self.domainPath_v2;
+	}
+	
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", domainPath, path];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
+	
+	if (apiVersion == APIVersion_v2)
+	{
+		[request setValue:@"application/json; charset=utf-8;" forHTTPHeaderField:@"Content-Type"];
+	}
+	
     [request setHTTPMethod:@"POST"];
     
     NSString *dataString = [self stringFromParameters:parameters];
@@ -234,8 +249,7 @@
 		[parameters setObject:@"en" forKey:@"Language"];
 	}
 
-    [self path:kASDKAPIPathInit
-    parameters:parameters
+	[self apiVersion:APIVersion_v2 path:kASDKAPIPathInit parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
     {
         ASDKInitResponse *responseObject = [[ASDKInitResponse alloc] initWithDictionary:responseDictionary];
@@ -266,7 +280,7 @@
         [parameters setObject:request.infoEmail forKey:kASDKInfoEmail];
     }
 
-    [self path:kASDKAPIPathFinishAuthorize parameters:parameters
+    [self apiVersion:APIVersion_v1 path:kASDKAPIPathFinishAuthorize parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
     {
         ASDKFinishAuthorizeResponse *responseObject = [[ASDKFinishAuthorizeResponse alloc] initWithDictionary:responseDictionary];
@@ -287,8 +301,7 @@
                                         kASDKPaymentId   : request.paymentId,
                                         kASDKToken       : request.token}.mutableCopy;
     
-    [self path:kASDKAPIPathGetState
-    parameters:parameters
+    [self apiVersion:APIVersion_v2 path:kASDKAPIPathGetState parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
      {
          ASDKGetStateResponse *responseObject = [[ASDKGetStateResponse alloc] initWithDictionary:responseDictionary];
@@ -310,8 +323,7 @@
                                         kASDKRebillId    : request.rebillId,
                                         kASDKToken       : request.token}.mutableCopy;
     
-    [self path:kASDKAPIPathCharge
-    parameters:parameters
+    [self apiVersion:APIVersion_v2 path:kASDKAPIPathCharge parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
      {
          ASDKChargeResponse *responseObject = [[ASDKChargeResponse alloc] initWithDictionary:responseDictionary];
@@ -331,8 +343,7 @@
                                         kASDKCustomerKey : request.customerKey,
                                         kASDKToken       : request.token}.mutableCopy;
     
-    [self path:kASDKAPIPathGetCardList
-    parameters:parameters
+    [self apiVersion:APIVersion_v2 path:kASDKAPIPathGetCardList parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
      {
          ASDKGetCardListResponse *responseObject = [[ASDKGetCardListResponse alloc] initWithDictionary:responseDictionary];
@@ -354,8 +365,7 @@
                                         kASDKCustomerKey : request.customerKey,
                                         kASDKToken       : request.token}.mutableCopy;
     
-    [self path:kASDKAPIPathRemoveCard
-    parameters:parameters
+    [self apiVersion:APIVersion_v1 path:kASDKAPIPathRemoveCard parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
      {
          ASDKRemoveCardResponse *responseObject = [[ASDKRemoveCardResponse alloc] initWithDictionary:responseDictionary];
@@ -376,7 +386,7 @@
 								kASDKPaymentId   : request.paymentId,
 								kASDKToken       : request.token};
 	
-	[self path:kASDKAPIPathCancel parameters:parameters
+	[self apiVersion:APIVersion_v1 path:kASDKAPIPathCancel parameters:parameters
 	   success:^(NSDictionary *responseDictionary, NSURLResponse *response) {
 		   ASDKCancelResponse *responseObject = [[ASDKCancelResponse alloc] initWithDictionary:responseDictionary];
 		   

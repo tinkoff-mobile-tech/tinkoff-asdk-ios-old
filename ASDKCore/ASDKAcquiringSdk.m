@@ -76,6 +76,11 @@
     return [self testDomain] ? kASDKTestDomainName : kASDKDomainName;
 }
 
+- (NSString *)domainPath_v2
+{
+	return [self testDomain] ? kASDKTestDomainName_v2 : kASDKDomainName_v2;
+}
+
 - (SecKeyRef)publicKeyRef
 {
     id<ASDKAcquiringSdkPublicKeyDataSource> publicKeyDataSource = self.publicKeyDataSource;
@@ -90,6 +95,7 @@
 	_testDomain = value;
 	
 	self.acquiringApi.domainPath = [self domainPath];
+	self.acquiringApi.domainPath_v2 = [self domainPath_v2];
 }
 
 
