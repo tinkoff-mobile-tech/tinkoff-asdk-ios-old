@@ -153,7 +153,14 @@ typedef enum
     ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
     ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
     cancelButton.tintColor = [designConfiguration navigationBarItemsTextColor];
-    
+	
+	if (designConfiguration.customBackButton)
+	{
+		cancelButton = designConfiguration.customBackButton;
+		[cancelButton setAction:@selector(cancelAction:)];
+		[cancelButton setTarget:self];
+	}
+
     [self.navigationItem setLeftBarButtonItem:cancelButton];
 
     [self updateExternalCardsList];
