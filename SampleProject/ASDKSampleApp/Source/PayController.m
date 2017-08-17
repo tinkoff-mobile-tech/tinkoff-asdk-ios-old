@@ -85,11 +85,16 @@
 
     double randomOrderId = arc4random()%10000000;
 	
-//Настройка дизайна
-//    ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
-//    [designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
-//    [designConfiguration setPayButtonColor:[UIColor greenColor] payButtonPressedColor:[UIColor blueColor] payButtonTextColor:[UIColor whiteColor]];
-//    paymentFormStarter.designConfiguration = designConfiguration;
+////Настройка дизайна
+//	ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
+//	[designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
+//	[designConfiguration setPayButtonColor:[UIColor greenColor] payButtonPressedColor:[UIColor blueColor] payButtonTextColor:[UIColor whiteColor]];
+//	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
+//	[cancelButton setTintColor:[UIColor redColor]];
+//	[designConfiguration setCustomBackButton:cancelButton];
+//	paymentFormStarter.designConfiguration = designConfiguration;
+
+	
 //Настройка сканнера карт
 	
     paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];

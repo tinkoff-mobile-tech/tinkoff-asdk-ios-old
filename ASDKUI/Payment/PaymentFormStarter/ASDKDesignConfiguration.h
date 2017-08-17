@@ -43,5 +43,7 @@
 - (UIColor *)payButtonPressedColor;
 - (UIColor *)payButtonTextColor;
 
+- (void)setCustomBackButton:(UIBarButtonItem *)backButton;
+- (UIBarButtonItem *)customBackButton;
 
 @end

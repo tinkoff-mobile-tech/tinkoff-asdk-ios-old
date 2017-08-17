@@ -30,6 +30,8 @@
 @property (nonatomic, strong) UIColor *payButtonPressedColor;
 @property (nonatomic, strong) UIColor *payButtonTextColor;
 
+@property (nonatomic, strong) UIBarButtonItem *backButton;
+
 @end
 
 @implementation ASDKDesignConfiguration
@@ -89,6 +91,16 @@
     _payButtonColor = payButtonColor;
     _payButtonPressedColor = payButtonPressedColor;
     _payButtonTextColor = payButtonTextColor;
+}
+
+- (void)setCustomBackButton:(UITabBarItem *)backButton
+{
+	_backButton = backButton;
+}
+
+- (UIBarButtonItem *)customBackButton
+{
+	return _backButton;
 }
 
 - (UIColor *)payButtonColor
