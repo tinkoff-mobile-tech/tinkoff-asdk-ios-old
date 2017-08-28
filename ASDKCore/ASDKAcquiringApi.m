@@ -66,12 +66,12 @@ typedef NS_ENUM(NSInteger, APIVersion)
 	
 	if (apiVersion == APIVersion_v2)
 	{
-		[request setValue:@"application/json; charset=utf-8;" forHTTPHeaderField:@"Content-Type"];
+		[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 	}
 	
     [request setHTTPMethod:@"POST"];
     
-    NSString *dataString = [self stringFromParameters:parameters];
+	NSString *dataString = [self apiVersion:apiVersion stringFromParameters:parameters];
     NSData *postData = [dataString dataUsingEncoding:NSUTF8StringEncoding];
     
     [request setHTTPBody:postData];
@@ -179,7 +179,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
     }
 }
 
-- (NSString *)stringFromParameters:(NSDictionary *)parameters
+- (NSString *)apiVersion:(APIVersion)apiVersion stringFromParameters:(NSDictionary *)parameters
 {
     NSString *dataString = @"";
     
@@ -200,7 +200,20 @@ typedef NS_ENUM(NSInteger, APIVersion)
     }
     
 //    NSLog(@"\n\n\n\n%@\n\n\n\n",dataString);
-    
+	
+	
+	if (apiVersion == APIVersion_v2)
+	{
+		NSError *error;
+		NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters
+														   options:NSJSONWritingPrettyPrinted
+															 error:&error];
+		if (jsonData)
+		{
+			dataString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+		}
+	}
+	
     return dataString;
 }
 
@@ -243,6 +256,11 @@ typedef NS_ENUM(NSInteger, APIVersion)
 		[parameters setObject:request.additionalPaymentData forKey:kASDKDATA];
 	}
 	
+	if (request.receiptData)
+	{
+		[parameters setObject:request.receiptData forKey:kASDKReceipt];
+	}
+	
 	NSString *location = [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
 	if ([location rangeOfString:@"ru_"].location == NSNotFound)
 	{
@@ -280,7 +298,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
         [parameters setObject:request.infoEmail forKey:kASDKInfoEmail];
     }
 
-    [self apiVersion:APIVersion_v1 path:kASDKAPIPathFinishAuthorize parameters:parameters
+    [self apiVersion:APIVersion_v2 path:kASDKAPIPathFinishAuthorize parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
     {
         ASDKFinishAuthorizeResponse *responseObject = [[ASDKFinishAuthorizeResponse alloc] initWithDictionary:responseDictionary];
@@ -365,7 +383,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
                                         kASDKCustomerKey : request.customerKey,
                                         kASDKToken       : request.token}.mutableCopy;
     
-    [self apiVersion:APIVersion_v1 path:kASDKAPIPathRemoveCard parameters:parameters
+    [self apiVersion:APIVersion_v2 path:kASDKAPIPathRemoveCard parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
      {
          ASDKRemoveCardResponse *responseObject = [[ASDKRemoveCardResponse alloc] initWithDictionary:responseDictionary];
@@ -386,7 +404,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
 								kASDKPaymentId   : request.paymentId,
 								kASDKToken       : request.token};
 	
-	[self apiVersion:APIVersion_v1 path:kASDKAPIPathCancel parameters:parameters
+	[self apiVersion:APIVersion_v2 path:kASDKAPIPathCancel parameters:parameters
 	   success:^(NSDictionary *responseDictionary, NSURLResponse *response) {
 		   ASDKCancelResponse *responseObject = [[ASDKCancelResponse alloc] initWithDictionary:responseDictionary];
 		   

@@ -160,7 +160,7 @@
 {
 	if ([[ASDKCardsListDataController instance] cardWithRebillId] != nil)
 	{
-		[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId] amount:self.item.cost description:nil additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"} fromViewController:self
+		[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId] amount:self.item.cost description:nil additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"} receiptData:nil fromViewController:self
 								  success:^(ASDKPaymentInfo *paymentInfo) {
 									  NSLog(@"%@",paymentInfo.paymentId);
 								  }
@@ -170,7 +170,12 @@
 	}
 	else
 	{
-		[PayController buyItemWithName:self.item.title description:self.item.bookDescription amount:self.item.cost recurrent:YES additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"} fromViewController:self
+		[PayController buyItemWithName:self.item.title description:self.item.bookDescription amount:self.item.cost recurrent:YES
+				 additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
+						   receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
+										 @"Items":@[@{@"Name":@"Название товара 1",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat10"},
+													@{@"Name":@"Название товара 2",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat118"}]}
+					fromViewController:self
 							   success:^(ASDKPaymentInfo *paymentInfo)
 									 {
 										 NSLog(@"%@",paymentInfo.paymentId);
@@ -209,7 +214,10 @@
 							 shippingContact:shippingContact
 					  shippingEditableFields:PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone //PKAddressFieldNone
 								   recurrent:YES
-					   additionalPaymentData:nil
+					   additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
+								 receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
+											   @"Items":@[@{@"Name":@"Название товара 1",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat10"},
+														  @{@"Name":@"Название товара 2",@"Price":@100,@"Quantity":@1,@"Amount":@100, @"Tax":@"vat118"}]}
 						  fromViewController:self
 									 success:^(ASDKPaymentInfo *paymentIfo) {
 										 NSLog(@"%@", paymentIfo.paymentId);

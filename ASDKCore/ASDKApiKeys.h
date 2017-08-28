@@ -26,7 +26,7 @@
 #define kASDKDomainName                     @"https://securepay.tinkoff.ru/rest/"
 
 //v2
-#define kASDKTestDomainName_v2                 @"https://rest-api-test.tcsbank.ru/rest/"
+#define kASDKTestDomainName_v2                 @"https://rest-api-test.tcsbank.ru/v2/"
 #define kASDKDomainName_v2                     @"https://securepay.tinkoff.ru/v2/"
 
 #define kASDKAPIPathInit                    @"Init"
@@ -59,6 +59,7 @@
 #define kASDKMessage                        @"Message"
 #define kASDKDescription                    @"Description"
 #define kASDKDATA                           @"DATA"
+#define kASDKReceipt						@"Receipt"
 #define kASDKPayForm                        @"PayForm"
 #define kASDKPayType                        @"PayType"
 #define kASDKRecurrent                      @"Recurrent"

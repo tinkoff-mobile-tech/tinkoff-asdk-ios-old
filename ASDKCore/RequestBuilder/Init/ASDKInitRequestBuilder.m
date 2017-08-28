@@ -27,9 +27,8 @@
 @property (nonatomic, copy) NSString *payForm;
 @property (nonatomic, copy) NSString *payType;
 @property (nonatomic) BOOL recurrent;
-@property (nonatomic, strong) NSString *additionalPaymentData;
-@property (nonatomic, strong) NSDictionary *additionalPaymentData_;
-
+@property (nonatomic, strong) NSDictionary *additionalPaymentData;
+@property (nonatomic, strong) NSDictionary *receiptData;
 
 @end
 
@@ -45,6 +44,7 @@
                                   terminalKey:(NSString *)terminalKey
                                      password:(NSString *)password
 						additionalPaymentData:(NSDictionary *)data
+								  receiptData:(NSDictionary *)receiptData
 {
     ASDKInitRequestBuilder *builder = [[ASDKInitRequestBuilder alloc] init];
     
@@ -59,8 +59,8 @@
         builder.recurrent = recurrent;
         builder.terminalKey = terminalKey;
         builder.password = password;
-		builder.additionalPaymentData_ = data;
-		builder.additionalPaymentData = nil;
+		builder.additionalPaymentData = data;
+		builder.receiptData = receiptData;
     }
 
     return builder;
@@ -90,7 +90,8 @@
 																	payType:self.payType
                                                                 customerKey:self.customerKey
                                                                   recurrent:self.recurrent
-													  additionalPaymentData:self.additionalPaymentData];
+													  additionalPaymentData:self.additionalPaymentData
+																receiptData:self.receiptData];
 
     return request;
 }
@@ -171,9 +172,9 @@
         return;
     }
 	
-	if ([self.additionalPaymentData_ count] > 0)
+	if ([self.additionalPaymentData count] > 0)
 	{
-		if ([self.additionalPaymentData_ objectForKey:@"Email"] == nil && [self.additionalPaymentData_ objectForKey:@"email"] == nil)
+		if ([self.additionalPaymentData objectForKey:@"Email"] == nil && [self.additionalPaymentData objectForKey:@"email"] == nil)
 		{
 			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра 'Email'" code:0];
 			
@@ -185,13 +186,13 @@
 		}
 
 		BOOL invalidAdditionalPaymentData = NO;
-		if ([[self.additionalPaymentData_ allKeys] count] > 20)
+		if ([[self.additionalPaymentData allKeys] count] > 20)
 		{
 			invalidAdditionalPaymentData = YES;
 		}
-		else for (NSString *key in [self.additionalPaymentData_ allKeys])
+		else for (NSString *key in [self.additionalPaymentData allKeys])
 		{
-			if ([key length] > 20 || [[self.additionalPaymentData_ objectForKey:key] length] > 100)
+			if ([key length] > 20 || [[self.additionalPaymentData objectForKey:key] length] > 100)
 			{
 				invalidAdditionalPaymentData = YES;
 				break;
@@ -215,15 +216,17 @@
     {
         [parameters setObject:self.amount.stringValue forKey:kASDKAmount];
     }
+
     if (self.orderId.length > 0)
     {
         [parameters setObject:self.orderId forKey:kASDKOrderId];
     }
+
     if (self.requestDescription.length > 0)
     {
         [parameters setObject:self.requestDescription forKey:kASDKDescription];
     }
-    
+
     if (self.payForm.length > 0)
     {
         [parameters setObject:self.payForm forKey:kASDKPayForm];
@@ -244,24 +247,6 @@
         [parameters setObject:@"Y" forKey:kASDKRecurrent];
     }
 
-	if ([self.additionalPaymentData_ count] > 0)
-	{
-
-		NSUInteger i = 0;
-		NSUInteger count = [[self.additionalPaymentData_ allKeys] count] - 1;
-		NSMutableString *strPostBody = [[NSMutableString alloc] init];
-		for (NSString *key in [self.additionalPaymentData_ allKeys])
-		{
-			NSString *data = [NSString stringWithFormat:@"%@=%@%@", [self encodeURL:key], [self encodeURL:[[self.additionalPaymentData_ objectForKey:key] description]], (i < count ?  @"|" : @"")];
-			[strPostBody appendString:data];
-			i++;
-		}
-		
-		self.additionalPaymentData = strPostBody;
-
-		[parameters setObject:strPostBody forKey:kASDKDATA];
-	}
-	
 	NSString *location = [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
 	if ([location rangeOfString:@"ru_"].location == NSNotFound)
 	{

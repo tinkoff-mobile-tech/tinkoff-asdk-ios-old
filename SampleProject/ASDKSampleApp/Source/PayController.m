@@ -76,6 +76,7 @@
                  amount:(NSNumber *)amount
 			  recurrent:(BOOL)recurrent
   additionalPaymentData:(NSDictionary *)data
+			receiptData:(NSDictionary *)receiptData
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)())onCancelled
@@ -85,18 +86,16 @@
 
     double randomOrderId = arc4random()%10000000;
 	
-////Настройка дизайна
-//	ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
+//Настройка дизайна
+	ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
 //	[designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
 //	[designConfiguration setPayButtonColor:[UIColor greenColor] payButtonPressedColor:[UIColor blueColor] payButtonTextColor:[UIColor whiteColor]];
-//	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
-//	[cancelButton setTintColor:[UIColor redColor]];
-//	[designConfiguration setCustomBackButton:cancelButton];
-//	paymentFormStarter.designConfiguration = designConfiguration;
+	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
+	[cancelButton setTintColor:[UIColor redColor]];
+	[designConfiguration setCustomBackButton:cancelButton];
+	paymentFormStarter.designConfiguration = designConfiguration;
 
-	
 //Настройка сканнера карт
-	
     paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
 
 	[paymentFormStarter presentPaymentFormFromViewController:viewController
@@ -109,6 +108,7 @@
                                                  customerKey:[PayController customerKey]
 												   recurrent:recurrent
 									   additionalPaymentData:data
+												 receiptData:receiptData
                                                      success:^(ASDKPaymentInfo *paymentInfo)
      {
 		 [[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":description, kASDKStatus:paymentInfo.status}];
@@ -137,6 +137,7 @@
 					amount:(NSNumber *)amount
 			   description:(NSString *)description
 	 additionalPaymentData:(NSDictionary *)data
+			   receiptData:(NSDictionary *)receiptData
 		fromViewController:(UIViewController *)viewController
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 					 error:(void (^)(ASDKAcquringSdkError *error))onError
@@ -147,7 +148,7 @@
 
 	paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
 
-	[paymentFormStarter chargeWithRebillId:rebillId amount:amount orderId:[NSNumber numberWithDouble:randomOrderId].stringValue description:description customerKey:[PayController customerKey] additionalPaymentData:data
+	[paymentFormStarter chargeWithRebillId:rebillId amount:amount orderId:[NSNumber numberWithDouble:randomOrderId].stringValue description:description customerKey:[PayController customerKey] additionalPaymentData:data receiptData:receiptData
 		success:^(ASDKPaymentInfo *paymentInfo) {
 			[[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":([description length] > 0 ? description: @""), kASDKStatus:paymentInfo.status}];
 
@@ -179,6 +180,7 @@
 	   shippingEditableFields:(PKAddressField)shippingEditableFields
 					recurrent:(BOOL)recurrent
 		additionalPaymentData:(NSDictionary *)data
+				  receiptData:(NSDictionary *)receiptData
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)())onCancelled
@@ -198,6 +200,7 @@
 								   shippingEditableFields:shippingEditableFields
 												recurrent:YES
 									additionalPaymentData:data
+											  receiptData:receiptData
 												  success:^(ASDKPaymentInfo *paymentInfo) {
 													  [[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":description, kASDKStatus:paymentInfo.status}];
 													  PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];

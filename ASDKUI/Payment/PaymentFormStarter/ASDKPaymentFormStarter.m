@@ -104,6 +104,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
     ASDKDesignConfiguration *designConfiguration = self.designConfiguration;
     
     [[ASDKBarButtonItem appearance] setTintColor:[designConfiguration navigationBarItemsTextColor]];
+	
 }
 
 - (void)presentPaymentFormFromViewController:(UIViewController *)presentingViewController
@@ -116,6 +117,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                  customerKey:(NSString *)customerKey
 								   recurrent:(BOOL)recurrent
 					   additionalPaymentData:(NSDictionary *)data
+								 receiptData:(NSDictionary *)receiptData
                                      success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
                                    cancelled:(void (^)())onCancelled
                                        error:(void(^)(ASDKAcquringSdkError *error))onError
@@ -131,6 +133,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                                                                   customerKey:customerKey
 																					recurrent:recurrent
 																		additionalPaymentData:data
+																				  receiptData:receiptData
                                                                                       success:^(ASDKPaymentInfo *paymentInfo)
                                          {
                                              [ASDKPaymentFormStarter resetSharedInstance];
@@ -281,6 +284,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 				   shippingEditableFields:(PKAddressField)shippingEditableFields
 								recurrent:(BOOL)recurrent
 					additionalPaymentData:(NSDictionary *)additionalPaymentData
+							  receiptData:(NSDictionary *)receiptData
 								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError
@@ -290,7 +294,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	self.onError = onError;
 	self.onCancelled = onCancelled;
 
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:recurrent additionalPaymentData:additionalPaymentData
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:recurrent additionalPaymentData:additionalPaymentData receiptData:receiptData
 		success:^(ASDKInitResponse *response){
 			self.paymentIdForApplePay = response.paymentId;
 			
@@ -375,10 +379,11 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			   description:(NSString *)description
 			   customerKey:(NSString *)customerKey
 	 additionalPaymentData:(NSDictionary *)data
+			   receiptData:(NSDictionary *)receiptData
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 					 error:(void (^)(ASDKAcquringSdkError *error))onError
 {
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:description payForm:nil customerKey:customerKey recurrent:NO additionalPaymentData:data
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:description payForm:nil customerKey:customerKey recurrent:NO additionalPaymentData:data receiptData:receiptData
 	 success:^(ASDKInitResponse *response) {
 		 [self.acquiringSdk chargeWithPaymentId:response.paymentId rebillId:rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
 			 [ASDKPaymentFormStarter resetSharedInstance];

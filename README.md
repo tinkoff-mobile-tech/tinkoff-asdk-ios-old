@@ -45,6 +45,9 @@ pod 'ASDKUI', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSyste
                        description:self.item.bookDescription
                             amount:self.item.cost
 			 additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
+					   receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
+										@"Items":@[@{@"Name":@"Название товара 1",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat10"},
+										@{@"Name":@"Название товара 2",@"Price":@100,@"Quantity":@1,@"Amount":@100, @"Tax":@"vat118"}]}
                 fromViewController:self
                            success:^(NSString *paymentId) {  NSLog(@"%@",paymentId);  }
                          cancelled:^  { NSLog(@"Canceled"); }
@@ -77,6 +80,9 @@ pod 'ASDKUI', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSyste
 							 shippingContact:shippingContact
 					  shippingEditableFields:PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone //PKAddressFieldNone
 					   additionalPaymentData:nil
+								receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
+												@"Items":@[@{@"Name":@"Название товара 1",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat10"},
+												@{@"Name":@"Название товара 2",@"Price":@100,@"Quantity":@1,@"Amount":@100, @"Tax":@"vat118"}]}
 						  fromViewController:self
 									 success:^(NSString *paymentId) { NSLog(@"%@", paymentId); }
 								   cancelled:^{ NSLog(@"Canceled"); }

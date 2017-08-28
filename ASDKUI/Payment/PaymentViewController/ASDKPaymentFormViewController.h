@@ -35,6 +35,7 @@
                    customerKey:(NSString *)customerKey
 					 recurrent:(BOOL)recurrent
 		 additionalPaymentData:(NSDictionary *)data
+				   receiptData:(NSDictionary *)receiptData
                        success:(void (^)(ASDKPaymentInfo *paymentInfo))success
                      cancelled:(void (^)())cancelled
                          error:(void (^)(ASDKAcquringSdkError *error))error;

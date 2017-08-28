@@ -68,6 +68,7 @@
                                  customerKey:(NSString *)customerKey
 								   recurrent:(BOOL)recurrent
 					   additionalPaymentData:(NSDictionary *)data
+								 receiptData:(NSDictionary *)receiptData
                                      success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
                                    cancelled:(void (^)())onCancelled
                                        error:(void (^)(ASDKAcquringSdkError *error))onError;
@@ -78,6 +79,7 @@
 			   description:(NSString *)description
 			   customerKey:(NSString *)customerKey
 	 additionalPaymentData:(NSDictionary *)data
+			   receiptData:(NSDictionary *)receiptData
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 					 error:(void (^)(ASDKAcquringSdkError *error))onError;
 
@@ -85,7 +87,7 @@
 + (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks NS_AVAILABLE_IOS(9_0);
 
 /**
- * @bref оплата с помощью ApplePay, онлайн документация https://oplata.tinkoff.ru/documentation/?section=Init
+ * @bref оплата с помощью ApplePay, онлайн документация https://oplata.tinkoff.ru/landing/develop/documentation/Init
  *
  * @param amount - Сумма
  * @param orderId - Номер заказа в системе Продавца
@@ -93,7 +95,7 @@
  *
  * @param customerKey - Идентификатор покупателя в системе Продавца. Если передается, то для данного покупателя будет осуществлена
  * привязка карты к данному идентификатору клиента CustomerKey. В нотификации на AUTHORIZED будет передан параметр CardId, 
- * подробнее см. метод GetGardList https://oplata.tinkoff.ru/documentation/?section=GetCardList
+ * подробнее см. метод GetGardList https://oplata.tinkoff.ru/landing/develop/documentation/GetCardList
  *
  * @param appleMerchantId - берётся из Target->Capabilities->ApplePay Merchant IDs. 
  * Создается в https://developer.apple.com/account/ios/identifier/merchant
@@ -108,12 +110,14 @@
  * PKAddressFieldNone - ни одного (и не показывать) 
  * PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone - Адрес ФИО Email и Телефон
  *
- * @param additionalPaymentData - Ключ=значение дополнительных параметров через “|”, например Email=a@test.ru|Phone=+71234567890,
- * если ключи или значения содержат в себе спец символы, то получившееся значение должно быть закодировано функцией urlencode.
- * При этом, обязательным является наличие дополнительного параметра Email. Прочие можно добавлять по желанию.
- * Данные параметры будут переданы на страницу оплаты (в случае ее кастомизации). Максимальная длина для каждого передаваемого параметра:
- * Ключ – 20 знаков, Значение – 100 знаков. Максимальное количество пар «ключ-значение» не может превышать 20.
- * Пример передачи данных в параметре DATA: DATA=Phone=+71234567890|Email=a@test.com
+ * @param additionalPaymentData - JSON объект содержащий дополнительные параметры в виде “ключ”:”значение”. 
+ * Данные параметры будут переданы на страницу оплаты (в случае ее кастомизации). 
+ * Максимальная длина для каждого передаваемого параметра: 
+ *  Ключ – 20 знаков,
+ *  Значение – 100 знаков.
+ * Максимальное количество пар «ключ-значение» не может превышать 20.
+ *
+ * @param receiptData - JSON объект с данными чека, https://oplata.tinkoff.ru/landing/develop/documentation/Init "Структура объекта Receipt"
  *
  * @param onSuccess блок в случае успеха
  * @param onCancelled блок в случае сканирования с ошибкой
@@ -132,7 +136,8 @@
 						  shippingContact:(PKContact *)shippingContact //кому доставить и адрес доставки
 				   shippingEditableFields:(PKAddressField)shippingEditableFields //какие поля можно показывать и редактировть на форме оплаты ApplePay
 								recurrent:(BOOL)recurrent
-					additionalPaymentData:(NSDictionary *)additionalPaymentData // Ключ=значение дополнительных параметров через “|”, например Email=a@test.ru|Phone=+71234567890
+					additionalPaymentData:(NSDictionary *)additionalPaymentData //JSON объект содержащий дополнительные параметры, например @"Email":@"a@test.ru|Phone=+71234567890"
+							  receiptData:(NSDictionary *)receiptData // JSON объект с данными чека, обязательно должен быть объект Items в который вложены позиции чека Email и Taxation - Система налогообложения, значения: osn, usn_income, usn_income_outcome, envd, esn, или patent
 								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 								cancelled:(void (^)())onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError NS_AVAILABLE_IOS(9_0);

@@ -31,7 +31,8 @@
 								 payType:(NSString *)payType
                              customerKey:(NSString *)customerKey
                                recurrent:(BOOL)recurrent
-				   additionalPaymentData:(NSString *)data
+				   additionalPaymentData:(NSDictionary *)data
+							 receiptData:(NSDictionary *)receiptData
 {
     ASDKInitRequest *request = [[ASDKInitRequest alloc] init];
     
@@ -48,6 +49,7 @@
         request.customerKey = customerKey;
         request.recurrent = recurrent;
 		request.additionalPaymentData = data;
+		request.receiptData = receiptData;
     }
 
     return request;

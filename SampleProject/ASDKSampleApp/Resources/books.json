@@ -11,8 +11,8 @@
         "cover": "cover2",
         "title": "Воздушные змеи",
         "author" : "Ромен Гари, 2015",
-        "cost" : 100.00,
-            "description" : ""
+        "cost" : 200.00,
+            "description" : "Тест"
       },
       {
         "cover": "cover3",

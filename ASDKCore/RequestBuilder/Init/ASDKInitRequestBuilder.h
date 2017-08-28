@@ -31,6 +31,7 @@
                                     recurrent:(BOOL)recurrent
                                   terminalKey:(NSString *)terminalKey
                                      password:(NSString *)password
-						additionalPaymentData:(NSDictionary *)data;
+						additionalPaymentData:(NSDictionary *)data
+								  receiptData:(NSDictionary *)receiptData;
 
 @end

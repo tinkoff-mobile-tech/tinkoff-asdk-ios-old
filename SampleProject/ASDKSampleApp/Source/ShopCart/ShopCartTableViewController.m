@@ -196,6 +196,7 @@
                             amount:[NSNumber numberWithDouble:_total]
 						 recurrent:NO
 			 additionalPaymentData:nil
+					   receiptData:nil
                 fromViewController:self
                            success:^(ASDKPaymentInfo *paymentInfo)
      {

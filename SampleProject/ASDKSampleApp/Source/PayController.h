@@ -18,6 +18,7 @@
                  amount:(NSNumber *)amount
 			  recurrent:(BOOL)recurrent
   additionalPaymentData:(NSDictionary *)data
+			receiptData:(NSDictionary *)receiptData
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)())onCancelled
@@ -27,6 +28,7 @@
 					amount:(NSNumber *)amount
 			   description:(NSString *)description
 	 additionalPaymentData:(NSDictionary *)data
+			   receiptData:(NSDictionary *)receiptData
 		fromViewController:(UIViewController *)viewController
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 					 error:(void (^)(ASDKAcquringSdkError *error))onError;
@@ -41,6 +43,7 @@
 	   shippingEditableFields:(PKAddressField)shippingEditableFields
 					recurrent:(BOOL)recurrent
 		additionalPaymentData:(NSDictionary *)data
+				  receiptData:(NSDictionary *)receiptData
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)())onCancelled

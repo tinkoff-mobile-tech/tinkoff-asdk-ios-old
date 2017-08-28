@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CEF638E1F54377C00C368AE /* TransactionDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF63851F54377C00C368AE /* TransactionDetailTableViewCell.m */; };
+		2CEF638F1F54377C00C368AE /* TransactionDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF63861F54377C00C368AE /* TransactionDetailTableViewCell.xib */; };
+		2CEF63901F54377C00C368AE /* TransactionHistoryModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF63881F54377C00C368AE /* TransactionHistoryModelController.m */; };
+		2CEF63911F54377C00C368AE /* TransactionHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF638A1F54377C00C368AE /* TransactionHistoryViewController.m */; };
+		2CEF63921F54377C00C368AE /* TransactionHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF638B1F54377C00C368AE /* TransactionHistoryViewController.xib */; };
+		2CEF63931F54377C00C368AE /* UITableViewHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF638D1F54377C00C368AE /* UITableViewHelpers.m */; };
 		684AD5C6421F7F3343AABD7F /* libPods-ASDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */; };
 		83871B8B1C6DCFDC00D69603 /* ShopCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 83871B8A1C6DCFDC00D69603 /* ShopCart.m */; };
 		83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B8C1C6DF29C00D69603 /* DetailInfoTableViewController.xib */; };
@@ -56,6 +62,16 @@
 
 /* Begin PBXFileReference section */
 		01788A6283865E9E86DA0E68 /* Pods-ASDKSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASDKSampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		2CEF63841F54377C00C368AE /* TransactionDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionDetailTableViewCell.h; sourceTree = "<group>"; };
+		2CEF63851F54377C00C368AE /* TransactionDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionDetailTableViewCell.m; sourceTree = "<group>"; };
+		2CEF63861F54377C00C368AE /* TransactionDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionDetailTableViewCell.xib; sourceTree = "<group>"; };
+		2CEF63871F54377C00C368AE /* TransactionHistoryModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionHistoryModelController.h; sourceTree = "<group>"; };
+		2CEF63881F54377C00C368AE /* TransactionHistoryModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionHistoryModelController.m; sourceTree = "<group>"; };
+		2CEF63891F54377C00C368AE /* TransactionHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionHistoryViewController.h; sourceTree = "<group>"; };
+		2CEF638A1F54377C00C368AE /* TransactionHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionHistoryViewController.m; sourceTree = "<group>"; };
+		2CEF638B1F54377C00C368AE /* TransactionHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionHistoryViewController.xib; sourceTree = "<group>"; };
+		2CEF638C1F54377C00C368AE /* UITableViewHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewHelpers.h; sourceTree = "<group>"; };
+		2CEF638D1F54377C00C368AE /* UITableViewHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewHelpers.m; sourceTree = "<group>"; };
 		38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ASDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80ADADDCD6F59A2D7EF6C6A3 /* Pods-ASDKSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASDKSampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		831672871C6486A500533D85 /* ASDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +144,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CEF63831F54376100C368AE /* History */ = {
+			isa = PBXGroup;
+			children = (
+				2CEF63841F54377C00C368AE /* TransactionDetailTableViewCell.h */,
+				2CEF63851F54377C00C368AE /* TransactionDetailTableViewCell.m */,
+				2CEF63861F54377C00C368AE /* TransactionDetailTableViewCell.xib */,
+				2CEF63871F54377C00C368AE /* TransactionHistoryModelController.h */,
+				2CEF63881F54377C00C368AE /* TransactionHistoryModelController.m */,
+				2CEF63891F54377C00C368AE /* TransactionHistoryViewController.h */,
+				2CEF638A1F54377C00C368AE /* TransactionHistoryViewController.m */,
+				2CEF638B1F54377C00C368AE /* TransactionHistoryViewController.xib */,
+				2CEF638C1F54377C00C368AE /* UITableViewHelpers.h */,
+				2CEF638D1F54377C00C368AE /* UITableViewHelpers.m */,
+			);
+			name = History;
+			sourceTree = "<group>";
+		};
 		625962B01098A0E65DBF2FBD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +249,7 @@
 		94251ADC1C6C899E00B5FE2B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				2CEF63831F54376100C368AE /* History */,
 				C316660F1DAF7BB800BA6AB8 /* Settings */,
 				BEF5356A1C7208E000935A15 /* About */,
 				83871B921C6E110200D69603 /* PayController */,
@@ -424,10 +458,12 @@
 				94251AF61C6C89F600B5FE2B /* LaunchScreen.storyboard in Resources */,
 				94251B331C6CD2B500B5FE2B /* BookItemCell.xib in Resources */,
 				94251B291C6CC6C500B5FE2B /* PaymentSuccessViewController.xib in Resources */,
+				2CEF63921F54377C00C368AE /* TransactionHistoryViewController.xib in Resources */,
 				94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */,
 				C3AAB1401DAFE3FC00C64972 /* Localizable.strings in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,
 				83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */,
+				2CEF638F1F54377C00C368AE /* TransactionDetailTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,10 +525,13 @@
 				83871B951C6E112400D69603 /* PayController.m in Sources */,
 				C316661C1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.m in Sources */,
 				94251AEC1C6C899E00B5FE2B /* ViewController.m in Sources */,
+				2CEF63901F54377C00C368AE /* TransactionHistoryModelController.m in Sources */,
 				94251AEA1C6C899E00B5FE2B /* AppDelegate.m in Sources */,
 				C316661B1DAF7BCB00BA6AB8 /* SettingsViewController.m in Sources */,
 				94251B321C6CD2B500B5FE2B /* BookItemCell.m in Sources */,
 				83871B8B1C6DCFDC00D69603 /* ShopCart.m in Sources */,
+				2CEF638E1F54377C00C368AE /* TransactionDetailTableViewCell.m in Sources */,
+				2CEF63931F54377C00C368AE /* UITableViewHelpers.m in Sources */,
 				94251AEE1C6C899E00B5FE2B /* main.m in Sources */,
 				94251AFA1C6C8D0D00B5FE2B /* ItemsListTableViewController.m in Sources */,
 				94251B021C6C8F4500B5FE2B /* DetailInfoTableViewController.m in Sources */,
@@ -504,6 +543,7 @@
 				94251B0A1C6CA60400B5FE2B /* BookItem.m in Sources */,
 				94251B1D1C6CB8BF00B5FE2B /* ShopCartCell.m in Sources */,
 				C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */,
+				2CEF63911F54377C00C368AE /* TransactionHistoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
