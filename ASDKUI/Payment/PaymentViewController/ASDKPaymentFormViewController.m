@@ -92,6 +92,8 @@ typedef enum
 @property (nonatomic, strong) NSDictionary *receiptData;
 
 @property (nonatomic, assign) BOOL updateCardCell;
+@property (nonatomic, assign) BOOL makeCharge;
+
 @end
 
 @implementation ASDKPaymentFormViewController
@@ -111,6 +113,7 @@ typedef enum
                          email:(NSString *)email
 				   customerKey:(NSString *)customerKey
 					 recurrent:(BOOL)recurrent
+					makeCharge:(BOOL)makeCharge
 		 additionalPaymentData:(NSDictionary *)data
 				   receiptData:(NSDictionary *)receiptData
                        success:(void (^)(ASDKPaymentInfo *paymentInfo))success
@@ -135,8 +138,9 @@ typedef enum
 		_additionalPaymentData = data;
 		_receiptData = receiptData;
 		_updateCardCell = NO;
+		_makeCharge = makeCharge;
     }
-    
+
     return self;
 }
 
@@ -224,14 +228,15 @@ typedef enum
 			if (_cardIdPriorityPass != nil)
 			{
 				card = [[ASDKCardsListDataController instance] cardWithIdentifier:_cardIdPriorityPass];
-				if (card == nil && [_cardIdPriorityPass length] == 0)
-				{
-					card = [[ASDKCardsListDataController instance] cardWithRebillId];
-					if (card == nil)
-					{
-						card = [[[ASDKCardsListDataController instance] externalCards] firstObject];
-					}
-				}
+			}
+
+			if (_makeCharge == YES && card == nil)
+			{
+				card = [[ASDKCardsListDataController instance] cardWithRebillId];
+			}
+			else if (card == nil && _cardIdPriorityPass != nil && _cardIdPriorityPass.length == 0)
+			{
+				card = [[[ASDKCardsListDataController instance] externalCards] firstObject];
 			}
 
 			if (card != nil)
@@ -667,6 +672,8 @@ typedef enum
     }
 }
 
+#pragma mark - Payment request
+
 - (void)performInitRequest
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
@@ -676,14 +683,25 @@ typedef enum
     __weak typeof(self) weakSelf = self;
     
     NSLog(@"step1");
-    
+	
+	NSMutableDictionary *paymentData = [[NSMutableDictionary alloc] init];
+	if ([_additionalPaymentData count])
+	{
+		[paymentData addEntriesFromDictionary:_additionalPaymentData];
+	}
+	
+	if (self.selectedCard && self.selectedCard.rebillId && self.makeCharge == YES)
+	{
+		[paymentData setObject:@(YES) forKey:@"chargeFlag"];
+	}
+	
     [self.acquiringSdk initWithAmount:realAmount
                               orderId:_orderId
                           description:nil
 							  payForm:nil
                           customerKey:_customerKey
 							recurrent:_requrent
-				additionalPaymentData:_additionalPaymentData
+				additionalPaymentData:[paymentData copy]
 						  receiptData:_receiptData
                               success:^(ASDKInitResponse *response)
     {
@@ -711,30 +729,30 @@ typedef enum
 
 - (void)performFinishAuthorizeRequestWithPaymentId:(ASDKInitResponse *)payment
 {
-//	if (self.selectedCard && self.selectedCard.rebillId)
-//	{
-//		 __weak typeof(self) weakSelf = self;
-//		[self.acquiringSdk chargeWithPaymentId:payment.paymentId rebillId:self.selectedCard.rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
-//			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-//			__strong typeof(weakSelf) strongSelf1 = weakSelf;
-//			if (strongSelf1)
-//			{
-//				[strongSelf1 manageSuccessWithPaymentInfo:paymentInfo];
-//			}
-//		} failure:^(ASDKAcquringSdkError *error) {
-//			__strong typeof(weakSelf) strongSelf = weakSelf;
-//			
-//			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-//		
-//			NSLog(@"\n\n\nPAYMENT FINISHED WITH ERROR STATE\n\n\n");
-//
-//			if (strongSelf)
-//			{
-//				[strongSelf manageError:error];
-//			}
-//		}];
-//	}
-//	else
+	if (self.selectedCard && self.selectedCard.rebillId && self.makeCharge == YES)
+	{
+		 __weak typeof(self) weakSelf = self;
+		[self.acquiringSdk chargeWithPaymentId:payment.paymentId rebillId:self.selectedCard.rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+			__strong typeof(weakSelf) strongSelf1 = weakSelf;
+			if (strongSelf1)
+			{
+				[strongSelf1 manageSuccessWithPaymentInfo:paymentInfo];
+			}
+		} failure:^(ASDKAcquringSdkError *error) {
+			__strong typeof(weakSelf) strongSelf = weakSelf;
+			
+			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+		
+			NSLog(@"\n\n\nPAYMENT FINISHED WITH ERROR STATE\n\n\n");
+
+			if (strongSelf)
+			{
+				[strongSelf manageError:error];
+			}
+		}];
+	}
+	else
 	{
 		NSString *cardNumber = [self cardRequisitesCell].cardNumber;
 		NSString *date = [self cardRequisitesCell].cardExpirationDate;
@@ -887,14 +905,8 @@ typedef enum
 	
     if (!self.selectedCard)
     {
-        [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^
-         {
-             paymentSuccessBlock();
-         }
-                                                                     errorBlock:^(ASDKAcquringSdkError *error)
-         {
-             paymentSuccessBlock();
-         }];
+        [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{ paymentSuccessBlock(); }
+                                                                     errorBlock:^(ASDKAcquringSdkError *error) { paymentSuccessBlock(); } ];
     }
     else
     {
@@ -1104,6 +1116,25 @@ typedef enum
 	{
 		[self updateSelectedExternalCardOnStart];
 	}
+}
+
+- (NSArray<ASDKCard*>*)filterCardList:(NSArray<ASDKCard*>*)cardList
+{
+	if (self.makeCharge)
+	{
+		NSMutableArray *result = [NSMutableArray new];
+		for (ASDKCard *card in cardList)
+		{
+			if (card.rebillId)
+			{
+				[result addObject:card];
+			}
+		}
+
+		return [result copy];
+	}
+
+	return cardList;
 }
 
 @end

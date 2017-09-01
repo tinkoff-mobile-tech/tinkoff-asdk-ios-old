@@ -17,6 +17,7 @@
             description:(NSString *)description
                  amount:(NSNumber *)amount
 			  recurrent:(BOOL)recurrent
+			 makeCharge:(BOOL)makeCharge
   additionalPaymentData:(NSDictionary *)data
 			receiptData:(NSDictionary *)receiptData
      fromViewController:(UIViewController *)viewController

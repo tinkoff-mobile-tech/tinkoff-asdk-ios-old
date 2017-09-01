@@ -70,7 +70,7 @@
     
     UIBarButtonItem *infoBarButton = [[UIBarButtonItem alloc] initWithCustomView:infoButton];
 	
-	UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showSettings)];
+	UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(showSettings)];
     
     [self.navigationItem setLeftBarButtonItems:@[infoBarButton, settingsBarButton]];
     

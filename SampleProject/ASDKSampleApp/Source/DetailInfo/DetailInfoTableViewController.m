@@ -17,6 +17,7 @@
 #import "LocalConstants.h"
 #import "TransactionHistoryViewController.h"
 #import "TransactionHistoryModelController.h"
+#import "ASDKTestSettings.h"
 
 @interface DetailInfoTableViewController ()
 
@@ -76,6 +77,7 @@
     self.bottomContainerView.backgroundColor = kMainBlueColor;
 	
 	[self.buttonApplePay setEnabled:[PayController isPayWithAppleAvailable]];
+	[[ASDKCardsListDataController instance] cardWithRebillId];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -158,37 +160,40 @@
 
 - (void)buyItem
 {
-	if ([[ASDKCardsListDataController instance] cardWithRebillId] != nil)
-	{
-		[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId] amount:self.item.cost description:nil additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"} receiptData:nil fromViewController:self
-								  success:^(ASDKPaymentInfo *paymentInfo) {
-									  NSLog(@"%@",paymentInfo.paymentId);
-								  }
-									error:^(ASDKAcquringSdkError *error) {
-										NSLog(@"%@",error);
-									}];
-	}
-	else
-	{
-		[PayController buyItemWithName:self.item.title description:self.item.bookDescription amount:self.item.cost recurrent:YES
-				 additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
-						   receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
-										 @"Items":@[@{@"Name":@"Название товара 1",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat10"},
-													@{@"Name":@"Название товара 2",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat118"}]}
-					fromViewController:self
-							   success:^(ASDKPaymentInfo *paymentInfo)
-									 {
-										 NSLog(@"%@",paymentInfo.paymentId);
-									 }
-							 cancelled:^
-									 {
-										 NSLog(@"Canceled");
-									 }
-								 error:^(ASDKAcquringSdkError *error)
-									{
-										NSLog(@"%@",error);
-									}];
-	}
+	[self buyFromCard];
+}
+
+- (void)buyCharge
+{
+	[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId] amount:self.item.cost description:nil additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"} receiptData:nil fromViewController:self
+							  success:^(ASDKPaymentInfo *paymentInfo) {
+								  NSLog(@"%@",paymentInfo.paymentId);
+							  }
+								error:^(ASDKAcquringSdkError *error) {
+									NSLog(@"%@",error);
+								}];
+}
+
+- (void)buyFromCard
+{
+	[PayController buyItemWithName:self.item.title description:self.item.bookDescription amount:self.item.cost recurrent:![ASDKTestSettings makeCharge] makeCharge:[ASDKTestSettings makeCharge]
+			 additionalPaymentData:nil//@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
+					   receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
+									 @"Items":@[@{@"Name":@"Название товара 1",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat10"},
+												@{@"Name":@"Название товара 2",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat118"}]}
+				fromViewController:self
+						   success:^(ASDKPaymentInfo *paymentInfo)
+	 {
+		 NSLog(@"%@",paymentInfo.paymentId);
+	 }
+						 cancelled:^
+	 {
+		 NSLog(@"Canceled");
+	 }
+							 error:^(ASDKAcquringSdkError *error)
+	 {
+		 NSLog(@"%@",error);
+	 }];
 }
 
 - (IBAction)buttonActionApplePay:(UIButton *)sender
@@ -210,14 +215,14 @@
 								 description:self.item.title
 									   email:shippingContact.emailAddress
 							 appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
-							 shippingMethods:nil //@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
+							 shippingMethods:nil//@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
 							 shippingContact:shippingContact
 					  shippingEditableFields:PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone //PKAddressFieldNone
-								   recurrent:YES
+								   recurrent:NO
 					   additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
 								 receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
-											   @"Items":@[@{@"Name":@"Название товара 1",@"Price":@100,@"Quantity":@1, @"Amount":@100, @"Tax":@"vat10"},
-														  @{@"Name":@"Название товара 2",@"Price":@100,@"Quantity":@1,@"Amount":@100, @"Tax":@"vat118"}]}
+											   @"Items":@[@{@"Name":@"Название товара 1", @"Price":@100, @"Quantity":@1, @"Amount":@100, @"Tax":@"vat10"},
+														  @{@"Name":@"Название товара 2", @"Price":@100, @"Quantity":@1, @"Amount":@100, @"Tax":@"vat118"}]}
 						  fromViewController:self
 									 success:^(ASDKPaymentInfo *paymentIfo) {
 										 NSLog(@"%@", paymentIfo.paymentId);

@@ -10,6 +10,10 @@
 #import "ASDKTestKeys.h"
 
 #define kActiveTerminal @"activeTerminal"
+#define kSettingCustomButtonCancel @"SettingCustomButtonCancel"
+#define kSettingCustomButtonPay @"SettingCustomButtonPay"
+#define kSettingCustomNavBarColor @"SettingCustomNavBarColor"
+#define kSettingMakeCharge @"MakeCharge"
 
 @implementation ASDKTestSettings
 
@@ -42,6 +46,46 @@
 + (NSString *)testPublicKey
 {
 	return kASDKTestPublicKey;
+}
+
++ (void)setCustomButtonCancel:(BOOL)value
+{
+	[ASDKTestSettings saveValue:@(value) forKey:kSettingCustomButtonCancel];
+}
+
++ (BOOL)customButtonCancel
+{
+	return [[ASDKTestSettings valueForKey:kSettingCustomButtonCancel] boolValue];
+}
+
++ (void)setCustomButtonPay:(BOOL)value
+{
+	[ASDKTestSettings saveValue:@(value) forKey:kSettingCustomButtonPay];
+}
+
++ (BOOL)customButtonPay
+{
+	return [[ASDKTestSettings valueForKey:kSettingCustomButtonPay] boolValue];
+}
+
++ (void)setCustomNavBarColor:(BOOL)value
+{
+	[ASDKTestSettings saveValue:@(value) forKey:kSettingCustomNavBarColor];
+}
+
++ (BOOL)customNavBarColor
+{
+	return [[ASDKTestSettings valueForKey:kSettingCustomNavBarColor] boolValue];
+}
+
++ (void)setMakeCharge:(BOOL)value
+{
+	[ASDKTestSettings saveValue:@(value) forKey:kSettingMakeCharge];
+}
+
++ (BOOL)makeCharge
+{
+	return [[ASDKTestSettings valueForKey:kSettingMakeCharge] boolValue];
 }
 
 + (void)saveValue:(id)value forKey:(NSString *)key

@@ -16,4 +16,16 @@
 + (NSString *)testTerminalPassword;
 + (NSString *)testPublicKey;
 
++ (void)setCustomButtonCancel:(BOOL)value;
++ (BOOL)customButtonCancel;
+
++ (void)setCustomButtonPay:(BOOL)value;
++ (BOOL)customButtonPay;
+
++ (void)setCustomNavBarColor:(BOOL)value;
++ (BOOL)customNavBarColor;
+
++ (void)setMakeCharge:(BOOL)value;
++ (BOOL)makeCharge;
+
 @end

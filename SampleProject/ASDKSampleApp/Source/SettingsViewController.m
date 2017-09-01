@@ -13,13 +13,19 @@
 
 typedef NS_ENUM(NSUInteger, SectionType)
 {
-	SectionTypeTerminal
+	SectionTypeTerminal,
+	SectionTypePaymentScreen,
+	SectionTypeMakeCharge
 };
 
 typedef NS_ENUM(NSUInteger, CellType)
 {
 	CellTypeKeyboard,
-	CellTypeTerminal
+	CellTypeTerminal,
+	CellTypeButtonCancel,
+	CellTypeButtonPay,
+	CellTypeNavBarColor,
+	CellTypeMakeCharge
 };
 
 @interface SettingsViewController ()
@@ -41,7 +47,9 @@ typedef NS_ENUM(NSUInteger, CellType)
 	[self.tableView setRowHeight:UITableViewAutomaticDimension];
 	[self.tableView setEstimatedRowHeight:50];
 	
-	self.tableViewDataSource = @[@{@(SectionTypeTerminal):@[@(CellTypeTerminal)]}];
+	self.tableViewDataSource = @[@{@(SectionTypeTerminal):@[@(CellTypeTerminal)]},
+								 @{@(SectionTypePaymentScreen):@[@(CellTypeButtonCancel),@(CellTypeButtonPay),@(CellTypeNavBarColor)]},
+								 @{@(SectionTypeMakeCharge):@[@(CellTypeMakeCharge)]}];
 	
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Закрыть")
 																	 style:UIBarButtonItemStylePlain
@@ -107,6 +115,10 @@ typedef NS_ENUM(NSUInteger, CellType)
 			result = NSLocalizedString(@"ActiveTerminal", @"Активный терминал");
 			break;
 			
+		case SectionTypePaymentScreen:
+			result = NSLocalizedString(@"PaymentScreenSettings", @"Настройки дизайна");
+			break;
+			
 		default:
 			break;
 	}
@@ -124,6 +136,13 @@ typedef NS_ENUM(NSUInteger, CellType)
 			//
 			break;
 			
+		case SectionTypePaymentScreen:
+			result = NSLocalizedString(@"PaymentScreenSettingsDescription", @"Этими настройками можно изменить цвет кнопки Оплатить и её надпись, цвет Панели навигации - NavigationBarColor, navigationBarItemsTextColor, navigationBarStyle. Использовтаь страндартную или свою кнопку 'закрыть' экран оплаты ");
+			break;
+			
+		case SectionTypeMakeCharge:
+			result = @"Осуществляет рекуррентный (повторный) платёж — безакцептное списание денежных средств со счета банковской карты Покупателя";
+			break;
 		default:
 			break;
 	}
@@ -143,8 +162,36 @@ typedef NS_ENUM(NSUInteger, CellType)
 			[(TableViewCellSegmentedControl *)cell addSegmentedControlValueChangedTarget:self action:@selector(terminalSourceChanged:) forControlEvents:UIControlEventValueChanged];
 			[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:[ASDKTestSettings testActiveTerminal]];
 			break;
-
-  		default:
+			
+		case CellTypeButtonCancel:
+			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSwitch class])];
+			[(TableViewCellSwitch *)cell setTitle:@"кнопка Отмена"];
+			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings customButtonCancel]];
+			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(actionSwitchButtonCancel:) forControlEvents:UIControlEventValueChanged];
+			break;
+			
+		case CellTypeButtonPay:
+			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSwitch class])];
+			[(TableViewCellSwitch *)cell setTitle:@"кнопка Оплатить"];
+			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings customButtonPay]];
+			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(actionSwitchButtonPay:) forControlEvents:UIControlEventValueChanged];
+			break;
+			
+		case CellTypeNavBarColor:
+			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSwitch class])];
+			[(TableViewCellSwitch *)cell setTitle:@"navigationBar"];
+			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings customNavBarColor]];
+			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(actionSwitchNavBarColor:) forControlEvents:UIControlEventValueChanged];
+			break;
+		
+		case CellTypeMakeCharge:
+			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSwitch class])];
+			[(TableViewCellSwitch *)cell setTitle:@"рекуррентный платёж"];
+			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings makeCharge]];
+			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(actionSwitchMakeCharge:) forControlEvents:UIControlEventValueChanged];
+			break;
+			
+		default:
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellDefault"];
 			break;
 	}
@@ -152,10 +199,31 @@ typedef NS_ENUM(NSUInteger, CellType)
     return cell;
 }
 
+
 - (void)terminalSourceChanged:(UISegmentedControl *)sender
 {
-	NSLog(@"%@", @(sender.selectedSegmentIndex));
+//	NSLog(@"%@", @(sender.selectedSegmentIndex));
 	[ASDKTestSettings setActiveTestTerminal:[sender titleForSegmentAtIndex:sender.selectedSegmentIndex]];
+}
+
+- (void)actionSwitchButtonCancel:(UISegmentedControl *)sender
+{
+	[ASDKTestSettings setCustomButtonCancel:![ASDKTestSettings customButtonCancel]];
+}
+
+- (void)actionSwitchButtonPay:(UISegmentedControl *)sender
+{
+	[ASDKTestSettings setCustomButtonPay:![ASDKTestSettings customButtonPay]];
+}
+
+- (void)actionSwitchNavBarColor:(UISegmentedControl *)sender
+{
+	[ASDKTestSettings setCustomNavBarColor:![ASDKTestSettings customNavBarColor]];
+}
+
+- (void)actionSwitchMakeCharge:(UISegmentedControl *)sender
+{
+	[ASDKTestSettings setMakeCharge:![ASDKTestSettings makeCharge]];
 }
 
 @end

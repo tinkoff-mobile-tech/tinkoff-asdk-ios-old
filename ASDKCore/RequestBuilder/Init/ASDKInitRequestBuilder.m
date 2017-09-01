@@ -174,16 +174,16 @@
 	
 	if ([self.additionalPaymentData count] > 0)
 	{
-		if ([self.additionalPaymentData objectForKey:@"Email"] == nil && [self.additionalPaymentData objectForKey:@"email"] == nil)
-		{
-			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра 'Email'" code:0];
-			
-			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
-			
-			*error = validationError;
-			
-			return;
-		}
+//		if ([self.additionalPaymentData objectForKey:@"Email"] == nil && [self.additionalPaymentData objectForKey:@"email"] == nil)
+//		{
+//			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра 'Email'" code:0];
+//			
+//			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
+//			
+//			*error = validationError;
+//			
+//			return;
+//		}
 
 		BOOL invalidAdditionalPaymentData = NO;
 		if ([[self.additionalPaymentData allKeys] count] > 20)
@@ -192,7 +192,8 @@
 		}
 		else for (NSString *key in [self.additionalPaymentData allKeys])
 		{
-			if ([key length] > 20 || [[self.additionalPaymentData objectForKey:key] length] > 100)
+			NSString *value = [NSString stringWithFormat:@"%@", [self.additionalPaymentData objectForKey:key]];
+			if ([key length] > 20 || [value length] > 100)
 			{
 				invalidAdditionalPaymentData = YES;
 				break;

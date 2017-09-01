@@ -102,15 +102,20 @@ typedef enum
     NSInteger numberOfRows = 0;
     switch (section)
     {
-        case ASDKCardsListSectionCard:
-        {
+		case ASDKCardsListSectionCard:
+		{
+			id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
+
+			if (cardsListDelegate && [cardsListDelegate respondsToSelector:@selector(filterCardList:)])
+			{
+				_cards = [cardsListDelegate filterCardList:_cards];
+			}
+
             numberOfRows = _cards.count;
-        }
+		}
             break;
         case ASDKCardsListSectionAddNewCard:
-        {
             numberOfRows = 1;
-        }
             break;
     }
     

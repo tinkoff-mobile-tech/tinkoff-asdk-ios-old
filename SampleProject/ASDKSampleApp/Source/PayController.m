@@ -75,6 +75,7 @@
             description:(NSString *)description
                  amount:(NSNumber *)amount
 			  recurrent:(BOOL)recurrent
+			 makeCharge:(BOOL)makeCharge
   additionalPaymentData:(NSDictionary *)data
 			receiptData:(NSDictionary *)receiptData
      fromViewController:(UIViewController *)viewController
@@ -86,14 +87,31 @@
 
     double randomOrderId = arc4random()%10000000;
 	
-//Настройка дизайна
-	ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
-//	[designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
-//	[designConfiguration setPayButtonColor:[UIColor greenColor] payButtonPressedColor:[UIColor blueColor] payButtonTextColor:[UIColor whiteColor]];
-	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
-	[cancelButton setTintColor:[UIColor redColor]];
-	[designConfiguration setCustomBackButton:cancelButton];
-	paymentFormStarter.designConfiguration = designConfiguration;
+	if ([ASDKTestSettings customButtonCancel] == YES ||
+		[ASDKTestSettings customButtonPay] == YES ||
+		[ASDKTestSettings customNavBarColor] == YES)
+	{
+		//Настройка дизайна
+		ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
+		if ([ASDKTestSettings customNavBarColor])
+		{
+			[designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
+		}
+		
+		if ([ASDKTestSettings customButtonPay])
+		{
+			[designConfiguration setPayButtonColor:[UIColor greenColor] payButtonPressedColor:[UIColor blueColor] payButtonTextColor:[UIColor whiteColor]];
+		}
+
+		if ([ASDKTestSettings customButtonCancel])
+		{
+			UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
+			[cancelButton setTintColor:[UIColor redColor]];
+			[designConfiguration setCustomBackButton:cancelButton];
+		}
+		
+		paymentFormStarter.designConfiguration = designConfiguration;
+	}
 
 //Настройка сканнера карт
     paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
@@ -107,6 +125,7 @@
                                                        email:nil 
                                                  customerKey:[PayController customerKey]
 												   recurrent:recurrent
+												  makeCharge:makeCharge
 									   additionalPaymentData:data
 												 receiptData:receiptData
                                                      success:^(ASDKPaymentInfo *paymentInfo)

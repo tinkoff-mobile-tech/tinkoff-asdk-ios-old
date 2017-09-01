@@ -25,3 +25,7 @@
 "ProductAddedToBag" = "Product added to bag";
 "ActiveTerminal" = "Active terminal";
 "Purchasehistory" = "Purchase history";
+"SelectAnotherCard" = "Select another payment card";
+"FromCard" = "from card";
+"PaymentScreenSettings" = "Payment screen settings";
+"PaymentScreenSettingsDescription" = "Switch this settings we are can change to use standart close button or custom, change pay button color and title. navigationBar items text color, navigation bar color and navigationBarStyle.";

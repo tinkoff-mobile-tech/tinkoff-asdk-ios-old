@@ -24,6 +24,7 @@
 - (void)didSelectCard:(ASDKCard *)card;
 - (void)cardsListDidCancel;
 - (void)cardListDidChanged;
+- (NSArray<ASDKCard*>*)filterCardList:(NSArray<ASDKCard*>*)cardList;
 
 @end
 
