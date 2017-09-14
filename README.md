@@ -1,6 +1,7 @@
 # Tinkoff Acquiring SDK for iOS
 
 ![PayFormActivity][img-pay]
+![PayFormActivityUserSettings][img-pay2]
 
 Acquiring SDK позволяет интегрировать [Интернет-Эквайрингу][acquiring] в мобильные приложения для платформы iOS.
 
@@ -112,9 +113,9 @@ SDK состоит из следующих модулей:
 * проходить 3DS подтверждение
 * управлять списком ранее сохраненных карт
 
-**Настройка экрана Оплаты**
+**Настройка экрана Оплата**
 
-для настройки элементов экрана оплаты нужно использовать ASDKDesignConfiguration 
+для настройки элементов экрана оплаты нужно использовать ASDKDesignConfiguration:
 
 * Настройка цветов для кнопок и заголовка в навигационной панели.
 * Настройка кнопки оплатить.
@@ -164,5 +165,6 @@ _**PayController**_ фасад для _**ASDKAcquiringSdk**_ который со
 [applepay]: https://oplata.tinkoff.ru/landing/develop/applepay
 [cocoapods]: https://cocoapods.org
 [img-pay]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen.png
+[img-pay2]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen2.png
 [server-api]: https://oplata.tinkoff.ru/landing/develop/documentation/termins_and_operations
 [issues]: https://github.com/TinkoffCreditSystems/tinkoff-asdk-ios/issues

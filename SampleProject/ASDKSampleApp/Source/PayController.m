@@ -108,9 +108,10 @@
 		[designConfiguration setCustomBackButton:cancelButton];
 	}
 	//
-	[designConfiguration setPayFormItems:@[//@(PayFormItems_ProductTitle),
+	[designConfiguration setPayFormItems:@[@(PayFormItems_Empty20px),
+										   //@(PayFormItems_ProductTitle),
 										   //@(PayFormItems_ProductDescription),
-										   @(PayFormItems_Amount),
+										   //@(PayFormItems_Amount),
 										   @(PayFormItems_PyamentCardRequisites),
 										   //@(PayFormItems_Email),
 										   @(PayFormItems_Empty20px),
@@ -118,7 +119,7 @@
 										   //@(PayFormItems_SecureLogos)
 										   ]];
 
-	//[designConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
+	[designConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
 	paymentFormStarter.designConfiguration = designConfiguration;
 
 //Настройка сканнера карт
