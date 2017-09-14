@@ -407,6 +407,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 {
 	if (completion)
 	{
+		//NSString *encryptedPaymentDataString = [[NSString alloc] initWithData:payment.token.paymentData encoding:NSUTF8StringEncoding];
+		//NSLog(@"%@", encryptedPaymentDataString);
 		NSString *encryptedPaymentData = [payment.token.paymentData base64EncodedStringWithOptions:0];
 		//NSString *encryptedPaymentData = [[NSString alloc] initWithData:payment.token.paymentData encoding:NSUTF8StringEncoding];
 		//encryptedPaymentData = @"paymentId={\"version\":\"EC_v1\",\"data\":\"bhgLPJ+Wra1MlGtYd1M2dHHXC1QqZOcIXC7TwbsNcVlqUZBEEYFCdI0NSCGk+EkU6VKgB64qL6N+lfvQFXKPQdjY8m4w7jRXlKGWC8HpjAUKFggyjDjnEaJZ4eXOvtpn+D5MQb4+YMl+o3ECOKvLfjGWp7WkxFbpl+Gs1LkntofBFBZ4Hq3IWRysfLUcTeRqDGgNk7LiHwVLzj9FTqh6TpFfQoDaQtJ1Ga/k3j/gMAJVtlwZ6CGGM9yjLtr3pjTWDp4tUieSeWsbAMMkB/0J9zK1V0L3rZ4tmY5DU6Xewl4dmQBxNXQ8MoqTdKQlqcrN9qRhlpUtiEJJEOBOMu2PmiShp+TZnjRb09Jva9rqeGIdGT57GlpXBVEEe8xgh62aMbxpWKVCEzTEsiI0fcw4\",\"signature\":\"MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCAMIID4jCCA4igAwIBAgIIJEPyqAad9XcwCgYIKoZIzj0EAwIwejEuMCwGA1UEAwwlQXBwbGUgQXBwbGljYXRpb24gSW50ZWdyYXRpb24gQ0EgLSBHMzEmMCQGA1UECwwdQXBwbGUgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMB4XDTE0MDkyNTIyMDYxMVoXDTE5MDkyNDIyMDYxMVowXzElMCMGA1UEAwwcZWNjLXNtcC1icm9rZXItc2lnbl9VQzQtUFJPRDEUMBIGA1UECwwLaU9TIFN5c3RlbXMxEzARBgNVBAoMCkFwcGxlIEluYy4xCzAJBgNVBAYTAlVTMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEwhV37evWx7Ihj2jdcJChIY3HsL1vLCg9hGCV2Ur0pUEbg0IO2BHzQH6DMx8cVMP36zIg1rrV1O/0komJPnwPE";

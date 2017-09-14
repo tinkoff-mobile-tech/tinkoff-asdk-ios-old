@@ -21,5 +21,7 @@
 @interface ASDKPayButtonCell : UITableViewCell
 
 + (instancetype)cell;
+- (void)setAttributedButtonTitle:(NSAttributedString *)title;
+- (void)setButtonTitle:(NSString *)title;
 
 @end

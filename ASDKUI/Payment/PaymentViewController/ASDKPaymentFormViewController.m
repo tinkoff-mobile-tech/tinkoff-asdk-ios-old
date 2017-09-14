@@ -46,6 +46,7 @@
 #import "ASDKBarButtonItem.h"
 
 #import "ASDKCardsListDataController.h"
+#import "ASDKEmptyTableViewCell.h"
 
 #define kASDKEmailRegexp @"[\\w_.-]+@[\\w_.-]+\\.[a-zA-Z]+"
 
@@ -53,13 +54,15 @@ NSString * const kTCSRubNoDotCap = @"₽";
 NSString * const kCurrencyCode = @"RUB";
 NSString * const kDecimalSeparator = @",";
 
-typedef enum
-{
-    ASDKPaymentViewControllerSectionHeader = 0,
-    ASDKPaymentViewControllerSectionRequisites,
-    ASDKPaymentViewControllerSectionDoneButton,
-    ASDKPaymentViewControllerSectionFooter
-} ASDKPaymentViewControllerSection;
+//typedef enum
+//{
+//    ASDKPaymentViewControllerSectionHeader = 0,
+//    ASDKPaymentViewControllerSectionRequisites,
+//    ASDKPaymentViewControllerSectionDoneButton,
+//    ASDKPaymentViewControllerSectionFooter
+//} ASDKPaymentViewControllerSection;
+
+NSUInteger const PayFormItems_PyamentCardID = -1;
 
 @interface ASDKPaymentFormViewController () <UITextFieldDelegate, ASDKCardsListDelegate>
 {
@@ -93,6 +96,9 @@ typedef enum
 
 @property (nonatomic, assign) BOOL updateCardCell;
 @property (nonatomic, assign) BOOL makeCharge;
+
+@property (nonatomic, strong) NSArray *tableViewDataSource;
+@property (nonatomic, strong) UIView *customSecureLogo;
 
 @end
 
@@ -151,7 +157,9 @@ typedef enum
     self.title = LOC(@"paymentForm.title");
     
     [self.tableView setBackgroundColor:[ASDKDesign colorTableViewBackground]];
-    
+	[self.tableView registerNib:[UINib nibWithNibName:@"ASDKEmptyTableViewCell" bundle:[NSBundle bundleForClass:[self class]]] forCellReuseIdentifier:@"ASDKEmptyTableViewCell"];
+	[self.tableView registerNib:[UINib nibWithNibName:@"ASDKPaymentFormHeaderCell" bundle:[NSBundle bundleForClass:[self class]]] forCellReuseIdentifier:@"ASDKPaymentFormHeaderCell"];
+
     ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"Common.Cancel")
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
@@ -160,16 +168,48 @@ typedef enum
     ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
     ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
     cancelButton.tintColor = [designConfiguration navigationBarItemsTextColor];
+	[self.navigationItem setLeftBarButtonItem:cancelButton];
 	
 	if (designConfiguration.customBackButton)
 	{
-		cancelButton = designConfiguration.customBackButton;
-		[cancelButton setAction:@selector(cancelAction:)];
-		[cancelButton setTarget:self];
+		[self.navigationItem setLeftBarButtonItem:nil];
+		
+		UIBarButtonItem *button = designConfiguration.customBackButton;
+		[button setAction:@selector(cancelAction:)];
+		[button setTarget:self];
+
+		[self.navigationItem setLeftBarButtonItem:button];
 	}
 
-    [self.navigationItem setLeftBarButtonItem:cancelButton];
+	NSMutableArray *dataSource = [NSMutableArray new];
+	if (designConfiguration.payFormItems != nil)
+	{
+		[dataSource addObjectsFromArray:designConfiguration.payFormItems];
+	}
 
+	if ([dataSource count] == 0)
+	{
+		[dataSource addObjectsFromArray:@[@(PayFormItems_ProductTitle),
+										  @(PayFormItems_ProductDescription),
+										  @(PayFormItems_Amount),
+										  @(PayFormItems_PyamentCardID),
+										  @(PayFormItems_PyamentCardRequisites),
+										  @(PayFormItems_Email),
+										  @(PayFormItems_PayButton),
+										  @(PayFormItems_SecureLogos)
+										  ]];
+	}
+	else
+	{
+		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardRequisites)];
+		if (index != NSNotFound)
+		{
+			[dataSource insertObject:@(PayFormItems_PyamentCardID) atIndex:index];
+		}
+	}
+
+	self.tableViewDataSource = [dataSource copy];
+	
     [self updateExternalCardsList];
 }
 
@@ -312,7 +352,7 @@ typedef enum
         }
     }
 }
-
+ 
 #pragma mark - Setters
 
 - (void)setSelectedCard:(ASDKCard *)selectedCard
@@ -328,7 +368,8 @@ typedef enum
 			[[self cardRequisitesCell] setUserInteractionEnabled:NO];
 			[self cardRequisitesCell].showSecretContainer = NO;
 			[[self cardRequisitesCell] setCardNumber:cardNumber];
-			[[[self cardRequisitesCell] textFieldCardNumber] setText:cardNumber];// updateCardRequisitesCellWithCardNumber:[cardNumber substringFromIndex:cardNumber.length - 4]];
+			[[[self cardRequisitesCell] textFieldCardNumber] setText:cardNumber];
+			[[[self cardRequisitesCell] textFieldCardNumber] setTextColor:[UIColor blackColor]];
 		}
 		else
 		{
@@ -341,7 +382,7 @@ typedef enum
         
         if (_shouldShowKeyboardWhenNewCardSelected)
         {
-            [[self cardRequisitesCell].secretCVVTextField becomeFirstResponder];
+            //[[self cardRequisitesCell].secretCVVTextField becomeFirstResponder];
         }
         else
         {
@@ -350,6 +391,7 @@ typedef enum
     }
     else
     {
+		[[self cardRequisitesCell] setUserInteractionEnabled:YES];
         [[self cardRequisitesCell].textFieldCardCVC setText:@""];
         [[self cardRequisitesCell].textFieldCardDate setText:@""];
         [self updateCardRequisitesCellWithCardNumber:@""];
@@ -523,108 +565,187 @@ typedef enum
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0)
-    {
-        return 2;
-    }
-    else if (section == 1)
-    {
-        return 3;
-    }
-    
-    return 1;
+    return [self.tableViewDataSource count];
+//	if (section == 0)
+//	{
+//		return 2;
+//	}
+//	else if (section == 1)
+//	{
+//		return 3;
+//	}
+//	
+//	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == ASDKPaymentViewControllerSectionHeader)
-    {
-        if (indexPath.row == 0)
-        {
-            return [self headerCell];
-        }
-        
-        return [self summCell];
-    }
-    else if (indexPath.section == ASDKPaymentViewControllerSectionRequisites)
-    {
-        if (indexPath.row == 1)
-        {
-			[self cardRequisitesCell].shouldShowTopSeparator = ![self shouldShowExternalCardsCell];
+	UITableViewCell *cell = nil;
+	
+	switch ([[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue])
+	{
+  		case PayFormItems_ProductTitle:
+			{
+				ASDKPaymentFormHeaderCell *cellTitle = [tableView dequeueReusableCellWithIdentifier:@"ASDKPaymentFormHeaderCell"];
+				cellTitle.titleLabel.text = _paymentTitle;
+				_headerCell.descriptionLabel.text = nil;
+				[cellTitle layoutIfNeeded];
+				cell = cellTitle;
+			}
+			break;
+
+		case PayFormItems_ProductDescription:
+			{
+				ASDKPaymentFormHeaderCell *cellTitle = [tableView dequeueReusableCellWithIdentifier:@"ASDKPaymentFormHeaderCell"];
+				cellTitle.titleLabel.text = nil;
+				cellTitle.descriptionLabel.text = _paymentDescription;
+				[cellTitle layoutIfNeeded];
+				cell = cellTitle;
+			}
+			break;
+
+		case PayFormItems_Amount:
+			cell = [self summCell];
+			break;
+
+		case PayFormItems_Email:
+			cell = [self emailCell];
+			break;
+
+		case PayFormItems_SecureLogos:
+			cell = [self footerCell];
+			[[self footerCell] setCustomSecureLogos:self.customSecureLogo];
+			break;
+
+		case PayFormItems_PayButton:
+			{
+				ASDKPayButtonCell *paymentButtonCell = [self paymentButtonCell];
 				
-			return [self cardRequisitesCell];
-        }
-        else if (indexPath.row == 2)
-        {
-            return [self emailCell];
-        }
-        else
-        {
-            [self externalCardsCell].shouldShowTopSeparator = [self shouldShowExternalCardsCell];
-        
-            return [self externalCardsCell];
-        }
-    }
-    else if (indexPath.section == ASDKPaymentViewControllerSectionDoneButton)
-    {
-        return [self paymentButtonCell];
-    }
-    else
-    {
-        return [self footerCell];
-    }
+				ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
+				ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
+				
+				[paymentButtonCell setButtonTitle:designConfiguration.payButtonTitle];
+				[paymentButtonCell setAttributedButtonTitle:designConfiguration.payButtonAttributedTitle];
+				
+				cell = paymentButtonCell;
+			}
+			break;
+
+		case PayFormItems_PyamentCardID:
+			cell = [self externalCardsCell];
+			break;
+
+		case PayFormItems_PyamentCardRequisites:
+			cell = [self cardRequisitesCell];
+			break;
+
+		case PayFormItems_Empty20px:
+		case PayFormItems_Empty5px:
+  		default:
+			cell = [tableView dequeueReusableCellWithIdentifier:@"ASDKEmptyTableViewCell"];
+			break;
+	}
+	
+	if (indexPath.row > 0)
+	{
+		NSInteger index = [[self.tableViewDataSource objectAtIndex:indexPath.row-1] integerValue];
+		NSInteger index1 = [[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue];
+		if ((index == PayFormItems_ProductTitle || index == PayFormItems_ProductDescription || index == PayFormItems_Empty20px || index == PayFormItems_Empty5px) &&
+		   (index1 != PayFormItems_ProductDescription && index1 != PayFormItems_Empty20px && index1 != PayFormItems_Empty5px))
+		{
+			if ([cell isKindOfClass:[ASDKBaseCell class]] && [cell respondsToSelector:@selector(shouldShowTopSeparator)])
+			{
+				ASDKBaseCell *baseCell = (ASDKBaseCell *)cell;
+				baseCell.shouldShowTopSeparator = YES;
+			}
+		}
+		else
+		{
+			if ([cell isKindOfClass:[ASDKBaseCell class]] && [cell respondsToSelector:@selector(shouldShowTopSeparator)])
+			{
+				ASDKBaseCell *baseCell = (ASDKBaseCell *)cell;
+				baseCell.shouldShowTopSeparator = NO;
+			}
+		}
+	}
+
+	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.section == ASDKPaymentViewControllerSectionDoneButton)
-    {
-        [self performPayment];
-    }
+	
+	if ([[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue] == PayFormItems_PayButton )
+	{
+		[self performPayment];
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == ASDKPaymentViewControllerSectionHeader)
-    {
-        return .01f;
-    }
-    else
-    {
-        return [super tableView:tableView heightForHeaderInSection:section];
-    }
+	return 0.01f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == ASDKPaymentViewControllerSectionHeader)
-    {
-        if (indexPath.row == 0)
-        {
-            return MIN([self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width], 98);
-        }
-    }
-    
-    else if (indexPath.section == ASDKPaymentViewControllerSectionRequisites)
-    {
-        if (indexPath.row == 0)
-        {
-            return [self shouldShowExternalCardsCell] ? [super tableView:tableView heightForRowAtIndexPath:indexPath] : .01f;
-        }
-		if (indexPath.row == 2)
-		{
-			return 44.0f;
-		}
-    }
-    
-    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+	CGFloat result = 0;
+
+	switch ([[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue])
+	{
+		case PayFormItems_ProductTitle:
+			self.headerCell.titleLabel.text = _paymentTitle;
+			self.headerCell.descriptionLabel.text = nil;//_paymentDescription;
+			result = MIN([self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width], 98);
+			break;
+			
+		case PayFormItems_ProductDescription:
+			self.headerCell.titleLabel.text = nil;//_paymentTitle;
+			self.headerCell.descriptionLabel.text = _paymentDescription;
+			result = MIN([self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width], 98);
+			break;
+			
+		case PayFormItems_SecureLogos:
+			if (self.customSecureLogo)
+			{
+				result = self.customSecureLogo.frame.size.height;
+			}
+			else
+			{
+				result = 44.0f;
+			}
+
+			break;
+			
+		case PayFormItems_PyamentCardRequisites:
+			result = 44.0f;
+			break;
+			
+		case PayFormItems_Amount:
+		case PayFormItems_Email:
+		case PayFormItems_PayButton:
+			result = 44.0f;
+			break;
+			
+		case PayFormItems_Empty20px:
+			result = 20.0f;
+			break;
+			
+		case PayFormItems_Empty5px:
+			result = 5.0f;
+			break;
+			
+		default:
+			result = 44.0f;
+			break;
+	}
+
+	return result;
 }
 
 

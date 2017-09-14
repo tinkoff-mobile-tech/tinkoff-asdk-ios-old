@@ -36,8 +36,9 @@
 
 + (NSString *)customerKey
 {
+	return @"user-key";
 //	return @"testMerchantApplePay";
-	return @"testCustomerKey1@gmail.com";
+//	return @"testCustomerKey1@gmail.com";
 }
 
 + (UIAlertController *)alertWithError:(ASDKAcquringSdkError *)error
@@ -87,31 +88,38 @@
 
     double randomOrderId = arc4random()%10000000;
 	
-	if ([ASDKTestSettings customButtonCancel] == YES ||
-		[ASDKTestSettings customButtonPay] == YES ||
-		[ASDKTestSettings customNavBarColor] == YES)
+	//Настройка дизайна
+	ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
+	// используем ASDKTestSettings для переключения настроект во время работы приложения, для быстрой демонстрации
+	if ([ASDKTestSettings customNavBarColor])
 	{
-		//Настройка дизайна
-		ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
-		if ([ASDKTestSettings customNavBarColor])
-		{
-			[designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
-		}
-		
-		if ([ASDKTestSettings customButtonPay])
-		{
-			[designConfiguration setPayButtonColor:[UIColor greenColor] payButtonPressedColor:[UIColor blueColor] payButtonTextColor:[UIColor whiteColor]];
-		}
-
-		if ([ASDKTestSettings customButtonCancel])
-		{
-			UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
-			[cancelButton setTintColor:[UIColor redColor]];
-			[designConfiguration setCustomBackButton:cancelButton];
-		}
-		
-		paymentFormStarter.designConfiguration = designConfiguration;
+		[designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
 	}
+	
+	if ([ASDKTestSettings customButtonPay])
+	{
+		[designConfiguration setPayButtonColor:[UIColor greenColor] payButtonPressedColor:[UIColor blueColor] payButtonTextColor:[UIColor whiteColor]];
+	}
+
+	if ([ASDKTestSettings customButtonCancel])
+	{
+		UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
+		[cancelButton setTintColor:[UIColor redColor]];
+		[designConfiguration setCustomBackButton:cancelButton];
+	}
+	//
+	[designConfiguration setPayFormItems:@[//@(PayFormItems_ProductTitle),
+										   //@(PayFormItems_ProductDescription),
+										   @(PayFormItems_Amount),
+										   @(PayFormItems_PyamentCardRequisites),
+										   //@(PayFormItems_Email),
+										   @(PayFormItems_Empty20px),
+										   @(PayFormItems_PayButton),
+										   //@(PayFormItems_SecureLogos)
+										   ]];
+
+	//[designConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
+	paymentFormStarter.designConfiguration = designConfiguration;
 
 //Настройка сканнера карт
     paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
@@ -121,7 +129,7 @@
                                                       amount:amount
                                                        title:name
                                                  description:description
-                                                      cardId:@""// nil - новая нужно вводить реквизиты карты, @"" - последняя сохраненная, @"836252" - карта по CardId
+													  cardId:[ASDKTestSettings makeNewCard] ? nil:@""// nil - новая нужно вводить реквизиты карты, @"" - последняя сохраненная, @"836252" - карта по CardId
                                                        email:nil 
                                                  customerKey:[PayController customerKey]
 												   recurrent:recurrent

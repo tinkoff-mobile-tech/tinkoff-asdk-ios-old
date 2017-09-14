@@ -112,6 +112,43 @@ SDK состоит из следующих модулей:
 * проходить 3DS подтверждение
 * управлять списком ранее сохраненных карт
 
+**Настройка экрана Оплаты**
+
+для настройки элементов экрана оплаты нужно использовать ASDKDesignConfiguration 
+
+* Настройка цветов для кнопок и заголовка в навигационной панели.
+* Настройка кнопки оплатить.
+* Настройка отображения элементов экрана.
+* Установить свои логотипы платежных систем или то, что потребуется.  
+
+Например, можно указать какие элементы показывать на экране и в какой последовательности, для этого нужно сформировать массив из эелементов:
+```objective-c
+typedef NS_ENUM(NSInteger, PayFormItems)
+{
+	PayFormItems_ProductTitle, // Заголовок, занвание товара 
+	PayFormItems_ProductDescription, // Описание товара
+	PayFormItems_Amount, // сумма
+	PayFormItems_PyamentCardRequisites,// поле для ввода реквизитов карты
+	PayFormItems_Email, // поле для ввода email
+	PayFormItems_PayButton, // кнопка оплатить
+	PayFormItems_SecureLogos, // логотипы платежных систем
+	PayFormItems_Empty20px, // пустое поле цвета фона таблицы высотой в 20 px
+	PayFormItems_Empty5px // пустое поле цвета фона таблицы высотой в 5 px
+};
+// установить элементы экрана оплаты и их последовательность: 
+[ASDKDesignConfiguration setPayFormItems:@[@(PayFormItems_ProductTitle),
+										   @(PayFormItems_ProductDescription),
+										   @(PayFormItems_Amount),
+										   @(PayFormItems_PyamentCardRequisites),
+										   @(PayFormItems_Email),
+										   @(PayFormItems_Empty20px),
+										   @(PayFormItems_PayButton),
+										   @(PayFormItems_SecureLogos)
+										 ]];
+// изменить на кнопке оплатить надпись:
+[ASDKDesignConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
+```
+
 ### Sample
 Содержит пример интеграции Tinkoff Acquiring SDK в мобильное приложение по продаже книг.
 Основные классы и файлы

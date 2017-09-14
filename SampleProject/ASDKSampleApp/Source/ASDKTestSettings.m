@@ -14,6 +14,7 @@
 #define kSettingCustomButtonPay @"SettingCustomButtonPay"
 #define kSettingCustomNavBarColor @"SettingCustomNavBarColor"
 #define kSettingMakeCharge @"MakeCharge"
+#define kSettingMakeNewCard @"MakeNewCard"
 
 @implementation ASDKTestSettings
 
@@ -86,6 +87,16 @@
 + (BOOL)makeCharge
 {
 	return [[ASDKTestSettings valueForKey:kSettingMakeCharge] boolValue];
+}
+
++ (void)setMakeNewCard:(BOOL)value
+{
+	[ASDKTestSettings saveValue:@(value) forKey:kSettingMakeNewCard];
+}
+
++ (BOOL)makeNewCard
+{
+	return [[ASDKTestSettings valueForKey:kSettingMakeNewCard] boolValue];
 }
 
 + (void)saveValue:(id)value forKey:(NSString *)key

@@ -50,4 +50,23 @@
     return cell;
 }
 
+- (void)setAttributedButtonTitle:(NSAttributedString *)title
+{
+	if (title != nil)
+	{
+		self.titleLabel.text = nil;
+		[self.titleLabel setAttributedText:title];
+	}
+}
+
+- (void)setButtonTitle:(NSString *)title
+{
+	[self.titleLabel setText:title];
+	
+	if (title == nil)
+	{
+		self.titleLabel.text = LOC(@"PaymentForm.payButtonTitle");
+	}
+}
+
 @end

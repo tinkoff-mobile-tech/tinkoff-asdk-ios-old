@@ -18,6 +18,13 @@
 #import "ASDKFooterCell.h"
 #import "ASDKDesign.h"
 
+@interface ASDKFooterCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewLogos;
+@property (weak, nonatomic) UIView *customLogosView;
+
+@end
+
 @implementation ASDKFooterCell
 
 + (instancetype)cell
@@ -33,7 +40,33 @@
 {
 	[super awakeFromNib];
 	
+	if (self.customLogosView)
+	{
+		[self.customLogosView removeFromSuperview];
+		self.customLogosView = nil;
+	}
+	
     [self.contentView setBackgroundColor:[ASDKDesign colorTableViewBackground]];
+}
+
+- (void)setCustomSecureLogos:(UIView *)view
+{
+	[self.imageViewLogos setHidden:(view != nil)];
+	
+	self.customLogosView = view;
+	[self.contentView addSubview:view];
+
+	view.center = self.contentView.center;
+}
+
+- (void)layoutSubviews
+{
+	if (self.customLogosView)
+	{
+		self.customLogosView.center = self.contentView.center;
+	}
+	
+	[super layoutSubviews];
 }
 
 @end

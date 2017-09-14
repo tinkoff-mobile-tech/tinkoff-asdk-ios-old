@@ -30,7 +30,12 @@
 @property (nonatomic, strong) UIColor *payButtonPressedColor;
 @property (nonatomic, strong) UIColor *payButtonTextColor;
 
+@property (nonatomic, strong) NSString *_payButtonTitle;
+@property (nonatomic, strong) NSAttributedString *_payButtonAttributedTitle;
+
 @property (nonatomic, strong) UIBarButtonItem *backButton;
+@property (nonatomic, strong) NSArray *_payFormItems;
+@property (nonatomic, strong) UIView *_paymentsSecureLogosView;
 
 @end
 
@@ -44,8 +49,6 @@
     
     return self;
 }
-
-
 
 
 - (void)setNavigationBarColor:(UIColor *)navigationBarColor
@@ -93,7 +96,7 @@
     _payButtonTextColor = payButtonTextColor;
 }
 
-- (void)setCustomBackButton:(UITabBarItem *)backButton
+- (void)setCustomBackButton:(UIBarButtonItem *)backButton
 {
 	_backButton = backButton;
 }
@@ -131,6 +134,79 @@
     }
     
     return [ASDKDesign colorTextDark];
+}
+
+- (NSString *)payButtonTitle
+{
+	return self._payButtonTitle;
+}
+
+- (void)setPayButtonTitle:(NSString *)title
+{
+	self._payButtonTitle = title;
+}
+
+- (NSAttributedString *)payButtonAttributedTitle
+{
+	return self._payButtonAttributedTitle;
+}
+
+- (void)setPayButtonAttributedTitle:(NSAttributedString *)title
+{
+	self._payButtonAttributedTitle = title;
+}
+
+- (void)setPayFormItems:(NSArray *)items
+{
+	__block BOOL result = items.count > 0;
+	[items enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		if ([obj isKindOfClass:[NSNumber class]])
+		{
+			switch ([obj integerValue]) {
+				case PayFormItems_ProductTitle:
+				case PayFormItems_ProductDescription:
+				case PayFormItems_Amount:
+				case PayFormItems_PyamentCardRequisites:
+				case PayFormItems_Email:
+				case PayFormItems_PayButton:
+				case PayFormItems_SecureLogos:
+				case PayFormItems_Empty20px:
+				case PayFormItems_Empty5px:
+					result &= YES;
+					break;
+
+				default:
+					result = NO;
+					*stop = YES;
+					break;
+			}
+		}
+		else
+		{
+			result = NO;
+			*stop = YES;
+		}
+	}];
+
+	if (result == YES)
+	{
+		self._payFormItems = items;
+	}
+}
+
+- (NSArray*)payFormItems
+{
+	return self._payFormItems;
+}
+
+- (void)setPaymentsSecureLogosView:(UIView *)view
+{
+	self._paymentsSecureLogosView = view;
+}
+
+- (UIView *)paymentsSecureLogosView
+{
+	return self._paymentsSecureLogosView;
 }
 
 @end

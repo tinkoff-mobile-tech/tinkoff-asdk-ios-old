@@ -15,7 +15,8 @@ typedef NS_ENUM(NSUInteger, SectionType)
 {
 	SectionTypeTerminal,
 	SectionTypePaymentScreen,
-	SectionTypeMakeCharge
+	SectionTypeMakeCharge,
+	SectionTypeMakeNewCard
 };
 
 typedef NS_ENUM(NSUInteger, CellType)
@@ -25,7 +26,8 @@ typedef NS_ENUM(NSUInteger, CellType)
 	CellTypeButtonCancel,
 	CellTypeButtonPay,
 	CellTypeNavBarColor,
-	CellTypeMakeCharge
+	CellTypeMakeCharge,
+	CellTypeMakeNewCard
 };
 
 @interface SettingsViewController ()
@@ -49,7 +51,8 @@ typedef NS_ENUM(NSUInteger, CellType)
 	
 	self.tableViewDataSource = @[@{@(SectionTypeTerminal):@[@(CellTypeTerminal)]},
 								 @{@(SectionTypePaymentScreen):@[@(CellTypeButtonCancel),@(CellTypeButtonPay),@(CellTypeNavBarColor)]},
-								 @{@(SectionTypeMakeCharge):@[@(CellTypeMakeCharge)]}];
+								 @{@(SectionTypeMakeCharge):@[@(CellTypeMakeCharge)]},
+								 @{@(SectionTypeMakeNewCard):@[@(CellTypeMakeNewCard)]}];
 	
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Закрыть")
 																	 style:UIBarButtonItemStylePlain
@@ -143,6 +146,11 @@ typedef NS_ENUM(NSUInteger, CellType)
 		case SectionTypeMakeCharge:
 			result = @"Осуществляет рекуррентный (повторный) платёж — безакцептное списание денежных средств со счета банковской карты Покупателя";
 			break;
+		
+		case SectionTypeMakeNewCard:
+			result = @"Оплачивать по реквизитам новой карты.\nВыкл. - оплачивать с последней оплаченой карты.";
+			break;
+			
 		default:
 			break;
 	}
@@ -190,6 +198,13 @@ typedef NS_ENUM(NSUInteger, CellType)
 			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings makeCharge]];
 			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(actionSwitchMakeCharge:) forControlEvents:UIControlEventValueChanged];
 			break;
+
+		case CellTypeMakeNewCard:
+			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSwitch class])];
+			[(TableViewCellSwitch *)cell setTitle:@"оплачивать по реквизитам"];
+			[(TableViewCellSwitch *)cell setSwitchValue:[ASDKTestSettings makeNewCard]];
+			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(actionSwitchMakeNewCard:) forControlEvents:UIControlEventValueChanged];
+			break;
 			
 		default:
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellDefault"];
@@ -224,6 +239,11 @@ typedef NS_ENUM(NSUInteger, CellType)
 - (void)actionSwitchMakeCharge:(UISegmentedControl *)sender
 {
 	[ASDKTestSettings setMakeCharge:![ASDKTestSettings makeCharge]];
+}
+
+- (void)actionSwitchMakeNewCard:(UISegmentedControl *)sender
+{
+	[ASDKTestSettings setMakeNewCard:![ASDKTestSettings makeNewCard]];
 }
 
 @end

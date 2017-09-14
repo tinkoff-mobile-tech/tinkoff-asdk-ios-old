@@ -37,23 +37,32 @@
     self.titleLabel.textColor = [ASDKDesign colorTextDark];
     self.descriptionLabel.textColor = [ASDKDesign colorTextLight];
     [self.contentView setBackgroundColor:[ASDKDesign colorTableViewBackground]];
+	
+	[self.titleLabel setText:nil];
+	[self.descriptionLabel setText:nil];
 }
 
 - (CGFloat)cellHeightWithSuperviewWidth:(CGFloat)width
 {
-    CGFloat height = self.descriptionLabel.frame.origin.y;
-    
-    NSString *descriptionString = self.descriptionLabel.text;
-    
-    if (descriptionString.length > 0)
+	CGFloat height = self.titleLabel.frame.origin.y;
+	
+	if (self.titleLabel.text.length > 0)
+	{
+		CGRect frame = CGRectMake(0, 0, width - 30, 300);
+		
+		height += [self.titleLabel.text boundingRectWithSize:frame.size
+												  options:NSStringDrawingUsesLineFragmentOrigin
+											   attributes:@{ NSFontAttributeName : self.titleLabel.font }
+												  context:nil].size.height;
+	}
+
+	if (self.descriptionLabel.text.length > 0)
     {
         CGRect frame = CGRectMake(0,0,width - 30,300);
-        
-        height += [descriptionString boundingRectWithSize:frame.size
+		
+        height += [self.descriptionLabel.text boundingRectWithSize:frame.size
                                                   options:NSStringDrawingUsesLineFragmentOrigin
-                                               attributes:@{
-                                                            NSFontAttributeName : self.descriptionLabel.font
-                                                            }
+                                               attributes:@{ NSFontAttributeName : self.descriptionLabel.font }
                                                   context:nil].size.height;
     }
     

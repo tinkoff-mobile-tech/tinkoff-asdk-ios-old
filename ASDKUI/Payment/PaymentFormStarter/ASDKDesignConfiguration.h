@@ -20,6 +20,19 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, PayFormItems)
+{
+	PayFormItems_ProductTitle ,
+	PayFormItems_ProductDescription,
+	PayFormItems_Amount,
+	PayFormItems_PyamentCardRequisites,
+	PayFormItems_Email,
+	PayFormItems_PayButton,
+	PayFormItems_SecureLogos,
+	PayFormItems_Empty20px,
+	PayFormItems_Empty5px
+};
+
 @interface ASDKDesignConfiguration : NSObject
 /*!
  *  @discussion Настройка цветов в навигейшн баре
@@ -43,7 +56,40 @@
 - (UIColor *)payButtonPressedColor;
 - (UIColor *)payButtonTextColor;
 
+- (NSString *)payButtonTitle;
+/*!
+ *  @discussion Установить на кнопку оплатить надпись
+ *
+ *  @param title - строка, выравнивается по центу
+ */
+- (void)setPayButtonTitle:(NSString *)title;
+- (NSAttributedString *)payButtonAttributedTitle;
+/*!
+ *  @discussion Установить на кнопку оплатить надпись
+ *
+ *  @param title - строка с атрибутами, выравнивается по центу
+ */
+- (void)setPayButtonAttributedTitle:(NSAttributedString *)title;
+
 - (void)setCustomBackButton:(UIBarButtonItem *)backButton;
 - (UIBarButtonItem *)customBackButton;
+
+/*!
+ *  @discussion Настройка элементов экрана оплаты и их последовательности
+ *
+ *  @param items - массив из элементов PayFormItems, если в массиве будут элементы не из PayFormItems будет использоваться базова конфигурация:
+ *  PayFormItems_ProductTitle, PayFormItems_ProductDescription, PayFormItems_Amount, PayFormItems_PyamentCardRequisites,
+ *  PayFormItems_Email, PayFormItems_PayButton, (PayFormItems_SecureLogos)
+ */
+- (void)setPayFormItems:(NSArray *)items;
+- (NSArray*)payFormItems;
+
+/*!
+ *  @discussion Установить свои логотипы платежных систем
+ *
+ *  @param view - любое uivew, элемент устанавливается вертикально по центру, значание высоты берется равной высоте контента.
+ */
+- (void)setPaymentsSecureLogosView:(UIView *)view;
+- (UIView *)paymentsSecureLogosView;
 
 @end

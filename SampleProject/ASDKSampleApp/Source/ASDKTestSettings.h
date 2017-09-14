@@ -28,4 +28,7 @@
 + (void)setMakeCharge:(BOOL)value;
 + (BOOL)makeCharge;
 
++ (void)setMakeNewCard:(BOOL)value;
++ (BOOL)makeNewCard;
+
 @end

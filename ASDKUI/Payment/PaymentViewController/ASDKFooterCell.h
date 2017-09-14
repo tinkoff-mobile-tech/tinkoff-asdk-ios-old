@@ -21,5 +21,6 @@
 @interface ASDKFooterCell : UITableViewCell
 
 + (instancetype)cell;
+- (void)setCustomSecureLogos:(UIView *)view;
 
 @end

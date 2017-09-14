@@ -22,6 +22,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		2C98637F1F6984B500FBC729 /* ASDKEmptyTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C98637C1F6984B500FBC729 /* ASDKEmptyTableViewCell.h */; };
+		2C9863801F6984B500FBC729 /* ASDKEmptyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98637D1F6984B500FBC729 /* ASDKEmptyTableViewCell.m */; };
+		2C9863811F6984B500FBC729 /* ASDKEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C98637E1F6984B500FBC729 /* ASDKEmptyTableViewCell.xib */; };
 		83129AFF1C68CAAD00A1F5DE /* ASDKMacroses.h in Headers */ = {isa = PBXBuildFile; fileRef = 83129AFE1C68CAAD00A1F5DE /* ASDKMacroses.h */; };
 		831672531C64798800533D85 /* ASDKUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 831672521C64798800533D85 /* ASDKUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8333793F1C7470E20097208D /* ASDKBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 8333793D1C7470E20097208D /* ASDKBarButtonItem.h */; };
@@ -126,6 +129,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C98637C1F6984B500FBC729 /* ASDKEmptyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKEmptyTableViewCell.h; sourceTree = "<group>"; };
+		2C98637D1F6984B500FBC729 /* ASDKEmptyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKEmptyTableViewCell.m; sourceTree = "<group>"; };
+		2C98637E1F6984B500FBC729 /* ASDKEmptyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		83129AFE1C68CAAD00A1F5DE /* ASDKMacroses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKMacroses.h; sourceTree = "<group>"; };
 		8316724F1C64798800533D85 /* ASDKUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ASDKUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		831672521C64798800533D85 /* ASDKUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKUI.h; sourceTree = "<group>"; };
@@ -393,6 +399,9 @@
 				94C86A101C6B304900046F0E /* EmailCell */,
 				CAB1A68B1C70FC9D00D2A252 /* PayButtonCell */,
 				83E156791C737404000BBD57 /* Footer */,
+				2C98637C1F6984B500FBC729 /* ASDKEmptyTableViewCell.h */,
+				2C98637D1F6984B500FBC729 /* ASDKEmptyTableViewCell.m */,
+				2C98637E1F6984B500FBC729 /* ASDKEmptyTableViewCell.xib */,
 			);
 			path = PaymentViewController;
 			sourceTree = "<group>";
@@ -548,6 +557,7 @@
 				94C86A281C6B304900046F0E /* ASDKTextField.h in Headers */,
 				83E156571C71C3B5000BBD57 /* ASDKDesign.h in Headers */,
 				BEB3F8C41C7DF171003771A4 /* ASDKCardsListDataController.h in Headers */,
+				2C98637F1F6984B500FBC729 /* ASDKEmptyTableViewCell.h in Headers */,
 				94C86A1C1C6B304900046F0E /* ASDKPaymentFormStarter.h in Headers */,
 				CAB1A6911C70FCBF00D2A252 /* ASDKPayButtonCell.h in Headers */,
 				94AA136A1C68D32F006FBC7E /* UIView+AutoLayout.h in Headers */,
@@ -613,6 +623,7 @@
 				TargetAttributes = {
 					8316724E1C64798800533D85 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0830;
 					};
 					8316725A1C6479A200533D85 = {
 						CreatedOnToolsVersion = 7.2;
@@ -660,6 +671,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9863811F6984B500FBC729 /* ASDKEmptyTableViewCell.xib in Resources */,
 				BEDEFF8E1C75A6780026D454 /* ASDKNumberCell.xib in Resources */,
 				83E156641C720A31000BBD57 /* ASDKLoaderViewController.xib in Resources */,
 				CA82FD211C70ED49005FD294 /* ASDKPaymentFormHeaderCell.xib in Resources */,
@@ -729,6 +741,7 @@
 				83E156461C71AE6F000BBD57 /* ASDKUtils.m in Sources */,
 				94C86A271C6B304900046F0E /* ASDKLabel.m in Sources */,
 				BE7E02821C7354F900DF6230 /* ASDKAddNewCardCell.m in Sources */,
+				2C9863801F6984B500FBC729 /* ASDKEmptyTableViewCell.m in Sources */,
 				833379401C7470E20097208D /* ASDKBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -865,6 +878,7 @@
 		831672581C64798800533D85 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEFINES_MODULE = YES;
@@ -885,6 +899,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Debug;
@@ -892,6 +908,7 @@
 		831672591C64798800533D85 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEFINES_MODULE = YES;
@@ -912,6 +929,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Release;
