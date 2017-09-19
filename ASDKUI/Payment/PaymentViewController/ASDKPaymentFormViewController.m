@@ -167,6 +167,8 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
     
     ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
     ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
+	self.customSecureLogo = designConfiguration.paymentsSecureLogosView;
+	
     cancelButton.tintColor = [designConfiguration navigationBarItemsTextColor];
 	[self.navigationItem setLeftBarButtonItem:cancelButton];
 	
