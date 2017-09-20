@@ -272,21 +272,24 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 				card = [[ASDKCardsListDataController instance] cardWithIdentifier:_cardIdPriorityPass];
 			}
 
-			if (_makeCharge == YES && card == nil)
+			if (_makeCharge == YES && card == nil && _cardIdPriorityPass != nil)
 			{
-				card = [[ASDKCardsListDataController instance] cardWithRebillId];
+				card = [[ASDKCardsListDataController instance] cardWithIdentifier:_cardIdPriorityPass];
+				if (card.rebillId == nil)
+				{
+					card = [[ASDKCardsListDataController instance] cardWithRebillId];
+				}
 			}
 			else if (card == nil && _cardIdPriorityPass != nil && _cardIdPriorityPass.length == 0)
 			{
 				card = [[[ASDKCardsListDataController instance] externalCards] firstObject];
 			}
 
-			if (card != nil)
+			[self setSelectedCard:card];
+			
+			if (card == nil)
 			{
-				[self setSelectedCard:card];
-				
 				_shouldShowKeyboardWhenNewCardSelected = YES;
-				
 				[self.tableView reloadData];
 			}
 		}
@@ -369,6 +372,8 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 		{
 			[[self cardRequisitesCell] setUserInteractionEnabled:NO];
 			[self cardRequisitesCell].showSecretContainer = NO;
+			[[self cardRequisitesCell] setScanButtonHidden:YES animated:NO];
+
 			[[self cardRequisitesCell] setCardNumber:cardNumber];
 			[[[self cardRequisitesCell] textFieldCardNumber] setText:cardNumber];
 			[[[self cardRequisitesCell] textFieldCardNumber] setTextColor:[UIColor blackColor]];
@@ -381,7 +386,7 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 		}
 		
         [self externalCardsCell].titleLabel.text = LOC(@"externalCardsCell.savedCard");
-        
+		
         if (_shouldShowKeyboardWhenNewCardSelected)
         {
             //[[self cardRequisitesCell].secretCVVTextField becomeFirstResponder];

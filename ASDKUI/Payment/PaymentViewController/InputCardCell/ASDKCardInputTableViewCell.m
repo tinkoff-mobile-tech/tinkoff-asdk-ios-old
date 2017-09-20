@@ -310,7 +310,7 @@ typedef enum
         self.secretCVVTextField.text = @"";
     }
 
-	[self setScanButtonHidden:!_showSecretContainer animated:NO];
+	[self setScanButtonHidden:_showSecretContainer animated:NO];
 
     self.secretContainerView.hidden = !_showSecretContainer;
 }
