@@ -37,6 +37,8 @@
 @property (nonatomic, strong) NSArray *_payFormItems;
 @property (nonatomic, strong) UIView *_paymentsSecureLogosView;
 
+@property (nonatomic, strong) UIButton *_customPayButton;
+
 @end
 
 @implementation ASDKDesignConfiguration
@@ -154,6 +156,16 @@
 - (void)setPayButtonAttributedTitle:(NSAttributedString *)title
 {
 	self._payButtonAttributedTitle = title;
+}
+
+- (void)setCustomPayButton:(UIButton *)button
+{
+	self._customPayButton = button;
+}
+
+- (UIButton *)customPayButton
+{
+	return self._customPayButton;
 }
 
 - (void)setPayFormItems:(NSArray *)items

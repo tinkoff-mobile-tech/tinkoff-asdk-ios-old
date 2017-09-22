@@ -100,6 +100,8 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 @property (nonatomic, strong) NSArray *tableViewDataSource;
 @property (nonatomic, strong) UIView *customSecureLogo;
 
+@property (nonatomic, assign) CGFloat keyboardHeight;
+
 @end
 
 @implementation ASDKPaymentFormViewController
@@ -168,6 +170,8 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 	[self.tableView registerNib:[UINib nibWithNibName:@"ASDKEmptyTableViewCell" bundle:[NSBundle bundleForClass:[self class]]] forCellReuseIdentifier:@"ASDKEmptyTableViewCell"];
 	[self.tableView registerNib:[UINib nibWithNibName:@"ASDKPaymentFormHeaderCell" bundle:[NSBundle bundleForClass:[self class]]] forCellReuseIdentifier:@"ASDKPaymentFormHeaderCell"];
 
+	self.keyboardHeight = 0;
+
     ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"Common.Cancel")
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
@@ -222,6 +226,49 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 	{
 		self.updateCardCell = NO;
 		[self updateSelectedExternalCardOnStart];
+	}
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[super viewDidDisappear:animated];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+	self.keyboardHeight = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+	
+	[self updateFlexibleSpace];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+	self.keyboardHeight = 0;
+	
+	[self updateFlexibleSpace];
+}
+
+- (void)updateFlexibleSpace
+{
+	NSMutableArray<NSIndexPath *> *paths = [NSMutableArray new];
+	for (NSInteger index = 0; index < [self.tableViewDataSource count]; index++)
+	{
+		NSNumber *number = [self.tableViewDataSource objectAtIndex:index];
+		if ([number integerValue] == PayFormItems_EmptyFlexibleSpace)
+		{
+			[paths addObject:[NSIndexPath indexPathForRow:index inSection:0]];
+		}
+	}
+	
+	if ([paths count] > 0)
+	{
+		[self.tableView reloadRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
 	}
 }
 
@@ -551,6 +598,13 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
     return _footerCell;
 }
 
+#pragma mark - button action
+
+- (void)buttonPayAction:(UIButton *)button
+{
+	[self performPayment];
+}
+
 #pragma mark - UITextField Delegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -636,15 +690,25 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 
 		case PayFormItems_PayButton:
 			{
-				ASDKPayButtonCell *paymentButtonCell = [self paymentButtonCell];
-				
 				ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
 				ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
-				
-				[paymentButtonCell setButtonTitle:designConfiguration.payButtonTitle];
-				[paymentButtonCell setAttributedButtonTitle:designConfiguration.payButtonAttributedTitle];
-				
-				cell = paymentButtonCell;
+				if (designConfiguration.customPayButton == nil)
+				{
+					ASDKPayButtonCell *paymentButtonCell = [self paymentButtonCell];
+					
+					[paymentButtonCell setButtonTitle:designConfiguration.payButtonTitle];
+					[paymentButtonCell setAttributedButtonTitle:designConfiguration.payButtonAttributedTitle];
+					
+					cell = paymentButtonCell;
+				}
+				else
+				{
+					cell = [tableView dequeueReusableCellWithIdentifier:@"ASDKEmptyTableViewCell" forIndexPath:indexPath];
+					[designConfiguration.customPayButton setCenter:cell.contentView.center];
+					[cell.contentView addSubview:designConfiguration.customPayButton];
+					
+					[designConfiguration.customPayButton addTarget:self action:@selector(buttonPayAction:) forControlEvents:UIControlEventTouchUpInside];
+				}
 			}
 			break;
 
@@ -741,8 +805,22 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 			
 		case PayFormItems_Amount:
 		case PayFormItems_Email:
-		case PayFormItems_PayButton:
 			result = 44.0f;
+			break;
+			
+		case PayFormItems_PayButton:
+			{
+				ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
+				ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
+				if (designConfiguration.customPayButton == nil)
+				{
+					result = 44.0f;
+				}
+				else
+				{
+					result = designConfiguration.customPayButton.frame.size.height;
+				}
+			}
 			break;
 			
 		case PayFormItems_Empty20px:
@@ -770,7 +848,7 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 					}
 				}
 				
-				result = (tableView.frame.size.height - height) / count;
+				result = (tableView.frame.size.height - height - self.keyboardHeight) / count;
 			}
 			break;
 

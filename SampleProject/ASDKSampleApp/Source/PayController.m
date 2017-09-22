@@ -107,14 +107,27 @@
 		[cancelButton setTintColor:[UIColor redColor]];
 		[designConfiguration setCustomBackButton:cancelButton];
 	}
+	
+	UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 280, 60)];
+	[payButton setBackgroundColor:[UIColor yellowColor]];
+	[payButton setTitle:@"Оплатить" forState:UIControlStateNormal];
+	[payButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	[payButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+	
+	payButton.layer.cornerRadius = 10;
+	payButton.clipsToBounds = YES;
+	
+	[designConfiguration setCustomPayButton:payButton];
+	
 	//
-	[designConfiguration setPayFormItems:@[//@(PayFormItems_Empty20px),
+	[designConfiguration setPayFormItems:@[@(PayFormItems_Empty20px),
 										   @(PayFormItems_ProductTitle),
 										   //@(PayFormItems_ProductDescription),
 										   //@(PayFormItems_Amount),
 										   //@(PayFormItems_EmptyFlexibleSpace),
 										   @(PayFormItems_PyamentCardRequisites),
-										   //@(PayFormItems_Email),
+										   @(PayFormItems_Email),
+										   @(PayFormItems_Empty20px),
 										   @(PayFormItems_EmptyFlexibleSpace),
 										   @(PayFormItems_PayButton),
 										   @(PayFormItems_SecureLogos),

@@ -57,20 +57,27 @@ typedef NS_ENUM(NSInteger, PayFormItems)
 - (UIColor *)payButtonPressedColor;
 - (UIColor *)payButtonTextColor;
 
-- (NSString *)payButtonTitle;
 /*!
  *  @discussion Установить на кнопку оплатить надпись
  *
  *  @param title - строка, выравнивается по центу
  */
 - (void)setPayButtonTitle:(NSString *)title;
-- (NSAttributedString *)payButtonAttributedTitle;
+- (NSString *)payButtonTitle;
+
+/*!
+ *
+ */
+- (void)setCustomPayButton:(UIButton *)button;
+- (UIButton *)customPayButton;
+
 /*!
  *  @discussion Установить на кнопку оплатить надпись
  *
  *  @param title - строка с атрибутами, выравнивается по центу
  */
 - (void)setPayButtonAttributedTitle:(NSAttributedString *)title;
+- (NSAttributedString *)payButtonAttributedTitle;
 
 - (void)setCustomBackButton:(UIBarButtonItem *)backButton;
 - (UIBarButtonItem *)customBackButton;
