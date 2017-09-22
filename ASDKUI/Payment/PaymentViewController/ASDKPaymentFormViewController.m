@@ -202,20 +202,11 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 		[dataSource addObjectsFromArray:@[@(PayFormItems_ProductTitle),
 										  @(PayFormItems_ProductDescription),
 										  @(PayFormItems_Amount),
-										  @(PayFormItems_PyamentCardID),
 										  @(PayFormItems_PyamentCardRequisites),
 										  @(PayFormItems_Email),
 										  @(PayFormItems_PayButton),
 										  @(PayFormItems_SecureLogos)
 										  ]];
-	}
-	else
-	{
-		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardRequisites)];
-		if (index != NSNotFound)
-		{
-			[dataSource insertObject:@(PayFormItems_PyamentCardID) atIndex:index];
-		}
 	}
 
 	self.tableViewDataSource = [dataSource copy];
@@ -271,6 +262,14 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 {
     if ([[ASDKCardsListDataController instance] externalCards].count > 0)
     {
+		NSMutableArray *dataSource = [NSMutableArray arrayWithArray:self.tableViewDataSource];
+		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardRequisites)];
+		if (index != NSNotFound && [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardID)] == NSNotFound)
+		{
+			[dataSource insertObject:@(PayFormItems_PyamentCardID) atIndex:index];
+			self.tableViewDataSource = [dataSource copy];
+		}
+
 		ASDKCard *card = _selectedCard;
 
 		if (_selectedCard == nil)
@@ -298,15 +297,23 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 			if (card == nil)
 			{
 				_shouldShowKeyboardWhenNewCardSelected = YES;
-				[self.tableView reloadData];
 			}
 		}
     }
 	else
 	{
 		[self setSelectedCard:nil];
-		[self.tableView reloadData];
+		NSMutableArray *dataSource = [NSMutableArray arrayWithArray:self.tableViewDataSource];
+		
+		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardID)];
+		if (index != NSNotFound)
+		{
+			[dataSource removeObjectAtIndex:index];
+			self.tableViewDataSource = [dataSource copy];
+		}
 	}
+	
+	[self.tableView reloadData];
 }
 
 #pragma mark - ASDKCustomKeyboardInputDelegate
