@@ -22,7 +22,7 @@
 
 typedef NS_ENUM(NSInteger, PayFormItems)
 {
-	PayFormItems_ProductTitle ,
+	PayFormItems_ProductTitle,
 	PayFormItems_ProductDescription,
 	PayFormItems_Amount,
 	PayFormItems_PyamentCardRequisites,
@@ -30,7 +30,8 @@ typedef NS_ENUM(NSInteger, PayFormItems)
 	PayFormItems_PayButton,
 	PayFormItems_SecureLogos,
 	PayFormItems_Empty20px,
-	PayFormItems_Empty5px
+	PayFormItems_Empty5px,
+	PayFormItems_EmptyFlexibleSpace
 };
 
 @interface ASDKDesignConfiguration : NSObject

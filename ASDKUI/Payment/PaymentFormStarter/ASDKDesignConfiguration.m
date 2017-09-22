@@ -172,6 +172,7 @@
 				case PayFormItems_SecureLogos:
 				case PayFormItems_Empty20px:
 				case PayFormItems_Empty5px:
+				case PayFormItems_EmptyFlexibleSpace:
 					result &= YES;
 					break;
 

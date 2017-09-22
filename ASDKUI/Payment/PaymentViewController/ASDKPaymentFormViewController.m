@@ -126,7 +126,7 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
                      cancelled:(void (^)())cancelled
                          error:(void(^)(ASDKAcquringSdkError *error))error
 {
-    self = [super initWithStyle:UITableViewStyleGrouped];
+    self = [super initWithStyle:UITableViewStylePlain];
     
     if (self)
     {
@@ -155,7 +155,15 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
     [super viewDidLoad];
     
     self.title = LOC(@"paymentForm.title");
-    
+	
+	[self.navigationController.navigationBar setTranslucent:NO];
+	
+	self.tableView.sectionHeaderHeight = 0;
+	self.tableView.sectionFooterHeight = 0;
+	self.tableView.estimatedSectionHeaderHeight = 0;
+	self.tableView.estimatedSectionFooterHeight = 0;
+	self.tableView.rowHeight = 0;
+	
     [self.tableView setBackgroundColor:[ASDKDesign colorTableViewBackground]];
 	[self.tableView registerNib:[UINib nibWithNibName:@"ASDKEmptyTableViewCell" bundle:[NSBundle bundleForClass:[self class]]] forCellReuseIdentifier:@"ASDKEmptyTableViewCell"];
 	[self.tableView registerNib:[UINib nibWithNibName:@"ASDKPaymentFormHeaderCell" bundle:[NSBundle bundleForClass:[self class]]] forCellReuseIdentifier:@"ASDKPaymentFormHeaderCell"];
@@ -578,16 +586,6 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.tableViewDataSource count];
-//	if (section == 0)
-//	{
-//		return 2;
-//	}
-//	else if (section == 1)
-//	{
-//		return 3;
-//	}
-//	
-//	return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -650,9 +648,10 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 		case PayFormItems_PyamentCardRequisites:
 			cell = [self cardRequisitesCell];
 			break;
-
+		
 		case PayFormItems_Empty20px:
 		case PayFormItems_Empty5px:
+		case PayFormItems_EmptyFlexibleSpace:
   		default:
 			cell = [tableView dequeueReusableCellWithIdentifier:@"ASDKEmptyTableViewCell"];
 			break;
@@ -662,8 +661,8 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 	{
 		NSInteger index = [[self.tableViewDataSource objectAtIndex:indexPath.row-1] integerValue];
 		NSInteger index1 = [[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue];
-		if ((index == PayFormItems_ProductTitle || index == PayFormItems_ProductDescription || index == PayFormItems_Empty20px || index == PayFormItems_Empty5px) &&
-		   (index1 != PayFormItems_ProductDescription && index1 != PayFormItems_Empty20px && index1 != PayFormItems_Empty5px))
+		if ((index == PayFormItems_ProductTitle || index == PayFormItems_ProductDescription || index == PayFormItems_Empty20px || index == PayFormItems_Empty5px || index == PayFormItems_EmptyFlexibleSpace) &&
+		   (index1 != PayFormItems_ProductDescription && index1 != PayFormItems_Empty20px && index1 != PayFormItems_Empty5px && index1 != PayFormItems_EmptyFlexibleSpace))
 		{
 			if ([cell isKindOfClass:[ASDKBaseCell class]] && [cell respondsToSelector:@selector(shouldShowTopSeparator)])
 			{
@@ -694,10 +693,10 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 	}
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-	return 0.01f;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//	return 0.0f;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -708,13 +707,13 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 		case PayFormItems_ProductTitle:
 			self.headerCell.titleLabel.text = _paymentTitle;
 			self.headerCell.descriptionLabel.text = nil;//_paymentDescription;
-			result = MIN([self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width], 98);
+			result = [self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width];
 			break;
 			
 		case PayFormItems_ProductDescription:
 			self.headerCell.titleLabel.text = nil;//_paymentTitle;
 			self.headerCell.descriptionLabel.text = _paymentDescription;
-			result = MIN([self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width], 98);
+			result = [self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width];
 			break;
 			
 		case PayFormItems_SecureLogos:
@@ -747,6 +746,27 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 			result = 5.0f;
 			break;
 			
+		case PayFormItems_EmptyFlexibleSpace:
+			{
+				CGFloat height = 0;
+				NSInteger count = 0;
+				for ( NSInteger index = 0; index < [self.tableViewDataSource count]; index++)
+				{
+					NSNumber *number = [self.tableViewDataSource objectAtIndex:index];
+					if ([number integerValue] != PayFormItems_EmptyFlexibleSpace)
+					{
+						height += [self tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+					}
+					else
+					{
+						count++;
+					}
+				}
+				
+				result = (tableView.frame.size.height - height) / count;
+			}
+			break;
+
 		default:
 			result = 44.0f;
 			break;
