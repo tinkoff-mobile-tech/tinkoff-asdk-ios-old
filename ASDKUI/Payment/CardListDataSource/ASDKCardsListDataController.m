@@ -129,7 +129,7 @@ static ASDKCardsListDataController * __cardsListDataController = nil;
 				 NSMutableArray *cards = [NSMutableArray new];
 				 for (ASDKCard *card in response.cards)
 				 {
-					 //if ([card status] == ASDKCardStatusActive)
+					 if ([card status] == ASDKCardStatusActive)
 					 {
 						 [cards addObject:card];
 					 }
