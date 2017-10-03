@@ -432,6 +432,7 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 		
 		if (_selectedCard.rebillId != nil)
 		{
+			[self updateCardRequisitesCellWithCardNumber:cardNumber];
 			[[self cardRequisitesCell] setUserInteractionEnabled:NO];
 			[self cardRequisitesCell].showSecretContainer = NO;
 			[[self cardRequisitesCell] setScanButtonHidden:YES animated:NO];
