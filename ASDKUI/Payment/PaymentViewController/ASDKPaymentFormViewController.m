@@ -849,6 +849,10 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 				}
 				
 				result = (tableView.frame.size.height - height - self.keyboardHeight) / count;
+				if (result < 0)
+				{
+					result = 0;
+				}
 			}
 			break;
 

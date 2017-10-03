@@ -251,7 +251,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
         [parameters setObject:@"Y" forKey:kASDKRecurrent];
     }
 	
-	if (request.additionalPaymentData)
+	if ([request.additionalPaymentData.allKeys count] > 0)
 	{
 		[parameters setObject:request.additionalPaymentData forKey:kASDKDATA];
 	}
