@@ -307,7 +307,7 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 
 - (void)updateSelectedExternalCardOnStart
 {
-    if ([[ASDKCardsListDataController instance] externalCards].count > 0)
+	if ([self filterCardList:[[ASDKCardsListDataController instance] externalCards]].count > 0)
     {
 		NSMutableArray *dataSource = [NSMutableArray arrayWithArray:self.tableViewDataSource];
 		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardRequisites)];
