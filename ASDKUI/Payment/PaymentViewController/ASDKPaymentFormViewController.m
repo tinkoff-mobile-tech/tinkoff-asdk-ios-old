@@ -62,7 +62,7 @@ NSString * const kDecimalSeparator = @",";
 //    ASDKPaymentViewControllerSectionFooter
 //} ASDKPaymentViewControllerSection;
 
-NSUInteger const PayFormItems_PyamentCardID = -1;
+NSUInteger const CellPyamentCardID = -1;
 
 @interface ASDKPaymentFormViewController () <UITextFieldDelegate, ASDKCardsListDelegate>
 {
@@ -203,13 +203,13 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 
 	if ([dataSource count] == 0)
 	{
-		[dataSource addObjectsFromArray:@[@(PayFormItems_ProductTitle),
-										  @(PayFormItems_ProductDescription),
-										  @(PayFormItems_Amount),
-										  @(PayFormItems_PyamentCardRequisites),
-										  @(PayFormItems_Email),
-										  @(PayFormItems_PayButton),
-										  @(PayFormItems_SecureLogos)
+		[dataSource addObjectsFromArray:@[@(CellProductTitle),
+										  @(CellProductDescription),
+										  @(CellAmount),
+										  @(CellPaymentCardRequisites),
+										  @(CellEmail),
+										  @(CellPayButton),
+										  @(CellSecureLogos)
 										  ]];
 	}
 
@@ -260,7 +260,7 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 	for (NSInteger index = 0; index < [self.tableViewDataSource count]; index++)
 	{
 		NSNumber *number = [self.tableViewDataSource objectAtIndex:index];
-		if ([number integerValue] == PayFormItems_EmptyFlexibleSpace)
+		if ([number integerValue] == CellEmptyFlexibleSpace)
 		{
 			[paths addObject:[NSIndexPath indexPathForRow:index inSection:0]];
 		}
@@ -310,10 +310,10 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 	if ([self filterCardList:[[ASDKCardsListDataController instance] externalCards]].count > 0)
     {
 		NSMutableArray *dataSource = [NSMutableArray arrayWithArray:self.tableViewDataSource];
-		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardRequisites)];
-		if (index != NSNotFound && [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardID)] == NSNotFound)
+		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(CellPaymentCardRequisites)];
+		if (index != NSNotFound && [dataSource indexOfObjectIdenticalTo:@(CellPyamentCardID)] == NSNotFound)
 		{
-			[dataSource insertObject:@(PayFormItems_PyamentCardID) atIndex:index];
+			[dataSource insertObject:@(CellPyamentCardID) atIndex:index];
 			self.tableViewDataSource = [dataSource copy];
 		}
 
@@ -352,7 +352,7 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 		[self setSelectedCard:nil];
 		NSMutableArray *dataSource = [NSMutableArray arrayWithArray:self.tableViewDataSource];
 		
-		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(PayFormItems_PyamentCardID)];
+		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(CellPyamentCardID)];
 		if (index != NSNotFound)
 		{
 			[dataSource removeObjectAtIndex:index];
@@ -656,17 +656,17 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 	
 	switch ([[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue])
 	{
-  		case PayFormItems_ProductTitle:
+  		case CellProductTitle:
 			{
 				ASDKPaymentFormHeaderCell *cellTitle = [tableView dequeueReusableCellWithIdentifier:@"ASDKPaymentFormHeaderCell"];
 				cellTitle.titleLabel.text = _paymentTitle;
-				_headerCell.descriptionLabel.text = nil;
+				cellTitle.descriptionLabel.text = nil;
 				[cellTitle layoutIfNeeded];
 				cell = cellTitle;
 			}
 			break;
 
-		case PayFormItems_ProductDescription:
+		case CellProductDescription:
 			{
 				ASDKPaymentFormHeaderCell *cellTitle = [tableView dequeueReusableCellWithIdentifier:@"ASDKPaymentFormHeaderCell"];
 				cellTitle.titleLabel.text = nil;
@@ -676,20 +676,20 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 			}
 			break;
 
-		case PayFormItems_Amount:
+		case CellAmount:
 			cell = [self summCell];
 			break;
 
-		case PayFormItems_Email:
+		case CellEmail:
 			cell = [self emailCell];
 			break;
 
-		case PayFormItems_SecureLogos:
+		case CellSecureLogos:
 			cell = [self footerCell];
 			[[self footerCell] setCustomSecureLogos:self.customSecureLogo];
 			break;
 
-		case PayFormItems_PayButton:
+		case CellPayButton:
 			{
 				ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
 				ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
@@ -713,17 +713,17 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 			}
 			break;
 
-		case PayFormItems_PyamentCardID:
+		case CellPyamentCardID:
 			cell = [self externalCardsCell];
 			break;
 
-		case PayFormItems_PyamentCardRequisites:
+		case CellPaymentCardRequisites:
 			cell = [self cardRequisitesCell];
 			break;
 		
-		case PayFormItems_Empty20px:
-		case PayFormItems_Empty5px:
-		case PayFormItems_EmptyFlexibleSpace:
+		case CellEmpty20px:
+		case CellEmpty5px:
+		case CellEmptyFlexibleSpace:
   		default:
 			cell = [tableView dequeueReusableCellWithIdentifier:@"ASDKEmptyTableViewCell"];
 			break;
@@ -733,8 +733,8 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 	{
 		NSInteger index = [[self.tableViewDataSource objectAtIndex:indexPath.row-1] integerValue];
 		NSInteger index1 = [[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue];
-		if ((index == PayFormItems_ProductTitle || index == PayFormItems_ProductDescription || index == PayFormItems_Empty20px || index == PayFormItems_Empty5px || index == PayFormItems_EmptyFlexibleSpace) &&
-		   (index1 != PayFormItems_ProductDescription && index1 != PayFormItems_Empty20px && index1 != PayFormItems_Empty5px && index1 != PayFormItems_EmptyFlexibleSpace))
+		if ((index == CellProductTitle || index == CellProductDescription || index == CellEmpty20px || index == CellEmpty5px || index == CellEmptyFlexibleSpace) &&
+		   (index1 != CellProductDescription && index1 != CellEmpty20px && index1 != CellEmpty5px && index1 != CellEmptyFlexibleSpace))
 		{
 			if ([cell isKindOfClass:[ASDKBaseCell class]] && [cell respondsToSelector:@selector(shouldShowTopSeparator)])
 			{
@@ -759,7 +759,7 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	if ([[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue] == PayFormItems_PayButton )
+	if ([[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue] == CellPayButton )
 	{
 		[self performPayment];
 	}
@@ -776,19 +776,19 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 
 	switch ([[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue])
 	{
-		case PayFormItems_ProductTitle:
+		case CellProductTitle:
 			self.headerCell.titleLabel.text = _paymentTitle;
 			self.headerCell.descriptionLabel.text = nil;//_paymentDescription;
 			result = [self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width];
 			break;
 			
-		case PayFormItems_ProductDescription:
+		case CellProductDescription:
 			self.headerCell.titleLabel.text = nil;//_paymentTitle;
 			self.headerCell.descriptionLabel.text = _paymentDescription;
 			result = [self.headerCell cellHeightWithSuperviewWidth:self.view.frame.size.width];
 			break;
 			
-		case PayFormItems_SecureLogos:
+		case CellSecureLogos:
 			if (self.customSecureLogo)
 			{
 				result = self.customSecureLogo.frame.size.height;
@@ -800,16 +800,16 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 
 			break;
 			
-		case PayFormItems_PyamentCardRequisites:
+		case CellPaymentCardRequisites:
 			result = 44.0f;
 			break;
 			
-		case PayFormItems_Amount:
-		case PayFormItems_Email:
+		case CellAmount:
+		case CellEmail:
 			result = 44.0f;
 			break;
 			
-		case PayFormItems_PayButton:
+		case CellPayButton:
 			{
 				ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
 				ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
@@ -824,22 +824,22 @@ NSUInteger const PayFormItems_PyamentCardID = -1;
 			}
 			break;
 			
-		case PayFormItems_Empty20px:
+		case CellEmpty20px:
 			result = 20.0f;
 			break;
 			
-		case PayFormItems_Empty5px:
+		case CellEmpty5px:
 			result = 5.0f;
 			break;
 			
-		case PayFormItems_EmptyFlexibleSpace:
+		case CellEmptyFlexibleSpace:
 			{
 				CGFloat height = 0;
 				NSInteger count = 0;
 				for ( NSInteger index = 0; index < [self.tableViewDataSource count]; index++)
 				{
 					NSNumber *number = [self.tableViewDataSource objectAtIndex:index];
-					if ([number integerValue] != PayFormItems_EmptyFlexibleSpace)
+					if ([number integerValue] != CellEmptyFlexibleSpace)
 					{
 						height += [self tableView:tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 					}

@@ -21,6 +21,18 @@
 
 @implementation ASDKRequestBuilder
 
+- (instancetype)initWithTerminalKey:(NSString *)terminalKey
+						   password:(NSString *)password
+{
+	if (self = [super init])
+	{
+		_terminalKey = terminalKey;
+		_password = password;
+	}
+
+	return self;
+}
+
 - (void)dealloc
 {
     NSLog(@"DEALLOC %@",NSStringFromClass([self class]));

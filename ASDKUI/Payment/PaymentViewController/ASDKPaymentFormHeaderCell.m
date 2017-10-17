@@ -58,7 +58,7 @@
 
 	if (self.descriptionLabel.text.length > 0)
     {
-        CGRect frame = CGRectMake(0,0,width - 30,300);
+        CGRect frame = CGRectMake(0, 0, width - 30, 300);
 		
         height += [self.descriptionLabel.text boundingRectWithSize:frame.size
                                                   options:NSStringDrawingUsesLineFragmentOrigin
@@ -66,7 +66,7 @@
                                                   context:nil].size.height;
     }
     
-    return height + 15;
+    return height + 8;
 }
 
 @end

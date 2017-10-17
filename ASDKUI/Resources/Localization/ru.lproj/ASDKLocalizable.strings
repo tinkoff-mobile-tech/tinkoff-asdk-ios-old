@@ -38,5 +38,8 @@
 
 "emailCell.placeholder" = "E-mail для квитанции";
 
+"attachCard.emailCellPlaceholder" = "E-mail";
+"attachCard.attach" = "Привязать карту";
+
 "NSPhotoLibraryUsageDescription" = "";
 "NSCameraUsageDescription" = "";

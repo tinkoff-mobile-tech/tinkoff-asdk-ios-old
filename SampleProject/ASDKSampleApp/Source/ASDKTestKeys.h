@@ -17,6 +17,7 @@ replace this constants:
 */
 #warning FIX ME!!!
 
+//#define kASDKTestTerminalKey1 @"testRegress"
 #define kASDKTestTerminalKey1 @"TestSDK"
 //#define kASDKTestTerminalKey1 @"1486655771621"
 #define kASDKTestTerminalKey2 @"sdk3DS"

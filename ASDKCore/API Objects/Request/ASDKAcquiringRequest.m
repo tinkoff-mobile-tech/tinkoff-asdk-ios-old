@@ -21,4 +21,16 @@
 
 @implementation ASDKAcquiringRequest
 
+- (instancetype)initWithTerminalKey:(NSString *)terminalKey
+							  token:(NSString *)token
+{
+	if (self = [super init])
+	{
+		_terminalKey = terminalKey;
+		_token = token;
+	}
+
+	return self;
+}
+
 @end

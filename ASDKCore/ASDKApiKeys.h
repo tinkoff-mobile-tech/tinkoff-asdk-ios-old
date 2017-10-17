@@ -99,6 +99,7 @@
 #define kASDKPaymentStatusRefunded          @"REFUNDED"
 #define kASDKPaymentStatusRejected          @"REJECTED"
 #define kASDKPaymentStatusUnknown           @"UNKNOWN"
+#define kASDKPaymentStatusCOMPLETED         @"COMPLETED"
 
 #pragma mark - CardStatus
 

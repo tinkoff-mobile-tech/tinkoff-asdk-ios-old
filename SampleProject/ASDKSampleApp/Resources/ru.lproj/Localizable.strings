@@ -29,4 +29,4 @@
 "FromCard" = "с карты";
 "PaymentScreenSettings" = "Настройки дизайна";
 "PaymentScreenSettingsDescription" = "Этими настройками можно изменить цвет кнопки Оплатить и её надпись, цвет Панели навигации - NavigationBarColor, navigationBarItemsTextColor, navigationBarStyle. Использовтаь страндартную или свою кнопку 'закрыть' экран оплаты.";
-
+"AttachCard.successfull" = "Карта успешно привязана";

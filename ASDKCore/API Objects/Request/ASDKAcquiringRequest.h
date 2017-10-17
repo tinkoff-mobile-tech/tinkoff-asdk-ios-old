@@ -24,4 +24,7 @@
 @property (nonatomic, copy) NSString *terminalKey;
 @property (nonatomic, copy) NSString *token;
 
+- (instancetype)initWithTerminalKey:(NSString *)terminalKey
+							  token:(NSString *)token;
+
 @end

@@ -19,7 +19,7 @@
 
 @implementation PayController
 
-+ (ASDKPaymentFormStarter *)paymentFormStarter
++ (ASDKAcquiringSdk *)acquiringSdk
 {
 	ASDKStringKeyCreator *stringKeyCreator = [[ASDKStringKeyCreator alloc] initWithPublicKeyString:[ASDKTestSettings testPublicKey]];
 	ASDKAcquiringSdk *acquiringSdk = [ASDKAcquiringSdk acquiringSdkWithTerminalKey:[ASDKTestSettings testActiveTerminal]
@@ -31,14 +31,19 @@
 	[acquiringSdk setTestDomain:YES];
 	[acquiringSdk setLogger:nil];
 	
-	return [ASDKPaymentFormStarter paymentFormStarterWithAcquiringSdk:acquiringSdk];
+	return acquiringSdk;
+}
+
++ (ASDKPaymentFormStarter *)paymentFormStarter
+{
+	return [ASDKPaymentFormStarter paymentFormStarterWithAcquiringSdk:[PayController acquiringSdk]];
 }
 
 + (NSString *)customerKey
 {
-	return @"user-key";
+//	return @"testRegress5";
 //	return @"testMerchantApplePay";
-//	return @"testCustomerKey1@gmail.com";
+	return @"testCustomerKey1@gmail.com";
 }
 
 + (UIAlertController *)alertWithError:(ASDKAcquringSdkError *)error
@@ -58,6 +63,23 @@
 + (UIAlertController *)alertForCancel
 {
 	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"CanceledPayment", @"Оплата отменена") message:nil preferredStyle:UIAlertControllerStyleAlert];
+	
+	UIAlertAction *cancelAction = [UIAlertAction
+								   actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
+								   style:UIAlertActionStyleCancel
+								   handler:^(UIAlertAction *action)
+								   {
+									   [alertController dismissViewControllerAnimated:YES completion:nil];
+								   }];
+	
+	[alertController addAction:cancelAction];
+	
+	return alertController;
+}
+
++ (UIAlertController *)alertAttachCardSuccessfull
+{
+	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"AttachCard.successfull", @"Карта успешно привязана") message:nil preferredStyle:UIAlertControllerStyleAlert];
 	
 	UIAlertAction *cancelAction = [UIAlertAction
 								   actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
@@ -120,18 +142,18 @@
 	[designConfiguration setCustomPayButton:payButton];
 	
 	//
-	[designConfiguration setPayFormItems:@[@(PayFormItems_Empty20px),
-										   @(PayFormItems_ProductTitle),
-										   //@(PayFormItems_ProductDescription),
-										   //@(PayFormItems_Amount),
-										   //@(PayFormItems_EmptyFlexibleSpace),
-										   @(PayFormItems_PyamentCardRequisites),
-										   @(PayFormItems_Email),
-										   @(PayFormItems_Empty20px),
-										   @(PayFormItems_EmptyFlexibleSpace),
-										   @(PayFormItems_PayButton),
-										   @(PayFormItems_SecureLogos),
-										   @(PayFormItems_Empty20px),
+	[designConfiguration setPayFormItems:@[@(CellEmpty20px),
+										   @(CellProductTitle),
+										   //@(CellProductDescription),
+										   //@(CellAmount),
+										   //@(CellEmptyFlexibleSpace),
+										   @(CellPaymentCardRequisites),
+										   @(CellEmail),
+										   @(CellEmpty20px),
+										   @(CellEmptyFlexibleSpace),
+										   @(CellPayButton),
+										   @(CellSecureLogos),
+										   @(CellEmpty20px),
 										   ]];
 
 	[designConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
@@ -311,6 +333,77 @@
 		
 		onError(error);
 	}];
+}
+
++ (void)attachCard:(ASDKCardCheckType)cardCheckType additionalData:(NSDictionary *)data fromViewController:(UIViewController *)viewController
+		   success:(void (^)(ASDKResponseAddCardInit *response))onSuccess
+		 cancelled:(void (^)(void))onCancelled
+			 error:(void(^)(ASDKAcquringSdkError *error))onError
+{
+	//////////////
+	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
+	
+	//Настройка дизайна
+	ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
+	// используем ASDKTestSettings для переключения настроект во время работы приложения, для быстрой демонстрации
+	if ([ASDKTestSettings customNavBarColor])
+	{
+		[designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
+	}
+	
+	if ([ASDKTestSettings customButtonCancel])
+	{
+		UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
+		[cancelButton setTintColor:[UIColor redColor]];
+		[designConfiguration setCustomBackButton:cancelButton];
+	}
+	
+	UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 280, 60)];
+	[payButton setBackgroundColor:[UIColor yellowColor]];
+	[payButton setTitle:@"Привязать карту" forState:UIControlStateNormal];
+	[payButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	[payButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+	
+	payButton.layer.cornerRadius = 10;
+	payButton.clipsToBounds = YES;
+	
+	//[designConfiguration setAttachCardCustomButton:payButton];
+	
+	//
+	[designConfiguration setAttachCardItems:@[//@(CellEmpty20px),
+											  @(CellProductTitle),
+											  @(CellProductDescription),
+											  @(CellPaymentCardRequisites),
+											  @(CellEmail),
+											  @(CellEmptyFlexibleSpace),
+											  @(CellAttachButton),
+											  @(CellSecureLogos),
+											  @(CellEmpty20px),
+											  ]];
+	
+	paymentFormStarter.designConfiguration = designConfiguration;
+
+	//Настройка сканнера карт
+	paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
+	
+	[paymentFormStarter presentAttachFormFromViewController:viewController
+												  formTitle:nil//@"Новая карта"
+												 formHeader:nil//@"Сохраните данные карты"
+												description:nil//@"и оплачивайте, не вводя реквизиты"
+													  email:nil
+											  cardCheckType:cardCheckType
+												customerKey:[PayController customerKey]
+											 additionalData:data
+													success:^(ASDKResponseAttachCard *result) {
+														[viewController presentViewController:[PayController alertAttachCardSuccessfull] animated:YES completion:nil];
+														onSuccess(result);
+													} cancelled:^{
+														[viewController presentViewController:[PayController alertForCancel] animated:YES completion:nil];
+														onCancelled();
+													} error:^(ASDKAcquringSdkError *error) {
+														[viewController presentViewController:[PayController alertWithError:error] animated:YES completion:nil];
+														onError(error);
+													}];	
 }
 
 @end

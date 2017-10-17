@@ -39,7 +39,12 @@ typedef enum
     ASDKPaymentStatus_REFUNDING,
     ASDKPaymentStatus_REFUNDED,
     ASDKPaymentStatus_REJECTED,
-    ASDKPaymentStatus_UNKNOWN
+    ASDKPaymentStatus_UNKNOWN,
+	ASDKPaymentStatus_COMPLETED,
+	ASDKPaymentStatus_HOLD,
+	ASDKPaymentStatus_NO,
+	ASDKPaymentStatus_3DSHOLD,
+	ASDKPaymentStatus_LOOP,
 } ASDKPaymentStatus;
 
 @interface ASDKAcquiringResponse : ASDKBaseObject

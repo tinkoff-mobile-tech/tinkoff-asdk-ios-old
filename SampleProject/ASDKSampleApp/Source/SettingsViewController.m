@@ -10,6 +10,7 @@
 #import "TableViewCellSwitch.h"
 #import "TableViewCellSegmentedControl.h"
 #import "ASDKTestSettings.h"
+#import "PayController.h"
 
 typedef NS_ENUM(NSUInteger, SectionType)
 {
@@ -27,7 +28,8 @@ typedef NS_ENUM(NSUInteger, CellType)
 	CellTypeButtonPay,
 	CellTypeNavBarColor,
 	CellTypeMakeCharge,
-	CellTypeMakeNewCard
+	CellTypeMakeNewCard,
+	CellTypeAddNewCard
 };
 
 @interface SettingsViewController ()
@@ -52,7 +54,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 	self.tableViewDataSource = @[@{@(SectionTypeTerminal):@[@(CellTypeTerminal)]},
 								 @{@(SectionTypePaymentScreen):@[@(CellTypeButtonCancel),@(CellTypeButtonPay),@(CellTypeNavBarColor)]},
 								 @{@(SectionTypeMakeCharge):@[@(CellTypeMakeCharge)]},
-								 @{@(SectionTypeMakeNewCard):@[@(CellTypeMakeNewCard)]}];
+								 @{@(SectionTypeMakeNewCard):@[@(CellTypeMakeNewCard), @(CellTypeAddNewCard)]}];
 	
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Закрыть")
 																	 style:UIBarButtonItemStylePlain
@@ -206,6 +208,16 @@ typedef NS_ENUM(NSUInteger, CellType)
 			[(TableViewCellSwitch *)cell addSwitchValueChangedTarget:self action:@selector(actionSwitchMakeNewCard:) forControlEvents:UIControlEventValueChanged];
 			break;
 			
+		case CellTypeAddNewCard:
+			cell = [tableView dequeueReusableCellWithIdentifier:@"addCard"];
+			if (cell == nil)
+			{
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"addCard"];
+			}
+			[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+			[cell.textLabel setText:@"Добавить новую карту"];
+			break;
+
 		default:
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellDefault"];
 			break;
@@ -214,6 +226,18 @@ typedef NS_ENUM(NSUInteger, CellType)
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
+	[PayController attachCard:ASDKCardCheckType_3DSHOLD additionalData:nil fromViewController:self success:^(ASDKResponseAddCardInit *response) {
+		//
+	} cancelled:^{
+		//
+	} error:^(ASDKAcquringSdkError *error) {
+		//
+	}];
+}
 
 - (void)terminalSourceChanged:(UISegmentedControl *)sender
 {

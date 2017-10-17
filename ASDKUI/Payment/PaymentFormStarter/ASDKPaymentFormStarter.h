@@ -87,7 +87,7 @@
 + (BOOL)isPayWithAppleAvailable NS_AVAILABLE_IOS(9_0);
 + (NSArray<PKPaymentNetwork> *)payWithAppleSupportedNetworks NS_AVAILABLE_IOS(9_0);
 
-/**
+/*!
  * @bref оплата с помощью ApplePay, онлайн документация https://oplata.tinkoff.ru/landing/develop/documentation/Init
  *
  * @param amount - Сумма
@@ -98,9 +98,9 @@
  * привязка карты к данному идентификатору клиента CustomerKey. В нотификации на AUTHORIZED будет передан параметр CardId, 
  * подробнее см. метод GetGardList https://oplata.tinkoff.ru/landing/develop/documentation/GetCardList
  *
- * @param appleMerchantId - берётся из Target->Capabilities->ApplePay Merchant IDs. 
+ * @param appleMerchantId - берётся из Target->Capabilities -> ApplePay Merchant IDs.
  * Создается в https://developer.apple.com/account/ios/identifier/merchant
- * Настраивается в сертификате https://developer.apple.com/account/ios/identifier/bundle  iOS App IDs-> Edit -> Apple Pay
+ * Настраивается в сертификате https://developer.apple.com/account/ios/identifier/bundle  iOS App IDs -> Edit -> Apple Pay
  *
  * @param shippingMethods - доставка и стоимость доставки, 
  * например "доставка курьером стоимость 300руб." @[[PKShippingMethod summaryItemWithLabel:@"Доставка курьером" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
@@ -137,7 +137,7 @@
 						  shippingContact:(PKContact *)shippingContact //кому доставить и адрес доставки
 				   shippingEditableFields:(PKAddressField)shippingEditableFields //какие поля можно показывать и редактировть на форме оплаты ApplePay
 								recurrent:(BOOL)recurrent
-					additionalPaymentData:(NSDictionary *)additionalPaymentData //JSON объект содержащий дополнительные параметры, например @"Email":@"a@test.ru|Phone=+71234567890"
+					additionalPaymentData:(NSDictionary *)additionalPaymentData //JSON объект содержащий дополнительные параметры, например @{@"Email" : @"a@test.ru"}
 							  receiptData:(NSDictionary *)receiptData // JSON объект с данными чека, обязательно должен быть объект Items в который вложены позиции чека Email и Taxation - Система налогообложения, значения: osn, usn_income, usn_income_outcome, envd, esn, или patent
 								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 								cancelled:(void (^)())onCancelled
@@ -150,5 +150,37 @@
 - (void)refundTransaction:(NSString *)paymentId
 				  success:(void (^)())onSuccess
 					error:(void (^)(ASDKAcquringSdkError *error))onError;
+
+/*!
+ * @bref привязка карты без оплаты, онлайн документация https://oplata.tinkoff.ru/landing/develop/documentation/Init
+ *
+ * @param formTitle - Заголовок экрана
+ * @param formHeader - заголовок для пояснения зачем надо привязывать карту
+ * @param description - Краткое описание зачем надо привязывать карту
+ *
+ * @param customerKey - Идентификатор покупателя в системе Продавца.
+ *
+ * @param cardCheckType
+ *  ASDKCardCheckType_NO – сохранить карту без проверок. Rebill ID для рекуррентных платежей не возвращается.
+ *  ASDKCardCheckType_3DS – при сохранении карты выполнить проверку 3DS и выполнить списание, а затем отмену на 1 р. В этом случае RebillID будет только для 3DS карт. Карты, не поддерживающие 3DS, привязаны не будут.
+ *  ASDKCardCheckType_HOLD – при сохранении сделать списание и затем отмену на 1 руб. RebillID для рекуррентных платежей возвращается в ответе.
+ *  ASDKCardCheckType_3DSHOLD – при привязке карты выполняем проверку, поддерживает карта 3DS или нет. Если карта поддерживает 3DS, далее выполняем списание и затем отмену на 1 руб.
+ *
+ * @param onSuccess блок в случае успеха
+ * @param onCancelled блок в случае сканирования с ошибкой
+ * @param onError блок при отмене сканирования
+ */
+
+- (void)presentAttachFormFromViewController:(UIViewController *)presentingViewController
+								  formTitle:(NSString *)title //Заголовок экрана
+								 formHeader:(NSString *)header // заголовок для пояснения зачем надо привязывать карту
+								description:(NSString *)description //описание зачем надо привязывать карту
+									  email:(NSString *)email //
+							  cardCheckType:(ASDKCardCheckType)cardCheckType //описание возможных значений в ASDKCard.h
+								customerKey:(NSString *)customerKey // идетинификатор пользователя (для сохранеиня платежей и карт)
+							 additionalData:(NSDictionary *)data //JSON объект содержащий дополнительные параметры, например @{@"Phone" : @"+71234567890"}
+									success:(void (^)(ASDKResponseAttachCard *result))onSuccess
+								  cancelled:(void (^)(void))onCancelled
+									  error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 @end

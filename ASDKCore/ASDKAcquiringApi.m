@@ -415,4 +415,76 @@ typedef NS_ENUM(NSInteger, APIVersion)
 	   }];
 }
 
+- (void)initAddCardWithRequest:(ASDKRequestAddCardInit *)request
+					   success:(void (^)(ASDKResponseAddCardInit *info))success
+					   failure:(void (^)(ASDKAcquringApiError *error))failure
+{
+	NSDictionary *parameters = @{kASDKTerminalKey: request.terminalKey, @"CheckType": request.checkType, @"CustomerKey": request.customerKey, kASDKToken: request.token};
+	
+	[self apiVersion:APIVersion_v2 path:@"AddCard" parameters:parameters success:^(NSDictionary *responseDictionary, NSURLResponse *response) {
+		ASDKResponseAddCardInit *responseObject = [[ASDKResponseAddCardInit alloc] initWithDictionary:responseDictionary];
+		success(responseObject);
+	} failure:^(ASDKAcquringApiError *error) {
+		failure(error);
+	}];
+}
+
+- (void)finishAddCardRequest:(ASDKRequestAttachCard *)request
+					 success:(void (^)(ASDKThreeDsData *data, ASDKResponseAttachCard *result, ASDKPaymentStatus status))success
+					 failure:(void (^)(ASDKAcquringApiError *error))failure
+{
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{kASDKTerminalKey: request.terminalKey, @"CardData": request.cardData, @"RequestKey": request.requestKey, kASDKToken: request.token}];
+	
+	if ([request.additionalData.allKeys count] > 0)
+	{
+		[parameters setObject:request.additionalData forKey:@"DATA"];
+	}
+
+	[self apiVersion:APIVersion_v2 path:@"AttachCard" parameters:parameters success:^(NSDictionary *responseDictionary, NSURLResponse *response) {
+		ASDKResponseAttachCard *responseAttachCard = [[ASDKResponseAttachCard alloc] initWithDictionary:responseDictionary];
+		
+		ASDKFinishAuthorizeResponse *responseObject = [[ASDKFinishAuthorizeResponse alloc] initWithDictionary:responseDictionary];
+		success(responseObject.threeDsData, responseAttachCard, responseObject.status);
+	
+	} failure:^(ASDKAcquringApiError *error) {
+		failure(error);
+	}];
+}
+
+- (void)getStateAttachCardRequest:(ASDKRequestGetAttachCardState *)request
+						  success:(void (^)(ASDKResponseGetAddCardState *respose))success
+						  failure:(void (^)(ASDKAcquringApiError *error))failure
+{
+	NSDictionary *parameters = @{kASDKTerminalKey: request.terminalKey, @"RequestKey": request.requestKey, kASDKToken: request.token};
+	
+	[self apiVersion:APIVersion_v2 path:@"GetAddCardState" parameters:parameters
+			 success:^(NSDictionary *responseDictionary, NSURLResponse *response)
+	 {
+		 ASDKResponseGetAddCardState *responseObject = [[ASDKResponseGetAddCardState alloc] initWithDictionary:responseDictionary];
+		 success(responseObject);
+	 }
+			 failure:^(ASDKAcquringApiError *error)
+	 {
+		 failure(error);
+	 }];
+}
+
+- (void)getStateSubmitRandomAmount:(ASDKRequestSubmitRandomAmount *)request
+						   success:(void (^)(ASDKResponseGetAddCardState *response))success
+						   failure:(void (^)(ASDKAcquringApiError *error))failure
+{
+	NSDictionary *parameters = @{kASDKAmount: request.amount, kASDKTerminalKey: request.terminalKey, @"RequestKey": request.requestKey, kASDKToken: request.token};
+	
+	[self apiVersion:APIVersion_v2 path:@"SubmitRandomAmount" parameters:parameters
+			 success:^(NSDictionary *responseDictionary, NSURLResponse *response)
+	 {
+		 ASDKResponseGetAddCardState *responseObject = [[ASDKResponseGetAddCardState alloc] initWithDictionary:responseDictionary];
+		 success(responseObject);
+	 }
+			 failure:^(ASDKAcquringApiError *error)
+	 {
+		 failure(error);
+	 }];
+}
+
 @end

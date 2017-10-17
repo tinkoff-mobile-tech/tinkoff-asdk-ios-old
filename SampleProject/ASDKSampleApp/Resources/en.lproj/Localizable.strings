@@ -29,3 +29,4 @@
 "FromCard" = "from card";
 "PaymentScreenSettings" = "Payment screen settings";
 "PaymentScreenSettingsDescription" = "Switch this settings we are can change to use standart close button or custom, change pay button color and title. navigationBar items text color, navigation bar color and navigationBarStyle.";
+"AttachCard.successfull" = "Attach card successfully";

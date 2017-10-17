@@ -20,18 +20,19 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, PayFormItems)
+typedef NS_ENUM(NSInteger, TableViewCellType)
 {
-	PayFormItems_ProductTitle,
-	PayFormItems_ProductDescription,
-	PayFormItems_Amount,
-	PayFormItems_PyamentCardRequisites,
-	PayFormItems_Email,
-	PayFormItems_PayButton,
-	PayFormItems_SecureLogos,
-	PayFormItems_Empty20px,
-	PayFormItems_Empty5px,
-	PayFormItems_EmptyFlexibleSpace
+	CellProductTitle,
+	CellProductDescription,
+	CellAmount,
+	CellPaymentCardRequisites,
+	CellEmail,
+	CellPayButton,
+	CellAttachButton,
+	CellSecureLogos,
+	CellEmpty20px,
+	CellEmpty5px,
+	CellEmptyFlexibleSpace
 };
 
 @interface ASDKDesignConfiguration : NSObject
@@ -86,8 +87,8 @@ typedef NS_ENUM(NSInteger, PayFormItems)
  *  @discussion Настройка элементов экрана оплаты и их последовательности
  *
  *  @param items - массив из элементов PayFormItems, если в массиве будут элементы не из PayFormItems будет использоваться базова конфигурация:
- *  PayFormItems_ProductTitle, PayFormItems_ProductDescription, PayFormItems_Amount, PayFormItems_PyamentCardRequisites,
- *  PayFormItems_Email, PayFormItems_PayButton, (PayFormItems_SecureLogos)
+ *  CellProductTitle, CellProductDescription, CellAmount, CellPyamentCardRequisites,
+ *  CellEmail, CellPayButton, (CellSecureLogos)
  */
 - (void)setPayFormItems:(NSArray *)items;
 - (NSArray*)payFormItems;
@@ -99,5 +100,18 @@ typedef NS_ENUM(NSInteger, PayFormItems)
  */
 - (void)setPaymentsSecureLogosView:(UIView *)view;
 - (UIView *)paymentsSecureLogosView;
+
+/*!
+ *
+ */
+
+- (NSArray *)attachCardItems;
+- (void)setAttachCardItems:(NSArray *)items;
+
+- (UIButton *)attachCardCustomButton;
+- (void)setAttachCardCustomButton:(UIButton *)button;
+
+- (NSString *)attachCardButtonTitle;
+- (void)setAttachCardButtonTitle:(NSString *)title;
 
 @end

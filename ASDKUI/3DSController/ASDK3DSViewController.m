@@ -29,6 +29,12 @@
 
 #import "ASDKBarButtonItem.h"
 
+typedef NS_ENUM(NSInteger, CheckStateType)
+{
+	CheckStateType_payment,
+	CheckStateType_addCardState
+};
+
 @interface ASDK3DSViewController () <UIWebViewDelegate>
 
 @property(nonatomic, strong) ASDKAcquiringSdk *acquiringSdk;
@@ -36,11 +42,15 @@
 @property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 @property (nonatomic, strong) NSString *paymentId;
+@property (nonatomic, strong) NSString *addCardRequestKey;
+
 @property (nonatomic, strong) ASDKThreeDsData *threeDsData;
 
-@property (nonatomic, strong) void (^onSuccess)(NSString *paymentId);
+@property (nonatomic, strong) void (^onSuccess)(NSString *result);
 @property (nonatomic, strong) void (^onCancelled)();
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
+
+@property (nonatomic, assign) CheckStateType checkStateType;
 
 @end
 
@@ -65,13 +75,30 @@
         _paymentId = paymentId;
         _threeDsData = data;
         _acquiringSdk = acquiringSdk;
+		_checkStateType = CheckStateType_payment;
     }
     
     return self;
 }
 
+- (instancetype)initWithAddCardRequestKey:(NSString *)requestKey
+					  threeDsData:(ASDKThreeDsData *)data
+					 acquiringSdk:(ASDKAcquiringSdk *)acquiringSdk
+{
+	self = [super initWithNibName:NSStringFromClass([self class]) bundle:[NSBundle bundleForClass:[self class]]];
+	if (self)
+	{
+		_addCardRequestKey = requestKey;
+		_threeDsData = data;
+		_acquiringSdk = acquiringSdk;
+		_checkStateType = CheckStateType_addCardState;
+	}
+	
+	return self;
+}
+
 - (void)showFromViewController:(UIViewController *)viewController
-                       success:(void (^)(NSString *paymentId))success
+                       success:(void (^)(NSString *result))success
                        failure:(void (^)(ASDKAcquringSdkError *statusError))failure
                         cancel:(void (^)())cancel
 {
@@ -162,7 +189,15 @@
     
     if ([webView.request.URL.absoluteString isEqualToString:[self termUrl]])
     {
-        [self checkPaymentState];
+		switch (self.checkStateType) {
+			case CheckStateType_payment:
+				[self checkPaymentState];
+				break;
+				
+			default:
+				[self checkAddCardState];
+				break;
+		}
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
@@ -246,7 +281,39 @@
               }
           }];
      }];
+}
 
+- (void)checkAddCardState
+{
+	self.webView.hidden = YES;
+	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
+
+	[self.acquiringSdk getStateAttachCardWithRequestKey:self.addCardRequestKey success:^(ASDKResponseGetAddCardState *response) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+		[self closeSelfWithCompletion:^{
+			if (response.status == ASDKPaymentStatus_COMPLETED)
+			{
+				if (self.onSuccess)
+				{
+					self.onSuccess([response cardId]);
+				}
+			}
+			else
+			{
+				NSString *message = @"AddCard state error";
+				NSString *details = [NSString stringWithFormat:@"%@", response.message];
+				
+				ASDKAcquringSdkError *stateError = [ASDKAcquringSdkError errorWithMessage:message details:details code:0];
+				
+				if (self.onError)
+				{
+					self.onError(stateError);
+				}
+			}
+		}];
+	} failure:^(ASDKAcquringSdkError *error) {
+		//
+	}];
 }
 
 @end

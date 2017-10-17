@@ -31,12 +31,15 @@
 
 "CardsList.AddNewCard" = "New card number";
 
-"Transfer.CardNumber.Sender" = "card number";
+"Transfer.CardNumber.Sender" = "Card number";
 
 "externalCardsCell.savedCard" = "Saved card";
 "externalCardsCell.newCard" = "New card";
 
-"emailCell.placeholder" = "E-mail for  receipt";
+"emailCell.placeholder" = "E-mail for receipt";
+
+"attachCard.emailCellPlaceholder" = "E-mail";
+"attachCard.attach" = "Attach card";
 
 "NSPhotoLibraryUsageDescription" = "";
 "NSCameraUsageDescription" = "";

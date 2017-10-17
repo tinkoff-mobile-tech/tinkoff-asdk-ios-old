@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H5t-mz-JVM" id="w19-FM-9TP">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8v-5p-6hW">
@@ -25,7 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2px-Fb-mwC">
-                        <rect key="frame" x="15" y="15" width="290" height="14"/>
+                        <rect key="frame" x="15" y="15" width="290" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -37,7 +37,6 @@
                     <constraint firstItem="2px-Fb-mwC" firstAttribute="leading" secondItem="w19-FM-9TP" secondAttribute="leading" constant="15" id="PEO-gx-q6S"/>
                     <constraint firstAttribute="trailing" secondItem="2px-Fb-mwC" secondAttribute="trailing" constant="15" id="Pqn-OK-Cm6"/>
                     <constraint firstItem="2px-Fb-mwC" firstAttribute="top" secondItem="g8v-5p-6hW" secondAttribute="bottom" id="Xyc-Kj-kOV"/>
-                    <constraint firstAttribute="bottom" secondItem="2px-Fb-mwC" secondAttribute="bottom" constant="15" id="tCh-tb-XQo"/>
                     <constraint firstItem="g8v-5p-6hW" firstAttribute="leading" secondItem="w19-FM-9TP" secondAttribute="leading" constant="15" id="vCa-3j-Cvs"/>
                 </constraints>
             </tableViewCellContentView>
@@ -46,7 +45,7 @@
                 <outlet property="descriptionLabel" destination="2px-Fb-mwC" id="kRD-Bj-Xh1"/>
                 <outlet property="titleLabel" destination="g8v-5p-6hW" id="DuY-PU-YJ9"/>
             </connections>
-            <point key="canvasLocation" x="-501" y="55.5"/>
+            <point key="canvasLocation" x="-920" y="-105"/>
         </tableViewCell>
     </objects>
 </document>

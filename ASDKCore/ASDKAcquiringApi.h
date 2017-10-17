@@ -47,6 +47,17 @@
 #import "ASDKCancelRequest.h"
 #import "ASDKCancelResponse.h"
 
+#import "ASDKRequestAddCardInit.h"
+#import "ASDKResponseAddCardInit.h"
+
+#import "ASDKRequestAttachCard.h"
+#import "ASDKResponseAttachCard.h"
+
+#import "ASDKRequestGetAttachCardState.h"
+#import "ASDKResponseGetAddCardState.h"
+
+#import "ASDKRequestSubmitRandomAmount.h"
+
 @protocol ASDKAcquiringApiLoggerDelegate <NSObject>
 
 - (void)print:(NSString *)logString;
@@ -89,5 +100,21 @@
 - (void)cancelWithRequest:(ASDKCancelRequest *)request
 				  success:(void (^)(ASDKCancelResponse *data))success
 				  failure:(void (^)(ASDKAcquringApiError *error))failure;
+
+- (void)initAddCardWithRequest:(ASDKRequestAddCardInit *)request
+					   success:(void (^)(ASDKResponseAddCardInit *info))success
+					   failure:(void (^)(ASDKAcquringApiError *error))failure;
+
+- (void)finishAddCardRequest:(ASDKRequestAttachCard *)request
+					 success:(void (^)(ASDKThreeDsData *data, ASDKResponseAttachCard *result, ASDKPaymentStatus status))success
+					 failure:(void (^)(ASDKAcquringApiError *error))failure;
+
+- (void)getStateAttachCardRequest:(ASDKRequestGetAttachCardState *)request
+					 success:(void (^)(ASDKResponseGetAddCardState *response))success
+					 failure:(void (^)(ASDKAcquringApiError *error))failure;
+
+- (void)getStateSubmitRandomAmount:(ASDKRequestSubmitRandomAmount *)request
+						   success:(void (^)(ASDKResponseGetAddCardState *response))success
+						   failure:(void (^)(ASDKAcquringApiError *error))failure;
 
 @end

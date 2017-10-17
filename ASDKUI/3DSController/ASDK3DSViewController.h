@@ -28,8 +28,12 @@
                       threeDsData:(ASDKThreeDsData *)data
                      acquiringSdk:(ASDKAcquiringSdk *)acquiringSdk;
 
+- (instancetype)initWithAddCardRequestKey:(NSString *)requestKey
+							  threeDsData:(ASDKThreeDsData *)data
+							 acquiringSdk:(ASDKAcquiringSdk *)acquiringSdk;
+
 - (void)showFromViewController:(UIViewController *)viewController
-                       success:(void (^)(NSString *paymentId))success
+                       success:(void (^)(NSString *result))success
                        failure:(void (^)(ASDKAcquringSdkError *statusError))failure
                         cancel:(void (^)())cancel;
 

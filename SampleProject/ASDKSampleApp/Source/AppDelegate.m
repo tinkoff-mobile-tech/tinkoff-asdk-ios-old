@@ -11,6 +11,7 @@
 #import "ItemsListTableViewController.h"
 #import "LocalConstants.h"
 #import "TransactionHistoryModelController.h"
+#import "PayController.h"
 
 @interface AppDelegate ()
 
@@ -52,7 +53,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
+
     return YES;
 }
 

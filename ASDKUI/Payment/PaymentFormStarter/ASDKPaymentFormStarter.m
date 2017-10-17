@@ -23,6 +23,8 @@
 #import "ASDKLoaderViewController.h"
 #import "ASDKBarButtonItem.h"
 #import "ASDKCardsListDataController.h"
+#import "ASDKAttachCardViewController.h"
+#import "ASDKLoopViewController.h"
 
 @interface ASDKPaymentFormStarter () <PKPaymentAuthorizationViewControllerDelegate>
 {
@@ -88,6 +90,17 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
     }
 }
 
++ (void)resetSharedInstance
+{
+	@synchronized(self)
+	{
+		[ASDKCardsListDataController resetAcquiringSdk];
+		[__paymentFormStarterInstance unregisterForNotifications];
+		[__paymentFormStarterInstance hideLoaderIfNeeded];
+		__paymentFormStarterInstance = nil;
+	}
+}
+
 - (void)registerForNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loaderVisiblityChanged:) name:ASDKNotificationShowLoader object:nil];
@@ -104,7 +117,6 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
     ASDKDesignConfiguration *designConfiguration = self.designConfiguration;
     
     [[ASDKBarButtonItem appearance] setTintColor:[designConfiguration navigationBarItemsTextColor]];
-	
 }
 
 - (void)presentPaymentFormFromViewController:(UIViewController *)presentingViewController
@@ -162,17 +174,6 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
     [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
     
     [presentingViewController presentViewController:nc animated:YES completion:nil];
-}
-
-+ (void)resetSharedInstance
-{
-    @synchronized(self)
-    {
-        [ASDKCardsListDataController resetAcquiringSdk];
-        [__paymentFormStarterInstance unregisterForNotifications];
-        [__paymentFormStarterInstance hideLoaderIfNeeded];
-        __paymentFormStarterInstance = nil;
-    }
 }
 
 #pragma mark - Loader
@@ -449,6 +450,47 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			self.onCompleteError = nil;
 		}
 	}];
+}
+
+- (void)presentAttachFormFromViewController:(UIViewController *)presentingViewController
+								  formTitle:(NSString *)title
+								 formHeader:(NSString *)header
+								description:(NSString *)description
+									  email:(NSString *)email
+							  cardCheckType:(ASDKCardCheckType)cardCheckType
+								customerKey:(NSString *)customerKey
+							 additionalData:(NSDictionary *)data
+									success:(void (^)(ASDKResponseAttachCard *result))onSuccess
+								  cancelled:(void (^)(void))onCancelled
+									  error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+	[self prepareDesign];
+
+//	ASDKLoopViewController *viewController = [[ASDKLoopViewController alloc] initWithAddCardRequestKey:@"1" acquiringSdk:self.acquiringSdk];
+	
+	ASDKAttachCardViewController *viewController = [[ASDKAttachCardViewController alloc] initWithCardCheckType:cardCheckType
+																									 formTitle:(NSString *)title
+																									formHeader:(NSString *)header
+																								   description:(NSString *)description
+																										 email:(NSString *)email
+																								   customerKey:(NSString *)customerKey
+																								additionalData:(NSDictionary *)data
+																									   success:^(ASDKResponseAttachCard *result) {
+																										   [ASDKPaymentFormStarter resetSharedInstance];
+																										   onSuccess(result);
+																									   } cancelled:^{
+																										   [ASDKPaymentFormStarter resetSharedInstance];
+																										   onCancelled();
+																									   } error:^(ASDKAcquringSdkError *error) {
+																										   [ASDKPaymentFormStarter resetSharedInstance];
+																										   onError(error);
+																									   }];
+
+	viewController.acquiringSdk = self.acquiringSdk;
+	
+	ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:viewController];
+	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
+	[presentingViewController presentViewController:nc animated:YES completion:nil];
 }
 
 @end

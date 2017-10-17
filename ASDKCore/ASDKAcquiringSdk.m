@@ -27,6 +27,12 @@
 #import "ASDKGetCardListRequestBuilder.h"
 #import "ASDKRemoveCardRequestBuilder.h"
 #import "ASDKCancelRequestBuilder.h"
+#import "ASDKRequestBuilderAddCardInit.h"
+#import "ASDKRequestBuilderGetAttachCardState.h"
+#import "ASDKRequestBuilderAttachCard.h"
+
+#import "ASDKRequestBuilderSubmitRandomAmount.h"
+#import "ASDKRequestSubmitRandomAmount.h"
 
 @interface ASDKAcquiringSdk () <ASDKAcquiringApiLoggerDelegate>
 
@@ -210,7 +216,6 @@
             failure(error);
         }];
     }
-    
 }
 
 - (void)getStateWithPaymentId:(NSString *)paymentId
@@ -333,10 +338,116 @@
 	}
 }
 
+- (void)initAttachCardWithCheckType:(ASDKCardCheckType)cardCheckType
+						customerKey:(NSString *)customerKey
+							success:(void (^)(ASDKResponseAddCardInit *response))success
+							failure:(void (^)(ASDKAcquringSdkError *error))failure
+{
+	ASDKAcquringSdkError *buildError;
+
+	ASDKRequestBuilderAddCardInit *builder = [[ASDKRequestBuilderAddCardInit alloc] initWithTerminalKey:self.terminalKey
+																							   password:self.password
+																							customerKey:customerKey
+																							  checkType:cardCheckType];
+	
+	ASDKRequestAddCardInit *request = (ASDKRequestAddCardInit *)[builder buildError:&buildError];
+	
+	if (buildError)
+	{
+		failure(buildError);
+	}
+	else
+	{
+		[self.acquiringApi initAddCardWithRequest:request success:^(ASDKResponseAddCardInit *info) {
+			success(info);
+		} failure:^(ASDKAcquringApiError *error) {
+			failure(error);
+		}];
+	}
+}
+
+- (void)finishAttachCardWithCardData:(NSString *)cardData aditionalInfo:(NSDictionary *)data requestKey:(NSString *)requestKey
+							 success:(void (^)(ASDKThreeDsData *data, ASDKResponseAttachCard *result, ASDKPaymentStatus status))success
+							 failure:(void (^)(ASDKAcquringSdkError *error))failure
+{
+	ASDKAcquringSdkError *buildError;
+	
+	ASDKRequestBuilderAttachCard *builder = [[ASDKRequestBuilderAttachCard alloc] initWithTerminalKey:self.terminalKey password:self.password
+																						   requestKey:requestKey
+																							 cardData:cardData additionalData:data];
+	
+	ASDKRequestAttachCard *request = (ASDKRequestAttachCard *)[builder buildError:&buildError];
+	
+	if (buildError)
+	{
+		failure(buildError);
+	}
+	else
+	{
+		[self.acquiringApi finishAddCardRequest:request success:^(ASDKThreeDsData *data, ASDKResponseAttachCard *result, ASDKPaymentStatus status) {
+			success(data, result, status);
+		} failure:^(ASDKAcquringApiError *error) {
+			failure(error);
+		}];
+	}
+}
+
+- (void)getStateAttachCardWithRequestKey:(NSString *)requestKey
+								 success:(void (^)(ASDKResponseGetAddCardState *response))success
+								 failure:(void (^)(ASDKAcquringSdkError *error))failure
+{
+	ASDKAcquringSdkError *buildError;
+	
+	ASDKRequestBuilderGetAttachCardState *builder = [[ASDKRequestBuilderGetAttachCardState alloc] initWithTerminalKey:self.terminalKey password:self.password
+																						   requestKey:requestKey];
+	
+	ASDKRequestGetAttachCardState *request = (ASDKRequestGetAttachCardState *)[builder buildError:&buildError];
+	
+	if (buildError)
+	{
+		failure(buildError);
+	}
+	else
+	{		
+		[self.acquiringApi getStateAttachCardRequest:request success:^(ASDKResponseGetAddCardState *response) {
+			success(response);
+		} failure:^(ASDKAcquringApiError *error) {
+			failure(error);
+		}];
+	}
+}
+
+- (void)getStateSubmitRandomAmount:(NSNumber *)amount
+						requestKey:(NSString *)requestKey
+						   success:(void (^)(ASDKResponseGetAddCardState *response))success
+						   failure:(void (^)(ASDKAcquringSdkError *error))failure
+{
+	ASDKAcquringSdkError *buildError;
+	
+	ASDKRequestBuilderSubmitRandomAmount *builder = [[ASDKRequestBuilderSubmitRandomAmount alloc] initWithTerminalKey:self.terminalKey
+																											 password:self.password
+																										   requestKey:requestKey amount:amount];
+	
+	ASDKRequestSubmitRandomAmount *request = (ASDKRequestSubmitRandomAmount *)[builder buildError:&buildError];
+	
+	if (buildError)
+	{
+		failure(buildError);
+	}
+	else
+	{
+		[self.acquiringApi getStateSubmitRandomAmount:request success:^(ASDKResponseGetAddCardState *response) {
+			success(response);
+		} failure:^(ASDKAcquringApiError *error) {
+			failure(error);
+		}];
+	}
+}
+
 + (void)getUrlWithSuccess:(void (^)(NSURL *url))success
                   failure:(void (^)(ASDKAcquringSdkError *error))failure
 {
-	
+
 }
 
 #pragma mark - ASDKAcquiringApiLoggerDelegate

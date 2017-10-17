@@ -28,6 +28,10 @@
 #import "ASDKRemoveCardResponse.h"
 #import "ASDKCancelResponse.h"
 
+#import "ASDKResponseAddCardInit.h"
+#import "ASDKResponseAttachCard.h"
+#import "ASDKResponseGetAddCardState.h"
+
 #import "ASDKCardData.h"
 #import "ASDKCard.h"
 
@@ -102,5 +106,23 @@
 - (void)rejectTrancastionWithPaymentId:(NSString *)paymentId
 							   success:(void (^)(ASDKCancelResponse *response))success
 							   failure:(void (^)(ASDKAcquringSdkError *error))failure;
+
+- (void)initAttachCardWithCheckType:(ASDKCardCheckType)cardCheckType
+						customerKey:(NSString *)customerKey
+							success:(void (^)(ASDKResponseAddCardInit *response))success
+							failure:(void (^)(ASDKAcquringSdkError *error))failure;
+
+- (void)finishAttachCardWithCardData:(NSString *)cardData aditionalInfo:(NSDictionary *)data requestKey:(NSString *)requestKey
+							 success:(void (^)(ASDKThreeDsData *data, ASDKResponseAttachCard *result, ASDKPaymentStatus status))success
+							 failure:(void (^)(ASDKAcquringSdkError *error))failure;
+
+- (void)getStateAttachCardWithRequestKey:(NSString *)requestKey
+								 success:(void (^)(ASDKResponseGetAddCardState *response))success
+								 failure:(void (^)(ASDKAcquringSdkError *error))failure;
+
+- (void)getStateSubmitRandomAmount:(NSNumber *)amount
+						requestKey:(NSString *)requestKey
+						   success:(void (^)(ASDKResponseGetAddCardState *response))success
+						   failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
 @end

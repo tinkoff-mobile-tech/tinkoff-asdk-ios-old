@@ -30,8 +30,9 @@
 
 - (ASDKAcquiringRequest *)buildError:(ASDKAcquringSdkError **)error;
 - (NSString *)makeToken;
-
-
 - (NSString *)dataStringFromDictionary:(NSDictionary *)dataDictionary;
+
+- (instancetype)initWithTerminalKey:(NSString *)terminalKey
+						   password:(NSString *)password;
 
 @end

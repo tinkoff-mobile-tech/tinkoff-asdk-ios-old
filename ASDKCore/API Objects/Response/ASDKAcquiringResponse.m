@@ -93,6 +93,26 @@
         {
             _status = ASDKPaymentStatus_REJECTED;
         }
+		else if ([status isEqualToString:kASDKPaymentStatusCOMPLETED])
+		{
+			_status = ASDKPaymentStatus_COMPLETED;
+		}
+		else if ([status isEqualToString:@"HOLD"])
+		{
+			_status = ASDKPaymentStatus_HOLD;
+		}
+		else if ([status isEqualToString:@"NO"])
+		{
+			_status = ASDKPaymentStatus_NO;
+		}
+		else if ([status isEqualToString:@"3DSHOLD"])
+		{
+			_status = ASDKPaymentStatus_3DSHOLD;
+		}
+		else if ([status isEqualToString:@"LOOP_CHECKING"])
+		{
+			_status = ASDKPaymentStatus_LOOP;
+		}
         else if ([status isEqualToString:kASDKPaymentStatusUnknown])
         {
             _status = ASDKPaymentStatus_UNKNOWN;
@@ -195,6 +215,10 @@
 	else if (status == ASDKPaymentStatus_REJECTED)
 	{
 		result = kASDKPaymentStatusRejected;
+	}
+	else if (status == ASDKPaymentStatus_COMPLETED)
+	{
+		result = kASDKPaymentStatusCOMPLETED;
 	}
 	else if (status == ASDKPaymentStatus_UNKNOWN)
 	{

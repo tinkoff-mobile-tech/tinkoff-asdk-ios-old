@@ -36,8 +36,11 @@
 @property (nonatomic, strong) UIBarButtonItem *backButton;
 @property (nonatomic, strong) NSArray *_payFormItems;
 @property (nonatomic, strong) UIView *_paymentsSecureLogosView;
-
 @property (nonatomic, strong) UIButton *_customPayButton;
+
+@property (nonatomic, strong) NSArray *_attachCardItems;
+@property (nonatomic, strong) UIButton *_attachCardCustomButton;
+@property (nonatomic, strong) NSString *_attachCardButtonTitle;
 
 @end
 
@@ -168,26 +171,27 @@
 	return self._customPayButton;
 }
 
-- (void)setPayFormItems:(NSArray *)items
+- (BOOL)checkCellItems:(NSArray *)items
 {
 	__block BOOL result = items.count > 0;
 	[items enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		if ([obj isKindOfClass:[NSNumber class]])
 		{
 			switch ([obj integerValue]) {
-				case PayFormItems_ProductTitle:
-				case PayFormItems_ProductDescription:
-				case PayFormItems_Amount:
-				case PayFormItems_PyamentCardRequisites:
-				case PayFormItems_Email:
-				case PayFormItems_PayButton:
-				case PayFormItems_SecureLogos:
-				case PayFormItems_Empty20px:
-				case PayFormItems_Empty5px:
-				case PayFormItems_EmptyFlexibleSpace:
+				case CellProductTitle:
+				case CellProductDescription:
+				case CellAmount:
+				case CellPaymentCardRequisites:
+				case CellEmail:
+				case CellPayButton:
+				case CellAttachButton:
+				case CellSecureLogos:
+				case CellEmpty20px:
+				case CellEmpty5px:
+				case CellEmptyFlexibleSpace:
 					result &= YES;
 					break;
-
+					
 				default:
 					result = NO;
 					*stop = YES;
@@ -200,8 +204,13 @@
 			*stop = YES;
 		}
 	}];
+	
+	return result;
+}
 
-	if (result == YES)
+- (void)setPayFormItems:(NSArray *)items
+{
+	if ([self checkCellItems:items] == YES)
 	{
 		self._payFormItems = items;
 	}
@@ -220,6 +229,39 @@
 - (UIView *)paymentsSecureLogosView
 {
 	return self._paymentsSecureLogosView;
+}
+
+- (NSArray *)attachCardItems
+{
+	return self._attachCardItems;
+}
+
+- (void)setAttachCardItems:(NSArray *)items
+{
+	if ([self checkCellItems:items] == YES)
+	{
+		self._attachCardItems = items;
+	}
+}
+
+- (UIButton *)attachCardCustomButton
+{
+	return self._attachCardCustomButton;
+}
+
+- (void)setAttachCardCustomButton:(UIButton *)button
+{
+	self._attachCardCustomButton = button;
+}
+
+- (NSString *)attachCardButtonTitle
+{
+	return self._attachCardButtonTitle;
+}
+
+- (void)setAttachCardButtonTitle:(NSString *)title
+{
+	self._attachCardButtonTitle = title;
 }
 
 @end
