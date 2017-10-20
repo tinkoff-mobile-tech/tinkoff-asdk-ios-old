@@ -154,8 +154,8 @@
 /*!
  * @bref привязка карты без оплаты, онлайн документация https://oplata.tinkoff.ru/landing/develop/documentation/Init
  *
- * @param formTitle - Заголовок экрана
- * @param formHeader - заголовок для пояснения зачем надо привязывать карту
+ * @param title - Заголовок экрана
+ * @param header - заголовок для пояснения зачем надо привязывать карту
  * @param description - Краткое описание зачем надо привязывать карту
  *
  * @param customerKey - Идентификатор покупателя в системе Продавца.
