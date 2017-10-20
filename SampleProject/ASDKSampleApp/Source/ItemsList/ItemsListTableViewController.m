@@ -116,14 +116,6 @@
 
 - (void)showSettings
 {
-//	[PayController attachCard:ASDKCardCheckType_3DSHOLD additionalData:nil fromViewController:self success:^(ASDKResponseAddCardInit *response) {
-//		//
-//	} cancelled:^{
-//		//
-//	} error:^(ASDKAcquringSdkError *error) {
-//		//
-//	}];
-
 	[self presentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingsViewController alloc] initWithStyle:UITableViewStyleGrouped]]
 					   animated:YES
 					 completion:nil];

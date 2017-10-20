@@ -62,7 +62,7 @@
 
 + (UIAlertController *)alertForCancel
 {
-	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"CanceledPayment", @"Оплата отменена") message:nil preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Cancel", @"Оплата") message:nil preferredStyle:UIAlertControllerStyleAlert];
 	
 	UIAlertAction *cancelAction = [UIAlertAction
 								   actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")

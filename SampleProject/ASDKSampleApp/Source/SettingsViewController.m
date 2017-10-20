@@ -11,6 +11,7 @@
 #import "TableViewCellSegmentedControl.h"
 #import "ASDKTestSettings.h"
 #import "PayController.h"
+#import <ASDKCore/ASDKCore.h>
 
 typedef NS_ENUM(NSUInteger, SectionType)
 {
@@ -29,13 +30,15 @@ typedef NS_ENUM(NSUInteger, CellType)
 	CellTypeNavBarColor,
 	CellTypeMakeCharge,
 	CellTypeMakeNewCard,
-	CellTypeAddNewCard
+	CellTypeAddNewCard,
+	CellTypeAddNewCardCheckType
 };
 
 @interface SettingsViewController ()
 
 @property (nonatomic, strong) NSArray *tableViewDataSource;
-	
+@property (nonatomic, assign) ASDKCardCheckType addNewCardCheckType;
+
 @end
 
 @implementation SettingsViewController
@@ -43,6 +46,8 @@ typedef NS_ENUM(NSUInteger, CellType)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	self.addNewCardCheckType = ASDKCardCheckType_NO;
 	
 	[self setTitle:NSLocalizedString(@"Settings", @"Настройки")];
 	
@@ -54,7 +59,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 	self.tableViewDataSource = @[@{@(SectionTypeTerminal):@[@(CellTypeTerminal)]},
 								 @{@(SectionTypePaymentScreen):@[@(CellTypeButtonCancel),@(CellTypeButtonPay),@(CellTypeNavBarColor)]},
 								 @{@(SectionTypeMakeCharge):@[@(CellTypeMakeCharge)]},
-								 @{@(SectionTypeMakeNewCard):@[@(CellTypeMakeNewCard), @(CellTypeAddNewCard)]}];
+								 @{@(SectionTypeMakeNewCard):@[@(CellTypeMakeNewCard), @(CellTypeAddNewCard), @(CellTypeAddNewCardCheckType)]}];
 	
 	UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Закрыть")
 																	 style:UIBarButtonItemStylePlain
@@ -150,7 +155,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 			break;
 		
 		case SectionTypeMakeNewCard:
-			result = @"Оплачивать по реквизитам новой карты.\nВыкл. - оплачивать с последней оплаченой карты.";
+			result = @"Оплачивать по реквизитам новой карты.\nВыкл. - оплачивать с последней оплаченой карты.\nВыберите способ проверки карты при привязке.";
 			break;
 			
 		default:
@@ -218,6 +223,28 @@ typedef NS_ENUM(NSUInteger, CellType)
 			[cell.textLabel setText:@"Добавить новую карту"];
 			break;
 
+		case CellTypeAddNewCardCheckType:
+			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSegmentedControl class])];
+			[(TableViewCellSegmentedControl *)cell setSegments:@[@"NO", @"3DS", @"HOLD", @"3DSHOLD"]];
+			[(TableViewCellSegmentedControl *)cell addSegmentedControlValueChangedTarget:self action:@selector(addNewCardCheckTypeChanged:) forControlEvents:UIControlEventValueChanged];
+			switch (self.addNewCardCheckType)
+			{
+				case ASDKCardCheckType_NO:
+					[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:@"NO"];
+					break;
+				case ASDKCardCheckType_3DS:
+					[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:@"3DS"];
+					break;
+				case ASDKCardCheckType_HOLD:
+					[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:@"HOLD"];
+					break;
+				case ASDKCardCheckType_3DSHOLD:
+					[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:@"3DSHOLD"];
+					break;
+			}
+			
+			break;
+			
 		default:
 			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cellDefault"];
 			break;
@@ -230,13 +257,42 @@ typedef NS_ENUM(NSUInteger, CellType)
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	[PayController attachCard:ASDKCardCheckType_3DSHOLD additionalData:nil fromViewController:self success:^(ASDKResponseAddCardInit *response) {
-		//
-	} cancelled:^{
-		//
-	} error:^(ASDKAcquringSdkError *error) {
-		//
-	}];
+	if ([self cellTypeForIndexPath:indexPath] == CellTypeAddNewCard)
+	{
+		[PayController attachCard:self.addNewCardCheckType additionalData:nil fromViewController:self success:^(ASDKResponseAddCardInit *response) {
+			//
+		} cancelled:^{
+			//
+		} error:^(ASDKAcquringSdkError *error) {
+			//
+		}];
+	}
+}
+
+- (void)addNewCardCheckTypeChanged:(UISegmentedControl *)sender
+{
+	switch (sender.selectedSegmentIndex)
+	{
+		case 0:
+			self.addNewCardCheckType = ASDKCardCheckType_NO;
+			break;
+		
+		case 1:
+			self.addNewCardCheckType = ASDKCardCheckType_3DS;
+			break;
+			
+		case 2:
+			self.addNewCardCheckType = ASDKCardCheckType_HOLD;
+			break;
+			
+		case 3:
+			self.addNewCardCheckType = ASDKCardCheckType_3DSHOLD;
+			break;
+			
+		default:
+			self.addNewCardCheckType = ASDKCardCheckType_NO;
+			break;
+	}
 }
 
 - (void)terminalSourceChanged:(UISegmentedControl *)sender

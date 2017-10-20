@@ -32,7 +32,9 @@
     if (!_status)
     {
         NSString *status = _dictionary[kASDKStatus];
-        
+		
+		_status = ASDKPaymentStatus_UNKNOWN;
+		
         if ([status isEqualToString:kASDKPaymentStatusNew])
         {
             _status = ASDKPaymentStatus_NEW;

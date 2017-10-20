@@ -312,7 +312,14 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 			}
 		}];
 	} failure:^(ASDKAcquringSdkError *error) {
-		//
+		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+		
+		[self closeSelfWithCompletion:^{
+			 if (self.onError)
+			 {
+				 self.onError(error);
+			 }
+		 }];
 	}];
 }
 

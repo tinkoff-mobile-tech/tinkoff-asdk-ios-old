@@ -61,7 +61,13 @@
 - (NSString *)errorDetails
 {
     NSLog(@"ПИУ!!! %@ дитэйлс %@",self.userInfo,self.userInfo[kASDKAcquringResponse][kASDKDetails]);
-    return self.userInfo[kASDKErrorDetails];
+	
+	if (self.userInfo[kASDKErrorDetails])
+	{
+		return self.userInfo[kASDKErrorDetails];
+	}
+	
+	return [NSString stringWithFormat:@"%@", self.userInfo[kASDKErrorCode]];
 }
 
 

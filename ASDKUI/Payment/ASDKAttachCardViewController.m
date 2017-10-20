@@ -751,7 +751,7 @@
 						 }];
 						//
 					}
-					else if (result.status == ASDKPaymentStatus_NO || result.status == ASDKPaymentStatus_HOLD)
+					else if ((result.status == ASDKPaymentStatus_NO || result.status == ASDKPaymentStatus_HOLD || result.status == ASDKPaymentStatus_UNKNOWN) && [result.errorCode isEqualToString:@"0"])
 					{
 						__strong typeof(weakSelf) strongSelf1 = weakSelf;
 						
@@ -799,12 +799,12 @@
 						
 						NSLog(@"\n\n\nAttach card FINISHED WITH ERROR STATE\n\n\n");
 						
-						NSString *message = @"Payment state error";
-						NSString *details = [NSString stringWithFormat:@"%@", result.errorCode];
+						NSString *message = @"Attach card error";
+						NSString *details = [NSString stringWithFormat:@"error %@", result.errorCode];
 						
 						ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:message
 																					 details:details
-																						code:0];
+																						code:[result.errorCode integerValue]];
 						
 						if (strongSelf)
 						{
