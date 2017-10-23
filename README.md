@@ -2,6 +2,7 @@
 
 ![PayFormActivity][img-pay]
 ![PayFormActivityUserSettings][img-pay2]
+![AttachCardActivity][img-attachCard]
 
 Acquiring SDK позволяет интегрировать [Интернет-Эквайрингу][acquiring] в мобильные приложения для платформы iOS.
 
@@ -90,6 +91,22 @@ pod 'ASDKUI', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSyste
 									   error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@", error); }];
 	}
 ```
+Привязать новую карту для оплаты
+
+```objective-c
+		[PayController attachCard:self.addNewCardCheckType // тип проверки ASDKCardCheckType
+					additionalData:@{@"Email":@"a@test.ru"}
+				fromViewController:self
+							success:^(ASDKResponseAddCardInit *response) {
+								//
+						} cancelled:^{
+								//
+							} error:^(ASDKAcquringSdkError *error) {
+								//
+		}];
+```
+
+
 [1] Рекуррентный платеж может производиться для дальнейшего списания средств с сохраненной карты, без ввода ее реквизитов. Эта возможность, например, может использоваться для осуществления платежей по подписке.
 
 
@@ -124,27 +141,29 @@ SDK состоит из следующих модулей:
 
 Например, можно указать какие элементы показывать на экране и в какой последовательности, для этого нужно сформировать массив из эелементов:
 ```objective-c
-typedef NS_ENUM(NSInteger, PayFormItems)
+typedef NS_ENUM(NSInteger, TableViewCellType)
 {
-	PayFormItems_ProductTitle, // Заголовок, занвание товара 
-	PayFormItems_ProductDescription, // Описание товара
-	PayFormItems_Amount, // сумма
-	PayFormItems_PyamentCardRequisites,// поле для ввода реквизитов карты
-	PayFormItems_Email, // поле для ввода email
-	PayFormItems_PayButton, // кнопка оплатить
-	PayFormItems_SecureLogos, // логотипы платежных систем
-	PayFormItems_Empty20px, // пустое поле цвета фона таблицы высотой в 20 px
-	PayFormItems_Empty5px // пустое поле цвета фона таблицы высотой в 5 px
+	CellProductTitle, // Заголовок, занвание товара
+	CellProductDescription, // Описание товара
+	CellAmount, // сумма
+	CellPyamentCardRequisites,// поле для ввода реквизитов карты
+	CellEmail, // поле для ввода email
+	CellPayButton, // кнопка оплатить
+	CellAttachButton, // кнопка привязать карту
+	CellSecureLogos, // логотипы платежных систем
+	CellEmpty20px, // пустое поле цвета фона таблицы высотой в 20 px
+	CellEmpty5px, // пустое поле цвета фона таблицы высотой в 5 px
+	CellEmptyFlexibleSpace // пустая строка высота которой занимает всё доступное пространство
 };
 // установить элементы экрана оплаты и их последовательность: 
-[ASDKDesignConfiguration setPayFormItems:@[@(PayFormItems_ProductTitle),
-										   @(PayFormItems_ProductDescription),
-										   @(PayFormItems_Amount),
-										   @(PayFormItems_PyamentCardRequisites),
-										   @(PayFormItems_Email),
-										   @(PayFormItems_Empty20px),
-										   @(PayFormItems_PayButton),
-										   @(PayFormItems_SecureLogos)
+[ASDKDesignConfiguration setPayFormItems:@[@(CellProductTitle),
+										   @(CellProductDescription),
+										   @(CellAmount),
+										   @(CellPyamentCardRequisites),
+										   @(CellEmail),
+										   @(CellEmpty20px),
+										   @(CellPayButton),
+										   @(CellSecureLogos)
 										 ]];
 // изменить на кнопке оплатить надпись:
 [ASDKDesignConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
@@ -166,5 +185,6 @@ _**PayController**_ фасад для _**ASDKAcquiringSdk**_ который со
 [cocoapods]: https://cocoapods.org
 [img-pay]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen.png
 [img-pay2]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen2.png
+[img-attachCard]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/attachCardScreen.png
 [server-api]: https://oplata.tinkoff.ru/landing/develop/documentation/termins_and_operations
 [issues]: https://github.com/TinkoffCreditSystems/tinkoff-asdk-ios/issues
