@@ -176,7 +176,7 @@
 								 formHeader:(NSString *)header // заголовок для пояснения зачем надо привязывать карту
 								description:(NSString *)description //описание зачем надо привязывать карту
 									  email:(NSString *)email //
-							  cardCheckType:(ASDKCardCheckType)cardCheckType //описание возможных значений в ASDKCard.h
+							  cardCheckType:(NSString *)cardCheckType //описание возможных значений в ASDKCard.h
 								customerKey:(NSString *)customerKey // идетинификатор пользователя (для сохранеиня платежей и карт)
 							 additionalData:(NSDictionary *)data //JSON объект содержащий дополнительные параметры, например @{@"Phone" : @"+71234567890"}
 									success:(void (^)(ASDKResponseAttachCard *result))onSuccess

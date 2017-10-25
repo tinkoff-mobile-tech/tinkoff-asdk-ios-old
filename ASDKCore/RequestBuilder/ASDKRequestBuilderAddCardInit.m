@@ -32,30 +32,13 @@
 - (instancetype)initWithTerminalKey:(NSString *)terminalKey
 						   password:(NSString *)password
 						customerKey:(NSString *)customerKey
-						  checkType:(ASDKCardCheckType)checkType
+						  checkType:(NSString *)checkType
 
 {
 	if (self = [super initWithTerminalKey:terminalKey password:password])
 	{
 		_customerKey = customerKey;
-		switch (checkType)
-		{
-			case ASDKCardCheckType_NO:
-				_checkType = @"NO";
-				break;
-			case ASDKCardCheckType_3DS:
-				_checkType = @"3DS";
-				break;
-			case ASDKCardCheckType_HOLD:
-				_checkType = @"HOLD";
-				break;
-			case ASDKCardCheckType_3DSHOLD:
-				_checkType = @"3DSHOLD";
-				break;
-			default:
-				_checkType = @"AUTO";
-				break;
-		}
+		_checkType =checkType;
 	}
 
 	return self;

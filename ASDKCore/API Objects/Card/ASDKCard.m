@@ -19,6 +19,11 @@
 #import "ASDKCard.h"
 #import "ASDKApiKeys.h"
 
+NSString *const ASDKCardCheckType_NO = @"NO";
+NSString *const ASDKCardCheckType_3DS = @"3DS";
+NSString *const ASDKCardCheckType_HOLD = @"HOLD";
+NSString *const ASDKCardCheckType_3DSHOLD = @"3DSHOLD";
+
 @implementation ASDKCard
 
 - (void)clearAllProperties

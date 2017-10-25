@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 @interface SettingsViewController ()
 
 @property (nonatomic, strong) NSArray *tableViewDataSource;
-@property (nonatomic, assign) ASDKCardCheckType addNewCardCheckType;
+@property (nonatomic, assign) NSString *addNewCardCheckType;
 
 @end
 
@@ -225,24 +225,9 @@ typedef NS_ENUM(NSUInteger, CellType)
 
 		case CellTypeAddNewCardCheckType:
 			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSegmentedControl class])];
-			[(TableViewCellSegmentedControl *)cell setSegments:@[@"NO", @"3DS", @"HOLD", @"3DSHOLD"]];
+			[(TableViewCellSegmentedControl *)cell setSegments:@[ASDKCardCheckType_NO, ASDKCardCheckType_3DS, ASDKCardCheckType_HOLD, ASDKCardCheckType_3DSHOLD]];
 			[(TableViewCellSegmentedControl *)cell addSegmentedControlValueChangedTarget:self action:@selector(addNewCardCheckTypeChanged:) forControlEvents:UIControlEventValueChanged];
-			switch (self.addNewCardCheckType)
-			{
-				case ASDKCardCheckType_NO:
-					[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:@"NO"];
-					break;
-				case ASDKCardCheckType_3DS:
-					[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:@"3DS"];
-					break;
-				case ASDKCardCheckType_HOLD:
-					[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:@"HOLD"];
-					break;
-				case ASDKCardCheckType_3DSHOLD:
-					[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:@"3DSHOLD"];
-					break;
-			}
-			
+			[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:self.addNewCardCheckType];
 			break;
 			
 		default:

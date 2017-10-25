@@ -457,7 +457,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 								 formHeader:(NSString *)header
 								description:(NSString *)description
 									  email:(NSString *)email
-							  cardCheckType:(ASDKCardCheckType)cardCheckType
+							  cardCheckType:(NSString *)cardCheckType
 								customerKey:(NSString *)customerKey
 							 additionalData:(NSDictionary *)data
 									success:(void (^)(ASDKResponseAttachCard *result))onSuccess

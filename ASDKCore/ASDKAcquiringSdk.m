@@ -338,7 +338,7 @@
 	}
 }
 
-- (void)initAttachCardWithCheckType:(ASDKCardCheckType)cardCheckType
+- (void)initAttachCardWithCheckType:(NSString *)cardCheckType
 						customerKey:(NSString *)customerKey
 							success:(void (^)(ASDKResponseAddCardInit *response))success
 							failure:(void (^)(ASDKAcquringSdkError *error))failure

@@ -29,7 +29,7 @@
 
 @property (nonatomic, strong) ASDKAcquiringSdk *acquiringSdk;
 
-- (instancetype)initWithCardCheckType:(ASDKCardCheckType)cardCheckType
+- (instancetype)initWithCardCheckType:(NSString *)cardCheckType
 							formTitle:(NSString *)title
 						   formHeader:(NSString *)header
 						  description:(NSString *)description

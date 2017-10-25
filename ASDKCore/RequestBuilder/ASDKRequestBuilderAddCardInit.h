@@ -27,6 +27,6 @@
 - (instancetype)initWithTerminalKey:(NSString *)terminalKey
 						   password:(NSString *)password
 						customerKey:(NSString *)customerKey
-						  checkType:(ASDKCardCheckType)checkType NS_DESIGNATED_INITIALIZER;
+						  checkType:(NSString *)checkType NS_DESIGNATED_INITIALIZER;
 
 @end

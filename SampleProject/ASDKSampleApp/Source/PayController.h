@@ -60,7 +60,7 @@
 				  success:(void (^)())onSuccess
 					error:(void (^)(ASDKAcquringSdkError *error))onError;
 
-+ (void)attachCard:(ASDKCardCheckType)cardCheckType additionalData:(NSDictionary *)data fromViewController:(UIViewController *)viewController
++ (void)attachCard:(NSString *)cardCheckType additionalData:(NSDictionary *)data fromViewController:(UIViewController *)viewController
 		   success:(void (^)(ASDKResponseAddCardInit *response))onSuccess
 		 cancelled:(void (^)(void))onCancelled
 			 error:(void(^)(ASDKAcquringSdkError *error))onError;
