@@ -50,7 +50,7 @@
 {
     self = [super init];
     
-    self.navigationBarStyle = UIBarStyleBlack;
+    self.navigationBarStyle = UIBarStyleDefault;
     
     return self;
 }
