@@ -348,7 +348,7 @@
 	// используем ASDKTestSettings для переключения настроект во время работы приложения, для быстрой демонстрации
 	if ([ASDKTestSettings customNavBarColor])
 	{
-		[designConfiguration setNavigationBarColor:[UIColor orangeColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleDefault];
+		[designConfiguration setNavigationBarColor:[UIColor blackColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleBlack];
 	}
 	
 	if ([ASDKTestSettings customButtonCancel])
