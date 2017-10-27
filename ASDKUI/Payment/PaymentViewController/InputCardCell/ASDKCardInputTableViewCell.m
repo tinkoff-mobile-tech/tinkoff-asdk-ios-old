@@ -703,7 +703,7 @@ typedef enum
 			[textField setTextColor:[self validateDate] ? self.textColor : [UIColor redColor]];
 			if ([self validateDate] && [textField isFirstResponder])
 			{
-				[textField resignFirstResponder];
+				//[textField resignFirstResponder];
 				[self.textFieldCardCVC becomeFirstResponder];
 			}
 			else
@@ -965,10 +965,10 @@ typedef enum
 	{
 		if (cardNumberIsValid)
 		{
-			[textField resignFirstResponder];
+			//[textField resignFirstResponder];
 			if (self.extendedModeEnabled && !self.secureModeEnabled)
 			{
-				[textField resignFirstResponder];
+				//[textField resignFirstResponder];
                 
                 if ([self validateDate])
                 {
