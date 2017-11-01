@@ -124,6 +124,18 @@ typedef enum
 	return cell;
 }
 
+- (void)setupForCVCInput
+{
+	[self setExtendedModeEnabled:YES];
+	[self setSecureModeEnabled:YES];
+	[self setCardNumberExpanded:NO animated:NO];
+	[self setPaymentLogoHidden:NO animated:NO];
+	[self setScanButtonHidden:YES animated:NO];
+	[self setNextButtonHidden:YES animated:NO];
+	[self.saveCardContainer setHidden:YES];
+	[self setShowSecretContainer:YES];
+}
+
 + (instancetype)cellForRecieverCard
 {
 	ASDKCardInputTableViewCell *cell = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"ASDKCardInputTableViewCell" owner:self options:nil] objectAtIndex:0];

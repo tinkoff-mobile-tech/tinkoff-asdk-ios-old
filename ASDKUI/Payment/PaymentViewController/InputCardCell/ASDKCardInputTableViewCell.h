@@ -78,5 +78,6 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 
 - (void)setScanButtonHidden:(BOOL)hidden animated:(BOOL)animated;
+- (void)setupForCVCInput;
 
 @end

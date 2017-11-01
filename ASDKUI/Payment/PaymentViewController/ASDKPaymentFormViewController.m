@@ -102,6 +102,9 @@ NSUInteger const CellPyamentCardID = -1;
 
 @property (nonatomic, assign) CGFloat keyboardHeight;
 
+@property (nonatomic, assign) BOOL chargeError;
+@property (nonatomic, copy) NSString *chargeErrorPaymentId;
+
 @end
 
 @implementation ASDKPaymentFormViewController
@@ -147,6 +150,7 @@ NSUInteger const CellPyamentCardID = -1;
 		_receiptData = receiptData;
 		_updateCardCell = NO;
 		_makeCharge = makeCharge;
+		_chargeError = NO;
     }
 
     return self;
@@ -915,7 +919,7 @@ NSUInteger const CellPyamentCardID = -1;
 - (void)performInitRequest
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
-    
+
     NSNumber *realAmount = [NSNumber numberWithDouble:100 * _amount.doubleValue];
     
     __weak typeof(self) weakSelf = self;
@@ -928,9 +932,15 @@ NSUInteger const CellPyamentCardID = -1;
 		[paymentData addEntriesFromDictionary:_additionalPaymentData];
 	}
 	
-	if (self.selectedCard && self.selectedCard.rebillId && self.makeCharge == YES)
+	if (self.selectedCard && self.selectedCard.rebillId && self.makeCharge == YES && self.chargeError == NO)
 	{
 		[paymentData setObject:@(YES) forKey:@"chargeFlag"];
+	}
+	
+	if (self.chargeError == YES && self.chargeErrorPaymentId.length > 0)
+	{
+		[paymentData setObject:self.chargeErrorPaymentId forKey:@"failMapiSessionId"];
+		[paymentData setObject:@(12) forKey:@"recurringType"];
 	}
 	
     [self.acquiringSdk initWithAmount:realAmount
@@ -967,7 +977,7 @@ NSUInteger const CellPyamentCardID = -1;
 
 - (void)performFinishAuthorizeRequestWithPaymentId:(ASDKInitResponse *)payment
 {
-	if (self.selectedCard && self.selectedCard.rebillId && self.makeCharge == YES)
+	if (self.selectedCard && self.selectedCard.rebillId && self.makeCharge == YES && self.chargeError == NO)
 	{
 		 __weak typeof(self) weakSelf = self;
 		[self.acquiringSdk chargeWithPaymentId:payment.paymentId rebillId:self.selectedCard.rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
@@ -979,14 +989,28 @@ NSUInteger const CellPyamentCardID = -1;
 			}
 		} failure:^(ASDKAcquringSdkError *error) {
 			__strong typeof(weakSelf) strongSelf = weakSelf;
-			
 			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-		
+			
 			NSLog(@"\n\n\nPAYMENT FINISHED WITH ERROR STATE\n\n\n");
-
+			
 			if (strongSelf)
 			{
-				[strongSelf manageError:error];
+				ASDKAcquiringResponse *errorResponse = [error.userInfo objectForKey:@"acquringResponse"];
+				//пользователю необходимо подтвердить платеж через ввод cvc ASDK-432
+				//ErrorCode == 104
+				if ([[errorResponse.dictionary objectForKey:@"ErrorCode"] integerValue] == 104)
+				{
+					strongSelf.makeCharge = NO;
+					strongSelf.chargeError = YES;
+					strongSelf.chargeErrorPaymentId = [errorResponse.dictionary objectForKey:@"PaymentId"];
+					[[strongSelf cardRequisitesCell] setupForCVCInput];
+					[[strongSelf cardRequisitesCell] setUserInteractionEnabled:YES];
+					[[[strongSelf cardRequisitesCell] secretCVVTextField] becomeFirstResponder];
+				}
+				else
+				{
+					[strongSelf manageError:error];
+				}
 			}
 		}];
 	}
