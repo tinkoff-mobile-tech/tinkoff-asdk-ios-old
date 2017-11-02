@@ -225,7 +225,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 
 		case CellTypeAddNewCardCheckType:
 			cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TableViewCellSegmentedControl class])];
-			[(TableViewCellSegmentedControl *)cell setSegments:@[ASDKCardCheckType_NO, ASDKCardCheckType_3DS, ASDKCardCheckType_HOLD, ASDKCardCheckType_3DSHOLD, @"AUTO"]];
+			[(TableViewCellSegmentedControl *)cell setSegments:@[ASDKCardCheckType_NO, ASDKCardCheckType_3DS, ASDKCardCheckType_HOLD, ASDKCardCheckType_3DSHOLD]];
 			[(TableViewCellSegmentedControl *)cell addSegmentedControlValueChangedTarget:self action:@selector(addNewCardCheckTypeChanged:) forControlEvents:UIControlEventValueChanged];
 			[(TableViewCellSegmentedControl *)cell segmentedControlSelectSegment:self.addNewCardCheckType];
 			break;
@@ -258,10 +258,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 {
 	switch (sender.selectedSegmentIndex)
 	{
-		case 0:
-			self.addNewCardCheckType = ASDKCardCheckType_NO;
-			break;
-		
+
 		case 1:
 			self.addNewCardCheckType = ASDKCardCheckType_3DS;
 			break;
@@ -274,8 +271,9 @@ typedef NS_ENUM(NSUInteger, CellType)
 			self.addNewCardCheckType = ASDKCardCheckType_3DSHOLD;
 			break;
 			
+		case 0:
 		default:
-			self.addNewCardCheckType = @"AUTO";
+			self.addNewCardCheckType = ASDKCardCheckType_NO;
 			break;
 	}
 }
