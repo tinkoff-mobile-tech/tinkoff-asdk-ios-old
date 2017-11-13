@@ -54,7 +54,7 @@
 @property (nonatomic, strong) UIView *customSecureLogo;
 @property (nonatomic, assign) CGFloat keyboardHeight;
 
-@property (nonatomic, assign) NSString *cardCheckType;
+@property (nonatomic, strong) NSString *cardCheckType;
 @property (nonatomic, strong) NSString *viewTitleHead;
 @property (nonatomic, strong) NSString *cardTitle;
 @property (nonatomic, strong) NSString *cardDescription;
