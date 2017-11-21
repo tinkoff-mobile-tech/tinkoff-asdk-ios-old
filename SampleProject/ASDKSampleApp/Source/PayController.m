@@ -111,7 +111,7 @@
     double randomOrderId = arc4random()%10000000;
 	
 	//Настройка дизайна
-	ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
+	ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
 	// используем ASDKTestSettings для переключения настроект во время работы приложения, для быстрой демонстрации
 	if ([ASDKTestSettings customNavBarColor])
 	{
@@ -129,18 +129,7 @@
 		[cancelButton setTintColor:[UIColor redColor]];
 		[designConfiguration setCustomBackButton:cancelButton];
 	}
-	
-	UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 280, 60)];
-	[payButton setBackgroundColor:[UIColor yellowColor]];
-	[payButton setTitle:@"Оплатить" forState:UIControlStateNormal];
-	[payButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[payButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
-	
-	payButton.layer.cornerRadius = 10;
-	payButton.clipsToBounds = YES;
-	
-	[designConfiguration setCustomPayButton:payButton];
-	
+
 	//
 	[designConfiguration setPayFormItems:@[@(CellEmpty20px),
 										   @(CellProductTitle),
@@ -155,9 +144,22 @@
 										   @(CellSecureLogos),
 										   @(CellEmpty20px),
 										   ]];
+	
+	if ([ASDKTestSettings customButtonPay])
+	{
+		//[designConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
+		
+		UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 280, 60)];
+		[payButton setBackgroundColor:[UIColor yellowColor]];
+		[payButton setTitle:@"Оплатить" forState:UIControlStateNormal];
+		[payButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[payButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
 
-	[designConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
-	paymentFormStarter.designConfiguration = designConfiguration;
+		payButton.layer.cornerRadius = 10;
+		payButton.clipsToBounds = YES;
+		
+		[designConfiguration setCustomPayButton:payButton];
+	}
 
 //Настройка сканнера карт
     paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
@@ -342,33 +344,32 @@
 {
 	//////////////
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
-	
+
 	//Настройка дизайна
-	ASDKDesignConfiguration *designConfiguration = [[ASDKDesignConfiguration alloc] init];
+	ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
 	// используем ASDKTestSettings для переключения настроект во время работы приложения, для быстрой демонстрации
 	if ([ASDKTestSettings customNavBarColor])
 	{
-		[designConfiguration setNavigationBarColor:[UIColor blackColor] navigationBarItemsTextColor:[UIColor darkGrayColor] navigationBarStyle:UIBarStyleBlack];
+		[designConfiguration setNavigationBarColor:[UIColor blackColor] navigationBarItemsTextColor:[UIColor whiteColor] navigationBarStyle:UIBarStyleBlack];
 	}
-	
+
 	if ([ASDKTestSettings customButtonCancel])
 	{
 		UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Отказаться" style:UIBarButtonItemStylePlain target:nil action:nil];
 		[cancelButton setTintColor:[UIColor redColor]];
 		[designConfiguration setCustomBackButton:cancelButton];
 	}
-	
-	UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 280, 60)];
-	[payButton setBackgroundColor:[UIColor yellowColor]];
-	[payButton setTitle:@"Привязать карту" forState:UIControlStateNormal];
-	[payButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[payButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
-	
-	payButton.layer.cornerRadius = 10;
-	payButton.clipsToBounds = YES;
-	
-	//[designConfiguration setAttachCardCustomButton:payButton];
-	
+
+//	UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 280, 60)];
+//	[payButton setBackgroundColor:[UIColor yellowColor]];
+//	[payButton setTitle:@"Привязать карту" forState:UIControlStateNormal];
+//	[payButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//	[payButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+//
+//	payButton.layer.cornerRadius = 10;
+//	payButton.clipsToBounds = YES;
+//	[designConfiguration setAttachCardCustomButton:payButton];
+
 	//
 	[designConfiguration setAttachCardItems:@[//@(CellEmpty20px),
 											  @(CellProductTitle),
@@ -380,8 +381,6 @@
 											  @(CellSecureLogos),
 											  @(CellEmpty20px),
 											  ]];
-	
-	paymentFormStarter.designConfiguration = designConfiguration;
 
 	//Настройка сканнера карт
 	paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];

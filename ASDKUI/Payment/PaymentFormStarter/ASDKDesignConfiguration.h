@@ -20,7 +20,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, TableViewCellType)
+typedef NS_ENUM(NSUInteger, TableViewCellType)
 {
 	CellProductTitle = 1,
 	CellProductDescription,

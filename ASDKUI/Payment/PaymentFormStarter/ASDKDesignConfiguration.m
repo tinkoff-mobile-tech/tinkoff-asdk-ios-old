@@ -48,10 +48,13 @@
 
 - (id)init
 {
-    self = [super init];
-    
-    self.navigationBarStyle = UIBarStyleDefault;
-    
+    if (self = [super init])
+	{
+    	_navigationBarStyle = UIBarStyleDefault;
+		_navigationBarColor = UIColor.whiteColor;
+		_navigationBarItemsTextColor = UIColor.blackColor;
+	}
+	
     return self;
 }
 
@@ -177,7 +180,7 @@
 	[items enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		if ([obj isKindOfClass:[NSNumber class]])
 		{
-			switch ([obj integerValue]) {
+			switch ([obj unsignedIntegerValue]) {
 				case CellProductTitle:
 				case CellProductDescription:
 				case CellAmount:

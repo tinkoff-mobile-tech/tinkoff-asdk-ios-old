@@ -314,7 +314,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	if ([self filterCardList:[[ASDKCardsListDataController instance] externalCards]].count > 0)
     {
 		NSMutableArray *dataSource = [NSMutableArray arrayWithArray:self.tableViewDataSource];
-		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(CellPaymentCardRequisites)];
+		NSUInteger index = [dataSource indexOfObjectIdenticalTo:@(CellPaymentCardRequisites)];
 		if (index != NSNotFound && [dataSource indexOfObjectIdenticalTo:@(CellPyamentCardID)] == NSNotFound)
 		{
 			[dataSource insertObject:@(CellPyamentCardID) atIndex:index];
@@ -356,7 +356,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		[self setSelectedCard:nil];
 		NSMutableArray *dataSource = [NSMutableArray arrayWithArray:self.tableViewDataSource];
 		
-		NSInteger index = [dataSource indexOfObjectIdenticalTo:@(CellPyamentCardID)];
+		NSUInteger index = [dataSource indexOfObjectIdenticalTo:@(CellPyamentCardID)];
 		if (index != NSNotFound)
 		{
 			[dataSource removeObjectAtIndex:index];
