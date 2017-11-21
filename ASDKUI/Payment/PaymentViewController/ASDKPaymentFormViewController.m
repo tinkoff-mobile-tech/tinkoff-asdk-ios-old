@@ -62,7 +62,7 @@ NSString * const kDecimalSeparator = @",";
 //    ASDKPaymentViewControllerSectionFooter
 //} ASDKPaymentViewControllerSection;
 
-NSUInteger const CellPyamentCardID = -1;
+NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 @interface ASDKPaymentFormViewController () <UITextFieldDelegate, ASDKCardsListDelegate>
 {

@@ -22,7 +22,7 @@
 
 typedef NS_ENUM(NSInteger, TableViewCellType)
 {
-	CellProductTitle,
+	CellProductTitle = 1,
 	CellProductDescription,
 	CellAmount,
 	CellPaymentCardRequisites,
