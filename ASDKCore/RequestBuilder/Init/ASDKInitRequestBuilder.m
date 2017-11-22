@@ -50,7 +50,7 @@
     
     if (builder)
     {
-        builder.amount = [NSNumber numberWithDouble:[NSString stringWithFormat:@"%.2f",amount.doubleValue].doubleValue];
+        builder.amount = [NSNumber numberWithInteger:[NSString stringWithFormat:@"%.0f", amount.doubleValue].integerValue];
         builder.orderId = orderId;
         builder.requestDescription = description;
 		builder.payType = payType;

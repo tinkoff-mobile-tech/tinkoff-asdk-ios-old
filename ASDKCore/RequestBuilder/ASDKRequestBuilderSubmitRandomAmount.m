@@ -38,7 +38,7 @@
 	if (self = [super initWithTerminalKey:terminalKey password:password])
 	{
 		_requestKey = requestKey;
-		_amount = [NSNumber numberWithDouble:[NSString stringWithFormat:@"%.2f", amount.doubleValue].doubleValue];
+		_amount = [NSNumber numberWithInteger:[NSString stringWithFormat:@"%.0f", amount.doubleValue].integerValue];
 	}
 	
 	return self;
