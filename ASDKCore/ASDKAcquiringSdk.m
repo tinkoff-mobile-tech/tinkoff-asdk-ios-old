@@ -63,7 +63,7 @@
 		acquiringSdk.payType = payType;
         acquiringSdk.password = password;
         acquiringSdk.publicKeyDataSource = publicKeyDataSource;
-        acquiringSdk.acquiringApi = [ASDKAcquiringApi acquiringApiWithDomainPath:[acquiringSdk domainPath]];
+		acquiringSdk.acquiringApi = [ASDKAcquiringApi acquiringApiWithDomainPath:[acquiringSdk domainPath] domainPath_v2:[acquiringSdk domainPath_v2]];
     }
     
     return acquiringSdk;

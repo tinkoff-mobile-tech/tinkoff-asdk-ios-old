@@ -39,11 +39,12 @@ typedef NS_ENUM(NSInteger, APIVersion)
     NSLog(@"API DEALLOC");
 }
 
-+ (ASDKAcquiringApi *)acquiringApiWithDomainPath:(NSString *)domainPath
++ (ASDKAcquiringApi *)acquiringApiWithDomainPath:(NSString *)domainPath domainPath_v2:(NSString *)domainPath_v2
 {
     ASDKAcquiringApi *acquiringApi = [[ASDKAcquiringApi alloc] init];
     
     acquiringApi.domainPath = domainPath;
+	acquiringApi.domainPath_v2 = domainPath_v2;
     
     return acquiringApi;
 }
