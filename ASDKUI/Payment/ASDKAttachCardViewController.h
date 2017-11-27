@@ -37,7 +37,7 @@
 						  customerKey:(NSString *)customerKey
 					   additionalData:(NSDictionary *)data
 							  success:(void (^)(ASDKResponseAttachCard *paymentInfo))success
-							cancelled:(void (^)())cancelled
+							cancelled:(void (^)(void))cancelled
 								error:(void (^)(ASDKAcquringSdkError *error))error;
 
 @end

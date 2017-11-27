@@ -41,7 +41,7 @@
 @interface ASDKAttachCardViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) void (^onSuccess)(ASDKResponseAttachCard *paymentInfo);
-@property (nonatomic, strong) void (^onCancelled)();
+@property (nonatomic, strong) void (^onCancelled)(void);
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
 @property (nonatomic, strong) ASDKFooterCell *footerCell;
@@ -74,7 +74,7 @@
 						  customerKey:(NSString *)customerKey
 					   additionalData:(NSDictionary *)data
 							  success:(void (^)(ASDKResponseAttachCard *paymentInfo))success
-							cancelled:(void (^)())cancelled
+							cancelled:(void (^)(void))cancelled
 								error:(void (^)(ASDKAcquringSdkError *error))error
 {
 	if (self = [super initWithStyle:UITableViewStylePlain])
@@ -845,7 +845,10 @@
 	}
 	else
 	{
-		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.errorMessage message:error.errorDetails preferredStyle:UIAlertControllerStyleAlert];
+		NSString *alertTitle = error.errorMessage ? error.errorMessage : @"Ошибка";
+		NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
+		
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
 		
 		UIAlertAction *cancelAction = [UIAlertAction
 									   actionWithTitle:LOC(@"Common.Close")
@@ -865,7 +868,7 @@
 {
 	__weak typeof(self) weakSelf = self;
 
-	void (^paymentSuccessBlock)() = ^
+	void (^paymentSuccessBlock)(void) = ^
 	{
 		__strong typeof(weakSelf) strongSelf = weakSelf;
 

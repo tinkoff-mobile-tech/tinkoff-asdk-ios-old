@@ -67,7 +67,12 @@
 		return self.userInfo[kASDKErrorDetails];
 	}
 	
-	return [NSString stringWithFormat:@"%@", self.userInfo[kASDKErrorCode]];
+	if (self.userInfo[kASDKErrorCode])
+	{
+		return [NSString stringWithFormat:@"%@", self.userInfo[kASDKErrorCode]];
+	}
+
+	return nil;
 }
 
 

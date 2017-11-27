@@ -104,7 +104,7 @@
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)(void))onCancelled
-                  error:(void(^)(ASDKAcquringSdkError *error))onError
+                  error:(void (^)(ASDKAcquringSdkError *error))onError
 {
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
 
@@ -251,7 +251,7 @@
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)(void))onCancelled
-						error:(void(^)(ASDKAcquringSdkError *error))onError
+						error:(void (^)(ASDKAcquringSdkError *error))onError
 {
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
 	[paymentFormStarter payWithApplePayFromViewController:viewController
@@ -296,7 +296,7 @@
 + (void)checkStatusTransaction:(NSString *)paymentId
 	   fromViewController:(UIViewController *)viewController
 				  success:(void (^)(ASDKPaymentStatus status))onSuccess
-					error:(void(^)(ASDKAcquringSdkError *error))onError
+					error:(void (^)(ASDKAcquringSdkError *error))onError
 {
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
 	
@@ -340,7 +340,7 @@
 + (void)attachCard:(NSString *)cardCheckType additionalData:(NSDictionary *)data fromViewController:(UIViewController *)viewController
 		   success:(void (^)(ASDKResponseAddCardInit *response))onSuccess
 		 cancelled:(void (^)(void))onCancelled
-			 error:(void(^)(ASDKAcquringSdkError *error))onError
+			 error:(void (^)(ASDKAcquringSdkError *error))onError
 {
 	//////////////
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];

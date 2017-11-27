@@ -38,7 +38,7 @@
 		 additionalPaymentData:(NSDictionary *)data
 				   receiptData:(NSDictionary *)receiptData
                        success:(void (^)(ASDKPaymentInfo *paymentInfo))success
-                     cancelled:(void (^)())cancelled
+                     cancelled:(void (^)(void))cancelled
                          error:(void (^)(ASDKAcquringSdkError *error))error;
 
 @property (nonatomic, strong) NSString *paymentId;

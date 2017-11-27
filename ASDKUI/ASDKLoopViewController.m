@@ -42,7 +42,7 @@
 @property(nonatomic, strong) ASDKAcquiringSdk *acquiringSdk;
 
 @property (nonatomic, strong) void (^onSuccess)(NSString *result);
-@property (nonatomic, strong) void (^onCancelled)();
+@property (nonatomic, strong) void (^onCancelled)(void);
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
 @property (nonatomic, strong) ASDKPaymentFormHeaderCell *headerCell;
@@ -69,7 +69,7 @@
 - (void)showFromViewController:(UIViewController *)viewController
 					   success:(void (^)(NSString *result))success
 					   failure:(void (^)(ASDKAcquringSdkError *statusError))failure
-						cancel:(void (^)())cancel
+						cancel:(void (^)(void))cancel
 {
 	self.onSuccess = success;
 	self.onError = failure;

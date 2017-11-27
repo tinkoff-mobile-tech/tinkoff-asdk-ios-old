@@ -87,7 +87,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 @property (nonatomic, strong) ASDKFooterCell *footerCell;
 
 @property (nonatomic, strong) void (^onSuccess)(ASDKPaymentInfo *paymentInfo);
-@property (nonatomic, strong) void (^onCancelled)();
+@property (nonatomic, strong) void (^onCancelled)(void);
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
 @property (nonatomic, strong) ASDKCard *selectedCard;
@@ -128,8 +128,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		 additionalPaymentData:(NSDictionary *)data
 				   receiptData:(NSDictionary *)receiptData
                        success:(void (^)(ASDKPaymentInfo *paymentInfo))success
-                     cancelled:(void (^)())cancelled
-                         error:(void(^)(ASDKAcquringSdkError *error))error
+                     cancelled:(void (^)(void))cancelled
+                         error:(void (^)(ASDKAcquringSdkError *error))error
 {
     self = [super initWithStyle:UITableViewStylePlain];
     
@@ -1149,7 +1149,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 {
     __weak typeof(self) weakSelf = self;
 	
-    void (^paymentSuccessBlock)() = ^
+    void (^paymentSuccessBlock)(void) = ^
     {
         __strong typeof(weakSelf) strongSelf = weakSelf;
 		
@@ -1190,7 +1190,10 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     }
     else
     {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.errorMessage message:error.errorDetails preferredStyle:UIAlertControllerStyleAlert];
+		NSString *alertTitle = error.errorMessage ? error.errorMessage : @"Ошибка";
+		NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
+		
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction
                                        actionWithTitle:LOC(@"Common.Close")

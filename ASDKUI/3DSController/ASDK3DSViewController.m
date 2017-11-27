@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 @property (nonatomic, strong) ASDKThreeDsData *threeDsData;
 
 @property (nonatomic, strong) void (^onSuccess)(NSString *result);
-@property (nonatomic, strong) void (^onCancelled)();
+@property (nonatomic, strong) void (^onCancelled)(void);
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
 @property (nonatomic, assign) CheckStateType checkStateType;
@@ -100,7 +100,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 - (void)showFromViewController:(UIViewController *)viewController
                        success:(void (^)(NSString *result))success
                        failure:(void (^)(ASDKAcquringSdkError *statusError))failure
-                        cancel:(void (^)())cancel
+                        cancel:(void (^)(void))cancel
 {
     self.onSuccess = success;
     self.onError = failure;

@@ -47,7 +47,7 @@
 @property (nonatomic, strong) NSString *paymentIdForApplePay;
 //
 @property (nonatomic, strong) void (^onSuccess)(ASDKPaymentInfo *paymentInfo);
-@property (nonatomic, strong) void (^onCancelled)();
+@property (nonatomic, strong) void (^onCancelled)(void);
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
 @property (nonatomic, strong) ASDKPaymentInfo *onCompleteSuccessPaymentInfo;
@@ -133,7 +133,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 								 receiptData:(NSDictionary *)receiptData
                                      success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
                                    cancelled:(void (^)(void))onCancelled
-                                       error:(void(^)(ASDKAcquringSdkError *error))onError
+                                       error:(void (^)(ASDKAcquringSdkError *error))onError
 {
     [self prepareDesign];
     

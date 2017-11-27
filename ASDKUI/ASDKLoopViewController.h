@@ -28,6 +28,6 @@
 - (void)showFromViewController:(UIViewController *)viewController
 					   success:(void (^)(NSString *result))success
 					   failure:(void (^)(ASDKAcquringSdkError *statusError))failure
-						cancel:(void (^)())cancel;
+						cancel:(void (^)(void))cancel;
 
 @end

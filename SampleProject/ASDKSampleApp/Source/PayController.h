@@ -23,7 +23,7 @@
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)(void))onCancelled
-                  error:(void(^)(ASDKAcquringSdkError *error))onError;
+                  error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 + (void)chargeWithRebillId:(NSNumber *)rebillId
 					amount:(NSNumber *)amount
@@ -48,12 +48,12 @@
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)(void))onCancelled
-						error:(void(^)(ASDKAcquringSdkError *error))onError;
+						error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 + (void)checkStatusTransaction:(NSString *)paymentId
 	   fromViewController:(UIViewController *)viewController
 				  success:(void (^)(ASDKPaymentStatus status))onSuccess
-					error:(void(^)(ASDKAcquringSdkError *error))onError;
+					error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 + (void)refundTransaction:(NSString *)paymentId
 	   fromViewController:(UIViewController *)viewController
@@ -63,6 +63,6 @@
 + (void)attachCard:(NSString *)cardCheckType additionalData:(NSDictionary *)data fromViewController:(UIViewController *)viewController
 		   success:(void (^)(ASDKResponseAddCardInit *response))onSuccess
 		 cancelled:(void (^)(void))onCancelled
-			 error:(void(^)(ASDKAcquringSdkError *error))onError;
+			 error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 @end
