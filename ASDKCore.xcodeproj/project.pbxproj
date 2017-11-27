@@ -49,6 +49,8 @@
 		2C6E6BAA1F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E6BA81F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m */; };
 		2C6E6BAD1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6E6BAB1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h */; };
 		2C6E6BAE1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E6BAC1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m */; };
+		2CFBF58E1FCBFD180060C87F /* ASDKUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CFBF58C1FCBFD180060C87F /* ASDKUtils.h */; };
+		2CFBF58F1FCBFD180060C87F /* ASDKUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBF58D1FCBFD180060C87F /* ASDKUtils.m */; };
 		83166ED71C63984E00533D85 /* ASDKCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166ED61C63984E00533D85 /* ASDKCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83166F2F1C63988F00533D85 /* ASDKBaseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EE11C63988F00533D85 /* ASDKBaseObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83166F301C63988F00533D85 /* ASDKBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE21C63988F00533D85 /* ASDKBaseObject.m */; };
@@ -150,6 +152,8 @@
 		2C6E6BA81F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKRequestSubmitRandomAmount.m; sourceTree = "<group>"; };
 		2C6E6BAB1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKRequestBuilderSubmitRandomAmount.h; sourceTree = "<group>"; };
 		2C6E6BAC1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKRequestBuilderSubmitRandomAmount.m; sourceTree = "<group>"; };
+		2CFBF58C1FCBFD180060C87F /* ASDKUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKUtils.h; sourceTree = "<group>"; };
+		2CFBF58D1FCBFD180060C87F /* ASDKUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKUtils.m; sourceTree = "<group>"; };
 		83166ED31C63984E00533D85 /* ASDKCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ASDKCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83166ED61C63984E00533D85 /* ASDKCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKCore.h; sourceTree = "<group>"; };
 		83166ED81C63984E00533D85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -264,6 +268,8 @@
 				946C39A21C64921A0036D1AF /* ASDKApiKeys.h */,
 				83166F151C63988F00533D85 /* CryptoUtils */,
 				83166F181C63988F00533D85 /* RequestBuilder */,
+				2CFBF58C1FCBFD180060C87F /* ASDKUtils.h */,
+				2CFBF58D1FCBFD180060C87F /* ASDKUtils.m */,
 			);
 			path = ASDKCore;
 			sourceTree = "<group>";
@@ -608,6 +614,7 @@
 				83166F411C63988F00533D85 /* ASDKAcquiringResponse.h in Headers */,
 				946C399E1C648F940036D1AF /* ASDKCardData.h in Headers */,
 				2C352DAB1E4B1707008215A5 /* ASDKCancelRequestBuilder.h in Headers */,
+				2CFBF58E1FCBFD180060C87F /* ASDKUtils.h in Headers */,
 				2C1C13451F8F6184002B636F /* ASDKRequestAttachCard.h in Headers */,
 				943FC86D1C6881650044C707 /* ASDKPaymentInfo.h in Headers */,
 				83166F4F1C63988F00533D85 /* ASDKAcquiringApi.h in Headers */,
@@ -761,6 +768,7 @@
 				83871B801C6CC5EF00D69603 /* ASDKStringKeyCreator.m in Sources */,
 				83166F501C63988F00533D85 /* ASDKAcquiringApi.m in Sources */,
 				83166F4A1C63988F00533D85 /* ASDKGetStateResponse.m in Sources */,
+				2CFBF58F1FCBFD180060C87F /* ASDKUtils.m in Sources */,
 				2C6E6BA01F949F9700B345B9 /* ASDKResponseGetAddCardState.m in Sources */,
 				2C1C134A1F8F8112002B636F /* ASDKResponseAddCardInit.m in Sources */,
 				83166F5D1C63988F00533D85 /* ASDKGetCardListRequestBuilder.m in Sources */,

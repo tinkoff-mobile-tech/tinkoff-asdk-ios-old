@@ -33,7 +33,7 @@
  */
 - (void)scanCardSuccess:(void (^)(NSString *cardNumber))success
                 failure:(void (^)(ASDKAcquringSdkError *error))failure
-                 cancel:(void (^)())cancel;
+                 cancel:(void (^)(void))cancel;
 
 @end
 
@@ -71,7 +71,7 @@
 					   additionalPaymentData:(NSDictionary *)data
 								 receiptData:(NSDictionary *)receiptData
                                      success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
-                                   cancelled:(void (^)())onCancelled
+                                   cancelled:(void (^)(void))onCancelled
                                        error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 - (void)chargeWithRebillId:(NSNumber *)rebillId
@@ -140,7 +140,7 @@
 					additionalPaymentData:(NSDictionary *)additionalPaymentData //JSON объект содержащий дополнительные параметры, например @{@"Email" : @"a@test.ru"}
 							  receiptData:(NSDictionary *)receiptData // JSON объект с данными чека, обязательно должен быть объект Items в который вложены позиции чека Email и Taxation - Система налогообложения, значения: osn, usn_income, usn_income_outcome, envd, esn, или patent
 								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
-								cancelled:(void (^)())onCancelled
+								cancelled:(void (^)(void))onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError NS_AVAILABLE_IOS(9_0);
 
 - (void)checkStatusTransaction:(NSString *)paymentId
@@ -148,7 +148,7 @@
 						 error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 - (void)refundTransaction:(NSString *)paymentId
-				  success:(void (^)())onSuccess
+				  success:(void (^)(void))onSuccess
 					error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 /*!

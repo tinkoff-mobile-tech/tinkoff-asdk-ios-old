@@ -1,8 +1,8 @@
 //
-//  ASDKRequestSubmitRandomAmount.m
+//  ASDKUtils.h
 //  ASDKCore
 //
-//  Created by v.budnikov on 16.10.17.
+//  Created by v.budnikov on 27.11.2017.
 //  Copyright © 2017 Tinkoff Bank. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,23 +18,12 @@
 // limitations under the License.
 //
 
-#import "ASDKRequestSubmitRandomAmount.h"
-#import "ASDKUtils.h"
+#import <Foundation/Foundation.h>
 
-@implementation ASDKRequestSubmitRandomAmount
+extern NSString *const kSumDecimalSeparator;
 
-- (instancetype)initWithTerminalKey:(NSString *)terminalKey
-							  token:(NSString *)token
-						 requestKey:(NSString *)requestKey
-							 amount:(NSNumber *)amount
-{
-	if (self = [super initWithTerminalKey:terminalKey token:token])
-	{
-		_requestKey = requestKey;
-		_amount = [ASDKUtils amountWholeDigits:amount.doubleValue];
-	}
-	
-	return self;
-}
+@interface ASDKUtils : NSObject
+
++ (NSString *)amountWholeDigits:(double)amount;
 
 @end

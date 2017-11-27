@@ -13,7 +13,7 @@
 @interface ASDKCardIOScanner () <CardIOPaymentViewControllerDelegate>
 
 @property (nonatomic, strong) void (^successBlock)(NSString *cardNumber);
-@property (nonatomic, strong) void (^cancelBlock)();
+@property (nonatomic, strong) void (^cancelBlock)(void);
 
 @end
 
@@ -96,7 +96,7 @@
 
 - (void)scanCardSuccess:(void (^)(NSString *cardNumnber))success
                 failure:(void (^)(ASDKAcquringSdkError *error))failure
-                 cancel:(void (^)())cancel
+                 cancel:(void (^)(void))cancel
 {
     self.successBlock = success;
     self.cancelBlock = cancel;

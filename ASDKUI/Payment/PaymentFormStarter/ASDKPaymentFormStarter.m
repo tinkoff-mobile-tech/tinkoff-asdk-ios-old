@@ -132,7 +132,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 					   additionalPaymentData:(NSDictionary *)data
 								 receiptData:(NSDictionary *)receiptData
                                      success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
-                                   cancelled:(void (^)())onCancelled
+                                   cancelled:(void (^)(void))onCancelled
                                        error:(void(^)(ASDKAcquringSdkError *error))onError
 {
     [self prepareDesign];
@@ -289,7 +289,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 					additionalPaymentData:(NSDictionary *)additionalPaymentData
 							  receiptData:(NSDictionary *)receiptData
 								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
-								cancelled:(void (^)())onCancelled
+								cancelled:(void (^)(void))onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError
 {
 	///////////////
@@ -366,7 +366,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 }
 
 - (void)refundTransaction:(NSString *)paymentId
-				  success:(void (^)())onSuccess
+				  success:(void (^)(void))onSuccess
 					error:(void (^)(ASDKAcquringSdkError *error))onError
 {
 	[self.acquiringSdk rejectTrancastionWithPaymentId:paymentId success:^(ASDKCancelResponse *response) {

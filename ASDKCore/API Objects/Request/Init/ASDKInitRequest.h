@@ -23,7 +23,7 @@
 @interface ASDKInitRequest : ASDKAcquiringRequest
 
 @property (nonatomic, copy) NSString *payType;
-@property (nonatomic, strong) NSNumber *amount;
+@property (nonatomic, strong) NSString *amount;
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, copy) NSString *customerKey;
 @property (nonatomic, copy) NSString *requestDescription;
@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSDictionary *receiptData;
 
 - (ASDKInitRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                  amount:(NSNumber *)amount
+                                  amount:(NSString *)amount
                                  orderId:(NSString *)orderId
                              description:(NSString *)description
                                    token:(NSString *)token

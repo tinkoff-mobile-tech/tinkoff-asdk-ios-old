@@ -22,7 +22,7 @@
 			receiptData:(NSDictionary *)receiptData
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
-              cancelled:(void (^)())onCancelled
+              cancelled:(void (^)(void))onCancelled
                   error:(void(^)(ASDKAcquringSdkError *error))onError;
 
 + (void)chargeWithRebillId:(NSNumber *)rebillId
@@ -47,7 +47,7 @@
 				  receiptData:(NSDictionary *)receiptData
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
-					cancelled:(void (^)())onCancelled
+					cancelled:(void (^)(void))onCancelled
 						error:(void(^)(ASDKAcquringSdkError *error))onError;
 
 + (void)checkStatusTransaction:(NSString *)paymentId
@@ -57,7 +57,7 @@
 
 + (void)refundTransaction:(NSString *)paymentId
 	   fromViewController:(UIViewController *)viewController
-				  success:(void (^)())onSuccess
+				  success:(void (^)(void))onSuccess
 					error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 + (void)attachCard:(NSString *)cardCheckType additionalData:(NSDictionary *)data fromViewController:(UIViewController *)viewController

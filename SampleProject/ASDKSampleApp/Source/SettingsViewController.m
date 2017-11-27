@@ -244,7 +244,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 	
 	if ([self cellTypeForIndexPath:indexPath] == CellTypeAddNewCard)
 	{
-		[PayController attachCard:self.addNewCardCheckType additionalData:nil fromViewController:self success:^(ASDKResponseAddCardInit *response) {
+		[PayController attachCard:@"AUTO"/*self.addNewCardCheckType*/ additionalData:nil fromViewController:self success:^(ASDKResponseAddCardInit *response) {
 			//
 		} cancelled:^{
 			//

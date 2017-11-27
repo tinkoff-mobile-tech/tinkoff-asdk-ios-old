@@ -112,7 +112,7 @@ static ASDKCardsListDataController * __cardsListDataController = nil;
 }
 
 
-- (void)updateCardsListWithSuccessBlock:(void (^)())onSuccess
+- (void)updateCardsListWithSuccessBlock:(void (^)(void))onSuccess
                              errorBlock:(void (^)(ASDKAcquringSdkError *error))onError
 {
     if (self.acquiringSdk && self.customerKey)
@@ -161,7 +161,7 @@ static ASDKCardsListDataController * __cardsListDataController = nil;
 }
 
 - (void)removeCardWithCardId:(NSNumber *)cardId
-                successBlock:(void (^)())onSuccess
+                successBlock:(void (^)(void))onSuccess
                   errorBlock:(void (^)(ASDKAcquringSdkError *error))onError
 {
     if (self.acquiringSdk && self.customerKey)

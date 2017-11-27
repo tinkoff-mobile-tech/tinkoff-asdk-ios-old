@@ -103,7 +103,7 @@
 			receiptData:(NSDictionary *)receiptData
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
-              cancelled:(void (^)())onCancelled
+              cancelled:(void (^)(void))onCancelled
                   error:(void(^)(ASDKAcquringSdkError *error))onError
 {
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
@@ -250,7 +250,7 @@
 				  receiptData:(NSDictionary *)receiptData
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
-					cancelled:(void (^)())onCancelled
+					cancelled:(void (^)(void))onCancelled
 						error:(void(^)(ASDKAcquringSdkError *error))onError
 {
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];
@@ -309,7 +309,7 @@
 
 + (void)refundTransaction:(NSString *)paymentId
 	   fromViewController:(UIViewController *)viewController
-				  success:(void (^)())onSuccess
+				  success:(void (^)(void))onSuccess
 					error:(void (^)(ASDKAcquringSdkError *error))onError
 {
 	ASDKPaymentFormStarter *paymentFormStarter = [PayController paymentFormStarter];

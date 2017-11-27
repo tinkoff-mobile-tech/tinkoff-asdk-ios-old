@@ -33,11 +33,11 @@
 - (ASDKCard *)cardWithRebillId;
 - (ASDKCard *)cardWithIdentifier:(NSString *)indentifier;
 
-- (void)updateCardsListWithSuccessBlock:(void (^)())onSuccess
+- (void)updateCardsListWithSuccessBlock:(void (^)(void))onSuccess
                              errorBlock:(void (^)(ASDKAcquringSdkError *error))onError;
 
 - (void)removeCardWithCardId:(NSNumber *)cardId
-                successBlock:(void (^)())onSuccess
+                successBlock:(void (^)(void))onSuccess
                   errorBlock:(void (^)(ASDKAcquringSdkError *error))onError;
 
 

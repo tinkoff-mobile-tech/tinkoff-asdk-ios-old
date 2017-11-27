@@ -23,7 +23,7 @@
 @implementation ASDKInitRequest
 
 - (ASDKInitRequest *)initWithTerminalKey:(NSString *)terminalKey
-                                  amount:(NSNumber *)amount
+                                  amount:(NSString *)amount
                                  orderId:(NSString *)orderId
                              description:(NSString *)description
                                    token:(NSString *)token

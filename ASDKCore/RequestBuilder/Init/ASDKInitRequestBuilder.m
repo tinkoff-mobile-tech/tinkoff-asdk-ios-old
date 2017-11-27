@@ -17,10 +17,11 @@
 // limitations under the License.
 
 #import "ASDKInitRequestBuilder.h"
+#import "ASDKUtils.h"
 
 @interface ASDKInitRequestBuilder ()
 
-@property (nonatomic, strong) NSNumber *amount;
+@property (nonatomic, strong) NSString *amount;
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, copy) NSString *customerKey;
 @property (nonatomic, copy) NSString *requestDescription;
@@ -50,7 +51,7 @@
     
     if (builder)
     {
-        builder.amount = [NSNumber numberWithInteger:[NSString stringWithFormat:@"%.0f", amount.doubleValue].integerValue];
+        builder.amount = [ASDKUtils amountWholeDigits:amount.doubleValue];
         builder.orderId = orderId;
         builder.requestDescription = description;
 		builder.payType = payType;
@@ -215,7 +216,7 @@
                                                                                       kASDKPassword : [self password]}];
     if (self.amount)
     {
-        [parameters setObject:self.amount.stringValue forKey:kASDKAmount];
+        [parameters setObject:self.amount forKey:kASDKAmount];
     }
 
     if (self.orderId.length > 0)

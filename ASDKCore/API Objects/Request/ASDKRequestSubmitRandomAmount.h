@@ -23,7 +23,7 @@
 @interface ASDKRequestSubmitRandomAmount : ASDKAcquiringRequest
 
 @property (nonatomic, copy) NSString *requestKey;
-@property (nonatomic, strong) NSNumber *amount;
+@property (nonatomic, strong) NSString *amount;
 
 - (instancetype)initWithTerminalKey:(NSString *)terminalKey
 							  token:(NSString *)token
