@@ -1,5 +1,5 @@
 //
-//  ASDKUtils.m
+//  ASDKUtilsAmount.m
 //  ASDKCore
 //
 //  Copyright © 2017 Tinkoff Bank. All rights reserved.
@@ -17,11 +17,11 @@
 // limitations under the License.
 //
 
-#import "ASDKUtils.h"
+#import "ASDKUtilsAmount.h"
 
 NSString *const kSumDecimalSeparator = @",";
 
-@implementation ASDKUtils
+@implementation ASDKUtilsAmount
 
 + (NSNumberFormatter *)sumNumberFormatter
 {

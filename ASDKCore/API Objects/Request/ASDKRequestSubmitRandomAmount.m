@@ -19,7 +19,7 @@
 //
 
 #import "ASDKRequestSubmitRandomAmount.h"
-#import "ASDKUtils.h"
+#import "ASDKUtilsAmount.h"
 
 @implementation ASDKRequestSubmitRandomAmount
 
@@ -31,7 +31,7 @@
 	if (self = [super initWithTerminalKey:terminalKey token:token])
 	{
 		_requestKey = requestKey;
-		_amount = [ASDKUtils amountWholeDigits:amount.doubleValue];
+		_amount = [ASDKUtilsAmount amountWholeDigits:amount.doubleValue];
 	}
 	
 	return self;

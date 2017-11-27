@@ -17,7 +17,7 @@
 // limitations under the License.
 
 #import "ASDKInitRequestBuilder.h"
-#import "ASDKUtils.h"
+#import "ASDKUtilsAmount.h"
 
 @interface ASDKInitRequestBuilder ()
 
@@ -51,7 +51,7 @@
     
     if (builder)
     {
-        builder.amount = [ASDKUtils amountWholeDigits:amount.doubleValue];
+        builder.amount = [ASDKUtilsAmount amountWholeDigits:amount.doubleValue];
         builder.orderId = orderId;
         builder.requestDescription = description;
 		builder.payType = payType;

@@ -1,5 +1,5 @@
 //
-//  ASDKUtils.h
+//  ASDKUtilsAmount.h
 //  ASDKCore
 //
 //  Created by v.budnikov on 27.11.2017.
@@ -22,7 +22,7 @@
 
 extern NSString *const kSumDecimalSeparator;
 
-@interface ASDKUtils : NSObject
+@interface ASDKUtilsAmount : NSObject
 
 + (NSString *)amountWholeDigits:(double)amount;
 
