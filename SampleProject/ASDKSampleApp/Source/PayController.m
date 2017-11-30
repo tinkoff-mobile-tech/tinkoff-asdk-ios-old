@@ -77,9 +77,9 @@
 	return alertController;
 }
 
-+ (UIAlertController *)alertAttachCardSuccessfull
++ (UIAlertController *)alertAttachCardSuccessfull:(NSString *)cardId
 {
-	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"AttachCard.successfull", @"Карта успешно привязана") message:nil preferredStyle:UIAlertControllerStyleAlert];
+	UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"AttachCard.successfull", @"Карта успешно привязана") message:[NSString stringWithFormat:@"card id = %@", cardId] preferredStyle:UIAlertControllerStyleAlert];
 	
 	UIAlertAction *cancelAction = [UIAlertAction
 								   actionWithTitle:NSLocalizedString(@"Close", @"Закрыть")
@@ -394,7 +394,8 @@
 												customerKey:[PayController customerKey]
 											 additionalData:data
 													success:^(ASDKResponseAttachCard *result) {
-														[viewController presentViewController:[PayController alertAttachCardSuccessfull] animated:YES completion:nil];
+														NSLog(@"%@", result.cardId);
+														[viewController presentViewController:[PayController alertAttachCardSuccessfull:result.cardId] animated:YES completion:nil];
 														onSuccess(result);
 													} cancelled:^{
 														[viewController presentViewController:[PayController alertForCancel] animated:YES completion:nil];

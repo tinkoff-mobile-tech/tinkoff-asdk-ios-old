@@ -724,7 +724,9 @@
 							 
 							 if (strongSelf1)
 							 {
-								 [strongSelf1 manageSuccessWithInfo:result];
+								 NSMutableDictionary *infoAttach = [NSMutableDictionary dictionaryWithDictionary:result.dictionary];
+								 [infoAttach setObject:cardId forKey:kASDKCardId];
+								 [strongSelf1 manageSuccessWithInfo:[[ASDKResponseAttachCard alloc] initWithDictionary:infoAttach]];
 							 }
 						 }
 														  failure:^(ASDKAcquringSdkError *statusError)

@@ -126,7 +126,9 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     NSData *postData = [dataString dataUsingEncoding:NSUTF8StringEncoding];
     
     [request setHTTPBody:postData];
-    
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
+
     [self.webView loadRequest:request];
 }
 
@@ -168,7 +170,6 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 }
 
 
-
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
@@ -185,8 +186,10 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     return YES;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+	
     if ([webView.request.URL.absoluteString isEqualToString:[self termUrl]])
     {
 		switch (self.checkStateType) {
@@ -199,8 +202,6 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 				break;
 		}
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nonnull NSError *)error
@@ -214,8 +215,6 @@ typedef NS_ENUM(NSInteger, CheckStateType)
              self.onError([ASDKAcquringSdkError acquiringErrorWithError:error]);
          }
      }];
-    
-    
 }
 
 - (void)cancel3DS
