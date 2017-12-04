@@ -145,6 +145,12 @@
 										   @(CellEmpty20px),
 										   ]];
 	
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	{
+		[designConfiguration setModalPresentationStyle:UIModalPresentationFormSheet];
+	}
+	
 	if ([ASDKTestSettings customButtonPay])
 	{
 		//[designConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
@@ -382,6 +388,11 @@
 											  @(CellEmpty20px),
 											  ]];
 
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	{
+		[designConfiguration setModalPresentationStyle:UIModalPresentationFormSheet];
+	}
+	
 	//Настройка сканнера карт
 	paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
 	

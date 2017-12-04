@@ -168,11 +168,12 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                          }];
     
     vc.acquiringSdk = self.acquiringSdk;
-    
-    ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:vc];
-    
+
+	ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:vc];
+	[nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
+
     [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
-    
+
     [presentingViewController presentViewController:nc animated:YES completion:nil];
 }
 
@@ -489,6 +490,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	viewController.acquiringSdk = self.acquiringSdk;
 	
 	ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:viewController];
+	[nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
 	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
 	[presentingViewController presentViewController:nc animated:YES completion:nil];
 }

@@ -1,7 +1,8 @@
 # Tinkoff Acquiring SDK for iOS
 
-![PayFormActivity][img-pay]
-![PayFormActivityUserSettings][img-pay2]
+![PayFormActivity1][img-pay]
+![PayFormActivity2][img-pay2]
+![PayFormActivity3][img-pay3]
 ![AttachCardActivity][img-attachCard]
 
 Acquiring SDK позволяет интегрировать [Интернет-Эквайрингу][acquiring] в мобильные приложения для платформы iOS.
@@ -138,6 +139,7 @@ SDK состоит из следующих модулей:
 * Настройка кнопки оплатить.
 * Настройка отображения элементов экрана.
 * Установить свои логотипы платежных систем или то, что потребуется.  
+* Показывать экраны SDK в режиме FormSheet для экранов iPad
 
 Например, можно указать какие элементы показывать на экране и в какой последовательности, для этого нужно сформировать массив из эелементов:
 ```objective-c
@@ -167,6 +169,12 @@ typedef NS_ENUM(NSInteger, TableViewCellType)
 										 ]];
 // изменить на кнопке оплатить надпись:
 [ASDKDesignConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
+
+// показывать окно моально для iPad
+if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+{
+	[designConfiguration setModalPresentationStyle:UIModalPresentationFormSheet];
+}
 ```
 
 ### Sample
@@ -185,6 +193,7 @@ _**PayController**_ фасад для _**ASDKAcquiringSdk**_ который со
 [cocoapods]: https://cocoapods.org
 [img-pay]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen.png
 [img-pay2]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen2.png
+[img-pay3]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen3.png
 [img-attachCard]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/attachCardScreen.png
 [server-api]: https://oplata.tinkoff.ru/landing/develop/documentation/termins_and_operations
 [issues]: https://github.com/TinkoffCreditSystems/tinkoff-asdk-ios/issues

@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,26 +16,29 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4GX-vJ-qAB" id="Smq-15-Mc1">
-                <frame key="frameInset" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Сохраненная карта" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g10-s9-o9I">
-                        <frame key="frameInset" minX="15" minY="11" width="156" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохраненная карта" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g10-s9-o9I">
+                        <rect key="frame" x="16" y="11" width="155" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ3-Hy-MC0">
+                        <rect key="frame" x="8" y="3" width="304" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="ayr-9l-8yg"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tfb-Dw-Ceg">
+                        <rect key="frame" x="8" y="31" width="304" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="TXC-oi-jfB"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pw-kr-B4d">
+                        <rect key="frame" x="234" y="8" width="63" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="Изменить">
                             <color key="titleColor" red="0.070588235289999995" green="0.54901960780000003" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -45,9 +51,9 @@
                     <constraint firstAttribute="trailingMargin" secondItem="ZZ3-Hy-MC0" secondAttribute="trailing" constant="-8" id="9Gg-5J-soS"/>
                     <constraint firstAttribute="trailingMargin" secondItem="tfb-Dw-Ceg" secondAttribute="trailing" constant="-8" id="KET-7N-KJA"/>
                     <constraint firstItem="4pw-kr-B4d" firstAttribute="centerY" secondItem="Smq-15-Mc1" secondAttribute="centerY" id="Okq-ar-p7I"/>
+                    <constraint firstItem="g10-s9-o9I" firstAttribute="leading" secondItem="Smq-15-Mc1" secondAttribute="leadingMargin" id="QXY-1R-j3a"/>
                     <constraint firstAttribute="trailingMargin" secondItem="4pw-kr-B4d" secondAttribute="trailing" constant="7" id="VlI-SZ-G1p"/>
                     <constraint firstItem="ZZ3-Hy-MC0" firstAttribute="leading" secondItem="Smq-15-Mc1" secondAttribute="leadingMargin" constant="-8" id="WRN-Yf-jxs"/>
-                    <constraint firstItem="g10-s9-o9I" firstAttribute="leading" secondItem="Smq-15-Mc1" secondAttribute="leading" constant="15" id="jiO-7E-K6G"/>
                     <constraint firstAttribute="bottomMargin" secondItem="tfb-Dw-Ceg" secondAttribute="bottom" constant="-8" id="keL-Vj-ADT"/>
                     <constraint firstItem="g10-s9-o9I" firstAttribute="centerY" secondItem="Smq-15-Mc1" secondAttribute="centerY" id="r0y-wt-K1W"/>
                     <constraint firstItem="4pw-kr-B4d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="g10-s9-o9I" secondAttribute="trailing" constant="8" id="yyt-Gb-a12"/>

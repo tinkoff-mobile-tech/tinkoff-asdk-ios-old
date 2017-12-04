@@ -16,7 +16,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -36,6 +35,7 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
 };
 
 @interface ASDKDesignConfiguration : NSObject
+
 /*!
  *  @discussion Настройка цветов в навигейшн баре
  *
@@ -43,6 +43,7 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
  *  @param navigationBarItemsTextColor цвет текста
  *  @param navigationBarStyle          бар стайл
  */
+
 - (void)setNavigationBarColor:(UIColor *)navigationBarColor
   navigationBarItemsTextColor:(UIColor *)navigationBarItemsTextColor
            navigationBarStyle:(UIBarStyle)navigationBarStyle;
@@ -63,6 +64,7 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
  *
  *  @param title - строка, выравнивается по центу
  */
+
 - (void)setPayButtonTitle:(NSString *)title;
 - (NSString *)payButtonTitle;
 
@@ -77,6 +79,7 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
  *
  *  @param title - строка с атрибутами, выравнивается по центу
  */
+
 - (void)setPayButtonAttributedTitle:(NSAttributedString *)title;
 - (NSAttributedString *)payButtonAttributedTitle;
 
@@ -90,6 +93,7 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
  *  CellProductTitle, CellProductDescription, CellAmount, CellPyamentCardRequisites,
  *  CellEmail, CellPayButton, (CellSecureLogos)
  */
+
 - (void)setPayFormItems:(NSArray *)items;
 - (NSArray*)payFormItems;
 
@@ -98,6 +102,7 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
  *
  *  @param view - любое uivew, элемент устанавливается вертикально по центру, значание высоты берется равной высоте контента.
  */
+
 - (void)setPaymentsSecureLogosView:(UIView *)view;
 - (UIView *)paymentsSecureLogosView;
 
@@ -113,5 +118,19 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
 
 - (NSString *)attachCardButtonTitle;
 - (void)setAttachCardButtonTitle:(NSString *)title;
+
+/*!
+ *  @discussion В каком виде показыть экраны UIModalPresentationStyle, по умолчанию UIModalPresentationFullScreen
+ *
+ */
+
+- (UIModalPresentationStyle)modalPresentationStyle;
+/*!
+ *  @discussion В каком виде показыть экраны
+ *
+ *  @param value - UIModalPresentationStyle, по умолчанию UIModalPresentationFullScreen
+ */
+
+- (void)setModalPresentationStyle:(UIModalPresentationStyle)value;
 
 @end

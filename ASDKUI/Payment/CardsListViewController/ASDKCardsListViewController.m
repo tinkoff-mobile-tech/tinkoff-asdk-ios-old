@@ -67,7 +67,9 @@ typedef enum
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(cancelAction:)];
-    
+	
+	cancelButton.tintColor = self.navigationController.navigationBar.tintColor;
+	
     [self.navigationItem setLeftBarButtonItem:cancelButton];
 }
 

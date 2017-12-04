@@ -1232,10 +1232,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     cardsListController.selectedCard = self.selectedCard;
     
     ASDKNavigationController *nc = [[ASDKNavigationController  alloc] initWithRootViewController:cardsListController];
-    
+	ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
+	ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
+	[nc setModalPresentationStyle:designConfiguration.modalPresentationStyle];
     [self presentViewController:nc animated:YES completion:nil];
 }
-
 
 #pragma mark - Validation
 

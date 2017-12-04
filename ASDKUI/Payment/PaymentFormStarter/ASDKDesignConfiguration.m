@@ -41,6 +41,7 @@
 @property (nonatomic, strong) NSArray *_attachCardItems;
 @property (nonatomic, strong) UIButton *_attachCardCustomButton;
 @property (nonatomic, strong) NSString *_attachCardButtonTitle;
+@property (nonatomic, assign) UIModalPresentationStyle _presentStyleModal;
 
 @end
 
@@ -53,11 +54,11 @@
     	_navigationBarStyle = UIBarStyleDefault;
 		_navigationBarColor = UIColor.whiteColor;
 		_navigationBarItemsTextColor = UIColor.blackColor;
+		__presentStyleModal = UIModalPresentationFullScreen;
 	}
-	
+
     return self;
 }
-
 
 - (void)setNavigationBarColor:(UIColor *)navigationBarColor
   navigationBarItemsTextColor:(UIColor *)navigationBarItemsTextColor
@@ -67,7 +68,6 @@
     _navigationBarItemsTextColor = navigationBarItemsTextColor;
     _navigationBarStyle = navigationBarStyle;
 }
-
 
 - (UIColor *)navigationBarColor
 {
@@ -265,6 +265,16 @@
 - (void)setAttachCardButtonTitle:(NSString *)title
 {
 	self._attachCardButtonTitle = title;
+}
+
+- (UIModalPresentationStyle)modalPresentationStyle
+{
+	return self._presentStyleModal;
+}
+
+- (void)setModalPresentationStyle:(UIModalPresentationStyle)value
+{
+	self._presentStyleModal = value;
 }
 
 @end
