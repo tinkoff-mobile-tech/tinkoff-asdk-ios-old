@@ -170,7 +170,7 @@ typedef NS_ENUM(NSInteger, TableViewCellType)
 // изменить на кнопке оплатить надпись:
 [ASDKDesignConfiguration setPayButtonTitle:[NSString stringWithFormat:@"Оплатить %.2f руб", [amount doubleValue]]];
 
-// показывать окно моально для iPad
+// показывать окно модально для iPad
 if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 {
 	[designConfiguration setModalPresentationStyle:UIModalPresentationFormSheet];
