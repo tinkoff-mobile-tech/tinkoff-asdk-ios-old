@@ -853,7 +853,15 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 					}
 				}
 				
+				if (count == 0) { count = 1; }
+				
 				result = (tableView.frame.size.height - height - self.keyboardHeight) / count;
+				
+				if (@available(iOS 11, *))
+				{
+					result -= self.view.safeAreaInsets.bottom;
+				}
+				
 				if (result < 0)
 				{
 					result = 0;
