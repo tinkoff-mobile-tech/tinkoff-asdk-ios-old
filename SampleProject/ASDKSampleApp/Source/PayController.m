@@ -378,8 +378,8 @@
 
 	//
 	[designConfiguration setAttachCardItems:@[//@(CellEmpty20px),
-											  @(CellProductTitle),
-											  @(CellProductDescription),
+											  //@(CellProductTitle),
+											  //@(CellProductDescription),
 											  @(CellPaymentCardRequisites),
 											  @(CellEmail),
 											  @(CellEmptyFlexibleSpace),

@@ -626,17 +626,12 @@
 	[self scanCard];
 }
 
-- (void)updateCardRequisitesCellWithCardNumber:(NSString *)cardNumber
+- (void)updateCardRequisitesCellWithCardRequisites:(NSString *)cardNumber expiredData:(NSString *)expiredData
 {
 	[[self cardRequisitesCell].textFieldCardNumber setText:@""];
 	[[self cardRequisitesCell] setCardNumber:cardNumber];
+	[[[self cardRequisitesCell] textFieldCardDate] setText:expiredData];
 	[[self cardRequisitesCell] textField:[self cardRequisitesCell].textFieldCardNumber shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:cardNumber];
-}
-
-- (void)updateCardRequisitesCellWithCardDate:(NSString *)cardDate
-{
-	[[self cardRequisitesCell].textFieldCardDate setText:@""];
-	[[self cardRequisitesCell] textField:[self cardRequisitesCell].textFieldCardDate shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:cardDate];
 }
 
 - (void)scanCard
@@ -649,15 +644,15 @@
 	{
 		__weak typeof(self) weakSelf = self;
 		
-		[cardScanner scanCardSuccess:^(NSString *cardNumber)
+		[cardScanner scanCardSuccess:^(id<ASDKAcquiringSdkCardRequisites> cardRequisites)
 		 {
-			 NSLog(@"scanned %@", cardNumber);
+			 NSLog(@"scanned number %@, ecpired date %@", [cardRequisites number], [cardRequisites expireDate]);
 			 
 			 __strong typeof(weakSelf) strongSelf = weakSelf;
 			 
 			 if (strongSelf)
 			 {
-				 [strongSelf updateCardRequisitesCellWithCardNumber:cardNumber];
+				 [strongSelf updateCardRequisitesCellWithCardRequisites:[cardRequisites number] expiredData:[cardRequisites expireDate]];
 			 }
 		 }
 							 failure:nil

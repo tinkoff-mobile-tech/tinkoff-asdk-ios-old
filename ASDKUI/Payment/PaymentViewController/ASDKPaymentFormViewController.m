@@ -436,7 +436,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		
 		if (_selectedCard.rebillId != nil)
 		{
-			[self updateCardRequisitesCellWithCardNumber:cardNumber];
+			[self updateCardRequisitesCellWithCardRequisites:cardNumber expiredData:nil];
 			[[self cardRequisitesCell] setUserInteractionEnabled:NO];
 			[self cardRequisitesCell].showSecretContainer = NO;
 			[[self cardRequisitesCell] setScanButtonHidden:YES animated:NO];
@@ -448,7 +448,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		else
 		{
 			[[self cardRequisitesCell] setUserInteractionEnabled:YES];
-			[self updateCardRequisitesCellWithCardNumber:cardNumber];
+			[self updateCardRequisitesCellWithCardRequisites:cardNumber expiredData:nil];
 			[self cardRequisitesCell].showSecretContainer = YES;
 		}
 		
@@ -468,7 +468,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		[[self cardRequisitesCell] setUserInteractionEnabled:YES];
         [[self cardRequisitesCell].textFieldCardCVC setText:@""];
         [[self cardRequisitesCell].textFieldCardDate setText:@""];
-        [self updateCardRequisitesCellWithCardNumber:@""];
+        [self updateCardRequisitesCellWithCardRequisites:@"" expiredData:nil];
         [[self cardRequisitesCell].textFieldCardNumber setText:@""];
         
         [self cardRequisitesCell].showSecretContainer = NO;
@@ -883,17 +883,12 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     [self scanCard];
 }
 
-- (void)updateCardRequisitesCellWithCardNumber:(NSString *)cardNumber
+- (void)updateCardRequisitesCellWithCardRequisites:(NSString *)cardNumber expiredData:(NSString *)expiredData
 {
     [[self cardRequisitesCell].textFieldCardNumber setText:@""];
     [[self cardRequisitesCell] setCardNumber:cardNumber];
+	[[[self cardRequisitesCell] textFieldCardDate] setText:expiredData];
     [[self cardRequisitesCell] textField:[self cardRequisitesCell].textFieldCardNumber shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:cardNumber];
-}
-
-- (void)updateCardRequisitesCellWithCardDate:(NSString *)cardDate
-{
-    [[self cardRequisitesCell].textFieldCardDate setText:@""];
-    [[self cardRequisitesCell] textField:[self cardRequisitesCell].textFieldCardDate shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:cardDate];
 }
 
 - (void)scanCard
@@ -905,16 +900,16 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     if (cardScanner && [cardScanner respondsToSelector:@selector(scanCardSuccess:failure:cancel:)])
     {
         __weak typeof(self) weakSelf = self;
-        
-        [cardScanner scanCardSuccess:^(NSString *cardNumber)
+
+        [cardScanner scanCardSuccess:^(id<ASDKAcquiringSdkCardRequisites> cardRequisites)
          {
-             NSLog(@"scanned %@", cardNumber);
+            NSLog(@"scanned number %@, ecpired date %@", [cardRequisites number], [cardRequisites expireDate]);
              
              __strong typeof(weakSelf) strongSelf = weakSelf;
              
              if (strongSelf)
              {
-                 [strongSelf updateCardRequisitesCellWithCardNumber:cardNumber];
+                 [strongSelf updateCardRequisitesCellWithCardRequisites:cardRequisites.number expiredData:cardRequisites.expireDate];
              }
          }
                              failure:nil

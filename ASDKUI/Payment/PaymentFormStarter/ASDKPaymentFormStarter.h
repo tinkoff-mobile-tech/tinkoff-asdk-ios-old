@@ -23,6 +23,13 @@
 #import "ASDKDesignConfiguration.h"
 #import <PassKit/PassKit.h>
 
+@protocol ASDKAcquiringSdkCardRequisites <NSObject>
+
+- (NSString*)number;
+- (NSString*)expireDate;
+
+@end
+
 @protocol ASDKAcquiringSdkCardScanner <NSObject>
 /*!
  *  @discussion Сканирует карту
@@ -31,7 +38,7 @@
  *  @param failure блок в случае сканирования с ошибкой
  *  @param cancel  блок при отмене сканирования
  */
-- (void)scanCardSuccess:(void (^)(NSString *cardNumber))success
+- (void)scanCardSuccess:(void (^)(id<ASDKAcquiringSdkCardRequisites> cardRequisites))success
                 failure:(void (^)(ASDKAcquringSdkError *error))failure
                  cancel:(void (^)(void))cancel;
 

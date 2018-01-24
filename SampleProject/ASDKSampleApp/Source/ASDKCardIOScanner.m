@@ -10,9 +10,30 @@
 #import "CardIO.h"
 #import "ASDKCardIOScanner.h"
 
+@interface ASDKCardRequisites: NSObject <ASDKAcquiringSdkCardRequisites>
+
+@property (nonatomic, strong) NSString *scanedCardNumber;
+@property (nonatomic, strong) NSString *scanedCardExpiredDate;
+
+@end
+
+@implementation ASDKCardRequisites
+
+- (NSString *)expireDate
+{
+	return self.scanedCardExpiredDate;
+}
+
+- (NSString *)number
+{
+	return self.scanedCardNumber;
+}
+
+@end
+
 @interface ASDKCardIOScanner () <CardIOPaymentViewControllerDelegate>
 
-@property (nonatomic, strong) void (^successBlock)(NSString *cardNumber);
+@property (nonatomic, strong) void (^successBlock)(id<ASDKAcquiringSdkCardRequisites> cardRequisites);
 @property (nonatomic, strong) void (^cancelBlock)(void);
 
 @end
@@ -55,8 +76,9 @@
     [cardScaner setKeepStatusBarStyle:YES];
     [cardScaner setSuppressScanConfirmation:YES];
     [cardScaner setUseCardIOLogo:YES];
-    [cardScaner setDisableManualEntryButtons:YES];
-    [cardScaner setCollectExpiry:NO];
+    [cardScaner setDisableManualEntryButtons:NO];
+	[cardScaner setScanExpiry:YES];
+	[cardScaner setCollectExpiry:YES];
     [cardScaner setCollectCVV:NO];
 }
 
@@ -74,11 +96,16 @@
 
 - (void)userDidProvideCreditCardInfo:(CardIOCreditCardInfo *)info inPaymentViewController:(CardIOPaymentViewController *)paymentViewController
 {
-    NSString *cardNumber = info.cardNumber;
-    
     if (self.successBlock)
     {
-        self.successBlock(cardNumber);
+		ASDKCardRequisites *cardRequisites = [[ASDKCardRequisites alloc] init];
+		cardRequisites.scanedCardNumber = info.cardNumber;
+		if (info.expiryYear > 0 && info.expiryMonth > 0)
+		{
+			cardRequisites.scanedCardExpiredDate = [NSString stringWithFormat:@"%02lu/%02lu", (unsigned long)info.expiryMonth, (unsigned long)(info.expiryYear - 2000)];
+		}
+
+        self.successBlock(cardRequisites);
     }
     
     [self closePaymentViewController:paymentViewController];
@@ -94,7 +121,7 @@
     [self closePaymentViewController:paymentViewController];
 }
 
-- (void)scanCardSuccess:(void (^)(NSString *cardNumnber))success
+- (void)scanCardSuccess:(void (^)(id<ASDKAcquiringSdkCardRequisites> cardRequisites))success
                 failure:(void (^)(ASDKAcquringSdkError *error))failure
                  cancel:(void (^)(void))cancel
 {
