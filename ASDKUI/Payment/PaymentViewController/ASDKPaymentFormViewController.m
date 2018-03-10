@@ -901,15 +901,12 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     {
         __weak typeof(self) weakSelf = self;
 
-        [cardScanner scanCardSuccess:^(id<ASDKAcquiringSdkCardRequisites> cardRequisites)
-         {
-            NSLog(@"scanned number %@, ecpired date %@", [cardRequisites number], [cardRequisites expireDate]);
-             
-             __strong typeof(weakSelf) strongSelf = weakSelf;
-             
+        [cardScanner scanCardSuccess:^(id<ASDKAcquiringSdkCardRequisites> cardRequisites) {
+			 __strong typeof(weakSelf) strongSelf = weakSelf;
+
              if (strongSelf)
              {
-                 [strongSelf updateCardRequisitesCellWithCardRequisites:cardRequisites.number expiredData:cardRequisites.expireDate];
+                 [strongSelf updateCardRequisitesCellWithCardRequisites:cardRequisites.cardNumber expiredData:cardRequisites.cardExpireDate];
              }
          }
                              failure:nil

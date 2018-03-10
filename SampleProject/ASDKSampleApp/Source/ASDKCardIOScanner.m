@@ -12,19 +12,19 @@
 
 @interface ASDKCardRequisites: NSObject <ASDKAcquiringSdkCardRequisites>
 
-@property (nonatomic, strong) NSString *scanedCardNumber;
-@property (nonatomic, strong) NSString *scanedCardExpiredDate;
+@property (nonatomic, copy) NSString *scanedCardNumber;
+@property (nonatomic, copy) NSString *scanedCardExpiredDate;
 
 @end
 
 @implementation ASDKCardRequisites
 
-- (NSString *)expireDate
+- (NSString *)cardExpireDate
 {
 	return self.scanedCardExpiredDate;
 }
 
-- (NSString *)number
+- (NSString *)cardNumber
 {
 	return self.scanedCardNumber;
 }
@@ -33,6 +33,7 @@
 
 @interface ASDKCardIOScanner () <CardIOPaymentViewControllerDelegate>
 
+@property (nonatomic, strong) ASDKCardRequisites *cardRequisites;
 @property (nonatomic, strong) void (^successBlock)(id<ASDKAcquiringSdkCardRequisites> cardRequisites);
 @property (nonatomic, strong) void (^cancelBlock)(void);
 
@@ -98,14 +99,14 @@
 {
     if (self.successBlock)
     {
-		ASDKCardRequisites *cardRequisites = [[ASDKCardRequisites alloc] init];
-		cardRequisites.scanedCardNumber = info.cardNumber;
+		self.cardRequisites = [[ASDKCardRequisites alloc] init];
+		self.cardRequisites.scanedCardNumber = info.cardNumber;
 		if (info.expiryYear > 0 && info.expiryMonth > 0)
 		{
-			cardRequisites.scanedCardExpiredDate = [NSString stringWithFormat:@"%02lu/%02lu", (unsigned long)info.expiryMonth, (unsigned long)(info.expiryYear - 2000)];
+			self.cardRequisites.scanedCardExpiredDate = [NSString stringWithFormat:@"%02lu/%02lu", (unsigned long)info.expiryMonth, (unsigned long)(info.expiryYear - 2000)];
 		}
 
-        self.successBlock(cardRequisites);
+        self.successBlock(self.cardRequisites);
     }
     
     [self closePaymentViewController:paymentViewController];

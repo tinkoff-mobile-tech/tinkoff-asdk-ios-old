@@ -25,8 +25,8 @@
 
 @protocol ASDKAcquiringSdkCardRequisites <NSObject>
 
-- (NSString*)number;
-- (NSString*)expireDate;
+- (NSString*)cardNumber;
+- (NSString*)cardExpireDate;
 
 @end
 
