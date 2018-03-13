@@ -176,7 +176,7 @@
                                                        title:name
                                                  description:description
 													  cardId:[ASDKTestSettings makeNewCard] ? nil:@""// nil - новая нужно вводить реквизиты карты, @"" - последняя сохраненная, @"836252" - карта по CardId
-                                                       email:nil 
+                                                       email:@"test@gmail.com"
                                                  customerKey:[PayController customerKey]
 												   recurrent:recurrent
 												  makeCharge:makeCharge
@@ -400,7 +400,7 @@
 												  formTitle:nil//@"Новая карта"
 												 formHeader:nil//@"Сохраните данные карты"
 												description:nil//@"и оплачивайте, не вводя реквизиты"
-													  email:nil
+													  email:@"test@gmail.com"
 											  cardCheckType:cardCheckType
 												customerKey:[PayController customerKey]
 											 additionalData:data

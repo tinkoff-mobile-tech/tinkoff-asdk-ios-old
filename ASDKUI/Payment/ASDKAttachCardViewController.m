@@ -274,6 +274,7 @@
 	{
 		_emailCell = [ASDKEmailCell cell];
 		[_emailCell.emailTextField setPlaceholder:LOC(@"attachCard.emailCellPlaceholder")];
+		[_emailCell.emailTextField setText:_preStateValueEmail];
 		[_emailCell.emailTextField setDelegate:self];
 	}
 

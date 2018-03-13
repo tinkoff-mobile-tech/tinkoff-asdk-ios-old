@@ -577,6 +577,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     if (!_emailCell)
     {
         _emailCell = [ASDKEmailCell cell];
+		[_emailCell.emailTextField setPlaceholder:LOC(@"emailCell.placeholder")];
+		[_emailCell.emailTextField setText:_email];
         [_emailCell.emailTextField setDelegate:self];
     }
     
