@@ -384,9 +384,7 @@
 				{
 					[buttonCell setButtonTitle:designConfiguration.attachCardButtonTitle];
 				}
-				
-				//[paymentButtonCell setAttributedButtonTitle:designConfiguration.payButtonAttributedTitle];
-				
+
 				cell = buttonCell;
 			}
 			else
@@ -395,7 +393,7 @@
 				[designConfiguration.attachCardCustomButton setCenter:cell.contentView.center];
 				[cell.contentView addSubview:designConfiguration.attachCardCustomButton];
 				
-				[designConfiguration.customPayButton addTarget:self action:@selector(buttonActionAttach:) forControlEvents:UIControlEventTouchUpInside];
+				[designConfiguration.attachCardCustomButton addTarget:self action:@selector(buttonActionAttach:) forControlEvents:UIControlEventTouchUpInside];
 			}
 		}
 			break;

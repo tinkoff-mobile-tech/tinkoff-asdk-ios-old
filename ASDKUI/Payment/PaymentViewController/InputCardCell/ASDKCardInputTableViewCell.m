@@ -413,23 +413,6 @@ typedef enum
 	
 	if (!_textColor)
 		[self setTextColor:[UIColor blackColor]];
-	
-	/*
-	 #if DEBUG
-	 //	[self.textFieldCardNumber setText:@"5264 8320 0101 9468"];//Газпром
-	 [self.textFieldCardNumber setText:@"5222 2383 2895 2798"];//Авангард
-	 //	[self.textFieldCardNumber setText:@"4874 1560 0029 7023"];//газпром
-	 //	[self.textFieldCardNumber setText:@"4377 7300 0169 4388"];//ко-брендовая карта RendezVous
-	 [self.textFieldCardCVC setText:@"123"];
-	 [self.textFieldCardDate setText:@"11/17"];
-	 //	[self.cellCardNumber textFieldSetText:@"5213 2437 3947 7998"];// карта ТКС
-	 //	[self.cellCVC textFieldSetText:@"521"];
-	 //	[self.cellExpirationDate textFieldSetText:@"05/18"];
-	 
-	 [self setCardNumber:self.textFieldCardNumber.text];
-	 [self textField:self.textFieldCardNumber shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:self.textFieldCardNumber.text];
-	 #endif
-	 */
 }
 
 #pragma mark ASDKTextFieldKeyInputDelegate
