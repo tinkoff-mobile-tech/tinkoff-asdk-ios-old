@@ -54,12 +54,12 @@
 @property (nonatomic, strong) UIView *customSecureLogo;
 @property (nonatomic, assign) CGFloat keyboardHeight;
 
-@property (nonatomic, strong) NSString *cardCheckType;
-@property (nonatomic, strong) NSString *viewTitleHead;
-@property (nonatomic, strong) NSString *cardTitle;
-@property (nonatomic, strong) NSString *cardDescription;
-@property (nonatomic, strong) NSString *preStateValueEmail;
-@property (nonatomic, strong) NSString *customerKey;
+@property (nonatomic, copy) NSString *cardCheckType;
+@property (nonatomic, copy) NSString *viewTitleHead;
+@property (nonatomic, copy) NSString *cardTitle;
+@property (nonatomic, copy) NSString *cardDescription;
+@property (nonatomic, copy) NSString *preStateValueEmail;
+@property (nonatomic, copy) NSString *customerKey;
 @property (nonatomic, strong) NSDictionary *additionalData;
 
 @end
@@ -98,7 +98,7 @@
 {
     [super viewDidLoad];
 
-	if (self.viewTitleHead.length > 0)
+	if (self.viewTitleHead != nil && self.viewTitleHead.length > 0)
 	{
 		self.title = self.viewTitleHead;
 	}
@@ -840,10 +840,15 @@
 	}
 	else
 	{
-		NSString *alertTitle = error.errorMessage ? error.errorMessage : @"Ошибка";
 		NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
-		
-		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
+		NSString *alertMessage = error.errorMessage ? error.errorMessage : @"";
+
+		if ( alertDetails.length > 0)
+		{
+			alertMessage = [NSString stringWithFormat:@"%@ %@", alertMessage, alertDetails];
+		}
+
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOC(@"Common.error") message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
 		
 		UIAlertAction *cancelAction = [UIAlertAction
 									   actionWithTitle:LOC(@"Common.Close")

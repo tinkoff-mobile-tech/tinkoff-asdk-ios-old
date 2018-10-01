@@ -24,11 +24,11 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
 	CellProductTitle = 1,
 	CellProductDescription,
 	CellAmount,
-	CellPaymentCardRequisites,
+	CellPaymentCardRequisites, // required field
 	CellEmail,
 	CellPayButton,
 	CellAttachButton,
-	CellSecureLogos,
+	CellSecureLogos, // required field
 	CellEmpty20px,
 	CellEmpty5px,
 	CellEmptyFlexibleSpace

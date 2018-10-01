@@ -29,13 +29,16 @@
     
     ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
     ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
-    self.navigationController.navigationBar.barStyle = [designConfiguration navigationBarStyle];
-    [self.navigationController.navigationBar setBackgroundImage:[ASDKUtils imageFromColor:[designConfiguration navigationBarColor]] forBarMetrics:UIBarMetricsDefault];
-    
-    self.navigationController.navigationBar.tintColor = [designConfiguration navigationBarItemsTextColor];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [designConfiguration navigationBarItemsTextColor]};
-    
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	if (designConfiguration)
+	{
+		self.navigationController.navigationBar.barStyle = [designConfiguration navigationBarStyle];
+		[self.navigationController.navigationBar setBackgroundImage:[ASDKUtils imageFromColor:[designConfiguration navigationBarColor]] forBarMetrics:UIBarMetricsDefault];
+
+		self.navigationController.navigationBar.tintColor = [designConfiguration navigationBarItemsTextColor];
+		self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [designConfiguration navigationBarItemsTextColor]};
+
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	}
 }
 
 - (BOOL)shouldAutorotate
@@ -47,6 +50,5 @@
 {
     return UIInterfaceOrientationMaskPortrait;
 }
-
 
 @end

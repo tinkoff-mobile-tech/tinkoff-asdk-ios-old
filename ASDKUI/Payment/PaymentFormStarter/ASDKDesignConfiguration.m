@@ -22,18 +22,18 @@
 
 @interface ASDKDesignConfiguration ()
 
-@property (nonatomic, strong) UIColor *navigationBarColor;
-@property (nonatomic, strong) UIColor *navigationBarItemsTextColor;
-@property (nonatomic) UIBarStyle navigationBarStyle;
+@property (nonatomic, strong) UIColor *_navigationBarColor;
+@property (nonatomic, strong) UIColor *_navigationBarItemsTextColor;
+@property (nonatomic) UIBarStyle _navigationBarStyle;
 
-@property (nonatomic, strong) UIColor *payButtonColor;
-@property (nonatomic, strong) UIColor *payButtonPressedColor;
-@property (nonatomic, strong) UIColor *payButtonTextColor;
+@property (nonatomic, strong) UIColor *_payButtonColor;
+@property (nonatomic, strong) UIColor *_payButtonPressedColor;
+@property (nonatomic, strong) UIColor *_payButtonTextColor;
 
 @property (nonatomic, strong) NSString *_payButtonTitle;
 @property (nonatomic, strong) NSAttributedString *_payButtonAttributedTitle;
 
-@property (nonatomic, strong) UIBarButtonItem *backButton;
+@property (nonatomic, strong) UIBarButtonItem *_backButton;
 @property (nonatomic, strong) NSArray *_payFormItems;
 @property (nonatomic, strong) UIView *_paymentsSecureLogosView;
 @property (nonatomic, strong) UIButton *_customPayButton;
@@ -51,9 +51,9 @@
 {
     if (self = [super init])
 	{
-    	_navigationBarStyle = UIBarStyleDefault;
-		_navigationBarColor = UIColor.whiteColor;
-		_navigationBarItemsTextColor = UIColor.blackColor;
+    	__navigationBarStyle = UIBarStyleDefault;
+		__navigationBarColor = UIColor.whiteColor;
+		__navigationBarItemsTextColor = UIColor.blackColor;
 		__presentStyleModal = UIModalPresentationFullScreen;
 	}
 
@@ -64,16 +64,16 @@
   navigationBarItemsTextColor:(UIColor *)navigationBarItemsTextColor
            navigationBarStyle:(UIBarStyle)navigationBarStyle
 {
-    _navigationBarColor = navigationBarColor;
-    _navigationBarItemsTextColor = navigationBarItemsTextColor;
-    _navigationBarStyle = navigationBarStyle;
+    __navigationBarColor = navigationBarColor;
+    __navigationBarItemsTextColor = navigationBarItemsTextColor;
+    __navigationBarStyle = navigationBarStyle;
 }
 
 - (UIColor *)navigationBarColor
 {
-    if (_navigationBarColor)
+    if (self._navigationBarColor)
     {
-        return _navigationBarColor;
+        return self._navigationBarColor;
     }
     
     return [ASDKDesign colorNavigationBar];
@@ -81,9 +81,9 @@
 
 - (UIColor *)navigationBarItemsTextColor
 {
-    if (_navigationBarItemsTextColor)
+    if (self._navigationBarItemsTextColor)
     {
-        return _navigationBarItemsTextColor;
+        return self._navigationBarItemsTextColor;
     }
     
     return [UIColor whiteColor];
@@ -91,34 +91,31 @@
 
 - (UIBarStyle)navigationBarStyle
 {
-    return _navigationBarStyle;
+    return self._navigationBarStyle;
 }
-
-
-
 
 - (void)setPayButtonColor:(UIColor *)payButtonColor payButtonPressedColor:(UIColor *)payButtonPressedColor payButtonTextColor:(UIColor *)payButtonTextColor
 {
-    _payButtonColor = payButtonColor;
-    _payButtonPressedColor = payButtonPressedColor;
-    _payButtonTextColor = payButtonTextColor;
+    self._payButtonColor = payButtonColor;
+    self._payButtonPressedColor = payButtonPressedColor;
+    self._payButtonTextColor = payButtonTextColor;
 }
 
 - (void)setCustomBackButton:(UIBarButtonItem *)backButton
 {
-	_backButton = backButton;
+	self._backButton = backButton;
 }
 
 - (UIBarButtonItem *)customBackButton
 {
-	return _backButton;
+	return self._backButton;
 }
 
 - (UIColor *)payButtonColor
 {
-    if (_payButtonColor)
+    if (self._payButtonColor)
     {
-        return _payButtonColor;
+        return self._payButtonColor;
     }
     
     return [ASDKDesign colorPayButton];
@@ -126,9 +123,9 @@
 
 - (UIColor *)payButtonPressedColor
 {
-    if (_payButtonPressedColor)
+    if (self._payButtonPressedColor)
     {
-        return _payButtonPressedColor;
+        return self._payButtonPressedColor;
     }
     
     return [ASDKDesign colorPayButtonPressed];
@@ -136,9 +133,9 @@
 
 - (UIColor *)payButtonTextColor
 {
-    if (_payButtonTextColor)
+    if (self._payButtonTextColor)
     {
-        return _payButtonTextColor;
+        return self._payButtonTextColor;
     }
     
     return [ASDKDesign colorTextDark];
@@ -207,7 +204,10 @@
 			*stop = YES;
 		}
 	}];
-	
+
+	NSAssert([items indexOfObjectIdenticalTo:@(CellSecureLogos)] != NSNotFound, @"CellSecureLogos is required field");
+	NSAssert([items indexOfObjectIdenticalTo:@(CellPaymentCardRequisites)] != NSNotFound, @"CellPaymentCardRequisites is required field");
+
 	return result;
 }
 

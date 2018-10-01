@@ -397,9 +397,9 @@
 	paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
 	
 	[paymentFormStarter presentAttachFormFromViewController:viewController
-												  formTitle:nil//@"Новая карта"
-												 formHeader:nil//@"Сохраните данные карты"
-												description:nil//@"и оплачивайте, не вводя реквизиты"
+												  formTitle:@"Новая карта"
+												 formHeader:@"Сохраните данные карты"
+												description:@"и оплачивайте, не вводя реквизиты"
 													  email:@"test@gmail.com"
 											  cardCheckType:cardCheckType
 												customerKey:[PayController customerKey]

@@ -350,6 +350,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 				_shouldShowKeyboardWhenNewCardSelected = YES;
 			}
 		}
+		else
+		{
+			[self setSelectedCard:nil];
+			_shouldShowKeyboardWhenNewCardSelected = YES;
+		}
     }
 	else
 	{
@@ -490,8 +495,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 - (IBAction)cancelAction:(id)sender
 {
-    [self closeSelfWithCompletion:^
-    {
+    [self closeSelfWithCompletion:^{
         if (self.onCancelled)
         {
             self.onCancelled();

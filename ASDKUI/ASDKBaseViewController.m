@@ -22,31 +22,24 @@
 #import "ASDKDesign.h"
 #import "ASDKPaymentFormStarter.h"
 
-@interface ASDKBaseViewController ()
-
-@end
-
 @implementation ASDKBaseViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+
     ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
     ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
-    NSLog(@"DESIGN!!! %@",designConfiguration);
-    self.navigationController.navigationBar.barStyle = [designConfiguration navigationBarStyle];
-    [self.navigationController.navigationBar setBackgroundImage:[ASDKUtils imageFromColor:[designConfiguration navigationBarColor]] forBarMetrics:UIBarMetricsDefault];
-	
-	self.navigationController.navigationBar.barTintColor = [designConfiguration navigationBarColor];
-    self.navigationController.navigationBar.tintColor = [designConfiguration navigationBarItemsTextColor];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [designConfiguration navigationBarItemsTextColor]};
-}
+	if (designConfiguration)
+	{
+		NSLog(@"DESIGN!!! %@",designConfiguration);
+		self.navigationController.navigationBar.barStyle = [designConfiguration navigationBarStyle];
+		[self.navigationController.navigationBar setBackgroundImage:[ASDKUtils imageFromColor:[designConfiguration navigationBarColor]] forBarMetrics:UIBarMetricsDefault];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+		self.navigationController.navigationBar.barTintColor = [designConfiguration navigationBarColor];
+		self.navigationController.navigationBar.tintColor = [designConfiguration navigationBarItemsTextColor];
+		self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [designConfiguration navigationBarItemsTextColor]};
+	}
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
