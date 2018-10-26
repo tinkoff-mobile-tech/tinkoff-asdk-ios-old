@@ -32,6 +32,7 @@
 - (NSNumber *)rebillId;
 - (ASDKCard *)cardWithRebillId;
 - (ASDKCard *)cardWithIdentifier:(NSString *)indentifier;
+- (ASDKCard *)cardByRebillId:(NSNumber *)rebillId;
 
 - (void)updateCardsListWithSuccessBlock:(void (^)(void))onSuccess
                              errorBlock:(void (^)(ASDKAcquringSdkError *error))onError;

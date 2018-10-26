@@ -65,4 +65,7 @@
 		 cancelled:(void (^)(void))onCancelled
 			 error:(void (^)(ASDKAcquringSdkError *error))onError;
 
++ (ASDKAcquiringSdk *)acquiringSdk;
++ (NSString *)customerKey;
+
 @end

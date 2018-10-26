@@ -22,7 +22,7 @@
 #import "ASDKPaymentFormSummCell.h"
 
 #import "ASDKExternalCardsCell.h"
-#import "ASDKCardInputTableViewCell.h"
+//#import "ASDKCardInputTableViewCell.h"
 #import "ASDKEmailCell.h"
 
 #import "ASDKPayButtonCell.h"
@@ -76,6 +76,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	BOOL	_requrent;
 	
     BOOL _shouldShowKeyboardWhenNewCardSelected;
+	BOOL _needSetupCardRequisitesCellForCVC;
 }
 
 @property (nonatomic, strong) ASDKPaymentFormHeaderCell *headerCell;
@@ -151,6 +152,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		_updateCardCell = NO;
 		_makeCharge = makeCharge;
 		_chargeError = NO;
+		_needSetupCardRequisitesCellForCVC = NO;
     }
 
     return self;
@@ -350,11 +352,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 				_shouldShowKeyboardWhenNewCardSelected = YES;
 			}
 		}
-		else
-		{
-			[self setSelectedCard:nil];
-			_shouldShowKeyboardWhenNewCardSelected = YES;
-		}
     }
 	else
 	{
@@ -368,8 +365,22 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			self.tableViewDataSource = [dataSource copy];
 		}
 	}
-	
+
 	[self.tableView reloadData];
+
+	if (_needSetupCardRequisitesCellForCVC == YES)
+	{
+		self.makeCharge = NO;
+		self.chargeError = YES;
+		[[self cardRequisitesCell] setupForCVCInput];
+		[[self cardRequisitesCell] setUserInteractionEnabled:YES];
+
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			[[[self cardRequisitesCell] secretCVVTextField] becomeFirstResponder];
+		});
+
+		_needSetupCardRequisitesCellForCVC = NO;
+	}
 }
 
 #pragma mark - ASDKCustomKeyboardInputDelegate
@@ -571,8 +582,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
         [_cardRequisitesCell setTextColor:[ASDKDesign colorTextDark]];
         [_cardRequisitesCell setPlaceholderColor:[ASDKDesign colorTextPlaceholder]];
     }
-    
-    
+
     return _cardRequisitesCell;
 }
 
@@ -607,6 +617,14 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     }
     
     return _footerCell;
+}
+
+#pragma mark - on charge error
+
+- (void)needSetupCardRequisitesCellForCVC
+{
+	self.updateCardCell = YES;
+	_needSetupCardRequisitesCellForCVC = YES;
 }
 
 #pragma mark - button action
@@ -774,11 +792,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		[self performPayment];
 	}
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//	return 0.0f;
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

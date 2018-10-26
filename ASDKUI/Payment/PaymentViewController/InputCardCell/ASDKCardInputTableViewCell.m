@@ -318,7 +318,10 @@ typedef enum
     
     if (_showSecretContainer)
     {
-        self.secretCardNumberLabel.text = [NSString stringWithFormat:@"%@",[self.cardNumber substringFromIndex:self.cardNumber.length - 4]];
+		if (self.cardNumber.length > 4)
+		{
+        	self.secretCardNumberLabel.text = [NSString stringWithFormat:@"%@", [self.cardNumber substringFromIndex:self.cardNumber.length - 4]];
+		}
         self.secretCVVTextField.text = @"";
     }
 

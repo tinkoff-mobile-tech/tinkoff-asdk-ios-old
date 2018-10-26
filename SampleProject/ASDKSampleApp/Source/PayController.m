@@ -233,7 +233,24 @@
 			[viewController presentViewController:nc animated:YES completion:nil];
 
 			onSuccess(paymentInfo);
-		} error:^(ASDKAcquringSdkError *error) {
+		}
+		needShowConfirm:^(UIViewController *vc) {
+			//Настройка дизайна
+			ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
+			//
+			[designConfiguration setPayFormItems:@[@(CellEmpty20px),
+												   @(CellAmount),
+												   @(CellPaymentCardRequisites),
+												   @(CellEmptyFlexibleSpace),
+												   @(CellPayButton),
+												   @(CellSecureLogos),
+												   @(CellEmpty20px),
+												   ]];
+
+			UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+			[viewController presentViewController:nc animated:YES completion:nil];
+		}
+		error:^(ASDKAcquringSdkError *error) {
 			[viewController presentViewController:[PayController alertWithError:error] animated:YES completion:nil];
 			onError(error);
 		}];

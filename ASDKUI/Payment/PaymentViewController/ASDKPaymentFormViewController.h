@@ -19,6 +19,7 @@
 #import <UIKit/UIKit.h>
 #import <ASDKCore/ASDKCore.h>
 #import "ASDKBaseTableViewController.h"
+#import "ASDKCardInputTableViewCell.h"
 
 @class ASDKAcquringApiError;
 
@@ -42,5 +43,9 @@
                          error:(void (^)(ASDKAcquringSdkError *error))error;
 
 @property (nonatomic, strong) NSString *paymentId;
+//
+- (void)needSetupCardRequisitesCellForCVC;
+- (void)setChargeError:(BOOL)value;
+- (void)setChargeErrorPaymentId:(NSString *)error;
 
 @end

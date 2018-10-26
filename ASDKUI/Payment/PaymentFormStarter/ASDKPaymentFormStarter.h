@@ -89,6 +89,7 @@
 	 additionalPaymentData:(NSDictionary *)data
 			   receiptData:(NSDictionary *)receiptData
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+		   needShowConfirm:(void (^)(UIViewController *vc))paymentConfirm
 					 error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 + (BOOL)isPayWithAppleAvailable NS_AVAILABLE_IOS(9_0);

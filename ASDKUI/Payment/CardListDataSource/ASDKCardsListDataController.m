@@ -111,6 +111,18 @@ static ASDKCardsListDataController * __cardsListDataController = nil;
 	return nil;
 }
 
+- (ASDKCard *)cardByRebillId:(NSNumber *)rebillId
+{
+	for (ASDKCard *card in self.externalCards)
+	{
+		if ([card.rebillId isEqualToNumber:rebillId] == YES)
+		{
+			return card;
+		}
+	}
+
+	return nil;
+}
 
 - (void)updateCardsListWithSuccessBlock:(void (^)(void))onSuccess
                              errorBlock:(void (^)(ASDKAcquringSdkError *error))onError

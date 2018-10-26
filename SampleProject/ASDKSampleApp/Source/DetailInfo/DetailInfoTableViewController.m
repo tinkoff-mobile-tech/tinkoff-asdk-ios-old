@@ -160,12 +160,27 @@
 
 - (void)buyItem
 {
-	[self buyFromCard];
+	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:PayController.acquiringSdk customerKey:PayController.customerKey];
+	[[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{
+		if ([[ASDKCardsListDataController instance] cardWithRebillId] == nil) {
+			[self buyFromCard];
+		}
+		else
+		{
+			[self buyCharge];
+		}
+	} errorBlock:^(ASDKAcquringSdkError *error) {
+		[self buyFromCard];
+	}];
 }
 
 - (void)buyCharge
 {
-	[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId] amount:self.item.cost description:nil additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"} receiptData:nil fromViewController:self
+	[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId] amount:self.item.cost description:nil additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
+						  receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
+										@"Items":@[@{@"Name":@"Название товара 1",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
+												   @{@"Name":@"Название товара 2",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
+				   fromViewController:self
 							  success:^(ASDKPaymentInfo *paymentInfo) {
 								  NSLog(@"%@",paymentInfo.paymentId);
 							  }

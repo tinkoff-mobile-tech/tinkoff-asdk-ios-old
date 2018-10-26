@@ -386,16 +386,91 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	 additionalPaymentData:(NSDictionary *)data
 			   receiptData:(NSDictionary *)receiptData
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+		   needShowConfirm:(void (^)(UIViewController *vc))paymentConfirm
 					 error:(void (^)(ASDKAcquringSdkError *error))onError
 {
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:description payForm:nil customerKey:customerKey recurrent:NO additionalPaymentData:data receiptData:receiptData
+	NSMutableDictionary *paymentData = [[NSMutableDictionary alloc] init];
+	if ([data count])
+	{
+		[paymentData addEntriesFromDictionary:data];
+	}
+
+	[paymentData setObject:@(YES) forKey:@"chargeFlag"];
+
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue]
+							  orderId:orderId
+						  description:description
+							  payForm:nil
+						  customerKey:customerKey
+							recurrent:NO
+				additionalPaymentData:paymentData
+						  receiptData:receiptData
 	 success:^(ASDKInitResponse *response) {
 		 [self.acquiringSdk chargeWithPaymentId:response.paymentId rebillId:rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
 			 [ASDKPaymentFormStarter resetSharedInstance];
 			 onSuccess(paymentInfo);
 		 } failure:^(ASDKAcquringSdkError *error) {
-			 [ASDKPaymentFormStarter resetSharedInstance];
-			 onError(error);
+			 ASDKAcquiringResponse *errorResponse = [error.userInfo objectForKey:@"acquringResponse"];
+			 //пользователю необходимо подтвердить платеж через ввод cvc ASDK-432
+			 //ErrorCode == 104
+			 if ([[errorResponse.dictionary objectForKey:@"ErrorCode"] integerValue] == 104)
+			 {
+				 [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{
+					 ASDKCard *selectedCard = [[ASDKCardsListDataController instance] cardByRebillId:rebillId];
+					 if (selectedCard != nil)
+					 {
+						[self prepareDesign];
+
+						 ASDKPaymentFormViewController *vc = [[ASDKPaymentFormViewController alloc] initWithAmount:amount
+																										   orderId:orderId
+																											 title:nil
+																									   description:description
+																											cardId:selectedCard.cardId
+																											 email:nil
+																									   customerKey:customerKey
+																										 recurrent:NO
+																										makeCharge:YES
+																							 additionalPaymentData:paymentData
+																									   receiptData:receiptData
+																										   success:^(ASDKPaymentInfo *paymentInfo)
+															  {
+																  [ASDKPaymentFormStarter resetSharedInstance];
+
+																  onSuccess(paymentInfo);
+															  }
+																										 cancelled:^
+															  {
+																  [ASDKPaymentFormStarter resetSharedInstance];
+
+																  onError(nil);
+															  }
+																											 error:^(ASDKAcquringSdkError *error)
+															  {
+																  [ASDKPaymentFormStarter resetSharedInstance];
+
+																  onError(error);
+															  }];
+
+						 vc.acquiringSdk = self.acquiringSdk;
+						 [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
+						 [vc setChargeError:YES];
+						 [vc setChargeErrorPaymentId:[errorResponse.dictionary objectForKey:@"PaymentId"]];
+						 [vc needSetupCardRequisitesCellForCVC];
+
+						 if (paymentConfirm)
+						 {
+							 paymentConfirm(vc);
+						 }
+					 }
+				 } errorBlock:^(ASDKAcquringSdkError *error) {
+
+				 }];
+			 }
+			 else
+			 {
+				 [ASDKPaymentFormStarter resetSharedInstance];
+				 onError(error);
+			 }
 		 }];
 	 } failure:^(ASDKAcquringSdkError *error) {
 		 onError(error);
