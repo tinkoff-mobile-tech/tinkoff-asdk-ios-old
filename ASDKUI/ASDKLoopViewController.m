@@ -99,7 +99,7 @@
 	
 	self.keyboardHeight = 0;
 	
-	ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"Common.Cancel")
+	ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"acq_btn_cancel")
 																		 style:UIBarButtonItemStylePlain
 																		target:self
 																		action:@selector(cancelAction:)];

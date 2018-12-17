@@ -104,7 +104,7 @@
 	}
 	else
 	{
-		self.title = LOC(@"externalCardsCell.newCard");
+		self.title = LOC(@"acq_new_card_label");
 	}
 
 	[self.navigationController.navigationBar setTranslucent:NO];
@@ -121,7 +121,7 @@
 	
 	self.keyboardHeight = 0;
 	
-	ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"Common.Cancel")
+	ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"acq_btn_cancel")
 																		 style:UIBarButtonItemStylePlain
 																		target:self
 																		action:@selector(cancelAction:)];
@@ -273,7 +273,7 @@
 	if (!_emailCell)
 	{
 		_emailCell = [ASDKEmailCell cell];
-		[_emailCell.emailTextField setPlaceholder:LOC(@"attachCard.emailCellPlaceholder")];
+		[_emailCell.emailTextField setPlaceholder:LOC(@"acq_email")];
 		[_emailCell.emailTextField setText:_preStateValueEmail];
 		[_emailCell.emailTextField setDelegate:self];
 	}
@@ -289,7 +289,7 @@
 		[_cardRequisitesCell.cardIOButton setBackgroundColor:[UIColor clearColor]];
 		[_cardRequisitesCell.saveCardContainer setHidden:YES];
 		_cardRequisitesCell.contentView.backgroundColor = [UIColor whiteColor];
-		[_cardRequisitesCell setPlaceholderText:LOC(@"Transfer.CardNumber.Sender")];
+		[_cardRequisitesCell setPlaceholderText:LOC(@"acq_title_card_number")];
 		[_cardRequisitesCell setUseDarkIcons:YES];
 		
 		id<ASDKAcquiringSdkCardScanner> cardScanner = [[ASDKPaymentFormStarter instance] cardScanner];
@@ -319,7 +319,7 @@
 	if (!_paymentButtonCell)
 	{
 		_paymentButtonCell = [ASDKPayButtonCell cell];
-		[_paymentButtonCell setButtonTitle:LOC(@"attachCard.attach")];
+		[_paymentButtonCell setButtonTitle:LOC(@"acq_title_add_card")];
 	}
 	
 	return _paymentButtonCell;
@@ -684,12 +684,10 @@
 						[additionalData addEntriesFromDictionary:self.additionalData];
 					}
 					
-					[additionalData setObject:emailString forKey:@"Email"];
+					[additionalData setObject:emailString forKey:LOC(@"acq_email")];
 					self.additionalData = additionalData;
 				}
-				
-				NSLog(@"QQQQ %@",self.acquiringSdk);
-				
+
 				ASDKCardData *cardData = [[ASDKCardData alloc] initWithPan:cardNumber
 																expiryDate:date
 															  securityCode:cvv
@@ -709,8 +707,6 @@
 						[threeDsController showFromViewController:strongSelf
 														  success:^(NSString *cardId)
 						 {
-							 NSLog(@"\n\n\nAttach card SUCCESS AFTER 3DS\n\n\n");
-							 
 							 __strong typeof(weakSelf) strongSelf1 = weakSelf;
 							 
 							 if (strongSelf1)
@@ -722,8 +718,6 @@
 						 }
 														  failure:^(ASDKAcquringSdkError *statusError)
 						 {
-							 NSLog(@"\n\n\nAttach card ERROR AFTER 3DS\n\n\n");
-							 
 							 __strong typeof(weakSelf) strongSelf1 = weakSelf;
 							 
 							 if (strongSelf1)
@@ -733,8 +727,6 @@
 						 }
 														   cancel:^()
 						 {
-							 NSLog(@"\n\n\nAttach card 3DS CANCELED\n\n\n");
-							 
 							 __strong typeof(weakSelf) strongSelf1 = weakSelf;
 							 
 							 if (strongSelf1)
@@ -742,7 +734,6 @@
 								 [strongSelf1 closeSelfWithCompletion:self.onCancelled];
 							 }
 						 }];
-						//
 					}
 					else if ((result.status == ASDKPaymentStatus_NO || result.status == ASDKPaymentStatus_HOLD || result.status == ASDKPaymentStatus_UNKNOWN) && [result.errorCode isEqualToString:@"0"])
 					{
@@ -758,8 +749,6 @@
 						[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 						ASDKLoopViewController *loopVoewController = [[ASDKLoopViewController alloc] initWithAddCardRequestKey:requestKey acquiringSdk:strongSelf.acquiringSdk];
 						[loopVoewController showFromViewController:strongSelf success:^(NSString *loopResult) {
-							NSLog(@"\n\n\nAttach card SUCCESS AFTER LOOP\n\n\n");
-							
 							__strong typeof(weakSelf) strongSelf1 = weakSelf;
 							
 							if (strongSelf1)
@@ -769,8 +758,6 @@
 								[strongSelf1 manageSuccessWithInfo:[[ASDKResponseAttachCard alloc] initWithDictionary:infoAttach]];
 							}
 						} failure:^(ASDKAcquringSdkError *statusError) {
-							NSLog(@"\n\n\nAttach card ERROR AFTER LOOP\n\n\n");
-							
 							__strong typeof(weakSelf) strongSelf1 = weakSelf;
 							
 							if (strongSelf1)
@@ -778,8 +765,6 @@
 								[strongSelf1 manageError:statusError];
 							}
 						} cancel:^{
-							NSLog(@"\n\n\nAttach card LOOP CANCELED\n\n\n");
-							
 							__strong typeof(weakSelf) strongSelf1 = weakSelf;
 							
 							if (strongSelf1)
@@ -791,8 +776,6 @@
 					else
 					{
 						[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-						
-						NSLog(@"\n\n\nAttach card FINISHED WITH ERROR STATE\n\n\n");
 						
 						NSString *message = @"Attach card error";
 						NSString *details = [NSString stringWithFormat:@"error %@", result.errorCode];
@@ -848,10 +831,10 @@
 			alertMessage = [NSString stringWithFormat:@"%@ %@", alertMessage, alertDetails];
 		}
 
-		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOC(@"Common.error") message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOC(@"acq_default_error_title") message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
 		
 		UIAlertAction *cancelAction = [UIAlertAction
-									   actionWithTitle:LOC(@"Common.Close")
+									   actionWithTitle:LOC(@"acq_btn_close")
 									   style:UIAlertActionStyleCancel
 									   handler:^(UIAlertAction *action)
 									   {

@@ -19,6 +19,7 @@
 #import "ASDKPaymentFormSummCell.h"
 #import "ASDKDesign.h"
 #import "ASDKMacroses.h"
+#import "ASDKLocalized.h"
 
 @implementation ASDKPaymentFormSummCell
 
@@ -37,7 +38,8 @@
     
     self.summLabel.textColor = [ASDKDesign colorTextDark];
     self.summTitleLabel.textColor = [ASDKDesign colorTextLight];
-    self.summTitleLabel.text = LOC(@"PaymentForm.summCellTitle");
+	
+	self.summTitleLabel.text = LOC(@"acq_money_label");
 }
 
 @end

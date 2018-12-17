@@ -47,20 +47,13 @@
 
 #import "ASDKCardsListDataController.h"
 #import "ASDKEmptyTableViewCell.h"
+#import "ASDKLocalized.h"
 
 #define kASDKEmailRegexp @"[\\w_.-]+@[\\w_.-]+\\.[a-zA-Z]+"
 
 NSString * const kTCSRubNoDotCap = @"₽";
 NSString * const kCurrencyCode = @"RUB";
 NSString * const kDecimalSeparator = @",";
-
-//typedef enum
-//{
-//    ASDKPaymentViewControllerSectionHeader = 0,
-//    ASDKPaymentViewControllerSectionRequisites,
-//    ASDKPaymentViewControllerSectionDoneButton,
-//    ASDKPaymentViewControllerSectionFooter
-//} ASDKPaymentViewControllerSection;
 
 NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
@@ -112,11 +105,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 #pragma mark - Init
 
-- (void)dealloc
-{
-    NSLog(@"DALLOC %@",NSStringFromClass([self class]));
-}
-
 - (instancetype)initWithAmount:(NSNumber *)amount
                        orderId:(NSString *)orderId
                          title:(NSString *)title
@@ -161,8 +149,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.title = LOC(@"paymentForm.title");
+	
+    self.title = LOC(@"acq_screen_title");
 	
 	[self.navigationController.navigationBar setTranslucent:NO];
 	
@@ -178,13 +166,18 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 	self.keyboardHeight = 0;
 
-    ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"Common.Cancel")
+    ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"acq_btn_cancel")
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(cancelAction:)];
     
     ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
     ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
+	if ([designConfiguration payViewTitle] != nil)
+	{
+		self.title = [designConfiguration payViewTitle];
+	}
+	
 	self.customSecureLogo = designConfiguration.paymentsSecureLogosView;
 	
     cancelButton.tintColor = [designConfiguration navigationBarItemsTextColor];
@@ -468,7 +461,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			[self cardRequisitesCell].showSecretContainer = YES;
 		}
 		
-        [self externalCardsCell].titleLabel.text = LOC(@"externalCardsCell.savedCard");
+        [self externalCardsCell].titleLabel.text = LOC(@"acq_saved_card_label");
 		
         if (_shouldShowKeyboardWhenNewCardSelected)
         {
@@ -489,7 +482,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
         
         [self cardRequisitesCell].showSecretContainer = NO;
         
-        [self externalCardsCell].titleLabel.text = LOC(@"externalCardsCell.newCard");
+        [self externalCardsCell].titleLabel.text = LOC(@"acq_new_card_label");
         
         if (_shouldShowKeyboardWhenNewCardSelected)
         {
@@ -562,7 +555,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
         [_cardRequisitesCell.cardIOButton setBackgroundColor:[UIColor clearColor]];
         [_cardRequisitesCell.saveCardContainer setHidden:YES];
         _cardRequisitesCell.contentView.backgroundColor = [UIColor whiteColor];
-        [_cardRequisitesCell setPlaceholderText:LOC(@"Transfer.CardNumber.Sender")];
+        [_cardRequisitesCell setPlaceholderText:LOC(@"acq_title_card_number")];
         [_cardRequisitesCell setUseDarkIcons:YES];
         
         id<ASDKAcquiringSdkCardScanner> cardScanner = [[ASDKPaymentFormStarter instance] cardScanner];
@@ -591,7 +584,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     if (!_emailCell)
     {
         _emailCell = [ASDKEmailCell cell];
-		[_emailCell.emailTextField setPlaceholder:LOC(@"emailCell.placeholder")];
+		[_emailCell.emailTextField setPlaceholder:LOC(@"acq_email_hint")];
 		[_emailCell.emailTextField setText:_email];
         [_emailCell.emailTextField setDelegate:self];
     }
@@ -942,8 +935,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     NSNumber *realAmount = [NSNumber numberWithDouble:100 * _amount.doubleValue];
     
     __weak typeof(self) weakSelf = self;
-    
-    NSLog(@"step1");
 	
 	NSMutableDictionary *paymentData = [[NSMutableDictionary alloc] init];
 	if ([_additionalPaymentData count])
@@ -981,8 +972,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     }
                               failure:^(ASDKAcquringSdkError *error)
     {
-        NSLog(@"failure %@", error);
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
         
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -1009,8 +998,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		} failure:^(ASDKAcquringSdkError *error) {
 			__strong typeof(weakSelf) strongSelf = weakSelf;
 			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-			
-			NSLog(@"\n\n\nPAYMENT FINISHED WITH ERROR STATE\n\n\n");
 			
 			if (strongSelf)
 			{
@@ -1042,8 +1029,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		
 		NSString *emailString = [self emailCell].emailTextField.text;
 		
-		NSLog(@"QQQQ %@",self.acquiringSdk);
-		
 		ASDKCardData *cardData = [[ASDKCardData alloc] initWithPan:cardNumber
 														expiryDate:date
 													  securityCode:cvv
@@ -1060,8 +1045,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 											  infoEmail:emailString
 												success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status)
 		 {
-			 NSLog(@"success\nData: %@\n PaymentInfo: %@, Status: %u", data.ACSUrl, paymentInfo, status);
-			 
 			 __strong typeof(weakSelf) strongSelf = weakSelf;
 			 
 			 if (status == ASDKPaymentStatus_3DS_CHECKING)
@@ -1075,8 +1058,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 					 [threeDsController showFromViewController:strongSelf
 													   success:^(NSString *paymentId)
 					  {
-						  NSLog(@"\n\n\nPAYMENT SUCCESS AFTER 3DS\n\n\n");
-						  
 						  __strong typeof(weakSelf) strongSelf1 = weakSelf;
 						  
 						  if (strongSelf1)
@@ -1086,8 +1067,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 					  }
 													   failure:^(ASDKAcquringSdkError *statusError)
 					  {
-						  NSLog(@"\n\n\nPAYMENT ERROR AFTER 3DS\n\n\n");
-						  
 						  __strong typeof(weakSelf) strongSelf1 = weakSelf;
 						  
 						  if (strongSelf1)
@@ -1097,8 +1076,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 					  }
 														cancel:^()
 					  {
-						  NSLog(@"\n\n\nPAYMENT 3DS CANCELED\n\n\n");
-						  
 						  __strong typeof(weakSelf) strongSelf1 = weakSelf;
 						  
 						  if (strongSelf1)
@@ -1120,9 +1097,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			 else
 			 {
 				 [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-				 
-				 NSLog(@"\n\n\nPAYMENT FINISHED WITH ERROR STATE\n\n\n");
-				 
+
 				 NSString *message = @"Payment state error";
 				 NSString *details = [NSString stringWithFormat:@"%@",paymentInfo];
 				 
@@ -1137,9 +1112,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			 }
 		 }
 												failure:^(ASDKAcquringSdkError *error)
-		 {
-			 NSLog(@"failure %@, message %@, details %@", error, error.errorMessage, error.errorDetails);
-			 
+		 {			 
 			 [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 			 
 			 __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -1209,13 +1182,13 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     }
     else
     {
-		NSString *alertTitle = error.errorMessage ? error.errorMessage : @"Ошибка";
+		NSString *alertTitle = error.errorMessage ? error.errorMessage : LOC(@"acq_default_error_title");
 		NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
 		
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *cancelAction = [UIAlertAction
-                                       actionWithTitle:LOC(@"Common.Close")
+                                       actionWithTitle:LOC(@"acq_btn_close")
                                        style:UIAlertActionStyleCancel
                                        handler:^(UIAlertAction *action)
                                        {

@@ -19,14 +19,13 @@
 #import "ASDKEmailCell.h"
 #import "ASDKDesign.h"
 #import "ASDKMacroses.h"
+#import "ASDKLocalized.h"
 
 @implementation ASDKEmailCell
 
 + (instancetype)cell
 {
-    ASDKEmailCell *cell = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"ASDKEmailCell" owner:self options:nil] objectAtIndex:0];
-    
-    return cell;
+    return [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"ASDKEmailCell" owner:self options:nil] objectAtIndex:0];
 }
 
 - (void)awakeFromNib
@@ -37,7 +36,7 @@
     self.emailTextField.tintColor = [ASDKDesign colorTextDark];
 	
     NSDictionary *placeholderAttributes = @{NSForegroundColorAttributeName:[ASDKDesign colorTextPlaceholder]};
-    NSAttributedString *placeholderString = [[NSAttributedString alloc] initWithString:LOC(@"emailCell.placeholder") attributes:placeholderAttributes];
+    NSAttributedString *placeholderString = [[NSAttributedString alloc] initWithString:LOC(@"acq_email_hint") attributes:placeholderAttributes];
     
     self.emailTextField.attributedPlaceholder = placeholderString;
     

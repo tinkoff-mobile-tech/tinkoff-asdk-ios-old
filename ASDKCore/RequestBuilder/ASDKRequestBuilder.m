@@ -33,17 +33,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-    NSLog(@"DEALLOC %@",NSStringFromClass([self class]));
-}
-
-- (id)init
-{
-    NSLog(@"ALLOC %@",NSStringFromClass([self class]));
-    return [super init];
-}
-
 - (ASDKAcquiringRequest *)buildError:(ASDKAcquringSdkError **)error
 {
     //implement in subclasses

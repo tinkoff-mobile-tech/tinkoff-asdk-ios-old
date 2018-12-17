@@ -26,6 +26,7 @@
 #import "ASDKCardsListDataController.h"
 #import "ASDKLoaderViewController.h"
 #import "ASDKMacroses.h"
+#import "ASDKLocalized.h"
 
 typedef enum
 {
@@ -59,11 +60,11 @@ typedef enum
 {
     [super viewDidLoad];
     
-    self.title = LOC(@"Title.CardsList");
+    self.title = LOC(@"acq_title_card_list");
     
     [self.tableView setBackgroundColor:[ASDKDesign colorTableViewBackground]];
     
-    ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"Common.Cancel")
+    ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"acq_btn_cancel")
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(cancelAction:)];
@@ -85,7 +86,7 @@ typedef enum
         _addNewCardCell = [ASDKAddNewCardCell newCell];
         _addNewCardCell.shouldShowTopSeparator = YES;
         _addNewCardCell.shouldShowBottomSeparator = YES;
-        _addNewCardCell.addCardTitleLabel.text = LOC(@"CardsList.AddNewCard");
+        _addNewCardCell.addCardTitleLabel.text = LOC(@"acq_enter_new_card_label");
     }
     
     return _addNewCardCell;

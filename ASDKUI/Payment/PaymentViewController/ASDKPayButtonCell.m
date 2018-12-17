@@ -19,6 +19,7 @@
 #import "ASDKPayButtonCell.h"
 #import "ASDKPaymentFormStarter.h"
 #import "ASDKMacroses.h"
+#import "ASDKLocalized.h"
 
 @interface ASDKPayButtonCell ()
 
@@ -45,7 +46,7 @@
     myBackViewSelected.backgroundColor = [designConfiguration payButtonPressedColor];
     cell.selectedBackgroundView = myBackViewSelected;
     
-    cell.titleLabel.text = LOC(@"PaymentForm.payButtonTitle");
+    cell.titleLabel.text = LOC(@"acq_pay");
     
     return cell;
 }
@@ -65,7 +66,7 @@
 	
 	if (title == nil)
 	{
-		self.titleLabel.text = LOC(@"PaymentForm.payButtonTitle");
+		self.titleLabel.text = LOC(@"acq_pay");
 	}
 }
 

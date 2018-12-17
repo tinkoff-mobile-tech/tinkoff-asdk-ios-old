@@ -26,6 +26,8 @@
 		2C1C135D1F8FAC81002B636F /* ASDKAttachCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C135B1F8FAC81002B636F /* ASDKAttachCardViewController.m */; };
 		2C6E6BA51F94CA0E00B345B9 /* ASDKLoopViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6E6BA31F94CA0E00B345B9 /* ASDKLoopViewController.h */; };
 		2C6E6BA61F94CA0E00B345B9 /* ASDKLoopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E6BA41F94CA0E00B345B9 /* ASDKLoopViewController.m */; };
+		2C76290D21A2BFD100514437 /* ASDKLocalized.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C76290B21A2BFD100514437 /* ASDKLocalized.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C76290E21A2BFD100514437 /* ASDKLocalized.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C76290C21A2BFD100514437 /* ASDKLocalized.m */; };
 		2C98637F1F6984B500FBC729 /* ASDKEmptyTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C98637C1F6984B500FBC729 /* ASDKEmptyTableViewCell.h */; };
 		2C9863801F6984B500FBC729 /* ASDKEmptyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98637D1F6984B500FBC729 /* ASDKEmptyTableViewCell.m */; };
 		2C9863811F6984B500FBC729 /* ASDKEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C98637E1F6984B500FBC729 /* ASDKEmptyTableViewCell.xib */; };
@@ -137,6 +139,8 @@
 		2C1C135B1F8FAC81002B636F /* ASDKAttachCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKAttachCardViewController.m; sourceTree = "<group>"; };
 		2C6E6BA31F94CA0E00B345B9 /* ASDKLoopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKLoopViewController.h; sourceTree = "<group>"; };
 		2C6E6BA41F94CA0E00B345B9 /* ASDKLoopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKLoopViewController.m; sourceTree = "<group>"; };
+		2C76290B21A2BFD100514437 /* ASDKLocalized.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKLocalized.h; sourceTree = "<group>"; };
+		2C76290C21A2BFD100514437 /* ASDKLocalized.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKLocalized.m; sourceTree = "<group>"; };
 		2C98637C1F6984B500FBC729 /* ASDKEmptyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKEmptyTableViewCell.h; sourceTree = "<group>"; };
 		2C98637D1F6984B500FBC729 /* ASDKEmptyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDKEmptyTableViewCell.m; sourceTree = "<group>"; };
 		2C98637E1F6984B500FBC729 /* ASDKEmptyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ASDKEmptyTableViewCell.xib; sourceTree = "<group>"; };
@@ -410,6 +414,8 @@
 				83E156801C746442000BBD57 /* DesignConfig */,
 				94C86A0B1C6B304900046F0E /* ASDKPaymentFormStarter.h */,
 				94C86A0C1C6B304900046F0E /* ASDKPaymentFormStarter.m */,
+				2C76290B21A2BFD100514437 /* ASDKLocalized.h */,
+				2C76290C21A2BFD100514437 /* ASDKLocalized.m */,
 			);
 			path = PaymentFormStarter;
 			sourceTree = "<group>";
@@ -596,6 +602,7 @@
 				BE4029E11C731DA1003FFBDD /* ASDKCardsListViewController.h in Headers */,
 				83E1567D1C737439000BBD57 /* ASDKFooterCell.h in Headers */,
 				83E1564F1C71B201000BBD57 /* ASDKBaseTableViewController.h in Headers */,
+				2C76290D21A2BFD100514437 /* ASDKLocalized.h in Headers */,
 				CA82FD261C70F811005FD294 /* ASDKPaymentFormSummCell.h in Headers */,
 				83E1565B1C7201AA000BBD57 /* ASDKNavigationController.h in Headers */,
 				BEDEFFA91C761C370026D454 /* ASDKHighlightedButton.h in Headers */,
@@ -753,6 +760,7 @@
 				CA82FD1F1C70ED3A005FD294 /* ASDKPaymentFormHeaderCell.m in Sources */,
 				94C5BCBB1C6B3E0300542BC8 /* ASDK3DSViewController.m in Sources */,
 				94C86A1F1C6B304900046F0E /* ASDKPaymentFormViewController.m in Sources */,
+				2C76290E21A2BFD100514437 /* ASDKLocalized.m in Sources */,
 				94C86A1D1C6B304900046F0E /* ASDKPaymentFormStarter.m in Sources */,
 				83E156701C731C8A000BBD57 /* ASDKExternalCardsCell.m in Sources */,
 				94C86A211C6B304900046F0E /* ASDKEmailCell.m in Sources */,

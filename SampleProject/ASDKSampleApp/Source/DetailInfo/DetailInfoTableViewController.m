@@ -160,6 +160,7 @@
 
 - (void)buyItem
 {
+//	[self buyFromCard];
 	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:PayController.acquiringSdk customerKey:PayController.customerKey];
 	[[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{
 		if ([[ASDKCardsListDataController instance] cardWithRebillId] == nil) {

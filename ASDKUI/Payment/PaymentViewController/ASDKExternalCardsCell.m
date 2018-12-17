@@ -19,6 +19,7 @@
 #import "ASDKExternalCardsCell.h"
 #import "ASDKDesign.h"
 #import "ASDKMacroses.h"
+#import "ASDKLocalized.h"
 
 @implementation ASDKExternalCardsCell
 
@@ -37,9 +38,9 @@
     
     self.titleLabel.textColor = [ASDKDesign colorTextDark];
     self.changeCardButton.titleLabel.textColor = [ASDKDesign colorMainBlue];
-	[self.changeCardButton setTitle:LOC(@"PaymentForm.changeCard") forState:UIControlStateNormal];
+	[self.changeCardButton setTitle:LOC(@"acq_change_card_label") forState:UIControlStateNormal];
 	
-    self.titleLabel.text = LOC(@"externalCardsCell.newCard");
+    self.titleLabel.text = LOC(@"acq_new_card_label");
 }
 
 @end

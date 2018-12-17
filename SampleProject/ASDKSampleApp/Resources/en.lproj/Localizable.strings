@@ -10,6 +10,7 @@
 "Close" = "Close";
 "Cancel" = "Cancel";
 "CanceledPayment" = "The payment is canceled";
+"CanceledAttachCard" = "Attach card is canceled";
 "Done" = "Done";
 "Delete" = "DELETE";
 "Details" = "Details";

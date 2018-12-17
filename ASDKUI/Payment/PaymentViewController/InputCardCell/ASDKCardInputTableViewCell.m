@@ -411,7 +411,7 @@ typedef enum
 	[self updatePlaceholders];
 	
 	[self.labelSaveCard setBackgroundColor:nil];
-    self.labelSaveCard.text = LOC(@"Transfer.saveCard");
+    self.labelSaveCard.text = LOC(@"acq_saved_card_label");
 	[self.switchSaveCard setBackgroundColor:nil];
 	
 	if (!_textColor)
@@ -842,7 +842,7 @@ typedef enum
 	NSDictionary *cardCVCAttributes = _cvcValidationFailed ? self.invalidPlaceholderAttributes : self.placeholderAttributes;
 	
 	[self.textFieldCardNumber setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:placeholderText attributes:cardNumberAttributes]];
-	[self.textFieldCardDate setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:LOC(@"Transfer.CardDate.placeholder") attributes:cardDateAttributes]];
+	[self.textFieldCardDate setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:LOC(@"acq_exp_date_hint") attributes:cardDateAttributes]];
 	[self.textFieldCardCVC setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:LOC(cvcPlaceholderText) attributes:cardCVCAttributes]];
     [self.secretCVVTextField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:LOC(cvcPlaceholderText) attributes:cardCVCAttributes]];
 }
@@ -965,9 +965,7 @@ typedef enum
 		{
 			//[textField resignFirstResponder];
 			if (self.extendedModeEnabled && !self.secureModeEnabled)
-			{
-				//[textField resignFirstResponder];
-                
+			{                
                 if ([self validateDate])
                 {
                     [self.textFieldCardCVC becomeFirstResponder];

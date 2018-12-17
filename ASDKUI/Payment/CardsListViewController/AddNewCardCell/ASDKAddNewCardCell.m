@@ -22,24 +22,7 @@
 
 + (instancetype)newCell
 {
-    ASDKAddNewCardCell *newCell = [[[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
-    
-    if (newCell)
-    {
-    }
-    
-    return newCell;
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+	return [[[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
 }
 
 @end

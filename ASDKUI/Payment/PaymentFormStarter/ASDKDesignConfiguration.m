@@ -42,6 +42,11 @@
 @property (nonatomic, strong) UIButton *_attachCardCustomButton;
 @property (nonatomic, strong) NSString *_attachCardButtonTitle;
 @property (nonatomic, assign) UIModalPresentationStyle _presentStyleModal;
+//
+@property (nonatomic, assign) NSString *localizableTable;
+@property (nonatomic, assign) NSBundle *localizableBundle;
+//
+@property (nonatomic, assign) NSString *payViewControllerTitle;
 
 @end
 
@@ -275,6 +280,16 @@
 - (void)setModalPresentationStyle:(UIModalPresentationStyle)value
 {
 	self._presentStyleModal = value;
+}
+
+- (void)setPayViewTitle:(NSString *)title
+{
+	self.payViewControllerTitle = title;
+}
+
+- (NSString *)payViewTitle
+{
+	return self.payViewControllerTitle;
 }
 
 @end

@@ -55,7 +55,7 @@
 #pragma mark -
 #pragma mark Localization
 
-#define LOC(key)									[[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:@"ASDKLocalizable"]
+//#define LOC(key)									[[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:@"ASDKLocalizable"]
 
 ///////////////////////////////////////////////////////////////////
 #pragma mark

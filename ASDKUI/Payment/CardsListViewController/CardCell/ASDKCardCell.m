@@ -36,13 +36,7 @@
 
 + (instancetype)newCell
 {
-    ASDKCardCell *newCell = [[[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
-    
-    if (newCell)
-    {
-    }
-    
-    return newCell;
+    return [[[NSBundle bundleForClass:[self class]] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] firstObject];
 }
 
 - (void)setCheck:(BOOL)value
@@ -100,6 +94,5 @@
 	
     [self.paymentSystemLogoImageView setImage:[UIImage imageNamed:imageName inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil]];
 }
-
 
 @end

@@ -17,29 +17,43 @@
   limitations under the License.
 */
 
-"Common.Cancel" = "Cancel";
-"Common.Close" = "Close";
-"Common.error" = "Error";
-
-"Title.CardsList" = "Select card";
-
-"paymentForm.title" = "Payment";
-"PaymentForm.payButtonTitle" = "Pay";
-"PaymentForm.summCellTitle" = "Total sum:";
-"PaymentForm.changeCard" = "сhange";
-"Transfer.CardDate.placeholder" = "MM/YY";
-
-"CardsList.AddNewCard" = "New card number";
-
-"Transfer.CardNumber.Sender" = "Card number";
-
-"externalCardsCell.savedCard" = "Saved card";
-"externalCardsCell.newCard" = "New card";
-
-"emailCell.placeholder" = "E-mail for receipt";
-
-"attachCard.emailCellPlaceholder" = "E-mail";
-"attachCard.attach" = "Attach card";
-
-"NSPhotoLibraryUsageDescription" = "";
-"NSCameraUsageDescription" = "";
+"acq_new_card_label" = "New card";
+"acq_saved_card_label" = "Linked card";
+"acq_change_card_label" = "Change";
+"acq_money_label" = "На сумму:";
+"acq_card_number_hint" = "PAN";
+"acq_recurrent_mode_card_hint" = "Choose card";
+"acq_exp_date_hint" = "MM/YY";
+"acq_cvc_hint" = "CVC";
+"acq_email_hint" = "E-mail for receipt";
+"acq_email" = "E-mail";
+"acq_pay" = "Оплатить";
+"acq_add_card" = "Add";
+"acq_check" = "Check";
+"acq_pay_with_amount" = "Pay %@ ₽";
+"acq_money_amount_format" = "%@ ₽";
+"acq_screen_title" = "Pay";
+"acq_enter_new_card_label" = "Add new card";
+"acq_delete_label" = "Delete";
+"acq_btn_cancel" = "Cancel";
+"acq_btn_close" = "Close";
+"acq_btn_change" = "Change";
+"acq_dialog_dismiss_btn" = "OK";
+"acq_default_error_title" = "Error";
+"acq_default_error_message" = "Something went wrong";
+"acq_network_error_message" = "Probably the Internet connection is interrupted, try again later";
+"acq_cant_delete_card_message" = "Не удалось удалить карту, попробуйте позже";
+"acq_progress_dialog_text" = "Payment…";
+"acq_progress_dialog_attach_card_text" = "Attaching card…";
+"acq_invalid_email" = "Incorrect e-mail";
+"acq_invalid_card" = "Incorrect PAN";
+"acq_attaching_card_loop_title" = "In order to confirm the binding of your card we wrote off and returned a small amount of money (up to 1,99 ₽)/ Please, specify the sum with accuracy to amount of coins.";
+"acq_attaching_card_loop_parse_error" = "Введите корректную сумму в копейках";
+"acq_attaching_card_loop_amount_hint" = "Заблокированная сумма";
+"acq_no_scan_providers" = "Отсутвуют провайдеры для сканирования";
+"acq_complete_payment" = "Для совершения платежа, введите CVC";
+"acq_complete_payment_ok" = "ОК";
+"acq_scan_type_camera" = "Scan with camera";
+"acq_title_card_list" = "Select card";
+"acq_title_card_number" = "Номер карты для оплаты";
+"acq_title_add_card" = "Attaching card";

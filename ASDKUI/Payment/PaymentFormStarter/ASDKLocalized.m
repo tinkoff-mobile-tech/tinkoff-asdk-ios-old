@@ -1,0 +1,70 @@
+//
+//  ASDKLocalized.m
+//  ASDKUI
+//
+//  Created by v.budnikov on 19.11.2018.
+//  Copyright © 2018 TCS Bank. All rights reserved.
+//
+
+#import "ASDKLocalized.h"
+
+@interface ASDKLocalized ()
+
+@property (nonatomic, assign) NSString *localizableTable;
+@property (nonatomic, assign) NSBundle *localizableBundle;
+
+@end
+
+@implementation ASDKLocalized
+
+static ASDKLocalized *_sharedObjectASDKLocalized = nil;
+
++ (instancetype)sharedInstance
+{
+	static dispatch_once_t onceToken = 0;
+	__strong static id _sharedObjectASDKLocalized = nil;
+	dispatch_once(&onceToken,
+				  ^{
+					  _sharedObjectASDKLocalized = [[self alloc] init];
+				  });
+
+	return _sharedObjectASDKLocalized;
+}
+
+- (instancetype)init
+{
+	if (self = [super init])
+	{
+		_localizableTable = @"ASDKLocalizable";
+		_localizableBundle = [NSBundle bundleForClass:[self class]];
+	}
+
+	return self;
+}
+
+- (void)setLocalizedTable:(NSString *)table
+{
+	_localizableTable = table;
+}
+
+- (void)setLocalizedBundle:(NSBundle *)bundle
+{
+	_localizableBundle = bundle;
+}
+
+- (NSString *)localizedStringForKey:(NSString *)key bundle:(NSBundle *)bundle localizedTable:(NSString *)table
+{
+	return [bundle localizedStringForKey:key value:@"" table:table];
+}
+
+- (NSString *)localizedStringForKey:(NSString *)key bundle:(NSBundle *)bundle
+{
+	return [bundle localizedStringForKey:key value:@"" table:self.localizableTable];
+}
+
+- (NSString *)localizedStringForKey:(NSString *)key
+{
+	return [self.localizableBundle localizedStringForKey:key value:@"" table:self.localizableTable];
+}
+
+@end

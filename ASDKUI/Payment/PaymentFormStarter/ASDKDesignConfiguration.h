@@ -133,4 +133,13 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
 
 - (void)setModalPresentationStyle:(UIModalPresentationStyle)value;
 
+/*!
+ *  @discussion Установить заголовок экрана оплатить
+ *
+ *  @param title - название экрана
+ */
+
+- (void)setPayViewTitle:(NSString *)title;
+- (NSString *)payViewTitle;
+
 @end

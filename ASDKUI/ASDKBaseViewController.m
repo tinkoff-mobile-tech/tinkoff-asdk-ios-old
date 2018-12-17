@@ -32,7 +32,6 @@
     ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
 	if (designConfiguration)
 	{
-		NSLog(@"DESIGN!!! %@",designConfiguration);
 		self.navigationController.navigationBar.barStyle = [designConfiguration navigationBarStyle];
 		[self.navigationController.navigationBar setBackgroundImage:[ASDKUtils imageFromColor:[designConfiguration navigationBarColor]] forBarMetrics:UIBarMetricsDefault];
 

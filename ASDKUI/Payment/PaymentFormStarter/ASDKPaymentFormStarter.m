@@ -60,11 +60,6 @@
 
 static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 
-- (void)dealloc
-{
-    NSLog(@"STARTER DEALLOC");
-}
-
 + (instancetype)instance
 {
     @synchronized(self)
@@ -415,7 +410,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			 //ErrorCode == 104
 			 if ([[errorResponse.dictionary objectForKey:@"ErrorCode"] integerValue] == 104)
 			 {
-				 [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{
+				 [[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey] updateCardsListWithSuccessBlock:^{
 					 ASDKCard *selectedCard = [[ASDKCardsListDataController instance] cardByRebillId:rebillId];
 					 if (selectedCard != nil)
 					 {
@@ -463,7 +458,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 						 }
 					 }
 				 } errorBlock:^(ASDKAcquringSdkError *error) {
-
+					 [ASDKPaymentFormStarter resetSharedInstance];
+					 onError(error);
 				 }];
 			 }
 			 else

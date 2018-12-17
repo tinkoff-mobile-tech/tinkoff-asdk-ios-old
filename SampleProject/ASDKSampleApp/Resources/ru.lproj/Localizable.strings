@@ -10,6 +10,7 @@
 "Close" = "Закрыть";
 "Cancel" = "Отмена";
 "CanceledPayment" = "Оплата отменена";
+"CanceledAttachCard" = "Сохранение карты";
 "Done" = "Готово";
 "Delete" = "УДАЛИТЬ";
 "Details" = "ПОДРОБНЕЕ";
