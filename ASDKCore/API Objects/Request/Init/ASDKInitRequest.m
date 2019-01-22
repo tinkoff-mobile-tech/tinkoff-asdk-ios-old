@@ -33,6 +33,9 @@
                                recurrent:(BOOL)recurrent
 				   additionalPaymentData:(NSDictionary *)data
 							 receiptData:(NSDictionary *)receiptData
+							   shopsData:(NSArray *)shopsData
+					   shopsReceiptsData:(NSArray *)shopsReceiptsData
+								location:(NSString *)location
 {
     ASDKInitRequest *request = [[ASDKInitRequest alloc] init];
     
@@ -50,6 +53,9 @@
         request.recurrent = recurrent;
 		request.additionalPaymentData = data;
 		request.receiptData = receiptData;
+		request.shopsData = shopsData;
+		request.shopsReceiptsData = shopsReceiptsData;
+		request.location = location;
     }
 
     return request;

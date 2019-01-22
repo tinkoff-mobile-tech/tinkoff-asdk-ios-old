@@ -10,8 +10,9 @@
 
 @interface ASDKLocalized ()
 
-@property (nonatomic, assign) NSString *localizableTable;
-@property (nonatomic, assign) NSBundle *localizableBundle;
+@property (nonatomic, copy) NSString *localizableTable;
+@property (nonatomic, strong) NSBundle *localizableBundle;
+@property (nonatomic, copy) NSString *localeIdentifier;
 
 @end
 
@@ -37,6 +38,7 @@ static ASDKLocalized *_sharedObjectASDKLocalized = nil;
 	{
 		_localizableTable = @"ASDKLocalizable";
 		_localizableBundle = [NSBundle bundleForClass:[self class]];
+		_localeIdentifier = [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
 	}
 
 	return self;
@@ -65,6 +67,11 @@ static ASDKLocalized *_sharedObjectASDKLocalized = nil;
 - (NSString *)localizedStringForKey:(NSString *)key
 {
 	return [self.localizableBundle localizedStringForKey:key value:@"" table:self.localizableTable];
+}
+
+- (void)setSMSLocaleIdentifier:(NSString *)localeIdentifier
+{
+	_localeIdentifier = localeIdentifier;
 }
 
 @end

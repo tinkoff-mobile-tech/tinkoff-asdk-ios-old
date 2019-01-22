@@ -198,6 +198,8 @@
 						makeCharge:NO
 			 additionalPaymentData:nil
 					   receiptData:nil
+						 shopsData:nil
+				 shopsReceiptsData:nil
                 fromViewController:self
                            success:^(ASDKPaymentInfo *paymentInfo)
      {

@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, CellType)
 @interface SettingsViewController ()
 
 @property (nonatomic, strong) NSArray *tableViewDataSource;
-@property (nonatomic, assign) NSString *addNewCardCheckType;
+@property (nonatomic, strong) NSString *addNewCardCheckType;
 
 @end
 

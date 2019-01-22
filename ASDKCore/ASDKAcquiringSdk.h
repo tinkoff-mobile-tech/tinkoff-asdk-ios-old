@@ -72,6 +72,9 @@
              recurrent:(BOOL)recurrent
  additionalPaymentData:(NSDictionary *)data
 		   receiptData:(NSDictionary *)receiptData
+			 shopsData:(NSArray *)shopsData
+	 shopsReceiptsData:(NSArray *)shopsReceiptsData
+			  location:(NSString *)location
                success:(void (^)(ASDKInitResponse *response))success
                failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
@@ -99,9 +102,6 @@
                            cardId:(NSNumber *)cardId
                           success:(void (^)(ASDKRemoveCardResponse *response))success
                           failure:(void (^)(ASDKAcquringSdkError *error))failure;
-
-//- (void)getUrlWithSuccess:(void (^)(NSURL *url))success
-//                  failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
 - (void)rejectTrancastionWithPaymentId:(NSString *)paymentId
 							   success:(void (^)(ASDKCancelResponse *response))success

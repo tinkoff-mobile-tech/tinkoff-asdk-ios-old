@@ -99,6 +99,8 @@
 			 makeCharge:(BOOL)makeCharge
   additionalPaymentData:(NSDictionary *)data
 			receiptData:(NSDictionary *)receiptData
+			  shopsData:(NSArray *)shopsData
+	  shopsReceiptsData:(NSArray *)shopsReceiptsData
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)(void))onCancelled
@@ -186,6 +188,8 @@
 												  makeCharge:makeCharge
 									   additionalPaymentData:data
 												 receiptData:receiptData
+												   shopsData:shopsData
+										   shopsReceiptsData:shopsReceiptsData
                                                      success:^(ASDKPaymentInfo *paymentInfo)
      {
 		 [[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":description, kASDKStatus:paymentInfo.status}];
@@ -215,6 +219,8 @@
 			   description:(NSString *)description
 	 additionalPaymentData:(NSDictionary *)data
 			   receiptData:(NSDictionary *)receiptData
+				 shopsData:(NSArray *)shopsData
+		 shopsReceiptsData:(NSArray *)shopsReceiptsData
 		fromViewController:(UIViewController *)viewController
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 					 error:(void (^)(ASDKAcquringSdkError *error))onError
@@ -229,7 +235,15 @@
 	
 	paymentFormStarter.cardScanner = [ASDKCardIOScanner scanner];
 
-	[paymentFormStarter chargeWithRebillId:rebillId amount:amount orderId:[NSNumber numberWithDouble:randomOrderId].stringValue description:description customerKey:[PayController customerKey] additionalPaymentData:data receiptData:receiptData
+	[paymentFormStarter chargeWithRebillId:rebillId
+									amount:amount
+								   orderId:[NSNumber numberWithDouble:randomOrderId].stringValue
+							   description:description
+							   customerKey:[PayController customerKey]
+					 additionalPaymentData:data
+							   receiptData:receiptData
+								 shopsData:shopsData
+						 shopsReceiptsData:shopsReceiptsData
 		success:^(ASDKPaymentInfo *paymentInfo) {
 			[[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":([description length] > 0 ? description: @""), kASDKStatus:paymentInfo.status}];
 
@@ -279,6 +293,8 @@
 					recurrent:(BOOL)recurrent
 		additionalPaymentData:(NSDictionary *)data
 				  receiptData:(NSDictionary *)receiptData
+					shopsData:(NSArray *)shopsData
+			shopsReceiptsData:(NSArray *)shopsReceiptsData
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)(void))onCancelled
@@ -299,6 +315,8 @@
 												recurrent:YES
 									additionalPaymentData:data
 											  receiptData:receiptData
+												shopsData:shopsData
+										shopsReceiptsData:shopsReceiptsData
 												  success:^(ASDKPaymentInfo *paymentInfo) {
 													  [[TransactionHistoryModelController sharedInstance] addTransaction:@{@"paymentId":paymentInfo.paymentId, @"paymentInfo":paymentInfo.dictionary, @"summ":amount, @"description":description, kASDKStatus:paymentInfo.status}];
 													  PaymentSuccessViewController *vc = [[PaymentSuccessViewController alloc] init];

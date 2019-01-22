@@ -38,6 +38,8 @@
 					makeCharge:(BOOL)makeCharge
 		 additionalPaymentData:(NSDictionary *)data
 				   receiptData:(NSDictionary *)receiptData
+					 shopsData:(NSArray *)shopsData
+			 shopsReceiptsData:(NSArray *)shopsReceiptsData
                        success:(void (^)(ASDKPaymentInfo *paymentInfo))success
                      cancelled:(void (^)(void))cancelled
                          error:(void (^)(ASDKAcquringSdkError *error))error;

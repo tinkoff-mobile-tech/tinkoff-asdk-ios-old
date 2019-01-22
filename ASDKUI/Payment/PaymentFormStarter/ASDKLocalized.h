@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define LOC(key) [[ASDKLocalized sharedInstance] localizedStringForKey:(key)]
-//#define LOC(key)                                    [[NSBundle bundleForClass:[self class]] localizedStringForKey:(key) value:@"" table:@"ASDKLocalizable"]
+
+#define SMSLocaleIdentifierRU @"ru_ru"
+#define SMSLocaleIdentifierEN @"en_en"
 
 @interface ASDKLocalized : NSObject
 
@@ -41,6 +43,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param bundle - расположение файла локализации
  */
 - (void)setLocalizedBundle:(NSBundle *)bundle;
+
+/*!
+ *  @discussion локализация для смс
+ *
+ *  @param localeIdentifier - значения в формате "ru_ru" для смс на русском или "en_en" для смс на английском
+ * 	по умолчанию инициализируется как [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
+ */
+- (void)setSMSLocaleIdentifier:(NSString *)localeIdentifier;
+- (NSString *)localeIdentifier;
 
 @end
 

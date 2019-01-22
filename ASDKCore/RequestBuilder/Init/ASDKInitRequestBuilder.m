@@ -21,7 +21,7 @@
 
 @interface ASDKInitRequestBuilder ()
 
-@property (nonatomic, strong) NSString *amount;
+@property (nonatomic, copy) NSString *amount;
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, copy) NSString *customerKey;
 @property (nonatomic, copy) NSString *requestDescription;
@@ -30,6 +30,9 @@
 @property (nonatomic) BOOL recurrent;
 @property (nonatomic, strong) NSDictionary *additionalPaymentData;
 @property (nonatomic, strong) NSDictionary *receiptData;
+@property (nonatomic, strong) NSArray *shopsData;
+@property (nonatomic, strong) NSArray *shopsReceiptsData;
+@property (nonatomic, copy) NSString *location;
 
 @end
 
@@ -46,6 +49,9 @@
                                      password:(NSString *)password
 						additionalPaymentData:(NSDictionary *)data
 								  receiptData:(NSDictionary *)receiptData
+									shopsData:(NSArray *)shopsData
+							shopsReceiptsData:(NSArray *)shopsReceiptsData
+									 location:(NSString *)location
 {
     ASDKInitRequestBuilder *builder = [[ASDKInitRequestBuilder alloc] init];
     
@@ -62,6 +68,9 @@
         builder.password = password;
 		builder.additionalPaymentData = data;
 		builder.receiptData = receiptData;
+		builder.shopsData = shopsData;
+		builder.shopsReceiptsData = shopsReceiptsData;
+		builder.location = location;
     }
 
     return builder;
@@ -92,7 +101,10 @@
                                                                 customerKey:self.customerKey
                                                                   recurrent:self.recurrent
 													  additionalPaymentData:self.additionalPaymentData
-																receiptData:self.receiptData];
+																receiptData:self.receiptData
+																  shopsData:self.shopsData
+														  shopsReceiptsData:self.shopsReceiptsData
+																   location:self.location];
 
     return request;
 }
@@ -175,17 +187,6 @@
 	
 	if ([self.additionalPaymentData count] > 0)
 	{
-//		if ([self.additionalPaymentData objectForKey:@"Email"] == nil && [self.additionalPaymentData objectForKey:@"email"] == nil)
-//		{
-//			validationError = [ASDKAcquringSdkError errorWithMessage:kASDKDATA details:@"Обязательным является наличие дополнительного параметра 'Email'" code:0];
-//			
-//			[(ASDKAcquringSdkError *)validationError setIsSdkError:NO];
-//			
-//			*error = validationError;
-//			
-//			return;
-//		}
-
 		BOOL invalidAdditionalPaymentData = NO;
 		if ([[self.additionalPaymentData allKeys] count] > 20)
 		{
@@ -249,8 +250,7 @@
         [parameters setObject:@"Y" forKey:kASDKRecurrent];
     }
 
-	NSString *location = [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
-	if ([location rangeOfString:@"ru_"].location == NSNotFound)
+	if (self.location && [self.location rangeOfString:@"ru_"].location == NSNotFound)
 	{
 		[parameters setObject:@"en" forKey:@"Language"];
 	}
@@ -260,23 +260,15 @@
 
 - (NSString *)encodeURL:(NSString *)string
 {
-//	NSMutableCharacterSet * characterSet = [NSMutableCharacterSet URLQueryAllowedCharacterSet];
-//	NSString *newString = [string stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
-	
 	NSMutableCharacterSet * characterSet = [NSMutableCharacterSet characterSetWithCharactersInString:@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"];
 	[characterSet invert];
 	NSString *newString = [string stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
 
-//	NSString *newString = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-//																								(__bridge CFStringRef)string,
-//																								NULL,
-//																								(CFStringRef)@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`",
-//																								CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding));
 	if (newString)
 	{
 		return newString;
 	}
-	
+
 	return @"";
 }
 

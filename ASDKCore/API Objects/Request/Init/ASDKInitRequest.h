@@ -31,6 +31,9 @@
 @property (nonatomic) BOOL recurrent;
 @property (nonatomic, strong) NSDictionary *additionalPaymentData;
 @property (nonatomic, strong) NSDictionary *receiptData;
+@property (nonatomic, strong) NSArray *shopsData;
+@property (nonatomic, strong) NSArray *shopsReceiptsData;
+@property (nonatomic, copy) NSString *location;
 
 - (ASDKInitRequest *)initWithTerminalKey:(NSString *)terminalKey
                                   amount:(NSString *)amount
@@ -42,6 +45,9 @@
                              customerKey:(NSString *)customerKey
                                recurrent:(BOOL)recurrent
 				   additionalPaymentData:(NSDictionary *)data
-							 receiptData:(NSDictionary *)receiptData;
+							 receiptData:(NSDictionary *)receiptData
+							   shopsData:(NSArray *)shopsData
+					   shopsReceiptsData:(NSArray *)shopsReceiptsData
+								location:(NSString *)location;
 
 @end

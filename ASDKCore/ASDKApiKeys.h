@@ -60,6 +60,8 @@
 #define kASDKDescription                    @"Description"
 #define kASDKDATA                           @"DATA"
 #define kASDKReceipt						@"Receipt"
+#define kASDKShops							@"Shops"
+#define kASDKReceipts						@"Receipts"
 #define kASDKPayForm                        @"PayForm"
 #define kASDKPayType                        @"PayType"
 #define kASDKRecurrent                      @"Recurrent"

@@ -20,6 +20,8 @@
 			 makeCharge:(BOOL)makeCharge
   additionalPaymentData:(NSDictionary *)data
 			receiptData:(NSDictionary *)receiptData
+			  shopsData:(NSArray *)shopsData
+	  shopsReceiptsData:(NSArray *)shopsReceiptsData
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)(void))onCancelled
@@ -30,6 +32,8 @@
 			   description:(NSString *)description
 	 additionalPaymentData:(NSDictionary *)data
 			   receiptData:(NSDictionary *)receiptData
+				 shopsData:(NSArray *)shopsData
+		 shopsReceiptsData:(NSArray *)shopsReceiptsData
 		fromViewController:(UIViewController *)viewController
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 					 error:(void (^)(ASDKAcquringSdkError *error))onError;
@@ -45,6 +49,8 @@
 					recurrent:(BOOL)recurrent
 		additionalPaymentData:(NSDictionary *)data
 				  receiptData:(NSDictionary *)receiptData
+					shopsData:(NSArray *)shopsData
+			shopsReceiptsData:(NSArray *)shopsReceiptsData
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)(void))onCancelled

@@ -87,6 +87,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 @property (nonatomic, strong) ASDKCard *selectedCard;
 @property (nonatomic, strong) NSDictionary *additionalPaymentData;
 @property (nonatomic, strong) NSDictionary *receiptData;
+@property (nonatomic, strong) NSArray *shopsData;
+@property (nonatomic, strong) NSArray *shopsReceiptsData;
 
 @property (nonatomic, assign) BOOL updateCardCell;
 @property (nonatomic, assign) BOOL makeCharge;
@@ -116,6 +118,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 					makeCharge:(BOOL)makeCharge
 		 additionalPaymentData:(NSDictionary *)data
 				   receiptData:(NSDictionary *)receiptData
+					 shopsData:(NSArray *)shopsData
+			 shopsReceiptsData:(NSArray *)shopsReceiptsData
                        success:(void (^)(ASDKPaymentInfo *paymentInfo))success
                      cancelled:(void (^)(void))cancelled
                          error:(void (^)(ASDKAcquringSdkError *error))error
@@ -137,6 +141,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		_requrent = recurrent;
 		_additionalPaymentData = data;
 		_receiptData = receiptData;
+		_shopsData = shopsData;
+		_shopsReceiptsData = shopsReceiptsData;
 		_updateCardCell = NO;
 		_makeCharge = makeCharge;
 		_chargeError = NO;
@@ -961,6 +967,9 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 							recurrent:_requrent
 				additionalPaymentData:[paymentData copy]
 						  receiptData:_receiptData
+							shopsData:_shopsData
+					shopsReceiptsData:_shopsReceiptsData
+							 location:ASDKLocalized.sharedInstance.localeIdentifier
                               success:^(ASDKInitResponse *response)
     {
         __strong typeof(weakSelf) strongSelf = weakSelf;

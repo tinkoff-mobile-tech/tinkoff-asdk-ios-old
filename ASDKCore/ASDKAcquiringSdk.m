@@ -37,15 +37,12 @@
 @interface ASDKAcquiringSdk () <ASDKAcquiringApiLoggerDelegate>
 
 @property (nonatomic, strong) ASDKAcquiringApi *acquiringApi;
-
 @property (nonatomic, strong) NSString *payType;
 @property (nonatomic, strong) NSString *terminalKey;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) id<ASDKAcquiringSdkPublicKeyDataSource> publicKeyDataSource;
 
 @end
-
-
 
 
 @implementation ASDKAcquiringSdk
@@ -113,6 +110,9 @@
              recurrent:(BOOL)recurrent
  additionalPaymentData:(NSDictionary *)data
 		   receiptData:(NSDictionary *)receiptData
+			 shopsData:(NSArray *)shopsData
+	 shopsReceiptsData:(NSArray *)shopsReceiptsData
+			  location:(NSString *)location
                success:(void (^)(ASDKInitResponse *response))success
                failure:(void (^)(ASDKAcquringSdkError *error))failure
 {
@@ -128,7 +128,10 @@
 																	terminalKey:self.terminalKey
 																	   password:self.password
 														  additionalPaymentData:data
-																	receiptData:receiptData];
+																	receiptData:receiptData
+																	  shopsData:shopsData
+															  shopsReceiptsData:shopsReceiptsData
+																	   location:location];
     
     ASDKInitRequest *request = (ASDKInitRequest *)[builder buildError:&buildError];
     

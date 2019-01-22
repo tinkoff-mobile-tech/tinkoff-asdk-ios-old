@@ -42,10 +42,7 @@
 @property (nonatomic, strong) UIButton *_attachCardCustomButton;
 @property (nonatomic, strong) NSString *_attachCardButtonTitle;
 @property (nonatomic, assign) UIModalPresentationStyle _presentStyleModal;
-//
-@property (nonatomic, strong) NSString *localizableTable;
-@property (nonatomic, strong) NSBundle *localizableBundle;
-//
+
 @property (nonatomic, strong) NSString *payViewControllerTitle;
 
 @end

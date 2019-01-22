@@ -31,7 +31,7 @@
     UIStatusBarStyle _oldStatusBarStyle;
 }
 
-@property (nonatomic,strong) ASDKAcquiringSdk *acquiringSdk;
+@property (nonatomic, strong) ASDKAcquiringSdk *acquiringSdk;
 
 @property (nonatomic, strong) NSString *terminalKey;
 @property (nonatomic, strong) NSString *password;
@@ -127,6 +127,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 								  makeCharge:(BOOL)makeCharge
 					   additionalPaymentData:(NSDictionary *)data
 								 receiptData:(NSDictionary *)receiptData
+								   shopsData:(NSArray *)shopsData
+						   shopsReceiptsData:(NSArray *)shopsReceiptsData
                                      success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
                                    cancelled:(void (^)(void))onCancelled
                                        error:(void (^)(ASDKAcquringSdkError *error))onError
@@ -144,6 +146,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 																				   makeCharge:makeCharge
 																		additionalPaymentData:data
 																				  receiptData:receiptData
+																					shopsData:shopsData
+																			shopsReceiptsData:shopsReceiptsData
                                                                                       success:^(ASDKPaymentInfo *paymentInfo)
                                          {
                                              [ASDKPaymentFormStarter resetSharedInstance];
@@ -285,6 +289,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 								recurrent:(BOOL)recurrent
 					additionalPaymentData:(NSDictionary *)additionalPaymentData
 							  receiptData:(NSDictionary *)receiptData
+								shopsData:(NSArray *)shopsData
+						shopsReceiptsData:(NSArray *)shopsReceiptsData
 								  success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 								cancelled:(void (^)(void))onCancelled
 									error:(void (^)(ASDKAcquringSdkError *error))onError
@@ -294,7 +300,17 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	self.onError = onError;
 	self.onCancelled = onCancelled;
 
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue] orderId:orderId description:nil payForm:nil customerKey:customerKey recurrent:recurrent additionalPaymentData:additionalPaymentData receiptData:receiptData
+	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue]
+							  orderId:orderId
+						  description:nil
+							  payForm:nil
+						  customerKey:customerKey
+							recurrent:recurrent
+				additionalPaymentData:additionalPaymentData
+						  receiptData:receiptData
+							shopsData:shopsData
+					shopsReceiptsData:shopsReceiptsData
+							 location:ASDKLocalized.sharedInstance.localeIdentifier
 		success:^(ASDKInitResponse *response){
 			self.paymentIdForApplePay = response.paymentId;
 			
@@ -380,6 +396,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			   customerKey:(NSString *)customerKey
 	 additionalPaymentData:(NSDictionary *)data
 			   receiptData:(NSDictionary *)receiptData
+				 shopsData:(NSArray *)shopsData
+		 shopsReceiptsData:(NSArray *)shopsReceiptsData
 				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
 		   needShowConfirm:(void (^)(UIViewController *vc))paymentConfirm
 					 error:(void (^)(ASDKAcquringSdkError *error))onError
@@ -400,6 +418,9 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 							recurrent:NO
 				additionalPaymentData:paymentData
 						  receiptData:receiptData
+							shopsData:shopsData
+					shopsReceiptsData:shopsReceiptsData
+							 location:ASDKLocalized.sharedInstance.localeIdentifier
 	 success:^(ASDKInitResponse *response) {
 		 [self.acquiringSdk chargeWithPaymentId:response.paymentId rebillId:rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
 			 [ASDKPaymentFormStarter resetSharedInstance];
@@ -427,6 +448,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 																										makeCharge:YES
 																							 additionalPaymentData:paymentData
 																									   receiptData:receiptData
+																										 shopsData:shopsData
+																								 shopsReceiptsData:shopsReceiptsData
 																										   success:^(ASDKPaymentInfo *paymentInfo)
 															  {
 																  [ASDKPaymentFormStarter resetSharedInstance];

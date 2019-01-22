@@ -32,6 +32,9 @@
                                   terminalKey:(NSString *)terminalKey
                                      password:(NSString *)password
 						additionalPaymentData:(NSDictionary *)data
-								  receiptData:(NSDictionary *)receiptData;
+								  receiptData:(NSDictionary *)receiptData
+									shopsData:(NSArray *)shopsData
+							shopsReceiptsData:(NSArray *)shopsReceiptsData
+									 location:(NSString *)location;
 
 @end

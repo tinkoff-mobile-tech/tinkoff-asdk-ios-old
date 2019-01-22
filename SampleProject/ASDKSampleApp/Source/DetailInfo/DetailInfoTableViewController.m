@@ -177,10 +177,15 @@
 
 - (void)buyCharge
 {
-	[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId] amount:self.item.cost description:nil additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
+	[PayController chargeWithRebillId:[[[ASDKCardsListDataController instance] cardWithRebillId] rebillId]
+							   amount:self.item.cost
+						  description:nil
+				additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
 						  receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
 										@"Items":@[@{@"Name":@"Название товара 1",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
 												   @{@"Name":@"Название товара 2",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
+							shopsData:nil
+					shopsReceiptsData:nil
 				   fromViewController:self
 							  success:^(ASDKPaymentInfo *paymentInfo) {
 								  NSLog(@"%@",paymentInfo.paymentId);
@@ -192,11 +197,17 @@
 
 - (void)buyFromCard
 {
-	[PayController buyItemWithName:self.item.title description:self.item.bookDescription amount:self.item.cost recurrent:![ASDKTestSettings makeCharge] makeCharge:[ASDKTestSettings makeCharge]
+	[PayController buyItemWithName:self.item.title
+					   description:self.item.bookDescription
+							amount:self.item.cost
+						 recurrent:![ASDKTestSettings makeCharge]
+						makeCharge:[ASDKTestSettings makeCharge]
 			 additionalPaymentData:nil//@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
 					   receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
 									 @"Items":@[@{@"Name":@"Название товара 1",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
 												@{@"Name":@"Название товара 2",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
+						 shopsData:nil
+				 shopsReceiptsData:nil
 				fromViewController:self
 						   success:^(ASDKPaymentInfo *paymentInfo)
 	 {
@@ -239,6 +250,8 @@
 								 receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
 											   @"Items":@[@{@"Name":@"Название товара 1", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
 														  @{@"Name":@"Название товара 2", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
+								   shopsData:nil
+						   shopsReceiptsData:nil
 						  fromViewController:self
 									 success:^(ASDKPaymentInfo *paymentIfo) {
 										 NSLog(@"%@", paymentIfo.paymentId);

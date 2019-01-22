@@ -33,7 +33,6 @@ typedef NS_ENUM(NSInteger, APIVersion)
 @implementation ASDKAcquiringApi
 
 
-
 - (void)dealloc
 {
     NSLog(@"API DEALLOC");
@@ -262,8 +261,17 @@ typedef NS_ENUM(NSInteger, APIVersion)
 		[parameters setObject:request.receiptData forKey:kASDKReceipt];
 	}
 	
-	NSString *location = [[[NSLocale currentLocale] objectForKey:NSLocaleIdentifier] lowercaseString];
-	if ([location rangeOfString:@"ru_"].location == NSNotFound)
+	if (request.shopsData && request.shopsData.count > 0)
+	{
+		[parameters setObject:request.shopsData forKey:kASDKShops];
+	}
+	
+	if (request.shopsReceiptsData && request.shopsReceiptsData.count > 0)
+	{
+		[parameters setObject:request.shopsReceiptsData forKey:kASDKReceipts];
+	}
+
+	if (request.location && [request.location rangeOfString:@"ru_"].location == NSNotFound)
 	{
 		[parameters setObject:@"en" forKey:@"Language"];
 	}
