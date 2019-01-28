@@ -184,8 +184,6 @@
 						  receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
 										@"Items":@[@{@"Name":@"Название товара 1",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
 												   @{@"Name":@"Название товара 2",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
-							shopsData:nil
-					shopsReceiptsData:nil
 				   fromViewController:self
 							  success:^(ASDKPaymentInfo *paymentInfo) {
 								  NSLog(@"%@",paymentInfo.paymentId);
@@ -250,8 +248,6 @@
 								 receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
 											   @"Items":@[@{@"Name":@"Название товара 1", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
 														  @{@"Name":@"Название товара 2", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
-								   shopsData:nil
-						   shopsReceiptsData:nil
 						  fromViewController:self
 									 success:^(ASDKPaymentInfo *paymentIfo) {
 										 NSLog(@"%@", paymentIfo.paymentId);

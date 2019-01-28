@@ -20,12 +20,33 @@
 			 makeCharge:(BOOL)makeCharge
   additionalPaymentData:(NSDictionary *)data
 			receiptData:(NSDictionary *)receiptData
-			  shopsData:(NSArray *)shopsData
-	  shopsReceiptsData:(NSArray *)shopsReceiptsData
      fromViewController:(UIViewController *)viewController
                 success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
               cancelled:(void (^)(void))onCancelled
                   error:(void (^)(ASDKAcquringSdkError *error))onError;
+
++ (void)buyItemWithName:(NSString *)name
+			description:(NSString *)description
+				 amount:(NSNumber *)amount
+			  recurrent:(BOOL)recurrent
+			 makeCharge:(BOOL)makeCharge
+  additionalPaymentData:(NSDictionary *)data
+			receiptData:(NSDictionary *)receiptData
+			  shopsData:(NSArray *)shopsData
+	  shopsReceiptsData:(NSArray *)shopsReceiptsData
+	 fromViewController:(UIViewController *)viewController
+				success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+			  cancelled:(void (^)(void))onCancelled
+				  error:(void (^)(ASDKAcquringSdkError *error))onError;
+
++ (void)chargeWithRebillId:(NSNumber *)rebillId
+					amount:(NSNumber *)amount
+			   description:(NSString *)description
+	 additionalPaymentData:(NSDictionary *)data
+			   receiptData:(NSDictionary *)receiptData
+		fromViewController:(UIViewController *)viewController
+				   success:(void (^)(ASDKPaymentInfo *paymentInfo))onSuccess
+					 error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 + (void)chargeWithRebillId:(NSNumber *)rebillId
 					amount:(NSNumber *)amount
@@ -39,6 +60,22 @@
 					 error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 + (BOOL)isPayWithAppleAvailable;
+
++ (void)buyWithApplePayAmount:(NSNumber *)amount
+				  description:(NSString *)description
+						email:(NSString *)email
+			  appleMerchantId:(NSString *)appleMerchantId
+			  shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
+			  shippingContact:(PKContact *)shippingContact
+	   shippingEditableFields:(PKAddressField)shippingEditableFields
+					recurrent:(BOOL)recurrent
+		additionalPaymentData:(NSDictionary *)data
+				  receiptData:(NSDictionary *)receiptData
+		   fromViewController:(UIViewController *)viewController
+					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
+					cancelled:(void (^)(void))onCancelled
+						error:(void (^)(ASDKAcquringSdkError *error))onError;
+
 + (void)buyWithApplePayAmount:(NSNumber *)amount
 				  description:(NSString *)description
 						email:(NSString *)email
