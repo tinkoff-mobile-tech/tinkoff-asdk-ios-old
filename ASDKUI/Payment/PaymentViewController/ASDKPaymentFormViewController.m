@@ -1375,6 +1375,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 - (void)cardListDidChanged
 {
+	if ([[ASDKCardsListDataController instance] cardWithIdentifier:_selectedCard.cardId] == nil)
+	{
+		_selectedCard = nil;
+	}
+	
 	if (self.view.window == nil)
 	{
 		self.updateCardCell = YES;
