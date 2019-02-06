@@ -201,11 +201,10 @@
 						 recurrent:![ASDKTestSettings makeCharge]
 						makeCharge:[ASDKTestSettings makeCharge]
 			 additionalPaymentData:nil//@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
-					   receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
-									 @"Items":@[@{@"Name":@"Название товара 1",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
-												@{@"Name":@"Название товара 2",@"Price":@10000,@"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
-						 shopsData:nil
-				 shopsReceiptsData:nil
+					   receiptData:nil//@{@"Email":@"a@test.ru", @"Taxation":@"osn",@"Items":@[@{@"Name":@"Название товара 1",@"Price":@20000,@"Quantity":@1, @"Amount":@20000, @"Tax":@"vat10"}]}
+						 shopsData:@[@{@"Amount": @(10000),@"Fee": @"20",@"Name": @"Shop1",@"ShopCode": @"100"},@{@"Amount": @(10000),@"Name": @"Shop2",@"ShopCode": @"101"}]
+				 shopsReceiptsData:@[@{@"Email": @"a@a.ru",@"Items": @[@{@"Amount": @(10000),@"Name": @"name1",@"Price": @(10000),@"Quantity": @(1), @"Tax": @"vat20",@"QUANTITY_SCALE_FACTOR": @(3)}],@"ShopCode": @"100",@"Taxation": @"esn"},
+									 @{@"Email": @"a@a.ru",@"Items": @[@{@"Amount": @(10000),@"Name": @"name1",@"Price": @(10000),@"Quantity": @(1), @"Tax": @"vat20",@"QUANTITY_SCALE_FACTOR": @(3)}],@"ShopCode": @"101",@"Taxation": @"esn"}]
 				fromViewController:self
 						   success:^(ASDKPaymentInfo *paymentInfo)
 	 {
