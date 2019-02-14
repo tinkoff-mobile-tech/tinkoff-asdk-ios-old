@@ -44,6 +44,12 @@ static ASDKLocalized *_sharedObjectASDKLocalized = nil;
 	return self;
 }
 
+- (void)forceSetLanguage:(NSString *)language
+{
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:language ofType:@"lproj"];
+    _localizableBundle = [NSBundle bundleWithPath:path];
+}
+
 - (void)setLocalizedTable:(NSString *)table
 {
 	_localizableTable = table;

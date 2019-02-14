@@ -31,6 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)localizedStringForKey:(NSString *)key;
 
 /*!
+ *  @discussion Принудительно устанавливает локаль для локализации, незасисимо от локали устрйоства
+ *
+ *  @param language - принудительная локаль, например "ru","en"
+ */
+- (void)forceSetLanguage:(NSString *)language;
+
+/*!
  *  @discussion установить название файла локализации который будет использоваться по умолчанию
  *
  *  @param table - название файла строк локализации
