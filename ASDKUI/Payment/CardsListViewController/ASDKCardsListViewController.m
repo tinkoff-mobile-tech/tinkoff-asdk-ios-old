@@ -205,6 +205,8 @@ typedef enum
              	[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 			 	[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 			 [tableView endUpdates];
+			 
+			 [tableView setEditing:NO];
 
 			id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
 			if (cardsListDelegate && [cardsListDelegate respondsToSelector:@selector(cardListDidChanged)])
