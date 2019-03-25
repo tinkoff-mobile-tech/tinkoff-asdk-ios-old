@@ -71,6 +71,8 @@
 @property (nonatomic, strong) NSString *domainPath;
 @property (nonatomic, strong) NSString *domainPath_v2;
 
+@property (nonatomic, assign) NSInteger requestTimeoutInterval;
+
 + (ASDKAcquiringApi *)acquiringApiWithDomainPath:(NSString *)domainPath domainPath_v2:(NSString *)domainPath_v2;
 
 - (void)initWithRequest:(ASDKInitRequest *)request

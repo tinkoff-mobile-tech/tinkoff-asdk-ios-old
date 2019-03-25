@@ -58,6 +58,7 @@
 - (NSString *)domainPath;
 - (NSString *)domainPath_v2;
 - (SecKeyRef)publicKeyRef;
+- (NSInteger)apiRequestsTimeoutInterval;
 
 + (ASDKAcquiringSdk *)acquiringSdkWithTerminalKey:(NSString *)terminalKey
 										  payType:(NSString *)payType

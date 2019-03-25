@@ -101,6 +101,10 @@
 	self.acquiringApi.domainPath_v2 = [self domainPath_v2];
 }
 
+- (NSInteger)defaultRequestTimeout
+{
+	return self.acquiringApi.requestTimeoutInterval;
+}
 
 - (void)initWithAmount:(NSNumber *)amount
                orderId:(NSString *)orderId

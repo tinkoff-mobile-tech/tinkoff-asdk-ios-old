@@ -120,6 +120,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     self.navigationItem.leftBarButtonItem = [[ASDKBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel3DS)];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.threeDsData.ACSUrl];
+	request.timeoutInterval = _acquiringSdk.apiRequestsTimeoutInterval;
     [request setHTTPMethod:@"POST"];
     NSString *dataString = [self stringFromParameters:[self parameters]];
 
@@ -128,7 +129,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     [request setHTTPBody:postData];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
-
+	
     [self.webView loadRequest:request];
 }
 

@@ -44,7 +44,8 @@ typedef NS_ENUM(NSInteger, APIVersion)
     
     acquiringApi.domainPath = domainPath;
 	acquiringApi.domainPath_v2 = domainPath_v2;
-    
+	acquiringApi.requestTimeoutInterval = 120;
+	
     return acquiringApi;
 }
 
@@ -63,6 +64,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	request.timeoutInterval = self.requestTimeoutInterval;
 	
 	if (apiVersion == APIVersion_v2)
 	{
