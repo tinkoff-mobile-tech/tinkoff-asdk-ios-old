@@ -101,7 +101,7 @@
 	self.acquiringApi.domainPath_v2 = [self domainPath_v2];
 }
 
-- (NSInteger)defaultRequestTimeout
+- (NSInteger)apiRequestsTimeoutInterval
 {
 	return self.acquiringApi.requestTimeoutInterval;
 }
