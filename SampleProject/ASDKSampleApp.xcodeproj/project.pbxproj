@@ -682,7 +682,7 @@
 				CODE_SIGN_ENTITLEMENTS = ASDKSampleApp/ASDKSampleApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8SEFGGQX9M;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ASDKSampleApp",
@@ -706,7 +706,7 @@
 				CODE_SIGN_ENTITLEMENTS = ASDKSampleApp/ASDKSampleApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8SEFGGQX9M;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ASDKSampleApp",
