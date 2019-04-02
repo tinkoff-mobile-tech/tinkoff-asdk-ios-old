@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XpX-iD-Nm5">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Pay Info Controller-->
+        <scene sceneID="AC5-69-mDB">
+            <objects>
+                <viewController storyboardIdentifier="PayInfoController" title="Pay Info Controller" id="XpX-iD-Nm5" customClass="PayInfoController" customModule="Vendopay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sSB-z7-i22">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Price" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="569-fa-sJu">
+                                <rect key="frame" x="135.5" y="223.5" width="104" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eR0-ui-iyF">
+                                <rect key="frame" x="146.5" y="518.5" width="82" height="30"/>
+                                <state key="normal" title="Attach Card"/>
+                                <connections>
+                                    <action selector="AttachCard:" destination="XpX-iD-Nm5" eventType="touchUpInside" id="NYn-nn-BEh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s90-ju-pIR" userLabel="Price">
+                                <rect key="frame" x="187.5" y="333.5" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <nil key="textColor"/>
+                                <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="shadowColor" white="0.33333333329999998" alpha="0.6628521127" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="2" height="-1"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqH-i2-REI">
+                                <rect key="frame" x="138.5" y="468.5" width="98" height="30"/>
+                                <state key="normal" title="Pay With Card"/>
+                                <connections>
+                                    <action selector="PayWithCard:" destination="XpX-iD-Nm5" eventType="touchUpInside" id="X4T-vD-H2H"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eR0-ui-iyF" firstAttribute="centerX" secondItem="sSB-z7-i22" secondAttribute="centerX" id="4qZ-y9-rlW"/>
+                            <constraint firstItem="569-fa-sJu" firstAttribute="centerY" secondItem="sSB-z7-i22" secondAttribute="centerY" constant="-100" id="7Wy-Y1-C66"/>
+                            <constraint firstItem="569-fa-sJu" firstAttribute="centerX" secondItem="sSB-z7-i22" secondAttribute="centerX" id="HpR-Wj-qyJ"/>
+                            <constraint firstItem="s90-ju-pIR" firstAttribute="centerY" secondItem="sSB-z7-i22" secondAttribute="centerY" id="K4T-rd-1DX"/>
+                            <constraint firstItem="JqH-i2-REI" firstAttribute="centerX" secondItem="sSB-z7-i22" secondAttribute="centerX" id="NLB-Cb-zQ1"/>
+                            <constraint firstItem="JqH-i2-REI" firstAttribute="centerY" secondItem="sSB-z7-i22" secondAttribute="centerY" constant="150" id="T1B-jx-6p2"/>
+                            <constraint firstItem="s90-ju-pIR" firstAttribute="centerX" secondItem="sSB-z7-i22" secondAttribute="centerX" id="acQ-bk-C7L"/>
+                            <constraint firstItem="eR0-ui-iyF" firstAttribute="centerY" secondItem="sSB-z7-i22" secondAttribute="centerY" constant="200" id="uYE-4B-m9n"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Rby-M8-2pP"/>
+                    </view>
+                    <connections>
+                        <outlet property="attachButton" destination="eR0-ui-iyF" id="OFW-gs-sFt"/>
+                        <outlet property="priceLabel" destination="s90-ju-pIR" id="gDv-gQ-2f0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="haL-8I-BHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3017" y="-572"/>
+        </scene>
+    </scenes>
+</document>
