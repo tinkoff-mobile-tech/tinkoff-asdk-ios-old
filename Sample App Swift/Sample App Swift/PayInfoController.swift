@@ -61,11 +61,37 @@ class PayInfoController: UIViewController {
         payOption = .Card
         pay()
     }
+    @IBAction func EditCards(_ sender: UIButton) {
+        guard let asdk_pfs = ASDKPaymentFormStarter.init(acquiringSdk: asdk) else {
+            return //TODO: restore state!
+        }
+        asdk_pfs.presentCardListForm(from: self, customerKey: customerKey, error: self.payError)
+    }
     
     @IBAction func AttachCard(_ sender: UIButton) {
         guard let asdk_pfs = ASDKPaymentFormStarter.init(acquiringSdk: asdk) else {
             return //TODO: restore state!
         }
+        
+        guard let design_config = asdk_pfs.designConfiguration else {
+            return //TODO: restore state!
+        }
+        
+        let des_elem:Array<NSNumber> =
+            [TableViewCellType.CellEmpty20px.rawValue as NSNumber,
+             TableViewCellType.CellAmount.rawValue as NSNumber,
+             TableViewCellType.CellPaymentCardRequisites.rawValue as NSNumber,
+             
+             TableViewCellType.CellEmptyFlexibleSpace.rawValue as NSNumber,
+             TableViewCellType.CellAttachButton.rawValue as NSNumber,
+             TableViewCellType.CellEmpty20px.rawValue as NSNumber,
+             TableViewCellType.CellSecureLogos.rawValue as NSNumber
+        ]
+        
+        design_config.setAttachCardItems(des_elem)
+        
+        print("Pay Form Items: \(String(describing: design_config.payFormItems()?.count))")
+        print(design_config.payFormItems())
         
         asdk_pfs.presentAttachForm(
             from: self,
@@ -73,7 +99,7 @@ class PayInfoController: UIViewController {
             formHeader: "Header",
             description: productDescription,
             email: email,
-            cardCheckType: ASDKCardCheckType_3DSHOLD,
+            cardCheckType: ASDKCardCheckType_NO,//ASDKCardCheckType_3DSHOLD,
             customerKey: customerKey,
             additionalData: nil,
             success: self.attachSuccess,
@@ -191,7 +217,7 @@ class PayInfoController: UIViewController {
                 email: email,
                 customerKey: customerKey,
                 recurrent: false,
-                makeCharge: true,
+                makeCharge: false,
                 additionalPaymentData: nil,
                 receiptData: nil,
                 success: self.paySuccess,

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XpX-iD-Nm5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XpX-iD-Nm5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--Pay Info Controller-->
         <scene sceneID="AC5-69-mDB">
             <objects>
-                <viewController storyboardIdentifier="PayInfoController" title="Pay Info Controller" id="XpX-iD-Nm5" customClass="PayInfoController" customModule="Vendopay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PayInfoController" title="Pay Info Controller" id="XpX-iD-Nm5" customClass="PayInfoController" customModule="Sample_App_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sSB-z7-i22">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,7 +25,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eR0-ui-iyF">
-                                <rect key="frame" x="146.5" y="518.5" width="82" height="30"/>
+                                <rect key="frame" x="0.0" y="577" width="375" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.955133597" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Attach Card"/>
                                 <connections>
                                     <action selector="AttachCard:" destination="XpX-iD-Nm5" eventType="touchUpInside" id="NYn-nn-BEh"/>
@@ -40,23 +41,37 @@
                                 <size key="shadowOffset" width="2" height="-1"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqH-i2-REI">
-                                <rect key="frame" x="138.5" y="468.5" width="98" height="30"/>
+                                <rect key="frame" x="0.0" y="532" width="375" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.955133597" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Pay With Card"/>
                                 <connections>
                                     <action selector="PayWithCard:" destination="XpX-iD-Nm5" eventType="touchUpInside" id="X4T-vD-H2H"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-WJ-vQ6">
+                                <rect key="frame" x="0.0" y="622" width="375" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.955133597" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Edit Card List"/>
+                                <connections>
+                                    <action selector="EditCards:" destination="XpX-iD-Nm5" eventType="touchUpInside" id="Adp-A1-yVi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="eR0-ui-iyF" firstAttribute="centerX" secondItem="sSB-z7-i22" secondAttribute="centerX" id="4qZ-y9-rlW"/>
+                            <constraint firstItem="Rby-M8-2pP" firstAttribute="trailing" secondItem="eR0-ui-iyF" secondAttribute="trailing" id="3FX-VO-haG"/>
                             <constraint firstItem="569-fa-sJu" firstAttribute="centerY" secondItem="sSB-z7-i22" secondAttribute="centerY" constant="-100" id="7Wy-Y1-C66"/>
                             <constraint firstItem="569-fa-sJu" firstAttribute="centerX" secondItem="sSB-z7-i22" secondAttribute="centerX" id="HpR-Wj-qyJ"/>
                             <constraint firstItem="s90-ju-pIR" firstAttribute="centerY" secondItem="sSB-z7-i22" secondAttribute="centerY" id="K4T-rd-1DX"/>
-                            <constraint firstItem="JqH-i2-REI" firstAttribute="centerX" secondItem="sSB-z7-i22" secondAttribute="centerX" id="NLB-Cb-zQ1"/>
-                            <constraint firstItem="JqH-i2-REI" firstAttribute="centerY" secondItem="sSB-z7-i22" secondAttribute="centerY" constant="150" id="T1B-jx-6p2"/>
+                            <constraint firstItem="Rby-M8-2pP" firstAttribute="bottom" secondItem="gzr-WJ-vQ6" secondAttribute="bottom" constant="15" id="ZkT-dh-Q5M"/>
+                            <constraint firstItem="eR0-ui-iyF" firstAttribute="leading" secondItem="Rby-M8-2pP" secondAttribute="leading" id="aX6-a4-stk"/>
+                            <constraint firstItem="JqH-i2-REI" firstAttribute="leading" secondItem="Rby-M8-2pP" secondAttribute="leading" id="aa1-cc-eLl"/>
                             <constraint firstItem="s90-ju-pIR" firstAttribute="centerX" secondItem="sSB-z7-i22" secondAttribute="centerX" id="acQ-bk-C7L"/>
-                            <constraint firstItem="eR0-ui-iyF" firstAttribute="centerY" secondItem="sSB-z7-i22" secondAttribute="centerY" constant="200" id="uYE-4B-m9n"/>
+                            <constraint firstItem="Rby-M8-2pP" firstAttribute="trailing" secondItem="JqH-i2-REI" secondAttribute="trailing" id="c8g-hI-CQF"/>
+                            <constraint firstItem="Rby-M8-2pP" firstAttribute="trailing" secondItem="gzr-WJ-vQ6" secondAttribute="trailing" id="fmh-Ug-uZY"/>
+                            <constraint firstItem="gzr-WJ-vQ6" firstAttribute="leading" secondItem="Rby-M8-2pP" secondAttribute="leading" id="ima-5Q-hsH"/>
+                            <constraint firstItem="eR0-ui-iyF" firstAttribute="top" secondItem="JqH-i2-REI" secondAttribute="bottom" constant="15" id="pFQ-xm-fZv"/>
+                            <constraint firstItem="gzr-WJ-vQ6" firstAttribute="top" secondItem="eR0-ui-iyF" secondAttribute="bottom" constant="15" id="smD-on-sIE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rby-M8-2pP"/>
                     </view>
@@ -67,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="haL-8I-BHI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3017" y="-572"/>
+            <point key="canvasLocation" x="3016.8000000000002" y="-572.56371814092961"/>
         </scene>
     </scenes>
 </document>

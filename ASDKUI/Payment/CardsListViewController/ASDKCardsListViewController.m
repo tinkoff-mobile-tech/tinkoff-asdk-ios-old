@@ -39,6 +39,8 @@ typedef enum
 @property (nonatomic, strong) ASDKAddNewCardCell *addNewCardCell;
 @property (nonatomic, strong) NSArray *cards;
 @property (nonatomic) BOOL didRemoveCards;
+@property (nonatomic) BOOL selectToDelete;
+@property (nonatomic) int numberOfRows;
 
 @end
 
@@ -47,6 +49,24 @@ typedef enum
 - (instancetype)init
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
+    
+    _selectToDelete = false;
+    _numberOfRows = 2;
+    
+    if (self)
+    {
+        _cards = [ASDKCardsListDataController instance].externalCards;
+    }
+    
+    return self;
+}
+
+- (instancetype)initForEditing
+{
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    
+    _selectToDelete = true;
+    _numberOfRows = 1;
     
     if (self)
     {
@@ -97,7 +117,7 @@ typedef enum
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return _numberOfRows;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -226,6 +246,11 @@ typedef enum
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     ASDKCard *selectedCard = nil;
+    
+    if (_selectToDelete){
+        [tableView setEditing:!tableView.isEditing animated:YES];
+        return;
+    }
 	
     if (indexPath.section == ASDKCardsListSectionCard)
     {

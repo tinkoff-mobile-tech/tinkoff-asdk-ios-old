@@ -25,6 +25,7 @@
 #import "ASDKCardsListDataController.h"
 #import "ASDKAttachCardViewController.h"
 #import "ASDKLoopViewController.h"
+#import "ASDKCardsListViewController.h"
 
 @interface ASDKPaymentFormStarter () <PKPaymentAuthorizationViewControllerDelegate>
 {
@@ -626,6 +627,43 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 	[nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
 	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
 	[presentingViewController presentViewController:nc animated:YES completion:nil];
+}
+
+- (void)presentCardListFormFromViewController:(UIViewController *)presentingViewController
+                                    /*formTitle:(NSString *)title //Заголовок экрана
+                                   formHeader:(NSString *)header // заголовок для пояснения зачем надо привязывать карту
+                                  description:(NSString *)description //описание зачем надо привязывать карту
+                                        email:(NSString *)email //
+                                cardCheckType:(NSString *)cardCheckType //описание возможных значений в ASDKCard.h*/
+                                  customerKey:(NSString *)customerKey // идетинификатор пользователя (для сохранеиня платежей и карт)
+                               /*additionalData:(NSDictionary *)data //JSON объект содержащий дополнительные параметры, например @{@"Phone" : @"+71234567890"}
+                                      success:(void (^)(ASDKResponseAttachCard *result))onSuccess
+                                    cancelled:(void (^)(void))onCancelled*/
+                                        error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+    [self prepareDesign];
+    
+    [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
+    
+    if (customerKey.length == 0)
+    {
+        //[onError error];
+        return;
+    }
+    
+    [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^
+     {
+         [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+         ASDKCardsListViewController *viewController = [[ASDKCardsListViewController alloc] initForEditing];
+         ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:viewController];
+         [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
+         [presentingViewController presentViewController:nc animated:YES completion:nil];
+     }
+                                                                 errorBlock:^(ASDKAcquringSdkError *error)
+     {
+         [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+         [onError error];
+     }];
 }
 
 @end
