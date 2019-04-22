@@ -38,8 +38,8 @@ class PayInfoController: UIViewController {
     
     func generateSum() {
         let pricef:Double = Double.random(in: 0 ..< 5)
-        self.purchasePrice = Decimal(pricef)
-        self.priceLabel.text = String(format:"%0.2f", pricef)
+        purchasePrice = Decimal(pricef)
+        priceLabel.text = String(format:"%0.2f", pricef)
     }
     
     override func viewDidLoad() {
@@ -49,7 +49,7 @@ class PayInfoController: UIViewController {
         
         generateSum()
         
-        self.payButton.isHidden = false
+        payButton.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,10 +65,16 @@ class PayInfoController: UIViewController {
         guard let asdk_pfs = ASDKPaymentFormStarter.init(acquiringSdk: asdk) else {
             return //TODO: restore state!
         }
-        asdk_pfs.presentCardListForm(from: self, customerKey: customerKey, error: self.payError)
+        asdk_pfs.presentCardListForm(from: self, customerKey: customerKey, addHandler: { [weak self] in
+            self?.attachCard()
+        }, error: payError)
     }
     
     @IBAction func AttachCard(_ sender: UIButton) {
+        attachCard()
+    }
+    
+    private func attachCard() {
         guard let asdk_pfs = ASDKPaymentFormStarter.init(acquiringSdk: asdk) else {
             return //TODO: restore state!
         }
@@ -102,9 +108,9 @@ class PayInfoController: UIViewController {
             cardCheckType: ASDKCardCheckType_NO,//ASDKCardCheckType_3DSHOLD,
             customerKey: customerKey,
             additionalData: nil,
-            success: self.attachSuccess,
-            cancelled: self.payCancelled,
-            error: self.payError)
+            success: attachSuccess,
+            cancelled: payCancelled,
+            error: payError)
     }
     
     private func addApplePayPaymentButtonToView() {
@@ -202,9 +208,9 @@ class PayInfoController: UIViewController {
                 receiptData: nil,
                 shopsData: nil,
                 shopsReceiptsData: nil,
-                success: self.paySuccess,
-                cancelled: self.payCancelled,
-                error: self.payError)
+                success: paySuccess,
+                cancelled: payCancelled,
+                error: payError)
             break
         case .Card:
             asdk_pfs.presentPaymentForm(
@@ -220,9 +226,9 @@ class PayInfoController: UIViewController {
                 makeCharge: false,
                 additionalPaymentData: nil,
                 receiptData: nil,
-                success: self.paySuccess,
-                cancelled: self.payCancelled,
-                error: self.payError)
+                success: paySuccess,
+                cancelled: payCancelled,
+                error: payError)
             break
         default:
             break

@@ -55,5 +55,9 @@
 "acq_complete_payment_ok" = "ОК";
 "acq_scan_type_camera" = "Scan with camera";
 "acq_title_card_list" = "Select card";
+"acq_title_card_list_edit" = "Card list";
+"acq_btn_card_list_edit_done" = "Back";
+"acq_btn_card_list_edit_mode" = "Done";
+"acq_btn_card_list_mode" = "Edit";
 "acq_title_card_number" = "Card number";
 "acq_title_add_card" = "Attaching card";

@@ -33,6 +33,5 @@
 @property (nonatomic, weak) id<ASDKCardsListDelegate> cardsListDelegate;
 @property (nonatomic, strong) ASDKCard *selectedCard;
 
-- (instancetype)initForEditing;
-
+- (instancetype)initForEditing:(void (^)(void))onAdd;
 @end

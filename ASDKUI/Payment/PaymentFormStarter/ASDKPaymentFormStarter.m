@@ -637,8 +637,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                 cardCheckType:(NSString *)cardCheckType //описание возможных значений в ASDKCard.h*/
                                   customerKey:(NSString *)customerKey // идетинификатор пользователя (для сохранеиня платежей и карт)
                                /*additionalData:(NSDictionary *)data //JSON объект содержащий дополнительные параметры, например @{@"Phone" : @"+71234567890"}
-                                      success:(void (^)(ASDKResponseAttachCard *result))onSuccess
-                                    cancelled:(void (^)(void))onCancelled*/
+                                      success:(void (^)(ASDKResponseAttachCard *result))onSuccess*/
+                                    addHandler:(void (^)(void))onAdd
                                         error:(void (^)(ASDKAcquringSdkError *error))onError
 {
     [self prepareDesign];
@@ -651,11 +651,12 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
         return;
     }
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
     [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^
      {
          [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-         ASDKCardsListViewController *viewController = [[ASDKCardsListViewController alloc] initForEditing];
-         ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:viewController];
+         ASDKCardsListViewController *cardListController = [[ASDKCardsListViewController alloc] initForEditing:onAdd];
+         ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:cardListController];
          [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
          [presentingViewController presentViewController:nc animated:YES completion:nil];
      }

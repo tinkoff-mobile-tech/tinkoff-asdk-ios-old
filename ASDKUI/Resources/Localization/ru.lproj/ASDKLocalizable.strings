@@ -54,6 +54,10 @@
 "acq_complete_payment" = "Для совершения платежа, введите CVC";
 "acq_complete_payment_ok" = "ОК";
 "acq_scan_type_camera" = "Сканировать камерой";
+"acq_title_card_list_edit" = "Список карт";
+"acq_btn_card_list_edit_done" = "Назад";
+"acq_btn_card_list_edit_mode" = "Готово";
+"acq_btn_card_list_mode" = "Изменить";
 "acq_title_card_list" = "Выберите карту";
 "acq_title_card_number" = "Номер карты для оплаты";
 "acq_title_add_card" = "Сохранение карты";

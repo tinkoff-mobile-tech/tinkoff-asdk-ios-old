@@ -36,11 +36,15 @@ typedef enum
 
 @interface ASDKCardsListViewController ()
 
+typedef void(^onAddCallbackT)(void);
+
 @property (nonatomic, strong) ASDKAddNewCardCell *addNewCardCell;
 @property (nonatomic, strong) NSArray *cards;
 @property (nonatomic) BOOL didRemoveCards;
-@property (nonatomic) BOOL selectToDelete;
+@property (nonatomic) BOOL editCardList;
 @property (nonatomic) int numberOfRows;
+@property (nonatomic) onAddCallbackT onAdd;
+@property (nonatomic) ASDKBarButtonItem *editButton;
 
 @end
 
@@ -50,7 +54,7 @@ typedef enum
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     
-    _selectToDelete = false;
+    _editCardList = false;
     _numberOfRows = 2;
     
     if (self)
@@ -61,12 +65,13 @@ typedef enum
     return self;
 }
 
-- (instancetype)initForEditing
+- (instancetype)initForEditing:(void (^)(void))onAdd
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     
-    _selectToDelete = true;
-    _numberOfRows = 1;
+    _editCardList = true;
+    _numberOfRows = 2;
+    _onAdd = onAdd;
     
     if (self)
     {
@@ -80,11 +85,24 @@ typedef enum
 {
     [super viewDidLoad];
     
-    self.title = LOC(@"acq_title_card_list");
+    NSString *backBtnLabel = LOC(@"acq_btn_cancel");
+    
+    if (_editCardList) {
+        self.title = LOC(@"acq_title_card_list_edit");
+        backBtnLabel = LOC(@"acq_btn_card_list_edit_done");
+        
+        _editButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"acq_btn_card_list_mode")
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(editAction:)];
+        
+        _editButton.tintColor = self.navigationController.navigationBar.tintColor;
+        [self.navigationItem setRightBarButtonItem:_editButton];
+    }
     
     [self.tableView setBackgroundColor:[ASDKDesign colorTableViewBackground]];
     
-    ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:LOC(@"acq_btn_cancel")
+    ASDKBarButtonItem *cancelButton = [[ASDKBarButtonItem alloc] initWithTitle:backBtnLabel
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(cancelAction:)];
@@ -92,6 +110,14 @@ typedef enum
 	cancelButton.tintColor = self.navigationController.navigationBar.tintColor;
 	
     [self.navigationItem setLeftBarButtonItem:cancelButton];
+}
+
+- (IBAction)editAction:(id)sender
+{
+    if (_cards.count == 0)
+        return;
+    
+    [self setEditingNew:!self.isEditing];
 }
 
 - (IBAction)cancelAction:(id)sender
@@ -106,6 +132,7 @@ typedef enum
         _addNewCardCell = [ASDKAddNewCardCell newCell];
         _addNewCardCell.shouldShowTopSeparator = YES;
         _addNewCardCell.shouldShowBottomSeparator = YES;
+        _addNewCardCell.selectionStyle = UITableViewCellSelectionStyleNone;
         _addNewCardCell.addCardTitleLabel.text = LOC(@"acq_enter_new_card_label");
     }
     
@@ -219,14 +246,18 @@ typedef enum
              [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 
              [weakSelf setCards:[ASDKCardsListDataController instance].externalCards];
-			 [weakSelf setSelectedCard:[[ASDKCardsListDataController instance].externalCards firstObject]];
+             if(!_editCardList){
+                 [weakSelf setSelectedCard:[[ASDKCardsListDataController instance].externalCards firstObject]];
+             }
+             
+             if (_cards.count == 0){
+                 [weakSelf setEditingNew:false];
+             }
 			 
 			 [tableView beginUpdates];
              	[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 			 	[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 			 [tableView endUpdates];
-			 
-			 [tableView setEditing:NO];
 
 			id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
 			if (cardsListDelegate && [cardsListDelegate respondsToSelector:@selector(cardListDidChanged)])
@@ -244,11 +275,25 @@ typedef enum
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
+    printf("Click\n");
+    if ( self.isEditing )
+        return;
+        
     ASDKCard *selectedCard = nil;
     
-    if (_selectToDelete){
-        [tableView setEditing:!tableView.isEditing animated:YES];
+    id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
+    
+    if (indexPath.section == ASDKCardsListSectionAddNewCard)
+    {
+        printf("Card Add requested, check delegate!");
+        //if(_onAdd){ _onAdd(); }
+            
+        [self closeSelfWithCompletion:_onAdd];
+        return;
+    }
+    
+    if (_editCardList){
         return;
     }
 	
@@ -256,8 +301,6 @@ typedef enum
     {
         selectedCard = _cards[indexPath.row];
     }
-
-    id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
     
     if (cardsListDelegate && [cardsListDelegate respondsToSelector:@selector(didSelectCard:)])
     {
@@ -280,6 +323,18 @@ typedef enum
     }
     
     [self dismissViewControllerAnimated:YES completion:completion];
+}
+
+- (void)setEditingNew: (BOOL)editing// animated:(BOOL)animated
+{
+//printf("setting editing: %i\n", editing);
+    if(editing){
+        _editButton.title = LOC(@"acq_btn_card_list_edit_mode");
+    } else {
+        _editButton.title = LOC(@"acq_btn_card_list_mode");
+    }
+    
+    [self setEditing:editing animated:true];
 }
 
 @end

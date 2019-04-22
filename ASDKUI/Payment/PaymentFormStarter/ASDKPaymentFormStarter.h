@@ -246,6 +246,7 @@
                              /*additionalData:(NSDictionary *)data //JSON объект содержащий дополнительные параметры, например @{@"Phone" : @"+71234567890"}
                                     success:(void (^)(ASDKResponseAttachCard *result))onSuccess
                                   cancelled:(void (^)(void))onCancelled*/
+                              addHandler:(void (^)(void))onAdd
                               error:(void (^)(ASDKAcquringSdkError *error))onError;
 
 @end
