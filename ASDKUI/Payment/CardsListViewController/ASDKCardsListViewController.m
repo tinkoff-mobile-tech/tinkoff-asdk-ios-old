@@ -284,16 +284,14 @@ typedef void(^onAddCallbackT)(void);
     
     id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
     
-    if (indexPath.section == ASDKCardsListSectionAddNewCard)
-    {
-        printf("Card Add requested, check delegate!");
-        //if(_onAdd){ _onAdd(); }
-            
-        [self closeSelfWithCompletion:_onAdd];
-        return;
-    }
-    
     if (_editCardList){
+        if (indexPath.section == ASDKCardsListSectionAddNewCard)
+        {
+            printf("Card Add requested, check delegate!");
+            
+            [self closeSelfWithCompletion:_onAdd];
+            return;
+        }
         return;
     }
 	

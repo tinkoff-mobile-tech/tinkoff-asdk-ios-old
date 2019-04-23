@@ -61,20 +61,47 @@ class PayInfoController: UIViewController {
         payOption = .Card
         pay()
     }
-    @IBAction func EditCards(_ sender: UIButton) {
+    
+    private func editError(err:ASDKAcquringSdkError?){
+        print("Card Edit error \(String(describing: err))")
+    }
+    
+    private func attachOnEditSuccess(pi:ASDKResponseAttachCard?) -> Void {
+        EditCardList()
+    }
+    
+    private func attachOnError(err:ASDKAcquringSdkError?) -> Void {
+        EditCardList()
+    }
+    
+    private func attachOnCancel() -> Void {
+        EditCardList()
+    }
+    
+    private func EditCardList(){
         guard let asdk_pfs = ASDKPaymentFormStarter.init(acquiringSdk: asdk) else {
             return //TODO: restore state!
         }
         asdk_pfs.presentCardListForm(from: self, customerKey: customerKey, addHandler: { [weak self] in
-            self?.attachCard()
-        }, error: payError)
+            
+            guard let wself = self else {
+                return;
+            }
+            self?.attachCard(onSuccess: wself.attachOnEditSuccess, onCancelled: wself.attachOnCancel, onError: wself.attachOnError)
+            }, error: editError)
+    }
+    
+    @IBAction func EditCards(_ sender: UIButton) {
+        EditCardList()
     }
     
     @IBAction func AttachCard(_ sender: UIButton) {
-        attachCard()
+        attachCard(onSuccess: attachSuccess, onCancelled: payCancelled, onError: payError(er:))
     }
     
-    private func attachCard() {
+    private func attachCard(onSuccess  success: @escaping ((ASDKResponseAttachCard?)->Void),
+                            onCancelled cancelled: @escaping (()->Void),
+                            onError error: @escaping ((ASDKAcquringSdkError?)->Void)) {
         guard let asdk_pfs = ASDKPaymentFormStarter.init(acquiringSdk: asdk) else {
             return //TODO: restore state!
         }
@@ -108,9 +135,9 @@ class PayInfoController: UIViewController {
             cardCheckType: ASDKCardCheckType_NO,//ASDKCardCheckType_3DSHOLD,
             customerKey: customerKey,
             additionalData: nil,
-            success: attachSuccess,
-            cancelled: payCancelled,
-            error: payError)
+            success: success,
+            cancelled: cancelled,
+            error: error)
     }
     
     private func addApplePayPaymentButtonToView() {
