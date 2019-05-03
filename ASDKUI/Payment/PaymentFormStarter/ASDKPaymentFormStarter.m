@@ -395,10 +395,16 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			else
 			{
 				self.onError(nil);
+                self.onSuccess = nil;
+                self.onError = nil;
+                self.onCancelled = nil;
 			}
 		}
 		failure:^(ASDKAcquringSdkError *error){
 			self.onError(error);
+            self.onSuccess = nil;
+            self.onError = nil;
+            self.onCancelled = nil;
 		}
 	 ];
 }
