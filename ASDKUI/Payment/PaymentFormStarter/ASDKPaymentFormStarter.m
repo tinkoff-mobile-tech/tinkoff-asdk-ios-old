@@ -584,6 +584,10 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			self.onError(error);
 			self.onCompleteError = nil;
 		}
+        
+        self.onSuccess = nil;
+        self.onCancelled = nil;
+        self.onError = nil;
 	}];
 }
 
