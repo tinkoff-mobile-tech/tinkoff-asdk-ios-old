@@ -51,6 +51,7 @@
 
 - (void)addSegmentedControlValueChangedTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents
 {
+	[self.segmentedControl removeTarget:nil action:nil forControlEvents:controlEvents];
 	[self.segmentedControl addTarget:target action:action forControlEvents:controlEvents];
 }
 	

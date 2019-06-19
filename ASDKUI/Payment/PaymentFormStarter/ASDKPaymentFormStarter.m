@@ -393,10 +393,13 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			}
 			else
 			{
+				[ASDKPaymentFormStarter resetSharedInstance];
 				self.onError(nil);
+				
 			}
 		}
-		failure:^(ASDKAcquringSdkError *error){
+		failure:^(ASDKAcquringSdkError *error) {
+			[ASDKPaymentFormStarter resetSharedInstance];
 			self.onError(error);
 		}
 	 ];
@@ -583,6 +586,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			self.onError(error);
 			self.onCompleteError = nil;
 		}
+		
+		[ASDKPaymentFormStarter resetSharedInstance];
 	}];
 }
 
