@@ -769,9 +769,9 @@ typedef enum
 		
 		NSString *cardNumber = [self cardNumber];
 		
-		if (_creditCardType == ASDKCreditCardTypeDiscover)
+		if (_creditCardType == ASDKCreditCardTypeDiscover || _creditCardType == ASDKCreditCardTypeMIR)
 		{
-			if (cardNumber.length >= 13)
+			if (cardNumber.length >= 16)
 			{
 				if (cardNumber.length <= 22)
 				{
