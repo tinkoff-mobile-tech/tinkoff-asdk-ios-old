@@ -388,7 +388,6 @@
 				831672841C6486A500533D85 /* Frameworks */,
 				831672851C6486A500533D85 /* Resources */,
 				831672A51C64878A00533D85 /* Embed Frameworks */,
-				A11A4A4A9DD47BEE00292CE2 /* [CP] Embed Pods Frameworks */,
 				57600297A2546A01FB72C740 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -476,13 +475,123 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources.sh",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/buttom_logos.imageset/buttom_logos.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/buttom_logos.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/check_green.imageset/check_green.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/check_green.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete.imageset/delete.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete_icon.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete_icon.imageset/delete_icon.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_grey.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_grey.imageset/next_grey.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_white.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_white.imageset/next_white.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMaestro.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMaestro.imageset/psIconMaestro.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMastercard.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMastercard.imageset/psIconMastercard.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMir.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMir.imageset/psIconMir.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIcons.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIcons.imageset/psIcons.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconVisa.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconVisa.imageset/psIconVisa.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card.imageset/scan_card.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card_grey.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card_grey.imageset/scan_card_grey.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/visa_white.imageset/Contents.json",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/visa_white.imageset/visa_white.pdf",
+				"${PODS_ROOT}/../../ASDKUI/Resources/Localization/en.lproj/ASDKLocalizable.strings",
+				"${PODS_ROOT}/../../ASDKUI/Resources/Localization/ru.lproj/ASDKLocalizable.strings",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/buttom_logos.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/check_green.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete_icon.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_grey.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_white.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMaestro.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMastercard.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMir.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIcons.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconVisa.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card_grey.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/visa_white.imageset",
+				"${PODS_ROOT}/../../ASDKUI/Resources/Localization/en.lproj",
+				"${PODS_ROOT}/../../ASDKUI/Resources/Localization/ru.lproj",
+				"${PODS_ROOT}/../../ASDKUI/3DSController/ASDK3DSViewController.xib",
+				"${PODS_ROOT}/../../ASDKUI/ASDKLoaderViewController.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/CardsListViewController/AddNewCardCell/ASDKAddNewCardCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/CardsListViewController/CardCell/ASDKCardCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKEmptyTableViewCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKExternalCardsCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKFooterCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKPayButtonCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKPaymentFormHeaderCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKPaymentFormSummCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/CustomInput/DeleteCell/ASDKDeleteCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/CustomInput/NumberCell/ASDKNumberCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/EmailCell/ASDKEmailCell.xib",
+				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/InputCardCell/ASDKCardInputTableViewCell.xib",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/buttom_logos.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Contents.json",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/check_green.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/delete.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/delete_icon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/next_grey.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/next_white.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMaestro.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMastercard.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMir.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIcons.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconVisa.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/scan_card.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/scan_card_grey.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/visa_white.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKLocalizable.strings",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/buttom_logos.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/check_green.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/delete.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/delete_icon.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/next_grey.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/next_white.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMaestro.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMastercard.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMir.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIcons.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconVisa.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/scan_card.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/scan_card_grey.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/visa_white.imageset",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ru.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDK3DSViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKLoaderViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKAddNewCardCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKCardCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKEmptyTableViewCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKExternalCardsCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKFooterCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKPayButtonCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKPaymentFormHeaderCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKPaymentFormSummCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKDeleteCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKNumberCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKEmailCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKCardInputTableViewCell.nib",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6350D7BD1EF85E2BB386E837 /* [CP] Check Pods Manifest.lock */ = {
@@ -491,28 +600,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ASDKSampleApp-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		A11A4A4A9DD47BEE00292CE2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

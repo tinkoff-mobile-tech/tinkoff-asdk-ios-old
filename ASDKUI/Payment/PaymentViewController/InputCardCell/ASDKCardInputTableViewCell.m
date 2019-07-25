@@ -29,6 +29,9 @@
 #define ASDKCreditCardPaymentSystemInputMaskMaestro16   @"____ ____ ____ _____"
 #define ASDKCreditCardPaymentSystemInputMaskMaestro19   @"________ ____________"
 #define ASDKCreditCardPaymentSystemInputMaskMaestro22   @"________ ______________"
+#define ASDKCreditCardPaymentSystemInputMaskMIR16       @"____ ____ ____ _____"
+#define ASDKCreditCardPaymentSystemInputMaskMIR18       @"________ ___________"
+#define ASDKCreditCardPaymentSystemInputMaskMIR19       @"________ ____________"
 
 //костыль
 typedef enum
@@ -766,9 +769,9 @@ typedef enum
 		
 		NSString *cardNumber = [self cardNumber];
 		
-		if (_creditCardType == ASDKCreditCardTypeDiscover)
+		if (_creditCardType == ASDKCreditCardTypeDiscover || _creditCardType == ASDKCreditCardTypeMIR)
 		{
-			if (cardNumber.length >= 13)
+			if (cardNumber.length >= 16)
 			{
 				if (cardNumber.length <= 22)
 				{
@@ -1245,17 +1248,32 @@ typedef enum
 		case ASDKCreditCardTypeVisa:
 		{
 			self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskVisa;
-			[self.textFieldCardCVC setInputMask:@"___"];
 			break;
 		}
 			
-		case ASDKCreditCardTypeMIR:
 		case ASDKCreditCardTypeMastercard:
 		{
 			self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMasterCard;
-			[self.textFieldCardCVC setInputMask:@"___"];
 			break;
 		}
+            
+        case ASDKCreditCardTypeMIR:
+        {
+            if (cardNumber.length <= 16)
+            {
+                self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMIR16;
+            }
+            else if (cardNumber.length <= 18)
+            {
+                self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMIR18;
+            }
+            else
+            {
+                self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMIR19;
+            }
+            
+            break;
+        }
 
 		case ASDKCreditCardTypeDiscover:
 		{
@@ -1272,16 +1290,17 @@ typedef enum
 				self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMaestro22;
 			}
 			
-			[self.textFieldCardCVC setInputMask:@"___"];
 			break;
 		}
+            
 		default:
 		{
-			[self.textFieldCardCVC setInputMask:@"____"];
 			self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputDefault;
 			break;
 		}
 	}
+    
+    [self.textFieldCardCVC setInputMask:@"___"];
 }
 
 - (NSString *)paymentSystemSecurityCodeNameForCardType:(ASDKCreditCardType)creditCardType
