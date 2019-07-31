@@ -98,14 +98,7 @@
 {
     [super viewDidLoad];
 
-	if (self.viewTitleHead != nil && self.viewTitleHead.length > 0)
-	{
-		self.title = self.viewTitleHead;
-	}
-	else
-	{
-		self.title = LOC(@"acq_new_card_label");
-	}
+    self.title = self.viewTitleHead.length > 0 ? self.viewTitleHead : LOC(@"acq_new_card_label");
 
 	[self.navigationController.navigationBar setTranslucent:NO];
 	
@@ -145,7 +138,7 @@
 	}
 	
 	NSMutableArray *dataSource = [NSMutableArray new];
-	if (designConfiguration.attachCardItems != nil)
+	if (designConfiguration.attachCardItems)
 	{
 		[dataSource addObjectsFromArray:designConfiguration.attachCardItems];
 	}
@@ -341,7 +334,7 @@
 {
 	UITableViewCell *cell = nil;
 	
-	switch ([[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue])
+	switch ([self.tableViewDataSource[indexPath.row] integerValue])
 	{
 		case CellProductTitle:
 		{
@@ -376,7 +369,7 @@
 		{
 			ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
 			ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
-			if (designConfiguration.attachCardCustomButton == nil)
+			if (!designConfiguration.attachCardCustomButton)
 			{
 				ASDKPayButtonCell *buttonCell = [self paymentButtonCell];
 				
@@ -414,10 +407,10 @@
 	
 	if (indexPath.row > 0)
 	{
-		NSInteger index = [[self.tableViewDataSource objectAtIndex:indexPath.row-1] integerValue];
-		NSInteger index1 = [[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue];
-		if ((index == CellProductTitle || index == CellProductDescription || index == CellEmpty20px || index == CellEmpty5px || index == CellEmptyFlexibleSpace) &&
-			(index1 != CellProductDescription && index1 != CellEmpty20px && index1 != CellEmpty5px && index1 != CellEmptyFlexibleSpace))
+		NSInteger previousIndex = [[self.tableViewDataSource objectAtIndex:indexPath.row-1] integerValue];
+		NSInteger currentIndex = [[self.tableViewDataSource objectAtIndex:indexPath.row] integerValue];
+		if ((previousIndex == CellProductTitle || previousIndex == CellProductDescription || previousIndex == CellEmpty20px || previousIndex == CellEmpty5px || previousIndex == CellEmptyFlexibleSpace) &&
+			(currentIndex != CellProductDescription && currentIndex != CellEmpty20px && currentIndex != CellEmpty5px && currentIndex != CellEmptyFlexibleSpace))
 		{
 			if ([cell isKindOfClass:[ASDKBaseCell class]] && [cell respondsToSelector:@selector(shouldShowTopSeparator)])
 			{
@@ -481,7 +474,7 @@
 		{
 			ASDKPaymentFormStarter *paymentFormStarter = [ASDKPaymentFormStarter instance];
 			ASDKDesignConfiguration *designConfiguration = paymentFormStarter.designConfiguration;
-			if (designConfiguration.attachCardCustomButton == nil)
+			if (!designConfiguration.attachCardCustomButton)
 			{
 				result = 44.0f;
 			}
@@ -575,14 +568,16 @@
 																			  error:nil];
 	
 	__block NSTextCheckingType checkingType;
-	[regExp enumerateMatchesInString:emailString options:0 range:NSMakeRange(0, emailString.length) usingBlock:^(NSTextCheckingResult *result,
-																												 NSMatchingFlags flags,
-																												 BOOL *stop)
-	 {
-		 checkingType = result.resultType;
-	 }];
-	
-	BOOL isEmailValid = (checkingType == NSTextCheckingTypeRegularExpression) ? YES : NO;
+    [regExp enumerateMatchesInString:emailString options:0
+                               range:NSMakeRange(0, emailString.length)
+                          usingBlock:^(NSTextCheckingResult *result,
+                                       NSMatchingFlags flags,
+                                       BOOL *stop)
+     {
+         checkingType = result.resultType;
+     }];
+    
+    BOOL isEmailValid = checkingType == NSTextCheckingTypeRegularExpression;
 	
 	return isEmailValid;
 }
@@ -627,9 +622,10 @@
 
 - (void)updateCardRequisitesCellWithCardRequisites:(NSString *)cardNumber expiredData:(NSString *)expiredData
 {
-	[[self cardRequisitesCell].textFieldCardNumber setText:@""];
+    [self cardRequisitesCell].textFieldCardNumber.text = @"";
+    [self cardRequisitesCell].textFieldCardDate.text = expiredData;
 	[[self cardRequisitesCell] setCardNumber:cardNumber];
-	[[[self cardRequisitesCell] textFieldCardDate] setText:expiredData];
+	
 	[[self cardRequisitesCell] textField:[self cardRequisitesCell].textFieldCardNumber shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:cardNumber];
 }
 
@@ -660,7 +656,7 @@
 {
 	[self.view endEditing:YES];
 	
-	if ([self validateForm] == YES)
+	if ([self validateForm])
 	{
 		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
 		
@@ -679,12 +675,12 @@
 				if ([emailString length] > 0)
 				{
 					NSMutableDictionary *additionalData = [NSMutableDictionary new];
-					if (self.additionalData != nil)
+					if (!self.additionalData)
 					{
 						[additionalData addEntriesFromDictionary:self.additionalData];
 					}
 					
-					[additionalData setObject:emailString forKey:LOC(@"acq_email")];
+                    additionalData[LOC(@"acq_email")] = emailString;
 					self.additionalData = additionalData;
 				}
 
@@ -826,7 +822,7 @@
 		NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
 		NSString *alertMessage = error.errorMessage ? error.errorMessage : @"";
 
-		if ( alertDetails.length > 0)
+		if (alertDetails.length > 0)
 		{
 			alertMessage = [NSString stringWithFormat:@"%@ %@", alertMessage, alertDetails];
 		}
