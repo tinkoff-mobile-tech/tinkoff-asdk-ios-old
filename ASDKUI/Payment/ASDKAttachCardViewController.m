@@ -215,13 +215,12 @@
 
 - (IBAction)cancelAction:(id)sender
 {
-	[self closeSelfWithCompletion:^
-	 {
-		 if (self.onCancelled)
-		 {
-			 self.onCancelled();
-		 }
-	 }];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.onCancelled)
+        {
+            self.onCancelled();
+        }
+    }];
 }
 
 - (void)closeSelfWithCompletion: (void (^)(void))completion
