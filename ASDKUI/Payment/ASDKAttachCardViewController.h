@@ -29,6 +29,8 @@
 
 @property (nonatomic, strong) ASDKAcquiringSdk *acquiringSdk;
 
+@property (nonatomic, assign) BOOL isDissmissAfterCompletion;
+
 - (instancetype)initWithCardCheckType:(NSString *)cardCheckType
 							formTitle:(NSString *)title
 						   formHeader:(NSString *)header
