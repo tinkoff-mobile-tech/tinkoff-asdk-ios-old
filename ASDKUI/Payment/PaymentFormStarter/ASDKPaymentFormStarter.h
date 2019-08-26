@@ -215,4 +215,17 @@
 								  cancelled:(void (^)(void))onCancelled
 									  error:(void (^)(ASDKAcquringSdkError *error))onError;
 
+- (void)presentAttachFormFromViewController:(UIViewController *)presentingViewController
+                                  formTitle:(NSString *)title //Заголовок экрана
+                                 formHeader:(NSString *)header // заголовок для пояснения зачем надо привязывать карту
+                                description:(NSString *)description //описание зачем надо привязывать карту
+                                      email:(NSString *)email //
+                              cardCheckType:(NSString *)cardCheckType //описание возможных значений в ASDKCard.h
+                                customerKey:(NSString *)customerKey // идетинификатор пользователя (для сохранеиня платежей и карт)
+                             additionalData:(NSDictionary *)data //JSON объект содержащий дополнительные параметры, например @{@"Phone" : @"+71234567890"}
+                  isDissmissAfterCompletion:(BOOL)isDissmissAfterCompletion //Скрывать ли экран при окончании добавления карты автоматически или нет
+                                    success:(void (^)(ASDKResponseAttachCard *result))onSuccess
+                                  cancelled:(void (^)(void))onCancelled
+                                      error:(void (^)(ASDKAcquringSdkError *error))onError;
+
 @end

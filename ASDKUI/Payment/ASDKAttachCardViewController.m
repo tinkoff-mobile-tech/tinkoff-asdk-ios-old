@@ -89,6 +89,7 @@
 		_onCancelled = cancelled;
 		_onError = error;
 		_additionalData = data;
+        _isDissmissAfterCompletion = YES;
 	}
 	
 	return self;
@@ -214,25 +215,32 @@
 
 - (IBAction)cancelAction:(id)sender
 {
-	[self closeSelfWithCompletion:^
-	 {
-		 if (self.onCancelled)
-		 {
-			 self.onCancelled();
-		 }
-	 }];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.onCancelled)
+        {
+            self.onCancelled();
+        }
+    }];
 }
 
 - (void)closeSelfWithCompletion: (void (^)(void))completion
 {
 	[self.view endEditing:YES];
-	
-	[self dismissViewControllerAnimated:YES completion:^{
-		if (completion)
-		{
-			completion();
-		}
-	}];
+    
+    void (^dismissCompletion)(void) = ^ {
+        if (completion)
+        {
+            completion();
+        }
+    };
+    
+    if (!self.isDissmissAfterCompletion) {
+        dismissCompletion();
+    } else {
+        [self dismissViewControllerAnimated:YES completion:^{
+            dismissCompletion();
+        }];
+    }
 }
 
 #pragma mark - TableView helpers
@@ -853,6 +861,7 @@
 
 		if (strongSelf)
 		{
+            
 			[strongSelf closeSelfWithCompletion:^
 			 {
 				 if (strongSelf.onSuccess)
