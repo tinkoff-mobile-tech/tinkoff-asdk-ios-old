@@ -1107,10 +1107,9 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			 {
 				 [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 
-				 NSString *message = @"Payment state error";
 				 NSString *details = [NSString stringWithFormat:@"%@",paymentInfo];
 				 
-				 ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:message
+				 ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:nil
 																			  details:details
 																				 code:0];
 				 

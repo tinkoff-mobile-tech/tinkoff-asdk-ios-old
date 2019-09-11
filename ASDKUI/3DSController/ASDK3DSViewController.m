@@ -255,10 +255,9 @@ typedef NS_ENUM(NSInteger, CheckStateType)
               }
               else
               {
-                  NSString *message = @"Payment state error";
                   NSString *details = [NSString stringWithFormat:@"%@",paymentInfo];
                   
-                  ASDKAcquringSdkError *stateError = [ASDKAcquringSdkError errorWithMessage:message
+                  ASDKAcquringSdkError *stateError = [ASDKAcquringSdkError errorWithMessage:nil
                                                                                     details:details
                                                                                        code:0];
                   
