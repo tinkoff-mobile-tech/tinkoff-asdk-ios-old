@@ -580,9 +580,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 		}
 		else
 		{
-			NSString *message = @"Payment state error";
 			NSString *details = [NSString stringWithFormat:@"%@", self.onCompleteSuccessPaymentInfo];
-			ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:message details:details code:0];
+			ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:nil details:details code:0];
 			self.onError(error);
 			self.onCompleteError = nil;
 		}
