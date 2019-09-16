@@ -512,10 +512,13 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 						 [vc setChargeError:YES];
 						 [vc setChargeErrorPaymentId:[errorResponse.dictionary objectForKey:@"PaymentId"]];
 						 [vc needSetupCardRequisitesCellForCVC];
-
+                         
+                         ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:vc];
+                         [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
+                         
 						 if (paymentConfirm)
 						 {
-							 paymentConfirm(vc);
+							 paymentConfirm(nc);
 						 }
 					 }
 				 } errorBlock:^(ASDKAcquringSdkError *error) {
