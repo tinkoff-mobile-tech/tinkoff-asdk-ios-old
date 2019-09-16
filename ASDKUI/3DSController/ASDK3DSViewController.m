@@ -207,6 +207,10 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nonnull NSError *)error
 {
+    if (error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled) {
+        return;
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
     
     [self  closeSelfWithCompletion:^
