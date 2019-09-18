@@ -815,40 +815,13 @@
 
 - (void)manageError:(ASDKAcquringSdkError *)error
 {
-	if (error.isSdkError)
-	{
-		[self closeSelfWithCompletion:^
-		 {
-			 if (self.onError)
-			 {
-				 self.onError(error);
-			 }
-		 }];
-	}
-	else
-	{
-		NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
-		NSString *alertMessage = error.errorMessage ? error.errorMessage : @"";
-
-		if (alertDetails.length > 0)
-		{
-			alertMessage = [NSString stringWithFormat:@"%@ %@", alertMessage, alertDetails];
-		}
-
-		UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOC(@"acq_default_error_title") message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-		
-		UIAlertAction *cancelAction = [UIAlertAction
-									   actionWithTitle:LOC(@"acq_btn_close")
-									   style:UIAlertActionStyleCancel
-									   handler:^(UIAlertAction *action)
-									   {
-										   [alertController dismissViewControllerAnimated:YES completion:nil];
-									   }];
-		
-		[alertController addAction:cancelAction];
-		
-		[self presentViewController:alertController animated:YES completion:nil];
-	}
+    [self closeSelfWithCompletion:^
+     {
+         if (self.onError)
+         {
+             self.onError(error);
+         }
+     }];
 }
 
 - (void)manageSuccessWithInfo:(ASDKResponseAttachCard *)cardInfo
