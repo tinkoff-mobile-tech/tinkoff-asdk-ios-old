@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,34 +13,38 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hUL-Hw-eOE" id="puZ-XJ-1BZ">
-                <frame key="frameInset" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qNz-4I-DvD">
+                        <rect key="frame" x="8" y="3" width="304" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="iYK-99-MyB"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uON-rg-wrr" userLabel="Name">
+                        <rect key="frame" x="55" y="12" width="42" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="42" id="RZz-5B-eyC"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1nY-4j-NXZ" userLabel="paymentSystemLogo">
+                        <rect key="frame" x="23" y="16.5" width="24" height="11"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11" id="tyR-8E-g3Q"/>
                             <constraint firstAttribute="width" constant="24" id="wyj-5e-Q4l"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="07b-jW-ISW">
+                        <rect key="frame" x="8" y="31" width="304" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="Kvi-4X-0yc"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_green" translatesAutoresizingMaskIntoConstraints="NO" id="paE-5g-su5" userLabel="checkmark">
+                        <rect key="frame" x="284" y="12" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="anC-4B-e1m"/>
                             <constraint firstAttribute="width" constant="20" id="ggA-XX-EAt"/>
@@ -71,6 +75,7 @@
                 <outlet property="customTopSeparatorHeight" destination="iYK-99-MyB" id="XGP-Q8-d1e"/>
                 <outlet property="paymentSystemLogoImageView" destination="1nY-4j-NXZ" id="lQF-dO-Acb"/>
             </connections>
+            <point key="canvasLocation" x="139" y="139"/>
         </tableViewCell>
     </objects>
     <resources>
