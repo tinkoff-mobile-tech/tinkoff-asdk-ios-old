@@ -458,7 +458,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 			[[self cardRequisitesCell] setCardNumber:cardNumber];
 			[[[self cardRequisitesCell] textFieldCardNumber] setText:cardNumber];
-			[[[self cardRequisitesCell] textFieldCardNumber] setTextColor:[UIColor blackColor]];
+			if (@available(iOS 13.0, *)) {
+                [[[self cardRequisitesCell] textFieldCardNumber] setTextColor:[UIColor labelColor]];
+            } else {
+                [[[self cardRequisitesCell] textFieldCardNumber] setTextColor:[UIColor blackColor]];
+            }
 		}
 		else
 		{
@@ -560,7 +564,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
         _cardRequisitesCell = [ASDKCardInputTableViewCell cell];
         [_cardRequisitesCell.cardIOButton setBackgroundColor:[UIColor clearColor]];
         [_cardRequisitesCell.saveCardContainer setHidden:YES];
-        _cardRequisitesCell.contentView.backgroundColor = [UIColor whiteColor];
+        if (@available(iOS 13.0, *)) {
+            _cardRequisitesCell.contentView.backgroundColor = [UIColor systemBackgroundColor];
+        } else {
+            _cardRequisitesCell.contentView.backgroundColor = [UIColor whiteColor];
+        }
         [_cardRequisitesCell setPlaceholderText:LOC(@"acq_title_card_number")];
         [_cardRequisitesCell setUseDarkIcons:YES];
         
@@ -640,7 +648,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     UITextField *emailTextField = [self emailCell].emailTextField;
     if ([textField isEqual:emailTextField])
     {
-        [textField setTextColor:[self validateEmail] ? [UIColor blackColor] : [UIColor redColor]];
+        UIColor *textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            textColor = [UIColor labelColor];
+        }
+        [textField setTextColor:[self validateEmail] ? textColor : [UIColor redColor]];
     }
 }
 
@@ -649,7 +661,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     UITextField *emailTextField = [self emailCell].emailTextField;
     if ([textField isEqual:emailTextField])
     {
-        [textField setTextColor:[self validateEmail] ? [UIColor blackColor] : [UIColor redColor]];
+        UIColor *textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            textColor = [UIColor labelColor];
+        }
+        [textField setTextColor:[self validateEmail] ? textColor : [UIColor redColor]];
     }
 }
 
@@ -658,7 +674,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     UITextField *emailTextField = [self emailCell].emailTextField;
     if ([textField isEqual:emailTextField])
     {
-        [textField setTextColor:[UIColor blackColor]];
+        if (@available(iOS 13.0, *)) {
+            [textField setTextColor:[UIColor labelColor]];
+        } else {
+            [textField setTextColor:[UIColor blackColor]];
+        }
     }
     
     return YES;
