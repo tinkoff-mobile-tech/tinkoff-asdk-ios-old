@@ -34,12 +34,10 @@
     
     CC_SHA256(inputData.bytes, (UInt32)inputData.length, digest);
     
-    NSData *outData = [NSData dataWithBytes:digest length:CC_SHA256_DIGEST_LENGTH];
-    NSString *outString = [outData description];
-    
-    outString = [outString stringByReplacingOccurrencesOfString:@" " withString:@""];
-    outString = [outString stringByReplacingOccurrencesOfString:@"<" withString:@""];
-    outString = [outString stringByReplacingOccurrencesOfString:@">" withString:@""];
+    NSMutableString *outString = [[NSMutableString alloc] init];
+    for (int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
+        [outString appendFormat:@"%02x", digest[i]];
+    }
     
     return outString;
 }
