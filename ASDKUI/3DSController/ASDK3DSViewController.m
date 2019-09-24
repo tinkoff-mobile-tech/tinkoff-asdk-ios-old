@@ -29,17 +29,19 @@
 
 #import "ASDKBarButtonItem.h"
 
+#import <WebKit/WebKit.h>
+
 typedef NS_ENUM(NSInteger, CheckStateType)
 {
 	CheckStateType_payment,
 	CheckStateType_addCardState
 };
 
-@interface ASDK3DSViewController () <UIWebViewDelegate>
+@interface ASDK3DSViewController () <WKUIDelegate, WKNavigationDelegate>
 
 @property(nonatomic, strong) ASDKAcquiringSdk *acquiringSdk;
 
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic) WKWebView *webView;
 
 @property (nonatomic, strong) NSString *paymentId;
 @property (nonatomic, strong) NSString *addCardRequestKey;
@@ -112,9 +114,64 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 
 #pragma mark - ViewController Lifecycle
 
+- (void)setupWebView
+{
+	WKWebViewConfiguration *wkWebConfig = [WKWebViewConfiguration new];
+    self.webView = [[WKWebView alloc] initWithFrame: CGRectZero configuration: wkWebConfig];
+	self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
+    self.webView.allowsBackForwardNavigationGestures = YES;
+    [self.view addSubview: self.webView];
+
+    self.webView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem: self.webView
+                                 attribute: NSLayoutAttributeTop
+                                 relatedBy: NSLayoutRelationEqual
+                                    toItem: self.view
+                                 attribute: NSLayoutAttributeTop
+                                multiplier: 1.0
+                                  constant: 0];
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem: self.webView
+                                 attribute: NSLayoutAttributeBottom
+                                 relatedBy: NSLayoutRelationEqual
+                                    toItem: self.view
+                                 attribute: NSLayoutAttributeBottom
+                                multiplier: 1.0
+                                  constant: 0];
+    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem: self.webView
+                                 attribute: NSLayoutAttributeLeft
+                                 relatedBy: NSLayoutRelationEqual
+                                    toItem: self.view
+                                 attribute: NSLayoutAttributeLeft
+                                multiplier: 1.0
+                                  constant: 0];
+    
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem: self.webView
+                                 attribute: NSLayoutAttributeRight
+                                 relatedBy: NSLayoutRelationEqual
+                                    toItem: self.view
+                                 attribute: NSLayoutAttributeRight
+                                multiplier: 1.0
+                                  constant: 0];
+    
+    NSArray *wb_constraints = @[ topConstraint,
+								 bottomConstraint,
+								 leftConstraint,
+								 rightConstraint
+								];
+    
+    [self.view addConstraints: wb_constraints];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+	[self setupWebView];
+	
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     self.navigationItem.leftBarButtonItem = [[ASDKBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel3DS)];
@@ -127,7 +184,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     NSData *postData = [dataString dataUsingEncoding:NSUTF8StringEncoding];
     
     [request setHTTPBody:postData];
-	
+		
 	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
 	
     [self.webView loadRequest:request];
@@ -135,7 +192,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 
 - (NSString *)termUrl
 {
-    return [NSString stringWithFormat:@"%@%@",[self.acquiringSdk domainPath],kASDKSubmit3DSAuthorization];
+	return [self.acquiringSdk termPath];
 }
 
 - (NSDictionary *)parameters
@@ -170,6 +227,32 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     return dataString;
 }
 
+
+#pragma mark - WKNavigationDelegate
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
+{
+	[webView evaluateJavaScript:@"document.getElementsByName('PaRes')[0].value" completionHandler:^(id _Nullable value, NSError * _Nullable error) {
+		if (error == nil)
+		{
+			NSString *paRes = (NSString *)value;
+			if (paRes.length > 0)
+			{
+				switch (self.checkStateType) {
+					case CheckStateType_payment:
+						[self checkPaymentState];
+						break;
+
+					default:
+						[self checkAddCardState];
+						break;
+				}
+			}
+		}
+	}];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+}
 
 #pragma mark - UIWebViewDelegate
 
@@ -246,7 +329,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     
     [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
     
-    [self.acquiringSdk getStateWithPaymentId:self.paymentId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status){
+    [self.acquiringSdk getStateWithPaymentId:self.paymentId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
          [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
          
          [self closeSelfWithCompletion:^{
@@ -276,8 +359,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
      {
          [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
          
-         [self closeSelfWithCompletion:^
-          {
+         [self closeSelfWithCompletion:^{
               if (self.onError)
               {
                   self.onError(error);

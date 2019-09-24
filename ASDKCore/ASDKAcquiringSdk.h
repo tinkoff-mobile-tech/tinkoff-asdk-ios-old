@@ -57,6 +57,7 @@
 
 - (NSString *)domainPath;
 - (NSString *)domainPath_v2;
+- (NSString *)termPath;
 - (SecKeyRef)publicKeyRef;
 - (NSInteger)apiRequestsTimeoutInterval;
 
