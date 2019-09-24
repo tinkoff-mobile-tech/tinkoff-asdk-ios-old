@@ -160,19 +160,19 @@
 
 - (void)buyItem
 {
-//	[self buyFromCard];
-	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:PayController.acquiringSdk customerKey:PayController.customerKey];
-	[[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{
-		if ([[ASDKCardsListDataController instance] cardWithRebillId] == nil) {
-			[self buyFromCard];
-		}
-		else
-		{
-			[self buyCharge];
-		}
-	} errorBlock:^(ASDKAcquringSdkError *error) {
-		[self buyFromCard];
-	}];
+	[self buyFromCard];
+//	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:PayController.acquiringSdk customerKey:PayController.customerKey];
+//	[[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{
+//		if ([[ASDKCardsListDataController instance] cardWithRebillId] == nil) {
+//			[self buyFromCard];
+//		}
+//		else
+//		{
+//			[self buyCharge];
+//		}
+//	} errorBlock:^(ASDKAcquringSdkError *error) {
+//		[self buyFromCard];
+//	}];
 }
 
 - (void)buyCharge

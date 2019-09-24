@@ -49,12 +49,12 @@
 		2C6E6BAA1F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E6BA81F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m */; };
 		2C6E6BAD1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6E6BAB1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h */; };
 		2C6E6BAE1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E6BAC1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m */; };
+		2C9BE102233904F60094347D /* ASDKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE51C63988F00533D85 /* ASDKCard.m */; };
 		2CFBF58E1FCBFD180060C87F /* ASDKUtilsAmount.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CFBF58C1FCBFD180060C87F /* ASDKUtilsAmount.h */; };
 		2CFBF58F1FCBFD180060C87F /* ASDKUtilsAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBF58D1FCBFD180060C87F /* ASDKUtilsAmount.m */; };
 		83166ED71C63984E00533D85 /* ASDKCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166ED61C63984E00533D85 /* ASDKCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83166F2F1C63988F00533D85 /* ASDKBaseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EE11C63988F00533D85 /* ASDKBaseObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83166F301C63988F00533D85 /* ASDKBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE21C63988F00533D85 /* ASDKBaseObject.m */; };
-		83166F321C63988F00533D85 /* ASDKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE51C63988F00533D85 /* ASDKCard.m */; };
 		83166F331C63988F00533D85 /* ASDKAcquiringRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EE71C63988F00533D85 /* ASDKAcquiringRequest.h */; };
 		83166F341C63988F00533D85 /* ASDKAcquiringRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE81C63988F00533D85 /* ASDKAcquiringRequest.m */; };
 		83166F351C63988F00533D85 /* ASDKChargeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166EEA1C63988F00533D85 /* ASDKChargeRequest.h */; };
@@ -684,6 +684,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -757,6 +758,7 @@
 				83166F631C63988F00533D85 /* ASDKRemoveCardRequestBuilder.m in Sources */,
 				83166F341C63988F00533D85 /* ASDKAcquiringRequest.m in Sources */,
 				83166F481C63988F00533D85 /* ASDKGetCardListResponse.m in Sources */,
+				2C9BE102233904F60094347D /* ASDKCard.m in Sources */,
 				BE1555371C7768EA00BEA6E1 /* ASDKAcquringSdkError.m in Sources */,
 				2C6E6BAE1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m in Sources */,
 				83166F381C63988F00533D85 /* ASDKFinishAuthorizeRequest.m in Sources */,
@@ -777,7 +779,6 @@
 				2C6E6BAA1F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m in Sources */,
 				946C399B1C648F630036D1AF /* ASDKRSAEncryptor.m in Sources */,
 				83166F611C63988F00533D85 /* ASDKInitRequestBuilder.m in Sources */,
-				83166F321C63988F00533D85 /* ASDKCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -894,6 +895,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 72;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -903,6 +905,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.4.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKCore;
@@ -916,6 +919,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 72;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -925,6 +929,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.4.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKCore;
