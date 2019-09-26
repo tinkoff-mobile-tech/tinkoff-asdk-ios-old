@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ASDKUI"
-  s.version      = "1.4.4"
+  s.version      = "1.4.5"
   s.summary      = "UI components library for internet acquiring from Tinkoff Bank"
   s.description  = "UI components library for internet acquiring from Tinkoff Bank!"
   s.homepage     = "https://www.tinkoff.ru"

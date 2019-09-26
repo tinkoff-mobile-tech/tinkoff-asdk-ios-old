@@ -1127,10 +1127,9 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			 {
 				 [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 
-				 NSString *message = @"Payment state error";
 				 NSString *details = [NSString stringWithFormat:@"%@",paymentInfo];
 				 
-				 ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:message
+				 ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:nil
 																			  details:details
 																				 code:0];
 				 
@@ -1199,35 +1198,13 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 - (void)manageError:(ASDKAcquringSdkError *)error
 {
-    if (error.isSdkError)
-    {
-        [self closeSelfWithCompletion:^
+    [self closeSelfWithCompletion:^
+     {
+         if (self.onError)
          {
-             if (self.onError)
-             {
-                 self.onError(error);
-             }
-         }];
-    }
-    else
-    {
-		NSString *alertTitle = error.errorMessage ? error.errorMessage : LOC(@"acq_default_error_title");
-		NSString *alertDetails = error.errorDetails ? error.errorDetails : error.userInfo[kASDKStatus];
-		
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertDetails preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *cancelAction = [UIAlertAction
-                                       actionWithTitle:LOC(@"acq_btn_close")
-                                       style:UIAlertActionStyleCancel
-                                       handler:^(UIAlertAction *action)
-                                       {
-                                           [alertController dismissViewControllerAnimated:YES completion:nil];
-                                       }];
-        
-        [alertController addAction:cancelAction];
-        
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
+             self.onError(error);
+         }
+     }];
 }
 
 - (void)closeSelfWithCompletion: (void (^)(void))completion

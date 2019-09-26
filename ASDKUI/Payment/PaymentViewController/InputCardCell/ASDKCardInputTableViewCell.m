@@ -29,6 +29,9 @@
 #define ASDKCreditCardPaymentSystemInputMaskMaestro16   @"____ ____ ____ _____"
 #define ASDKCreditCardPaymentSystemInputMaskMaestro19   @"________ ____________"
 #define ASDKCreditCardPaymentSystemInputMaskMaestro22   @"________ ______________"
+#define ASDKCreditCardPaymentSystemInputMaskMIR16       @"____ ____ ____ _____"
+#define ASDKCreditCardPaymentSystemInputMaskMIR18       @"________ ___________"
+#define ASDKCreditCardPaymentSystemInputMaskMIR19       @"________ ____________"
 
 //костыль
 typedef enum
@@ -114,7 +117,7 @@ typedef enum
 	
 	[cell setExtendedModeEnabled:YES];
 	[cell setSecureModeEnabled:YES];
-	[cell setCardNumberExpanded:NO animated:NO];
+	[cell setCardNumberExpanded:NO resetValidationState:YES animated:NO];
 	[cell setPaymentLogoHidden:NO animated:NO];
 	[cell setScanButtonHidden:YES animated:NO];
 	[cell setNextButtonHidden:YES animated:NO];
@@ -128,7 +131,7 @@ typedef enum
 {
 	[self setExtendedModeEnabled:YES];
 	[self setSecureModeEnabled:YES];
-	[self setCardNumberExpanded:NO animated:NO];
+	[self setCardNumberExpanded:NO resetValidationState:YES animated:NO];
 	[self setPaymentLogoHidden:NO animated:NO];
 	[self setScanButtonHidden:YES animated:NO];
 	[self setNextButtonHidden:YES animated:NO];
@@ -411,7 +414,7 @@ typedef enum
     [self.secretCVVTextField setDelegate:self];
     [self.secretCVVTextField setKeyInputDelegate:self];
 	
-	[self setCardNumberExpanded:YES animated:NO];
+	[self setCardNumberExpanded:YES resetValidationState:YES animated:NO];
 	
 	[self updatePlaceholders];
 	
@@ -491,28 +494,12 @@ typedef enum
 	
 	if (textField == self.textFieldCardNumber)
 	{
-		_cardNumberValidationFailed = NO;
-		
 		if (!_expanded)
 		{
-			[self setCardNumberExpanded:YES animated:YES];
+			[self setCardNumberExpanded:YES resetValidationState:YES animated:YES];
 			[self updateButtonsStates];
 		}
 	}
-	else if (textField == self.textFieldCardDate)
-	{
-		_dateValidationFailed = NO;
-	}
-	else if (textField == self.textFieldCardCVC)
-	{
-		_cvcValidationFailed = NO;
-	}
-    
-    else if (textField == self.secretCVVTextField)
-    {
-        _cvcValidationFailed = NO;
-    }
-	
 	return YES;
 }
 
@@ -775,9 +762,9 @@ typedef enum
 		
 		NSString *cardNumber = [self cardNumber];
 		
-		if (_creditCardType == ASDKCreditCardTypeDiscover)
+		if (_creditCardType == ASDKCreditCardTypeDiscover || _creditCardType == ASDKCreditCardTypeMIR)
 		{
-			if (cardNumber.length >= 13)
+			if (cardNumber.length >= 16)
 			{
 				if (cardNumber.length <= 22)
 				{
@@ -885,82 +872,102 @@ typedef enum
 
 - (BOOL)validateForm
 {
-	[self resetValidationResults];
-	BOOL result = YES;
+    [self resetValidationResults];
     
     if (self.showSecretContainer)
     {
-        BOOL cvcIsValid = [self validateSecretCVC];
-        if (!cvcIsValid)
+        BOOL isCVCValid = [self validateSecretCVC];
+        if (isCVCValid)
         {
             _cvcValidationFailed = YES;
             self.secretCVVTextField.textColor = [UIColor redColor];
         }
-        result &= cvcIsValid;
         
         [self updatePlaceholders];
         
-        return result;
+        return isCVCValid;
     }
-	
-	if (self.secureModeEnabled)
-	{
-		BOOL cvcIsValid = [self validateCVC];
-		if (!cvcIsValid)
-		{
-			_cvcValidationFailed = YES;
-			self.textFieldCardCVC.textColor = [UIColor redColor];
-		}
-		result &= cvcIsValid;
-	}
-	else
-	{
-		if (self.extendedModeEnabled)
-		{
-			BOOL cvcIsValid = [self validateCVC];
-			if (!cvcIsValid)
-			{
-				_cvcValidationFailed = YES;
-				self.textFieldCardCVC.textColor = [UIColor redColor];
-			}
-			result &= cvcIsValid;
-			
-			BOOL dateIsValid = [self validateDate];
-			if (!dateIsValid)
-			{
-				_dateValidationFailed = YES;
-				self.textFieldCardDate.textColor = [UIColor redColor];
-			}
-			result &= dateIsValid;
-		}
-		
-		
-		BOOL cardNumberIsValid = YES;
-		if (_creditCardType == ASDKCreditCardTypeDiscover)
-		{
-			cardNumberIsValid = self.textFieldCardNumber.text.length > 0;
-		}
-		else if (_creditCardType == ASDKCreditCardTypeUnrecognized)
-		{
-			cardNumberIsValid = NO;
-		}
-		else
-		{
-			cardNumberIsValid = [self luhnCheck:self.cardNumber];
-		}
-		
-		if (!cardNumberIsValid)
-		{
-			_cardNumberValidationFailed = YES;
-			_textFieldCardNumber.textColor = [UIColor redColor];
-		}
-		
-		result &= cardNumberIsValid;
-	}
-	
-	[self updatePlaceholders];
-	
-	return result;
+    
+    if (self.secureModeEnabled)
+    {
+        BOOL isCVCValid = [self validateCVC];
+        if (isCVCValid)
+        {
+            _cvcValidationFailed = YES;
+            self.textFieldCardCVC.textColor = [UIColor redColor];
+        }
+        
+        [self updatePlaceholders];
+        
+        return isCVCValid;
+    }
+    
+    BOOL isFormValid = YES;
+    
+    BOOL isCardNumberValid = YES;
+    if (_creditCardType == ASDKCreditCardTypeDiscover)
+    {
+        isCardNumberValid = self.textFieldCardNumber.text.length > 0;
+    }
+    else if (_creditCardType == ASDKCreditCardTypeUnrecognized)
+    {
+        isCardNumberValid = NO;
+    }
+    else
+    {
+        isCardNumberValid = [self luhnCheck:self.cardNumber];
+    }
+    
+    if (!isCardNumberValid)
+    {
+        _cardNumberValidationFailed = YES;
+        _textFieldCardNumber.textColor = [UIColor redColor];
+        
+        [self setCardNumberExpanded:YES resetValidationState:NO animated:YES];
+    }
+    
+    isFormValid &= isCardNumberValid;
+    
+    if (self.extendedModeEnabled)
+    {
+        BOOL isDateValid = [self validateDate];
+        if (!isDateValid)
+        {
+            _dateValidationFailed = YES;
+            self.textFieldCardDate.textColor = [UIColor redColor];
+            
+            if (isFormValid)
+            {
+                [self.textFieldCardDate becomeFirstResponder];
+                [self setCardNumberExpanded:NO resetValidationState:NO animated:YES];
+                [self setNextButtonHidden:YES animated:YES];
+                [self setScanButtonHidden:YES animated:YES];
+            }
+        }
+        
+        isFormValid &= isDateValid;
+        
+        BOOL isCVCValid = [self validateCVC];
+        if (!isCVCValid)
+        {
+            _cvcValidationFailed = YES;
+            self.textFieldCardCVC.textColor = [UIColor redColor];
+            
+            if (isFormValid)
+            {
+                [self.textFieldCardCVC becomeFirstResponder];
+                [self setCardNumberExpanded:NO resetValidationState:NO animated:YES];
+                [self setNextButtonHidden:YES animated:YES];
+                [self setScanButtonHidden:YES animated:YES];
+            }
+        }
+        
+        isFormValid &= isCVCValid;
+    }
+    
+    [self updatePlaceholders];
+    
+    return isFormValid;
 }
 
 - (void)validateCardNumberAndCollapse
@@ -990,7 +997,7 @@ typedef enum
 			}
 			
 			[textField setTextColor:self.textColor];
-			[self setCardNumberExpanded:NO animated:YES];
+			[self setCardNumberExpanded:NO resetValidationState:YES animated:YES];
 			[self setNextButtonHidden:YES animated:YES];
 			[self setScanButtonHidden:YES animated:YES];
 		}
@@ -1150,7 +1157,7 @@ typedef enum
 	}
 }
 
-- (void)setCardNumberExpanded:(BOOL)expanded animated:(BOOL)animated
+- (void)setCardNumberExpanded:(BOOL)expanded resetValidationState:(BOOL)reset animated:(BOOL)animated
 {
 	if (!_extendedModeEnabled)
 	{
@@ -1162,7 +1169,7 @@ typedef enum
 		expanded = NO;
 	}
 	
-	[self resetValidationResults];
+    if (reset) [self resetValidationResults];
 	
 	CGFloat viewWidth = self.frame.size.width;
 	
@@ -1254,17 +1261,32 @@ typedef enum
 		case ASDKCreditCardTypeVisa:
 		{
 			self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskVisa;
-			[self.textFieldCardCVC setInputMask:@"___"];
 			break;
 		}
 			
-		case ASDKCreditCardTypeMIR:
 		case ASDKCreditCardTypeMastercard:
 		{
 			self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMasterCard;
-			[self.textFieldCardCVC setInputMask:@"___"];
 			break;
 		}
+            
+        case ASDKCreditCardTypeMIR:
+        {
+            if (cardNumber.length <= 16)
+            {
+                self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMIR16;
+            }
+            else if (cardNumber.length <= 18)
+            {
+                self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMIR18;
+            }
+            else
+            {
+                self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMIR19;
+            }
+            
+            break;
+        }
 
 		case ASDKCreditCardTypeDiscover:
 		{
@@ -1281,16 +1303,17 @@ typedef enum
 				self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputMaskMaestro22;
 			}
 			
-			[self.textFieldCardCVC setInputMask:@"___"];
 			break;
 		}
+            
 		default:
 		{
-			[self.textFieldCardCVC setInputMask:@"____"];
 			self.textFieldCardNumber.inputMask = ASDKCreditCardPaymentSystemInputDefault;
 			break;
 		}
 	}
+    
+    [self.textFieldCardCVC setInputMask:@"___"];
 }
 
 - (NSString *)paymentSystemSecurityCodeNameForCardType:(ASDKCreditCardType)creditCardType

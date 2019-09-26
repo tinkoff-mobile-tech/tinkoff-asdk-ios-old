@@ -512,10 +512,13 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 						 [vc setChargeError:YES];
 						 [vc setChargeErrorPaymentId:[errorResponse.dictionary objectForKey:@"PaymentId"]];
 						 [vc needSetupCardRequisitesCellForCVC];
-
+                         
+                         ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:vc];
+                         [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
+                         
 						 if (paymentConfirm)
 						 {
-							 paymentConfirm(vc);
+							 paymentConfirm(nc);
 						 }
 					 }
 				 } errorBlock:^(ASDKAcquringSdkError *error) {
@@ -580,15 +583,58 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 		}
 		else
 		{
-			NSString *message = @"Payment state error";
 			NSString *details = [NSString stringWithFormat:@"%@", self.onCompleteSuccessPaymentInfo];
-			ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:message details:details code:0];
+			ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:nil details:details code:0];
 			self.onError(error);
 			self.onCompleteError = nil;
 		}
 		
 		[ASDKPaymentFormStarter resetSharedInstance];
 	}];
+}
+
+- (void)presentAttachFormFromViewController:(UIViewController *)presentingViewController
+                                  formTitle:(NSString *)title
+                                 formHeader:(NSString *)header
+                                description:(NSString *)description
+                                      email:(NSString *)email
+                              cardCheckType:(NSString *)cardCheckType
+                                customerKey:(NSString *)customerKey
+                             additionalData:(NSDictionary *)data
+                  isDissmissAfterCompletion:(BOOL)isDissmissAfterCompletion
+                                    success:(void (^)(ASDKResponseAttachCard *result))onSuccess
+                                  cancelled:(void (^)(void))onCancelled
+                                      error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+    [self prepareDesign];
+    
+    //    ASDKLoopViewController *viewController = [[ASDKLoopViewController alloc] initWithAddCardRequestKey:@"1" acquiringSdk:self.acquiringSdk];
+    
+    ASDKAttachCardViewController *viewController = [[ASDKAttachCardViewController alloc] initWithCardCheckType:cardCheckType
+                                                                                                     formTitle:(NSString *)title
+                                                                                                    formHeader:(NSString *)header
+                                                                                                   description:(NSString *)description
+                                                                                                         email:(NSString *)email
+                                                                                                   customerKey:(NSString *)customerKey
+                                                                                                additionalData:(NSDictionary *)data
+                                                                                                       success:^(ASDKResponseAttachCard *result) {
+                                                                                                           [ASDKPaymentFormStarter resetSharedInstance];
+                                                                                                           onSuccess(result);
+                                                                                                       } cancelled:^{
+                                                                                                           [ASDKPaymentFormStarter resetSharedInstance];
+                                                                                                           onCancelled();
+                                                                                                       } error:^(ASDKAcquringSdkError *error) {
+                                                                                                           [ASDKPaymentFormStarter resetSharedInstance];
+                                                                                                           onError(error);
+                                                                                                       }];
+    viewController.isDissmissAfterCompletion = isDissmissAfterCompletion;
+    
+    viewController.acquiringSdk = self.acquiringSdk;
+    
+    ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:viewController];
+    [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
+    [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
+    [presentingViewController presentViewController:nc animated:YES completion:nil];
 }
 
 - (void)presentAttachFormFromViewController:(UIViewController *)presentingViewController
@@ -600,37 +646,21 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 								customerKey:(NSString *)customerKey
 							 additionalData:(NSDictionary *)data
 									success:(void (^)(ASDKResponseAttachCard *result))onSuccess
-								  cancelled:(void (^)(void))onCancelled
-									  error:(void (^)(ASDKAcquringSdkError *error))onError
+                                  cancelled:(void (^)(void))onCancelled
+                                      error:(void (^)(ASDKAcquringSdkError *error))onError
 {
-	[self prepareDesign];
-
-//	ASDKLoopViewController *viewController = [[ASDKLoopViewController alloc] initWithAddCardRequestKey:@"1" acquiringSdk:self.acquiringSdk];
-	
-	ASDKAttachCardViewController *viewController = [[ASDKAttachCardViewController alloc] initWithCardCheckType:cardCheckType
-																									 formTitle:(NSString *)title
-																									formHeader:(NSString *)header
-																								   description:(NSString *)description
-																										 email:(NSString *)email
-																								   customerKey:(NSString *)customerKey
-																								additionalData:(NSDictionary *)data
-																									   success:^(ASDKResponseAttachCard *result) {
-																										   [ASDKPaymentFormStarter resetSharedInstance];
-																										   onSuccess(result);
-																									   } cancelled:^{
-																										   [ASDKPaymentFormStarter resetSharedInstance];
-																										   onCancelled();
-																									   } error:^(ASDKAcquringSdkError *error) {
-																										   [ASDKPaymentFormStarter resetSharedInstance];
-																										   onError(error);
-																									   }];
-
-	viewController.acquiringSdk = self.acquiringSdk;
-	
-	ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:viewController];
-	[nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
-	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
-	[presentingViewController presentViewController:nc animated:YES completion:nil];
+    [self presentAttachFormFromViewController:presentingViewController
+                                    formTitle:title
+                                   formHeader:header
+                                  description:description
+                                        email:email
+                                cardCheckType:cardCheckType
+                                  customerKey:customerKey
+                               additionalData:data
+                    isDissmissAfterCompletion:YES
+                                      success:onSuccess
+                                    cancelled:onCancelled
+                                        error:onError];
 }
 
 @end
