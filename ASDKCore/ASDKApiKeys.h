@@ -29,8 +29,6 @@
 #define kASDKTestDomainName_v2                 @"https://rest-api-test.tcsbank.ru/v2/"
 #define kASDKDomainName_v2                     @"https://securepay.tinkoff.ru/v2/"
 
-#define kASDKAPITermPath 					@"https://api.tinkoff.ru/v1/3ds"
-
 #define kASDKAPIPathInit                    @"Init"
 #define kASDKAPIPathFinishAuthorize         @"FinishAuthorize"
 #define kASDKAPIPathCharge                  @"Charge"

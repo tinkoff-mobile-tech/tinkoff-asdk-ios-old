@@ -118,7 +118,6 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 {
 	WKWebViewConfiguration *wkWebConfig = [WKWebViewConfiguration new];
     self.webView = [[WKWebView alloc] initWithFrame: CGRectZero configuration: wkWebConfig];
-	self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
     self.webView.allowsBackForwardNavigationGestures = YES;
     [self.view addSubview: self.webView];
@@ -179,15 +178,15 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     
     self.navigationItem.leftBarButtonItem = [[ASDKBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel3DS)];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.threeDsData.ACSUrl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: self.threeDsData.ACSUrl];
 	request.timeoutInterval = _acquiringSdk.apiRequestsTimeoutInterval;
-	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPMethod:@"POST"];
-    NSString *dataString = [self stringFromParameters:[self parameters]];
+	[request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
+    [request setHTTPMethod: @"POST"];
+    NSString *dataString = [self stringFromParameters: [self parameters]];
 
-    NSData *postData = [dataString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *postData = [dataString dataUsingEncoding: NSUTF8StringEncoding];
     
-    [request setHTTPBody:postData];
+    [request setHTTPBody: postData];
 		
 	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
 	
@@ -196,7 +195,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 
 - (NSString *)termUrl
 {
-	return [self.acquiringSdk termPath];
+	return [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath], kASDKSubmit3DSAuthorization];
 }
 
 - (NSDictionary *)parameters
@@ -236,26 +235,33 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation
 {
-	[webView evaluateJavaScript:@"document.getElementsByName('PaRes')[0].value" completionHandler:^(id _Nullable value, NSError * _Nullable error) {
-		if (error == nil)
-		{
-			NSString *paRes = (NSString *)value;
-			if (paRes.length > 0)
+	if (self.webView == webView)
+	{
+		[self.webView evaluateJavaScript:@"document.baseURI" completionHandler:^(id _Nullable value, NSError * _Nullable error) {
+			if (error == nil)
 			{
-				switch (self.checkStateType) {
-					case CheckStateType_payment:
-						[self checkPaymentState];
-						break;
+				NSString *termUrl = (NSString *)value;
+				if ([termUrl rangeOfString:@"cancel.do"].location != NSNotFound)
+				{
+					[self cancel3DS];
+				}
+				else if ([termUrl rangeOfString:[self termUrl]].location != NSNotFound)
+				{
+					switch (self.checkStateType) {
+						case CheckStateType_payment:
+							[self checkPaymentState];
+							break;
 
-					default:
-						[self checkAddCardState];
-						break;
+						default:
+							[self checkAddCardState];
+							break;
+					}
 				}
 			}
-		}
-	}];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+		}];
+
+		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+	}
 }
 
 #pragma mark - UIWebViewDelegate
@@ -337,7 +343,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
          [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
          
          [self closeSelfWithCompletion:^{
-              if (status == ASDKPaymentStatus_CONFIRMED || status == ASDKPaymentStatus_AUTHORIZED)
+              if (status == ASDKPaymentStatus_CONFIRMED || status == ASDKPaymentStatus_AUTHORIZED || status == ASDKPaymentStatus_3DS_CHECKED)
               {
                   if (self.onSuccess)
                   {
@@ -346,7 +352,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
               }
               else
               {
-                  NSString *details = [NSString stringWithFormat:@"%@",paymentInfo];
+                  NSString *details = [NSString stringWithFormat:@"%@", paymentInfo];
                   
                   ASDKAcquringSdkError *stateError = [ASDKAcquringSdkError errorWithMessage:nil
                                                                                     details:details

@@ -84,11 +84,6 @@
 	return [self testDomain] ? kASDKTestDomainName_v2 : kASDKDomainName_v2;
 }
 
-- (NSString *)termPath
-{
-	return kASDKAPITermPath;
-}
-
 - (SecKeyRef)publicKeyRef
 {
     id<ASDKAcquiringSdkPublicKeyDataSource> publicKeyDataSource = self.publicKeyDataSource;
