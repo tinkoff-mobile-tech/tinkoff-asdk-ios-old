@@ -33,28 +33,47 @@
 
 + (UIColor *)colorTableViewBackground
 {
-    return [ASDKUtils colorWithInteger:0xf6f7f8];
+    if (@available(iOS 13.0, *)) {
+        return [UIColor systemBackgroundColor];
+    } else {
+        return [ASDKUtils colorWithInteger:0xf6f7f8];
+    }
 }
 
 + (UIColor *)colorTextLight
 {
-    return [ASDKUtils colorWithInteger:0x9299a2];
+    if (@available(iOS 13.0, *)) {
+        return [UIColor tertiaryLabelColor];
+    } else {
+        return [ASDKUtils colorWithInteger:0x9299a2];
+    }
 }
 
 + (UIColor *)colorTextDark
 {
-//    return [UIColor blueColor];
-    return [ASDKUtils colorWithInteger:0x333333];
+    if (@available(iOS 13.0, *)) {
+        return [UIColor labelColor];
+    } else {
+        return [ASDKUtils colorWithInteger:0x333333];
+    }
 }
 
 + (UIColor *)colorTextPlaceholder
 {
-    return [ASDKUtils colorWithInteger:0xc7c9cc];
+    if (@available(iOS 13.0, *)) {
+        return [UIColor placeholderTextColor];
+    } else {
+        return [ASDKUtils colorWithInteger:0xc7c9cc];
+    }
 }
 
 + (UIColor *)colorMainBlue
 {
-    return [ASDKUtils colorWithInteger:0x009ecf];
+    if (@available(iOS 13.0, *)) {
+        return [UIColor systemTealColor];
+    } else {
+        return [ASDKUtils colorWithInteger:0x009ecf];
+    }
 }
 
 + (UIColor *)colorNavigationBar
