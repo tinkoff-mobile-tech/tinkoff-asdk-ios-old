@@ -178,6 +178,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.threeDsData.ACSUrl];
 	request.timeoutInterval = _acquiringSdk.apiRequestsTimeoutInterval;
+	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
     NSString *dataString = [self stringFromParameters:[self parameters]];
 
