@@ -169,10 +169,13 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	[self setupWebView];
-	
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self setupWebView];
+  
+    if (@available(iOS 13.0, *)) {
+        [self.view setBackgroundColor:[UIColor systemBackgroundColor]];
+    } else {
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+    }
     
     self.navigationItem.leftBarButtonItem = [[ASDKBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel3DS)];
     

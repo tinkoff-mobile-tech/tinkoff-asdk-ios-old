@@ -54,8 +54,13 @@
     if (self = [super init])
 	{
     	__navigationBarStyle = UIBarStyleDefault;
-		__navigationBarColor = UIColor.whiteColor;
-		__navigationBarItemsTextColor = UIColor.blackColor;
+		if (@available(iOS 13.0, *)) {
+            __navigationBarColor = UIColor.systemBackgroundColor;
+            __navigationBarItemsTextColor = UIColor.labelColor;
+        } else {
+            __navigationBarColor = UIColor.whiteColor;
+            __navigationBarItemsTextColor = UIColor.blackColor;
+        }
 		__presentStyleModal = UIModalPresentationFullScreen;
 	}
 
@@ -86,6 +91,10 @@
     if (self._navigationBarItemsTextColor)
     {
         return self._navigationBarItemsTextColor;
+    }
+    
+    if (@available(iOS 13.0, *)) {
+        return [UIColor systemBackgroundColor];
     }
     
     return [UIColor whiteColor];

@@ -103,7 +103,11 @@
                 if (_layerWithoutGradient == nil)
                 {
                     _layerWithoutGradient = [CALayer layer];
-                    _layerWithoutGradient.backgroundColor = [UIColor blackColor].CGColor;
+                    if (@available(iOS 13.0, *)) {
+                        _layerWithoutGradient.backgroundColor = [UIColor labelColor].CGColor;
+                    } else {
+                        _layerWithoutGradient.backgroundColor = [UIColor blackColor].CGColor;
+                    }
                     _layerWithoutGradient.opacity = 1.0;
                 }
                 

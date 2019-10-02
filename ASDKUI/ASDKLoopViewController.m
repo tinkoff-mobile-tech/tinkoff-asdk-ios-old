@@ -185,7 +185,14 @@
 	NSString *summString = amountTextField.text;
 	BOOL result = [self isValidAmount:summString];
 	
-	[amountTextField setTextColor:result ? [UIColor blackColor] : [UIColor redColor]];
+	UIColor *textColor;
+    if (@available(iOS 13.0, *)) {
+        textColor = [UIColor labelColor];
+    } else {
+        textColor = [UIColor blackColor];
+    }
+    
+    [amountTextField setTextColor:result ? textColor : [UIColor redColor]];
 	
 	return result;
 }
@@ -211,7 +218,11 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	[textField setTextColor:[UIColor blackColor]];
+    if (@available(iOS 13.0, *)) {
+        [textField setTextColor:[UIColor labelColor]];
+    } else {
+        [textField setTextColor:[UIColor blackColor]];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -219,13 +230,23 @@
 	UITextField *amountTextField = [self amountCell].emailTextField;
 	if ([textField isEqual:amountTextField])
 	{
-		[textField setTextColor:[self isValidAmount:textField.text] ? [UIColor blackColor] : [UIColor redColor]];
+        UIColor *textColor;
+        if (@available(iOS 13.0, *)) {
+            textColor = [UIColor labelColor];
+        } else {
+            textColor = [UIColor blackColor];
+        }
+		[textField setTextColor:[self isValidAmount:textField.text] ? textColor : [UIColor redColor]];
 	}
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	[textField setTextColor:[UIColor blackColor]];
+    if (@available(iOS 13.0, *)) {
+        [textField setTextColor:[UIColor labelColor]];
+    } else {
+        [textField setTextColor:[UIColor blackColor]];
+    }
 	return YES;
 }
 

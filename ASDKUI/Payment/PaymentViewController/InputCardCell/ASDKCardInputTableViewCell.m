@@ -142,8 +142,13 @@ typedef enum
 + (instancetype)cellForRecieverCard
 {
 	ASDKCardInputTableViewCell *cell = [[[NSBundle bundleForClass:[self class]] loadNibNamed:@"ASDKCardInputTableViewCell" owner:self options:nil] objectAtIndex:0];
-	[cell.contentView setBackgroundColor:[UIColor whiteColor]];
-	[cell.viewCardContainer setBackgroundColor:[UIColor whiteColor]];
+	if (@available(iOS 13.0, *)) {
+        [cell.contentView setBackgroundColor:[UIColor systemBackgroundColor]];
+        [cell.viewCardContainer setBackgroundColor:[UIColor systemBackgroundColor]];
+    } else {
+        [cell.contentView setBackgroundColor:[UIColor whiteColor]];
+        [cell.viewCardContainer setBackgroundColor:[UIColor whiteColor]];
+    }
 	[cell setUseDarkIcons:YES];
 	[cell setExtendedModeEnabled:NO];
     [cell setShowSecretContainer:NO];
@@ -418,7 +423,11 @@ typedef enum
 	[self.switchSaveCard setBackgroundColor:nil];
 	
 	if (!_textColor)
-		[self setTextColor:[UIColor blackColor]];
+		if (@available(iOS 13.0, *)) {
+            [self setTextColor:[UIColor labelColor]];
+        } else {
+            [self setTextColor:[UIColor blackColor]];
+        }
 }
 
 #pragma mark ASDKTextFieldKeyInputDelegate

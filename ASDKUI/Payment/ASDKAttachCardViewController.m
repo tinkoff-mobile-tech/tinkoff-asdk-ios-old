@@ -289,7 +289,11 @@
 		_cardRequisitesCell = [ASDKCardInputTableViewCell cell];
 		[_cardRequisitesCell.cardIOButton setBackgroundColor:[UIColor clearColor]];
 		[_cardRequisitesCell.saveCardContainer setHidden:YES];
-		_cardRequisitesCell.contentView.backgroundColor = [UIColor whiteColor];
+		if (@available(iOS 13.0, *)) {
+            _cardRequisitesCell.contentView.backgroundColor = [UIColor systemBackgroundColor];
+        } else {
+            _cardRequisitesCell.contentView.backgroundColor = [UIColor whiteColor];
+        }
 		[_cardRequisitesCell setPlaceholderText:LOC(@"acq_title_card_number")];
 		[_cardRequisitesCell setUseDarkIcons:YES];
 		
@@ -594,31 +598,43 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-	UITextField *emailTextField = [self emailCell].emailTextField;
-	if ([textField isEqual:emailTextField])
-	{
-		[textField setTextColor:[self validateEmail] ? [UIColor blackColor] : [UIColor redColor]];
-	}
+    UITextField *emailTextField = [self emailCell].emailTextField;
+    if ([textField isEqual:emailTextField])
+    {
+        UIColor *textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            textColor = [UIColor labelColor];
+        }
+        [textField setTextColor:[self validateEmail] ? textColor : [UIColor redColor]];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-	UITextField *emailTextField = [self emailCell].emailTextField;
-	if ([textField isEqual:emailTextField])
-	{
-		[textField setTextColor:[self validateEmail] ? [UIColor blackColor] : [UIColor redColor]];
-	}
+    UITextField *emailTextField = [self emailCell].emailTextField;
+    if ([textField isEqual:emailTextField])
+    {
+        UIColor *textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            textColor = [UIColor labelColor];
+        }
+        [textField setTextColor:[self validateEmail] ? textColor : [UIColor redColor]];
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-	UITextField *emailTextField = [self emailCell].emailTextField;
-	if ([textField isEqual:emailTextField])
-	{
-		[textField setTextColor:[UIColor blackColor]];
-	}
-	
-	return YES;
+    UITextField *emailTextField = [self emailCell].emailTextField;
+    if ([textField isEqual:emailTextField])
+    {
+        UIColor *textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            textColor = [UIColor labelColor];
+        }
+        [textField setTextColor:textColor];
+    }
+    
+    return YES;
 }
 
 #pragma mark - ASDKCardsListDelegate
