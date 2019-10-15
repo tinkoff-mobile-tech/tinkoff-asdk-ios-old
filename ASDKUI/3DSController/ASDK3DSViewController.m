@@ -256,11 +256,8 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 							NSMutableDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data
 																								options:kNilOptions
 																								  error:&jsonError];
-							ASDKAcquiringResponse *result = [[ASDKAcquiringResponse alloc] initWithDictionary: responseJSON];
 							
-							NSLog(@"result.success = %i", result.success);
-							NSLog(@"result.code = %@", result.errorCode);
-							NSLog(@"result.message = %@", result.message);
+							ASDKAcquiringResponse *result = [[ASDKAcquiringResponse alloc] initWithDictionary: responseJSON];
 							
 							if (result.success == true)
 							{
