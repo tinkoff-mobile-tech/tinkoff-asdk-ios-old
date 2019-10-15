@@ -247,72 +247,57 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 				}
 				else if ([termUrl rangeOfString:[self termUrl]].location != NSNotFound)
 				{
-					switch (self.checkStateType) {
-						case CheckStateType_payment:
-							[self checkPaymentState];
-							break;
+					[self.webView evaluateJavaScript:@"document.getElementsByTagName('pre')[0].innerHTML" completionHandler:^(id _Nullable value, NSError * _Nullable error) {
+						NSString *responce = (NSString *)value;
+						if (responce != nil)
+						{
+							NSData *data = [responce dataUsingEncoding:NSUTF8StringEncoding];
+							NSError *jsonError;
+							NSMutableDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data
+																								options:kNilOptions
+																								  error:&jsonError];
+							ASDKAcquiringResponse *result = [[ASDKAcquiringResponse alloc] initWithDictionary: responseJSON];
+							
+							NSLog(@"result.success = %i", result.success);
+							NSLog(@"result.code = %@", result.errorCode);
+							NSLog(@"result.message = %@", result.message);
+							
+							if (result.success == true)
+							{
+								switch (self.checkStateType) {
+									case CheckStateType_payment:
+										[self checkPaymentState];
+										break;
 
-						default:
-							[self checkAddCardState];
-							break;
-					}
+									default:
+										[self checkAddCardState];
+										break;
+								}
+							}
+							else
+							{
+								[self closeSelfWithCompletion:^{
+									if (self.onError)
+									{
+										NSString *errorMessage = result.message;
+										NSString *errorDetails = result.details == nil ? @"3ds checking error" : result.details;
+										NSInteger errorCode = result.errorCode == nil ? 0 : [result.errorCode integerValue];
+										
+										ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage: errorMessage
+																									 details: errorDetails
+																										code: errorCode];
+										self.onError(error);
+									}
+								}];
+							}
+						}
+					}];
 				}
 			}
 		}];
 
 		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 	}
-}
-
-#pragma mark - UIWebViewDelegate
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSString *urlString = request.URL.absoluteString;
-    
-    if ([urlString rangeOfString:@"cancel.do"].location != NSNotFound)
-    {
-        [self cancel3DS];
-        
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-	
-    if ([webView.request.URL.absoluteString isEqualToString:[self termUrl]])
-    {
-		switch (self.checkStateType) {
-			case CheckStateType_payment:
-				[self checkPaymentState];
-				break;
-				
-			default:
-				[self checkAddCardState];
-				break;
-		}
-    }
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nonnull NSError *)error
-{
-    if (error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled) {
-        return;
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-    
-    [self  closeSelfWithCompletion:^
-     {
-         if (self.onError)
-         {
-             self.onError([ASDKAcquringSdkError acquiringErrorWithError:error]);
-         }
-     }];
 }
 
 - (void)cancel3DS
@@ -352,15 +337,18 @@ typedef NS_ENUM(NSInteger, CheckStateType)
               }
               else
               {
-                  NSString *details = [NSString stringWithFormat:@"%@", paymentInfo];
-                  
-                  ASDKAcquringSdkError *stateError = [ASDKAcquringSdkError errorWithMessage:nil
-                                                                                    details:details
-                                                                                       code:0];
+				  ASDKAcquiringResponse *result = [[ASDKAcquiringResponse alloc] initWithDictionary: paymentInfo.dictionary];
+				  NSString *errorMessage = result.message;
+				  NSString *errorDetails = result.details == nil ? [NSString stringWithFormat: @"%@", paymentInfo] : result.details;
+				  NSInteger errorCode = result.errorCode == nil ? 0 : [result.errorCode integerValue];
+				  
+				  ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage: errorMessage
+																			   details: errorDetails
+																				  code: errorCode];
                   
                   if (self.onError)
                   {
-                      self.onError(stateError);
+                      self.onError(error);
                   }
               }
           }];
@@ -395,14 +383,17 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 			}
 			else
 			{
-				NSString *message = @"AddCard state error";
-				NSString *details = [NSString stringWithFormat:@"%@", response.message];
+				NSString *errorMessage = response.message;
+				NSString *errorDetails = response.details == nil ?  @"AddCard state error" : response.details;
+				NSInteger errorCode = response.errorCode == nil ? 0 : [response.errorCode integerValue];
 				
-				ASDKAcquringSdkError *stateError = [ASDKAcquringSdkError errorWithMessage:message details:details code:0];
+				ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage: errorMessage
+																			 details: errorDetails
+																				code: errorCode];
 				
 				if (self.onError)
 				{
-					self.onError(stateError);
+					self.onError(error);
 				}
 			}
 		}];

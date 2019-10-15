@@ -797,12 +797,13 @@
 					{
 						[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 						
-						NSString *message = @"Attach card error";
-						NSString *details = [NSString stringWithFormat:@"error %@", result.errorCode];
+						NSString *errorMessage = result.message == nil ? @"Attach card error" : result.message;
+						NSString *errorDetails = result.details == nil ? [NSString stringWithFormat:@"error %@", result.errorCode] : result.details;
+						NSInteger errorCode = result.errorCode == nil ? 0 : [result.errorCode integerValue];
 						
-						ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:message
-																					 details:details
-																						code:[result.errorCode integerValue]];
+						ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:errorMessage
+																					 details:errorDetails
+																						code:errorCode];
 						
 						if (strongSelf)
 						{
@@ -819,7 +820,7 @@
 				[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 				ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:response.message
 																			 details:response.details
-																				code:0];
+																				code:[response.errorCode integerValue]];
 				[self manageError:error];
 			}
 		} failure:^(ASDKAcquringSdkError *error) {

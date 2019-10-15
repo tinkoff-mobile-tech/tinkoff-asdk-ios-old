@@ -1125,13 +1125,16 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			 }
 			 else
 			 {
-				 [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-
-				 NSString *details = [NSString stringWithFormat:@"%@",paymentInfo];
+				 [[NSNotificationCenter defaultCenter] postNotificationName: ASDKNotificationHideLoader object: nil];
 				 
-				 ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:nil
-																			  details:details
-																				 code:0];
+				 ASDKAcquiringResponse *result = [[ASDKAcquiringResponse alloc] initWithDictionary: paymentInfo.dictionary];
+				 NSString *errorMessage = result.message;
+				 NSString *errorDetails = result.details == nil ? [NSString stringWithFormat: @"%@", paymentInfo] : result.details;
+				 NSInteger errorCode = result.errorCode == nil ? 0 : [result.errorCode integerValue];
+				 
+				 ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage: errorMessage
+																			  details: errorDetails
+																				 code: errorCode];
 				 
 				 if (strongSelf)
 				 {
