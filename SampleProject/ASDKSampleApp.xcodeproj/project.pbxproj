@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C83A63A235DD74900F22255 /* ASDKlocalizableRu.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C83A639235DD74900F22255 /* ASDKlocalizableRu.strings */; };
 		2CA5873C2359E798000AC124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA5873B2359E798000AC124 /* Assets.xcassets */; };
 		2CEF638E1F54377C00C368AE /* TransactionDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF63851F54377C00C368AE /* TransactionDetailTableViewCell.m */; };
 		2CEF638F1F54377C00C368AE /* TransactionDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF63861F54377C00C368AE /* TransactionDetailTableViewCell.xib */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		01788A6283865E9E86DA0E68 /* Pods-ASDKSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASDKSampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		2C83A639235DD74900F22255 /* ASDKlocalizableRu.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = ASDKlocalizableRu.strings; sourceTree = "<group>"; };
 		2CA5873B2359E798000AC124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CEF63841F54377C00C368AE /* TransactionDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionDetailTableViewCell.h; sourceTree = "<group>"; };
 		2CEF63851F54377C00C368AE /* TransactionDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionDetailTableViewCell.m; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 		94251ADA1C6C899E00B5FE2B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2C83A639235DD74900F22255 /* ASDKlocalizableRu.strings */,
 				2CA5873B2359E798000AC124 /* Assets.xcassets */,
 				94F109591C6DDFB70043410D /* books.json */,
 				BEDEFF561C74B2A00026D454 /* Localizable.strings */,
@@ -461,6 +464,7 @@
 				2CEF63921F54377C00C368AE /* TransactionHistoryViewController.xib in Resources */,
 				C3AAB1401DAFE3FC00C64972 /* Localizable.strings in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,
+				2C83A63A235DD74900F22255 /* ASDKlocalizableRu.strings in Resources */,
 				83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */,
 				2CEF638F1F54377C00C368AE /* TransactionDetailTableViewCell.xib in Resources */,
 			);
