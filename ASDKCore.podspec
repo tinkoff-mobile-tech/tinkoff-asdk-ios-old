@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   
   s.author             = { "d.tarasov" => "d.tarasov@tinkoff.ru" } 
   s.platform     = :ios
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "9.0"
   s.source       = { :git => "https://github.com/TinkoffCreditSystems/tinkoff-asdk-ios.git", :tag => "#{s.version}" }
   s.source_files  = "ASDKCore", "ASDKCore/**/*.{h,m}"
   s.requires_arc = true
