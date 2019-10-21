@@ -10,15 +10,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ASDK3DSViewController">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="Ckg-TD-Akj"/>
+                <outlet property="view" destination="RqI-dx-fq3" id="i5x-33-pX2"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view contentMode="scaleToFill" id="RqI-dx-fq3">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <viewLayoutGuide key="safeArea" id="By8-oO-D1b"/>
-            <point key="canvasLocation" x="-422" y="2"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="ahL-SG-g77"/>
+            <point key="canvasLocation" x="-857" y="-655"/>
         </view>
     </objects>
 </document>
