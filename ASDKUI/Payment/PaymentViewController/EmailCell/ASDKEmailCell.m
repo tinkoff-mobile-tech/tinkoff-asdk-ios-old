@@ -40,7 +40,7 @@
     
     self.emailTextField.attributedPlaceholder = placeholderString;
     
-    [self.emailTextField setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
+    [self.emailTextField setFont:[UIFont systemFontOfSize:17.0]];
 }
 
 @end

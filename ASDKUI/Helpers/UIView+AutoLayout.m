@@ -682,9 +682,16 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
         return [self autoPinEdge:ALEdgeTop toEdge:ALEdgeTop ofView:viewController.view withOffset:inset];
     } else {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:viewController.topLayoutGuide attribute:NSLayoutAttributeBottom multiplier:1.0f constant:inset];
-        [viewController.view al_addConstraintUsingGlobalPriority:constraint];
-        return constraint;
+	
+		NSLayoutConstraint *constraint;
+		if (@available(iOS 11.0, *)) {
+			constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:viewController.view.safeAreaLayoutGuide.topAnchor attribute:NSLayoutAttributeBottom multiplier:1.0f constant:inset];
+		} else {
+			constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:viewController.topLayoutGuide attribute:NSLayoutAttributeBottom multiplier:1.0f constant:inset];
+		}
+		
+		[viewController.view al_addConstraintUsingGlobalPriority:constraint];
+		return constraint;
     }
 }
 
@@ -703,9 +710,16 @@ static BOOL _al_isExecutingConstraintsBlock = NO;
         return [self autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:viewController.view withOffset:-inset];
     } else {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:viewController.bottomLayoutGuide attribute:NSLayoutAttributeTop multiplier:1.0f constant:-inset];
-        [viewController.view al_addConstraintUsingGlobalPriority:constraint];
-        return constraint;
+		NSLayoutConstraint *constraint;
+		
+		if (@available(iOS 11.0, *)) {
+			constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:viewController.view.safeAreaLayoutGuide.topAnchor attribute:NSLayoutAttributeTop multiplier:1.0f constant:-inset];
+		} else {
+			constraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:viewController.bottomLayoutGuide attribute:NSLayoutAttributeTop multiplier:1.0f constant:-inset];
+		}
+
+		[viewController.view al_addConstraintUsingGlobalPriority:constraint];
+		return constraint;
     }
 }
 

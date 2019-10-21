@@ -74,7 +74,22 @@
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)(void))onCancelled
-						error:(void (^)(ASDKAcquringSdkError *error))onError;
+						error:(void (^)(ASDKAcquringSdkError *error))onError API_DEPRECATED("PKAddressField deprecated. Use buyUsingApplePayAmount with PKContactField and -requiredShippingContactFields / -requiredBillingContactFields", ios(8.0, 11.0), watchos(3.0, 4.0));
+
++ (void)buyUsingApplePayAmount:(NSNumber *)amount
+				   description:(NSString *)description
+						 email:(NSString *)email
+			   appleMerchantId:(NSString *)appleMerchantId
+			   shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
+			   shippingContact:(PKContact *)shippingContact
+		shippingEditableFields:(NSSet<PKContactField> *)shippingEditableFields
+					 recurrent:(BOOL)recurrent
+		 additionalPaymentData:(NSDictionary *)data
+				   receiptData:(NSDictionary *)receiptData
+			fromViewController:(UIViewController *)viewController
+					   success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
+					 cancelled:(void (^)(void))onCancelled
+						 error:(void (^)(ASDKAcquringSdkError *error))onError API_AVAILABLE(ios(11.0), watchos(4.0));
 
 + (void)buyWithApplePayAmount:(NSNumber *)amount
 				  description:(NSString *)description
@@ -91,7 +106,24 @@
 		   fromViewController:(UIViewController *)viewController
 					  success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
 					cancelled:(void (^)(void))onCancelled
-						error:(void (^)(ASDKAcquringSdkError *error))onError;
+						error:(void (^)(ASDKAcquringSdkError *error))onError API_DEPRECATED("PKAddressField deprecated. Use buyUsingApplePayAmount with PKContactField and -requiredShippingContactFields / -requiredBillingContactFields", ios(8.0, 11.0), watchos(3.0, 4.0));
+
++ (void)buyUsingApplePayAmount:(NSNumber *)amount
+				   description:(NSString *)description
+						 email:(NSString *)email
+			   appleMerchantId:(NSString *)appleMerchantId
+			   shippingMethods:(NSArray<PKShippingMethod *> *)shippingMethods
+			   shippingContact:(PKContact *)shippingContact
+		shippingEditableFields:(NSSet<PKContactField> *)shippingEditableFields
+					 recurrent:(BOOL)recurrent
+		 additionalPaymentData:(NSDictionary *)data
+				   receiptData:(NSDictionary *)receiptData
+					 shopsData:(NSArray *)shopsData
+			 shopsReceiptsData:(NSArray *)shopsReceiptsData
+			fromViewController:(UIViewController *)viewController
+					   success:(void (^)(ASDKPaymentInfo *paymentIfo))onSuccess
+					 cancelled:(void (^)(void))onCancelled
+						 error:(void (^)(ASDKAcquringSdkError *error))onError API_AVAILABLE(ios(11.0), watchos(4.0));
 
 + (void)checkStatusTransaction:(NSString *)paymentId
 	   fromViewController:(UIViewController *)viewController

@@ -214,7 +214,7 @@ typedef enum
 				[cardsListDelegate cardListDidChanged];
 			}
 			 
-			 _didRemoveCards = YES;
+			self->_didRemoveCards = YES;
          }
                                                           errorBlock:^(ASDKAcquringSdkError *error)
          {

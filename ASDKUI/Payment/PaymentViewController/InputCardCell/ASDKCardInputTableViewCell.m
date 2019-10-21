@@ -368,7 +368,7 @@ typedef enum
 	//[self.textFieldCardNumber setDisableCopy:YES];
 	[self.textFieldCardNumber setKeyboardType:UIKeyboardTypeNumberPad];
 	[self.textFieldCardNumber setKeyboardAppearance:UIKeyboardAppearanceLight];
-	[self.textFieldCardNumber setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
+	[self.textFieldCardNumber setFont:[UIFont systemFontOfSize:17]];
 	[self.textFieldCardNumber setDelegate:self];
 	
 	[_viewCardNumber addSubview:self.textFieldCardNumber];
@@ -382,7 +382,7 @@ typedef enum
 	[self.textFieldCardDate setDelegate:self];
 	[self.textFieldCardDate setKeyboardType:UIKeyboardTypeNumberPad];
 	[self.textFieldCardDate setKeyboardAppearance:UIKeyboardAppearanceLight];
-	[self.textFieldCardDate setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
+	[self.textFieldCardDate setFont:[UIFont systemFontOfSize:17.0]];
 	[self.textFieldCardDate setKeyInputDelegate:self];
 	
 	[_viewCardDate addSubview:self.textFieldCardDate];
@@ -395,7 +395,7 @@ typedef enum
 	[self.textFieldCardCVC setDisableCopy:YES];
 	[self.textFieldCardCVC setKeyboardType:UIKeyboardTypeNumberPad];
 	[self.textFieldCardCVC setKeyboardAppearance:UIKeyboardAppearanceLight];
-	[self.textFieldCardCVC setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
+	[self.textFieldCardCVC setFont:[UIFont systemFontOfSize:17.0]];
 	[self.textFieldCardCVC setSecureTextEntry:YES];
 	[self.textFieldCardCVC setDelegate:self];
 	[self.textFieldCardCVC setKeyInputDelegate:self];
@@ -409,7 +409,7 @@ typedef enum
 	[self.secretCVVTextField setDisableCopy:YES];
     [self.secretCVVTextField setKeyboardType:UIKeyboardTypeNumberPad];
     [self.secretCVVTextField setKeyboardAppearance:UIKeyboardAppearanceLight];
-    [self.secretCVVTextField setFont:[UIFont systemFontOfSize:17.0 weight:UIFontWeightLight]];
+    [self.secretCVVTextField setFont:[UIFont systemFontOfSize:17.0]];
     [self.secretCVVTextField setSecureTextEntry:YES];
     [self.secretCVVTextField setDelegate:self];
     [self.secretCVVTextField setKeyInputDelegate:self];
@@ -423,11 +423,13 @@ typedef enum
 	[self.switchSaveCard setBackgroundColor:nil];
 	
 	if (!_textColor)
+	{
 		if (@available(iOS 13.0, *)) {
             [self setTextColor:[UIColor labelColor]];
         } else {
             [self setTextColor:[UIColor blackColor]];
         }
+	}
 }
 
 #pragma mark ASDKTextFieldKeyInputDelegate

@@ -160,9 +160,9 @@
 
 - (void)buyItem
 {
-	[self buyFromCard];
-//	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:PayController.acquiringSdk customerKey:PayController.customerKey];
-//	[[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{
+	[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:PayController.acquiringSdk customerKey:PayController.customerKey];
+	[[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{
+		[self buyFromCard];
 //		if ([[ASDKCardsListDataController instance] cardWithRebillId] == nil) {
 //			[self buyFromCard];
 //		}
@@ -170,9 +170,9 @@
 //		{
 //			[self buyCharge];
 //		}
-//	} errorBlock:^(ASDKAcquringSdkError *error) {
-//		[self buyFromCard];
-//	}];
+	} errorBlock:^(ASDKAcquringSdkError *error) {
+		[self buyFromCard];
+	}];
 }
 
 - (void)buyCharge
@@ -234,25 +234,49 @@
 		[postalAddress setPostalCode:@"125212"];
 		[postalAddress setISOCountryCode:@"643"];
 		shippingContact.postalAddress = [postalAddress copy];
-		
-		[PayController buyWithApplePayAmount:self.item.cost
-								 description:self.item.title
-									   email:shippingContact.emailAddress
-							 appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
-							 shippingMethods:nil//@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
-							 shippingContact:shippingContact
-					  shippingEditableFields:PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone //PKAddressFieldNone
-								   recurrent:NO
-					   additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
-								 receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
-											   @"Items":@[@{@"Name":@"Название товара 1", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
-														  @{@"Name":@"Название товара 2", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
-						  fromViewController:self
-									 success:^(ASDKPaymentInfo *paymentIfo) {
-										 NSLog(@"%@", paymentIfo.paymentId);
-									 }
-								   cancelled:^{ NSLog(@"Canceled"); }
-									   error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@", error); }];
+	
+		if (@available(iOS 11, *))
+		{
+			[PayController buyUsingApplePayAmount:self.item.cost
+									  description:self.item.title
+											email:shippingContact.emailAddress
+								  appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
+								  shippingMethods:nil
+								  shippingContact:shippingContact
+						   shippingEditableFields:[NSSet setWithObjects:PKContactFieldPostalAddress, PKContactFieldName, PKContactFieldEmailAddress, PKContactFieldPhoneNumber, nil]
+										recurrent:NO
+							additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
+									  receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
+													@"Items":@[@{@"Name":@"Название товара 1", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
+															   @{@"Name":@"Название товара 2", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
+							   fromViewController:self
+										  success:^(ASDKPaymentInfo *paymentIfo) {
+				NSLog(@"%@", paymentIfo.paymentId);
+			}
+										cancelled:^{ NSLog(@"Canceled"); }
+											error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@", error); }];
+		}
+		else
+		{
+			[PayController buyWithApplePayAmount:self.item.cost
+									 description:self.item.title
+										   email:shippingContact.emailAddress
+								 appleMerchantId:@"merchant.tcsbank.ApplePayTestMerchantId"
+								 shippingMethods:nil//@[[PKShippingMethod summaryItemWithLabel:@"Доставка" amount:[NSDecimalNumber decimalNumberWithString:@"300"]]]
+								 shippingContact:shippingContact
+						  shippingEditableFields:PKAddressFieldPostalAddress|PKAddressFieldName|PKAddressFieldEmail|PKAddressFieldPhone //PKAddressFieldNone
+									   recurrent:NO
+						   additionalPaymentData:@{@"Email":@"a@test.ru", @"Phone":@"+71234567890"}
+									 receiptData:@{@"Email":@"a@test.ru", @"Taxation":@"osn",
+												   @"Items":@[@{@"Name":@"Название товара 1", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat10"},
+															  @{@"Name":@"Название товара 2", @"Price":@10000, @"Quantity":@1, @"Amount":@10000, @"Tax":@"vat118"}]}
+							  fromViewController:self
+										 success:^(ASDKPaymentInfo *paymentIfo) {
+				NSLog(@"%@", paymentIfo.paymentId);
+			}
+									   cancelled:^{ NSLog(@"Canceled"); }
+										   error:^(ASDKAcquringSdkError *error) {  NSLog(@"%@", error); }];
+		}
 	}
 }
 

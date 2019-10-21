@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CA5873C2359E798000AC124 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA5873B2359E798000AC124 /* Assets.xcassets */; };
 		2CEF638E1F54377C00C368AE /* TransactionDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF63851F54377C00C368AE /* TransactionDetailTableViewCell.m */; };
 		2CEF638F1F54377C00C368AE /* TransactionDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF63861F54377C00C368AE /* TransactionDetailTableViewCell.xib */; };
 		2CEF63901F54377C00C368AE /* TransactionHistoryModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF63881F54377C00C368AE /* TransactionHistoryModelController.m */; };
@@ -18,7 +19,6 @@
 		83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B8C1C6DF29C00D69603 /* DetailInfoTableViewController.xib */; };
 		83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B901C6E0C3100D69603 /* ShopCartTableViewController.xib */; };
 		83871B951C6E112400D69603 /* PayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83871B941C6E112400D69603 /* PayController.m */; };
-		94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94251ADB1C6C899E00B5FE2B /* Assets.xcassets */; };
 		94251AEA1C6C899E00B5FE2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251ADE1C6C899E00B5FE2B /* AppDelegate.m */; };
 		94251AEC1C6C899E00B5FE2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251AE31C6C899E00B5FE2B /* ViewController.m */; };
 		94251AEE1C6C899E00B5FE2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 94251AE61C6C899E00B5FE2B /* main.m */; };
@@ -62,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		01788A6283865E9E86DA0E68 /* Pods-ASDKSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASDKSampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		2CA5873B2359E798000AC124 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CEF63841F54377C00C368AE /* TransactionDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionDetailTableViewCell.h; sourceTree = "<group>"; };
 		2CEF63851F54377C00C368AE /* TransactionDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionDetailTableViewCell.m; sourceTree = "<group>"; };
 		2CEF63861F54377C00C368AE /* TransactionDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		83871B931C6E112400D69603 /* PayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayController.h; sourceTree = "<group>"; };
 		83871B941C6E112400D69603 /* PayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayController.m; sourceTree = "<group>"; };
 		83E156691C721F26000BBD57 /* LocalConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalConstants.h; sourceTree = "<group>"; };
-		94251ADB1C6C899E00B5FE2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94251ADD1C6C899E00B5FE2B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		94251ADE1C6C899E00B5FE2B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		94251AE11C6C899E00B5FE2B /* ASDKTestKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDKTestKeys.h; sourceTree = "<group>"; };
@@ -239,8 +239,8 @@
 		94251ADA1C6C899E00B5FE2B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2CA5873B2359E798000AC124 /* Assets.xcassets */,
 				94F109591C6DDFB70043410D /* books.json */,
-				94251ADB1C6C899E00B5FE2B /* Assets.xcassets */,
 				BEDEFF561C74B2A00026D454 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -406,8 +406,8 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				LastUpgradeCheck = 0910;
-				ORGANIZATIONNAME = "TCS Bank";
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = "Tinkoff Bank";
 				TargetAttributes = {
 					831672861C6486A500533D85 = {
 						CreatedOnToolsVersion = 7.2;
@@ -425,11 +425,10 @@
 				};
 			};
 			buildConfigurationList = 831672821C6486A500533D85 /* Build configuration list for PBXProject "ASDKSampleApp" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			compatibilityVersion = "Xcode 10.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				Base,
 				ru,
 				en,
@@ -453,13 +452,13 @@
 				83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */,
 				94F1095A1C6DDFB70043410D /* books.json in Resources */,
 				C3AAB1411DAFE40000C64972 /* InfoPlist.strings in Resources */,
+				2CA5873C2359E798000AC124 /* Assets.xcassets in Resources */,
 				C316661D1DAF7BCB00BA6AB8 /* TableViewCellSegmentedControl.xib in Resources */,
 				94251B1E1C6CB8BF00B5FE2B /* ShopCartCell.xib in Resources */,
 				94251AF61C6C89F600B5FE2B /* LaunchScreen.storyboard in Resources */,
 				94251B331C6CD2B500B5FE2B /* BookItemCell.xib in Resources */,
 				94251B291C6CC6C500B5FE2B /* PaymentSuccessViewController.xib in Resources */,
 				2CEF63921F54377C00C368AE /* TransactionHistoryViewController.xib in Resources */,
-				94251AE91C6C899E00B5FE2B /* Assets.xcassets in Resources */,
 				C3AAB1401DAFE3FC00C64972 /* Localizable.strings in Resources */,
 				BEF535721C72091D00935A15 /* AboutViewController.xib in Resources */,
 				83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */,
@@ -475,120 +474,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources.sh",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/buttom_logos.imageset/buttom_logos.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/buttom_logos.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/check_green.imageset/check_green.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/check_green.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete.imageset/delete.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete_icon.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete_icon.imageset/delete_icon.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_grey.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_grey.imageset/next_grey.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_white.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_white.imageset/next_white.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMaestro.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMaestro.imageset/psIconMaestro.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMastercard.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMastercard.imageset/psIconMastercard.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMir.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMir.imageset/psIconMir.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIcons.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIcons.imageset/psIcons.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconVisa.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconVisa.imageset/psIconVisa.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card.imageset/scan_card.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card_grey.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card_grey.imageset/scan_card_grey.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/visa_white.imageset/Contents.json",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/visa_white.imageset/visa_white.pdf",
-				"${PODS_ROOT}/../../ASDKUI/Resources/Localization/en.lproj/ASDKLocalizable.strings",
-				"${PODS_ROOT}/../../ASDKUI/Resources/Localization/ru.lproj/ASDKLocalizable.strings",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/buttom_logos.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/check_green.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/delete_icon.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_grey.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/next_white.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMaestro.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMastercard.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconMir.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIcons.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/psIconVisa.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/scan_card_grey.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/ASDKUIImages.xcassets/visa_white.imageset",
-				"${PODS_ROOT}/../../ASDKUI/Resources/Localization/en.lproj",
-				"${PODS_ROOT}/../../ASDKUI/Resources/Localization/ru.lproj",
-				"${PODS_ROOT}/../../ASDKUI/3DSController/ASDK3DSViewController.xib",
-				"${PODS_ROOT}/../../ASDKUI/ASDKLoaderViewController.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/CardsListViewController/AddNewCardCell/ASDKAddNewCardCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/CardsListViewController/CardCell/ASDKCardCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKEmptyTableViewCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKExternalCardsCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKFooterCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKPayButtonCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKPaymentFormHeaderCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/ASDKPaymentFormSummCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/CustomInput/DeleteCell/ASDKDeleteCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/CustomInput/NumberCell/ASDKNumberCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/EmailCell/ASDKEmailCell.xib",
-				"${PODS_ROOT}/../../ASDKUI/Payment/PaymentViewController/InputCardCell/ASDKCardInputTableViewCell.xib",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/buttom_logos.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Contents.json",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/check_green.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/delete.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/delete_icon.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/next_grey.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/next_white.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMaestro.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMastercard.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMir.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIcons.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconVisa.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/scan_card.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/scan_card_grey.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/visa_white.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKLocalizable.strings",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/buttom_logos.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/check_green.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/delete.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/delete_icon.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/next_grey.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/next_white.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMaestro.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMastercard.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconMir.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIcons.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/psIconVisa.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/scan_card.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/scan_card_grey.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/visa_white.imageset",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ru.lproj",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDK3DSViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKLoaderViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKAddNewCardCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKCardCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKEmptyTableViewCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKExternalCardsCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKFooterCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKPayButtonCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKPaymentFormHeaderCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKPaymentFormSummCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKDeleteCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKNumberCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKEmailCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ASDKCardInputTableViewCell.nib",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -683,12 +574,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -716,7 +609,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -737,12 +630,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -764,7 +659,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -776,7 +671,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 80ADADDCD6F59A2D7EF6C6A3 /* Pods-ASDKSampleApp.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ASDKSampleApp/ASDKSampleApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 75;
@@ -788,8 +682,10 @@
 					"$(PROJECT_DIR)/ASDKSampleApp/ASDK",
 				);
 				INFOPLIST_FILE = "ASDKSampleApp/Supporting files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.4.8;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -803,7 +699,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 01788A6283865E9E86DA0E68 /* Pods-ASDKSampleApp.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ASDKSampleApp/ASDKSampleApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 75;
@@ -815,8 +710,10 @@
 					"$(PROJECT_DIR)/ASDKSampleApp/ASDK",
 				);
 				INFOPLIST_FILE = "ASDKSampleApp/Supporting files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.4.8;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
