@@ -356,6 +356,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
      {
          ASDKChargeResponse *responseObject = [[ASDKChargeResponse alloc] initWithDictionary:responseDictionary];
+         responseObject.paymentInfo.rebillId = request.rebillId;
          success(responseObject.paymentInfo, responseObject.status);
      }
        failure:^(ASDKAcquringApiError *error)

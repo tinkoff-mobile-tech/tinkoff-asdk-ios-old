@@ -27,5 +27,6 @@
 @property (nonatomic, copy) NSString *orderId;
 @property (nonatomic, strong) NSNumber *amount;
 @property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSNumber *rebillId;
 
 @end
