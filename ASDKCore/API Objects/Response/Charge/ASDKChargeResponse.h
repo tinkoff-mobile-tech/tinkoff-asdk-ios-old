@@ -22,9 +22,16 @@
 #import "ASDKPaymentInfo.h"
 #import "ASDKThreeDsData.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ASDKChargeResponse : ASDKAcquiringResponse
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+                          rebillId:(nullable NSNumber *)rebillId;
 
 @property (nonatomic, strong) ASDKPaymentInfo *paymentInfo;
 @property (nonatomic, strong) ASDKThreeDsData *threeDsData;
 
 @end
+
+NS_ASSUME_NONNULL_END

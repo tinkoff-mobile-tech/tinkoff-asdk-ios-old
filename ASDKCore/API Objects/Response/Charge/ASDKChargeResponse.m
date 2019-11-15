@@ -23,6 +23,16 @@
 
 @implementation ASDKChargeResponse
 
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary
+                         rebillId:(NSNumber *)rebillId {
+    self = [super initWithDictionary:dictionary];
+    if (!self) {
+        return nil;
+    }
+    _paymentInfo.rebillId = rebillId;
+    return self;
+}
+
 - (ASDKThreeDsData *)threeDsData
 {
     if (!_threeDsData)
