@@ -259,7 +259,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 							
 							ASDKAcquiringResponse *result = [[ASDKAcquiringResponse alloc] initWithDictionary: responseJSON];
 							
-							if (result.success == true)
+							if (result.success == true && [result.errorCode integerValue] == 0)
 							{
 								switch (self.checkStateType) {
 									case CheckStateType_payment:
