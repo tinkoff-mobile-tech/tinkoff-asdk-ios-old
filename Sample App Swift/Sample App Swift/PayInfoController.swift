@@ -37,7 +37,7 @@ class PayInfoController: UIViewController {
     var payOption:PayForm = .Card
     
     func generateSum() {
-        let pricef:Double = Double.random(in: 0 ..< 5)
+        let pricef:Double = Double.random(in: 1 ..< 5)
         purchasePrice = Decimal(pricef)
         priceLabel.text = String(format:"%0.2f", pricef)
     }
@@ -216,6 +216,18 @@ class PayInfoController: UIViewController {
         
         let orderId = String(arc4random()%10000000);
         
+        let amount:NSNumber = (purchasePrice * 100 as NSNumber)
+
+        let email:String = "user@domain.org"
+        let qty = 1
+        let receiptData:  [String: Any] = [
+            "Email": email,    // org email???
+            "Taxation": "osn", // org taxation type
+            "Items": [
+                ["Name": "product name", "Price":amount, "Quantity":qty, "Amount":amount , "Tax": "vat10"] //how to determine VAT for item???
+            ]
+        ]
+        
         switch (payOption){
         case .applePay:
             asdk_pfs.payWithApplePay(
@@ -224,7 +236,7 @@ class PayInfoController: UIViewController {
                 orderId: orderId,
                 description: productDescription,
                 customerKey: customerKey,
-                sendEmail: false,
+                sendEmail: true,
                 email: email,
                 appleMerchantId: AppleMerchantID,
                 shippingMethods: nil,
@@ -232,7 +244,7 @@ class PayInfoController: UIViewController {
                 shippingEditableFields: fields,
                 recurrent: false,
                 additionalPaymentData: nil,
-                receiptData: nil,
+                receiptData: receiptData,
                 shopsData: nil,
                 shopsReceiptsData: nil,
                 success: paySuccess,
@@ -252,7 +264,7 @@ class PayInfoController: UIViewController {
                 recurrent: false,
                 makeCharge: false,
                 additionalPaymentData: nil,
-                receiptData: nil,
+                receiptData: receiptData,
                 success: paySuccess,
                 cancelled: payCancelled,
                 error: payError)
