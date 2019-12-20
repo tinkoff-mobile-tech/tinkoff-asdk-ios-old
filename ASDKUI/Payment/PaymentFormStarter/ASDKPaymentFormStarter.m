@@ -25,6 +25,7 @@
 #import "ASDKCardsListDataController.h"
 #import "ASDKAttachCardViewController.h"
 #import "ASDKLoopViewController.h"
+#import "ASDKCardsListViewController.h"
 
 @interface ASDKPaymentFormStarter () <PKPaymentAuthorizationViewControllerDelegate>
 {
@@ -452,12 +453,18 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			{
 				[ASDKPaymentFormStarter resetSharedInstance];
 				self.onError(nil);
+                self.onSuccess = nil;
+                self.onError = nil;
+                self.onCancelled = nil;
 				
 			}
 		}
 		failure:^(ASDKAcquringSdkError *error) {
 			[ASDKPaymentFormStarter resetSharedInstance];
 			self.onError(error);
+            self.onSuccess = nil;
+            self.onError = nil;
+            self.onCancelled = nil;
 		}
 	 ];
 }
@@ -674,6 +681,10 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 		}
 		
 		[ASDKPaymentFormStarter resetSharedInstance];
+        
+        self.onSuccess = nil;
+        self.onCancelled = nil;
+        self.onError = nil;
 	}];
 }
 
@@ -745,6 +756,44 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
                                       success:onSuccess
                                     cancelled:onCancelled
                                         error:onError];
+}
+
+- (void)presentCardListFormFromViewController:(UIViewController *)presentingViewController
+                                    /*formTitle:(NSString *)title //Заголовок экрана
+                                   formHeader:(NSString *)header // заголовок для пояснения зачем надо привязывать карту
+                                  description:(NSString *)description //описание зачем надо привязывать карту
+                                        email:(NSString *)email //
+                                cardCheckType:(NSString *)cardCheckType //описание возможных значений в ASDKCard.h*/
+                                  customerKey:(NSString *)customerKey // идетинификатор пользователя (для сохранеиня платежей и карт)
+                               /*additionalData:(NSDictionary *)data //JSON объект содержащий дополнительные параметры, например @{@"Phone" : @"+71234567890"}
+                                      success:(void (^)(ASDKResponseAttachCard *result))onSuccess*/
+                                    addHandler:(void (^)(void))onAdd
+                                        error:(void (^)(ASDKAcquringSdkError *error))onError
+{
+    [self prepareDesign];
+    
+    [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
+    
+    if (customerKey.length == 0)
+    {
+        //[onError error];
+        return;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
+    [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^
+     {
+         [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+         ASDKCardsListViewController *cardListController = [[ASDKCardsListViewController alloc] initForEditing:onAdd];
+         ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:cardListController];
+         [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
+         [presentingViewController presentViewController:nc animated:YES completion:nil];
+     }
+                                                                 errorBlock:^(ASDKAcquringSdkError *error)
+     {
+         [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+         [onError error];
+     }];
 }
 
 @end

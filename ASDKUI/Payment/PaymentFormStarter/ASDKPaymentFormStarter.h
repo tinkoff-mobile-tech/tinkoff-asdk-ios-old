@@ -246,4 +246,37 @@
                                   cancelled:(void (^)(void))onCancelled
                                       error:(void (^)(ASDKAcquringSdkError *error))onError;
 
+/*!
+ * @bref Отображение списка привязанных карт с возможностью привязать новую, онлайн документация https://oplata.tinkoff.ru/landing/develop/documentation/Init
+ *
+ * @param title - Заголовок экрана
+ * @param header - заголовок для пояснения зачем надо привязывать карту
+ * @param description - Краткое описание зачем надо привязывать карту
+ *
+ * @param customerKey - Идентификатор покупателя в системе Продавца.
+ *
+ * @param cardCheckType
+ *  ASDKCardCheckType_NO – сохранить карту без проверок. Rebill ID для рекуррентных платежей не возвращается.
+ *  ASDKCardCheckType_3DS – при сохранении карты выполнить проверку 3DS и выполнить списание, а затем отмену на 1 р. В этом случае RebillID будет только для 3DS карт. Карты, не поддерживающие 3DS, привязаны не будут.
+ *  ASDKCardCheckType_HOLD – при сохранении сделать списание и затем отмену на 1 руб. RebillID для рекуррентных платежей возвращается в ответе.
+ *  ASDKCardCheckType_3DSHOLD – при привязке карты выполняем проверку, поддерживает карта 3DS или нет. Если карта поддерживает 3DS, далее выполняем списание и затем отмену на 1 руб.
+ *
+ * @param onSuccess блок в случае успеха
+ * @param onCancelled блок в случае сканирования с ошибкой
+ * @param onError блок при отмене сканирования
+ */
+
+- (void)presentCardListFormFromViewController:(UIViewController *)presentingViewController
+                                  /*formTitle:(NSString *)title //Заголовок экрана
+                                 formHeader:(NSString *)header // заголовок для пояснения зачем надо привязывать карту
+                                description:(NSString *)description //описание зачем надо привязывать карту
+                                      email:(NSString *)email //
+                              cardCheckType:(NSString *)cardCheckType //описание возможных значений в ASDKCard.h*/
+                                customerKey:(NSString *)customerKey // идетинификатор пользователя (для сохранеиня платежей и карт)
+                             /*additionalData:(NSDictionary *)data //JSON объект содержащий дополнительные параметры, например @{@"Phone" : @"+71234567890"}
+                                    success:(void (^)(ASDKResponseAttachCard *result))onSuccess
+                                  cancelled:(void (^)(void))onCancelled*/
+                              addHandler:(void (^)(void))onAdd
+                              error:(void (^)(ASDKAcquringSdkError *error))onError;
+
 @end
