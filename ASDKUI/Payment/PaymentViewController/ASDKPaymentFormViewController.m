@@ -1386,4 +1386,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	return cardList;
 }
 
+#pragma mark - UIAdaptivePresentationControllerDelegate
+
+- (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController
+{
+    [self closeSelfWithCompletion:self.onCancelled];
+}
+
 @end
