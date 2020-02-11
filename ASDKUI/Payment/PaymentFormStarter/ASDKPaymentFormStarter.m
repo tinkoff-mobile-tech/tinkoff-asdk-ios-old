@@ -206,7 +206,6 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 
 	ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:vc];
 	[nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
-    nc.presentationController.delegate = vc;
 
     [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
 

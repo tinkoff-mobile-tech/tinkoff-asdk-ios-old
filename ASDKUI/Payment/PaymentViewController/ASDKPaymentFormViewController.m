@@ -159,6 +159,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     self.title = LOC(@"acq_screen_title");
 	
 	[self.navigationController.navigationBar setTranslucent:NO];
+    self.navigationController.presentationController.delegate = self;
 	
 	self.tableView.sectionHeaderHeight = 0;
 	self.tableView.sectionFooterHeight = 0;
