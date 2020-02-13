@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,15 +13,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hUL-Hw-eOE" id="puZ-XJ-1BZ">
-                <frame key="frameInset" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qNz-4I-DvD">
+                        <rect key="frame" x="8" y="0.0" width="304" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="iYK-99-MyB"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uON-rg-wrr" userLabel="Name">
+                        <rect key="frame" x="55" y="12" width="42" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="42" id="RZz-5B-eyC"/>
                         </constraints>
@@ -30,17 +32,20 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1nY-4j-NXZ" userLabel="paymentSystemLogo">
+                        <rect key="frame" x="23" y="16.5" width="24" height="11"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11" id="tyR-8E-g3Q"/>
                             <constraint firstAttribute="width" constant="24" id="wyj-5e-Q4l"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="07b-jW-ISW">
+                        <rect key="frame" x="8" y="34" width="304" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="Kvi-4X-0yc"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check_green" translatesAutoresizingMaskIntoConstraints="NO" id="paE-5g-su5" userLabel="checkmark">
+                        <rect key="frame" x="284" y="12" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="anC-4B-e1m"/>
                             <constraint firstAttribute="width" constant="20" id="ggA-XX-EAt"/>
@@ -53,9 +58,9 @@
                     <constraint firstItem="1nY-4j-NXZ" firstAttribute="centerY" secondItem="puZ-XJ-1BZ" secondAttribute="centerY" id="Mtg-4b-9Ah"/>
                     <constraint firstItem="uON-rg-wrr" firstAttribute="centerY" secondItem="puZ-XJ-1BZ" secondAttribute="centerY" id="NA5-5y-Bl9"/>
                     <constraint firstItem="qNz-4I-DvD" firstAttribute="leading" secondItem="puZ-XJ-1BZ" secondAttribute="leadingMargin" constant="-8" id="UB6-Ra-wgX"/>
-                    <constraint firstItem="qNz-4I-DvD" firstAttribute="top" secondItem="puZ-XJ-1BZ" secondAttribute="topMargin" constant="-8" id="X84-ge-eXL"/>
+                    <constraint firstItem="qNz-4I-DvD" firstAttribute="top" secondItem="puZ-XJ-1BZ" secondAttribute="firstBaseline" id="X84-ge-eXL"/>
                     <constraint firstItem="07b-jW-ISW" firstAttribute="leading" secondItem="puZ-XJ-1BZ" secondAttribute="leadingMargin" constant="-8" id="Z40-ra-ZFD"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="07b-jW-ISW" secondAttribute="bottom" constant="-8" id="Z5q-66-fqE"/>
+                    <constraint firstAttribute="baseline" secondItem="07b-jW-ISW" secondAttribute="bottom" id="Z5q-66-fqE"/>
                     <constraint firstAttribute="trailingMargin" secondItem="qNz-4I-DvD" secondAttribute="trailing" constant="-8" id="l2y-3e-MXl"/>
                     <constraint firstAttribute="trailingMargin" secondItem="paE-5g-su5" secondAttribute="trailing" id="ofv-ir-prR"/>
                     <constraint firstItem="uON-rg-wrr" firstAttribute="leading" secondItem="1nY-4j-NXZ" secondAttribute="trailing" constant="8" id="prg-Ch-pnf"/>
@@ -71,6 +76,7 @@
                 <outlet property="customTopSeparatorHeight" destination="iYK-99-MyB" id="XGP-Q8-d1e"/>
                 <outlet property="paymentSystemLogoImageView" destination="1nY-4j-NXZ" id="lQF-dO-Acb"/>
             </connections>
+            <point key="canvasLocation" x="139" y="154"/>
         </tableViewCell>
     </objects>
     <resources>
