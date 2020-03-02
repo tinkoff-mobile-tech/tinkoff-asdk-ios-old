@@ -30,6 +30,7 @@
 #define kASDKDomainName_v2                     @"https://securepay.tinkoff.ru/v2/"
 
 #define kASDKAPIPathInit                    @"Init"
+#define kASDKAPIPathCheck3dsVersion         @"Check3dsVersion"
 #define kASDKAPIPathFinishAuthorize         @"FinishAuthorize"
 #define kASDKAPIPathCharge                  @"Charge"
 #define kASDKAPIPathCancel                  @"Cancel"
@@ -77,7 +78,8 @@
 #define kASDKCard                           @""
 #define kASDKTermUrl                        @"TermUrl"
 #define kASDKInfoEmail                      @"InfoEmail"
-
+#define kASDKAcsTransId						@"AcsTransId"
+#define kASDKTdsServerTransId				@"TdsServerTransId"
 #pragma mark - API Error
 
 #define kASDKErrorMessage                   @"errorMessage"

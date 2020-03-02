@@ -1,7 +1,6 @@
 //
-//  ASDKThreeDsData.h
+//  ASDKFinishAuthorizeRequest.h
 //  ASDKCore
-//
 // Copyright (c) 2016 TCS Bank
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,21 +14,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
 
+#import "ASDKAcquiringRequest.h"
 
+@interface ASDKRequestCheck3dsVersion : ASDKAcquiringRequest
 
-#import <Foundation/Foundation.h>
-#import "ASDKBaseObject.h"
+@property (nonatomic, strong) NSString *paymentId;
+@property (nonatomic, strong) NSString *cardData;
 
-@interface ASDKThreeDsData : ASDKBaseObject
-
-// 1.X
-@property (nonatomic, copy) NSString *MD;
-@property (nonatomic, copy) NSString *paReq;
-
-// 2.X
-@property (nonatomic, strong) NSURL *acsUrl;
-@property (nonatomic, copy) NSString *acsTransId;
-@property (nonatomic, copy) NSString *tdsServerTransId;
+- (ASDKRequestCheck3dsVersion *)initWithTerminalKey:(NSString *)terminalKey
+										  paymentId:(NSString *)paymentId
+										   cardData:(NSString *)cardData
+											  token:(NSString *)token;
 
 @end

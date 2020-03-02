@@ -27,6 +27,7 @@
 												  infoEmail:(NSString *)infoEmail
 												terminalKey:(NSString *)terminalKey
 												   password:(NSString *)password
-									   encryptedPaymentData:(NSString *)encryptedPaymentData;
+									   encryptedPaymentData:(NSString *)encryptedPaymentData
+													   data:(NSDictionary *)data;
 
 @end

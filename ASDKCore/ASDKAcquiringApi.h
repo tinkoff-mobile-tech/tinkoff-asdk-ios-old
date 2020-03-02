@@ -58,6 +58,9 @@
 
 #import "ASDKRequestSubmitRandomAmount.h"
 
+#import "ASDKRequestCheck3dsVersion.h"
+#import "ASDKResponseCheck3dsVersion.h"
+
 @protocol ASDKAcquiringApiLoggerDelegate <NSObject>
 
 - (void)print:(NSString *)logString;
@@ -79,9 +82,13 @@
                 success:(void (^)(ASDKInitResponse *response))success
                 failure:(void (^)(ASDKAcquringApiError *error))failure;
 
-- (void)finishAuthorizeWithRequest:(ASDKFinishAuthorizeRequest *)request
-                           success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
+- (void)check3dsVersionWithRequest:(ASDKRequestCheck3dsVersion *)request
+                           success:(void (^)(ASDKResponseCheck3dsVersion *response))success
                            failure:(void (^)(ASDKAcquringApiError *error))failure;
+
+- (void)finishAuthorizeWithRequest:(ASDKFinishAuthorizeRequest *)request
+						   success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
+						   failure:(void (^)(ASDKAcquringApiError *error))failure;
 
 - (void)chargeWithRequest:(ASDKChargeRequest *)request
                              success:(void (^)(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success

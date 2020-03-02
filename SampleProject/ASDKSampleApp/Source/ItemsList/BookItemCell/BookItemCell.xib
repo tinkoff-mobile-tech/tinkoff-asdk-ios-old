@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -92,28 +92,19 @@
                         <rect key="frame" x="12" y="234" width="456" height="187"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6z9-69-lCg" userLabel="itemTitleLabel">
-                                <rect key="frame" x="15" y="0.0" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="0FE-DD-IwC"/>
-                                </constraints>
+                                <rect key="frame" x="15" y="0.0" width="426" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zou-Os-min" userLabel="itemSubtitleLabel">
-                                <rect key="frame" x="15" y="29" width="37.5" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="ft8-Y9-EG0"/>
-                                </constraints>
+                                <rect key="frame" x="15" y="29" width="426" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRG-ZW-hvI">
-                                <rect key="frame" x="15" y="55" width="426" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="0bQ-Er-DFK"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRG-ZW-hvI">
+                                <rect key="frame" x="15" y="55" width="426" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -123,13 +114,13 @@
                             <constraint firstAttribute="trailing" secondItem="BRG-ZW-hvI" secondAttribute="trailing" constant="15" id="03u-dq-pfN"/>
                             <constraint firstItem="6z9-69-lCg" firstAttribute="leading" secondItem="SwM-AD-2Eu" secondAttribute="leading" constant="15" id="0ZA-Ut-JH5"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BRG-ZW-hvI" secondAttribute="bottom" priority="750" id="BAY-4Y-bPL"/>
+                            <constraint firstAttribute="trailing" secondItem="6z9-69-lCg" secondAttribute="trailing" constant="15" id="S4S-sZ-4pl"/>
                             <constraint firstItem="BRG-ZW-hvI" firstAttribute="leading" secondItem="SwM-AD-2Eu" secondAttribute="leading" constant="15" id="X2b-3W-cMD"/>
                             <constraint firstItem="Zou-Os-min" firstAttribute="leading" secondItem="SwM-AD-2Eu" secondAttribute="leading" constant="15" id="ZDI-xP-hog"/>
                             <constraint firstItem="Zou-Os-min" firstAttribute="top" secondItem="6z9-69-lCg" secondAttribute="bottom" constant="8" id="bxc-jk-DDI"/>
                             <constraint firstItem="6z9-69-lCg" firstAttribute="top" secondItem="SwM-AD-2Eu" secondAttribute="top" id="itL-Fg-nwl"/>
                             <constraint firstItem="BRG-ZW-hvI" firstAttribute="top" secondItem="Zou-Os-min" secondAttribute="bottom" constant="8" id="r7K-98-wUZ"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6z9-69-lCg" secondAttribute="trailing" constant="15" id="vRc-px-A3p"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Zou-Os-min" secondAttribute="trailing" constant="15" id="xb0-du-WMN"/>
+                            <constraint firstAttribute="trailing" secondItem="Zou-Os-min" secondAttribute="trailing" constant="15" id="xb0-du-WMN"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -33,6 +33,7 @@
 
 #import "ASDKRequestBuilderSubmitRandomAmount.h"
 #import "ASDKRequestSubmitRandomAmount.h"
+#import "ASDKRequestBuilderCheck3dsVersion.h"
 
 @interface ASDKAcquiringSdk () <ASDKAcquiringApiLoggerDelegate>
 
@@ -157,10 +158,39 @@
     }
 }
 
+- (void)check3dsVersionWithPaymentId:(NSString *)paymentId
+							cardData:(NSString *)cardData
+							 success:(void (^)(ASDKResponseCheck3dsVersion *response))success
+							 failure:(void (^)(ASDKAcquringSdkError *error))failure
+{
+	ASDKAcquringSdkError *buildError;
+	
+	ASDKRequestBuilderCheck3dsVersion *builder = [[ASDKRequestBuilderCheck3dsVersion alloc] initWithTerminalKey:self.terminalKey
+																									   password:self.password
+																									  paymentId:paymentId
+																									   cardData:cardData];
+	
+	ASDKRequestCheck3dsVersion *request = (ASDKRequestCheck3dsVersion *)[builder buildError:&buildError];
+	
+	if (buildError)
+	{
+		failure(buildError);
+	}
+	else
+	{
+		[self.acquiringApi check3dsVersionWithRequest:request success:^(ASDKResponseCheck3dsVersion *response) {
+			success(response);
+		} failure:^(ASDKAcquringApiError *error) {
+			failure(error);
+		}];
+	}
+}
+
 - (void)finishAuthorizeWithPaymentId:(NSString *)paymentId
 				encryptedPaymentData:(NSString *)encryptedPaymentData
                             cardData:(NSString *)cardData
                            infoEmail:(NSString *)infoEmail
+								data:(NSDictionary *)data
                              success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                              failure:(void (^)(ASDKAcquringSdkError *error))failure
 {
@@ -171,7 +201,8 @@
 																							   infoEmail:infoEmail
 																							 terminalKey:self.terminalKey
 																								password:self.password
-																					encryptedPaymentData:encryptedPaymentData];
+																					encryptedPaymentData:encryptedPaymentData
+																									data:data];
     
     ASDKFinishAuthorizeRequest *request = (ASDKFinishAuthorizeRequest *)[builder buildError:&buildError];
     
@@ -181,13 +212,10 @@
     }
     else
     {
-        [self.acquiringApi finishAuthorizeWithRequest:request
-                                             success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status)
-        {
+        [self.acquiringApi finishAuthorizeWithRequest:request success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
             success(data, paymentInfo, status);
         }
-                                             failure:^(ASDKAcquringApiError *error)
-        {
+		failure:^(ASDKAcquringApiError *error) {
             failure(error);
         }];
     }

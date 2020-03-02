@@ -22,6 +22,8 @@
 #import <ASDKCore/ASDKAcquringSdkError.h>
 #import "ASDKBaseViewController.h"
 
+#define kASDKSubmit3DSAuthorization @"Submit3DSAuthorization"
+
 @interface ASDK3DSViewController : ASDKBaseViewController
 
 - (instancetype)initWithPaymentId:(NSString *)paymentId

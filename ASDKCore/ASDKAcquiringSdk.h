@@ -35,6 +35,9 @@
 #import "ASDKCardData.h"
 #import "ASDKCard.h"
 
+#import "ASDKResponseCheck3dsVersion.h"
+#import "ASDKUtilsRequest.h"
+
 @protocol ASDKAcquiringSdkLoggerDelegate <NSObject>
 
 - (void)print:(NSString *)logString;
@@ -79,10 +82,16 @@
                success:(void (^)(ASDKInitResponse *response))success
                failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
+- (void)check3dsVersionWithPaymentId:(NSString *)paymentId
+							cardData:(NSString *)cardData
+						   success:(void (^)(ASDKResponseCheck3dsVersion *response))success
+						   failure:(void (^)(ASDKAcquringSdkError *error))failure;
+
 - (void)finishAuthorizeWithPaymentId:(NSString *)paymentId
 				encryptedPaymentData:(NSString *)encryptedPaymentData
                             cardData:(NSString *)cardData
-                           infoEmail:(NSString *)infoEmail
+						   infoEmail:(NSString *)infoEmail
+								data:(NSDictionary *)data
                              success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                              failure:(void (^)(ASDKAcquringSdkError *error))failure;
 
