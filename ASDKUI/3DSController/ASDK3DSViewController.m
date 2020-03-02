@@ -19,9 +19,9 @@
 #import "ASDK3DSViewController.h"
 #import <ASDKCore/ASDKApiKeys.h>
 #import <ASDKCore/ASDKAcquiringSdk.h>
-#import "ASDKLoaderViewController.h"
+#import <ASDKCore/ASDKUtilsRequest.h>
 
-#define kASDKSubmit3DSAuthorization @"Submit3DSAuthorization"
+#import "ASDKLoaderViewController.h"
 
 #import "ASDKNavigationController.h"
 
@@ -30,6 +30,7 @@
 #import "ASDKBarButtonItem.h"
 
 #import <WebKit/WebKit.h>
+
 
 typedef NS_ENUM(NSInteger, CheckStateType)
 {
@@ -57,10 +58,6 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 @end
 
 @implementation ASDK3DSViewController
-
-#pragma mark - Getters
-
-#pragma mark - Init
 
 - (void)dealloc
 {
@@ -178,19 +175,36 @@ typedef NS_ENUM(NSInteger, CheckStateType)
     
     self.navigationItem.leftBarButtonItem = [[ASDKBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel3DS)];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: self.threeDsData.ACSUrl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: self.threeDsData.acsUrl];
 	request.timeoutInterval = _acquiringSdk.apiRequestsTimeoutInterval;
-	[request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
+	[request setAllHTTPHeaderFields:[ASDKUtilsRequest defaultHTTPHeaders]];
     [request setHTTPMethod: @"POST"];
+	
     NSString *dataString = [self stringFromParameters: [self parameters]];
-
     NSData *postData = [dataString dataUsingEncoding: NSUTF8StringEncoding];
-    
     [request setHTTPBody: postData];
 		
 	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
+	[self.webView loadRequest:request];
+
+	//NSError *error = nil;
+	//NSData *requestData = [NSData dataWithContentsOfURL:request options:NSDataReadingUncached error:&error];
 	
-    [self.webView loadRequest:request];
+//	NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//	NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+//
+//	NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//		dispatch_async(dispatch_get_main_queue(), ^{
+//			if (data != nil)
+//			{
+//				[self.webView loadData:data MIMEType:@"text/html" characterEncodingName:@"UTF-8" baseURL:self.threeDsData.ACSUrl];
+//			}
+//
+//			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
+//		});
+//	}];
+//
+//	[dataTask resume];
 }
 
 - (NSString *)termUrl

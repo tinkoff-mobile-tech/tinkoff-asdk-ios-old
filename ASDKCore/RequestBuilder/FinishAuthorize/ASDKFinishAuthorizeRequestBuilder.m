@@ -20,11 +20,12 @@
 
 @interface ASDKFinishAuthorizeRequestBuilder ()
 
-@property (nonatomic, strong) NSString *paymentId;
-@property (nonatomic) NSString *sendEmail;
+@property (nonatomic, copy) NSString *paymentId;
+@property (nonatomic, copy) NSString *sendEmail;
 @property (nonatomic, copy) NSString *cardData;
-@property (nonatomic, strong) NSString *infoEmail;
+@property (nonatomic, copy) NSString *infoEmail;
 @property (nonatomic, copy) NSString *encryptedPaymentData;
+@property (nonatomic, strong) NSDictionary *data;
 
 @end
 
@@ -36,6 +37,7 @@
 												terminalKey:(NSString *)terminalKey
 												   password:(NSString *)password
 									   encryptedPaymentData:(NSString *)encryptedPaymentData
+													   data:(NSDictionary *)data
 {
     ASDKFinishAuthorizeRequestBuilder *builder = [[ASDKFinishAuthorizeRequestBuilder alloc] init];
     
@@ -48,6 +50,7 @@
         builder.terminalKey = terminalKey;
         builder.password = password;
 		builder.encryptedPaymentData = encryptedPaymentData;
+		builder.data = data;
     }
     
     return builder;
@@ -79,7 +82,8 @@
                                                                                          cardData:self.cardData
                                                                                         infoEmail:self.infoEmail
                                                                                             token:token
-																			 encryptedPaymentData:self.encryptedPaymentData];
+																			 encryptedPaymentData:self.encryptedPaymentData
+																							 data:self.data];
     
     return request;
 }

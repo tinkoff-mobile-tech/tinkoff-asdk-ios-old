@@ -19,6 +19,7 @@
 #import "ASDKAcquiringApi.h"
 #import "ASDKApiKeys.h"
 #import "ASDKAcquringApiError.h"
+#import "ASDKUtilsRequest.h"
 
 typedef NS_ENUM(NSInteger, APIVersion)
 {
@@ -26,12 +27,8 @@ typedef NS_ENUM(NSInteger, APIVersion)
 	APIVersion_v2 = 2
 };
 
-@interface ASDKAcquiringApi ()
-
-@end
 
 @implementation ASDKAcquiringApi
-
 
 - (void)dealloc
 {
@@ -66,10 +63,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
 	request.timeoutInterval = self.requestTimeoutInterval;
 	
-	if (apiVersion == APIVersion_v2)
-	{
-		[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-	}
+	[request setAllHTTPHeaderFields:[ASDKUtilsRequest defaultHTTPHeaders]];
 	
     [request setHTTPMethod:@"POST"];
     
@@ -78,89 +72,79 @@ typedef NS_ENUM(NSInteger, APIVersion)
     
     [request setHTTPBody:postData];
     
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-                                      {
-                                          dispatch_async(dispatch_get_main_queue(), ^
-                                                         {
-                                                             ASDKAcquringApiError *finalError;
-                                                             NSDictionary *finalResponseDictionary;
-                                                             
-                                                             if (error)
-                                                             {
-                                                                 finalError = [ASDKAcquringApiError acquiringErrorWithError:error];
-                                                             }
-                                                             else
-                                                             {
-                                                                 NSError *jsonError;
-                                                                 NSMutableDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                                                     options:kNilOptions
-                                                                                                                                       error:&jsonError];
-                                                                 
-                                                                 if (jsonError)
-                                                                 {
-                                                                     ASDKAcquringApiError *apiJsonError = [ASDKAcquringApiError acquiringErrorWithError:jsonError];
-                                                                     finalError = apiJsonError;
-                                                                 }
-                                                                 else
-                                                                 {
-                                                                     ASDKAcquiringResponse *fullResponse = [[ASDKAcquiringResponse alloc] initWithDictionary:responseJSON];
-                                                                     
-                                                                     BOOL isCardsListRequest = [path isEqualToString:kASDKAPIPathGetCardList];
-                                                                     BOOL success;
-                                                                     
-                                                                     if (isCardsListRequest)
-                                                                     {
-                                                                         if ([responseJSON isKindOfClass:[NSDictionary class]])
-                                                                         {
-                                                                             success = [fullResponse success];
-                                                                         }
-                                                                         else
-                                                                         {
-                                                                             success = YES;
-                                                                         }
-                                                                     }
-                                                                     else
-                                                                     {
-                                                                         success = [fullResponse success];
-                                                                     }
-                                                                     
-                                                                     if (!success)
-                                                                     {
-                                                                         ASDKAcquringApiError *apiError = [ASDKAcquringApiError errorWithAcquringResponse:fullResponse
-                                                                                                                                                urlString:urlString
-                                                                                                                                               parameters:parameters
-                                                                                                                                                     code:[responseJSON[kASDKErrorCode] integerValue]];
-                                                                         if (apiError.code == kASDKApiErrorCodeEmptyCardList)
-                                                                         {
-                                                                             finalResponseDictionary = [NSDictionary dictionary];
-                                                                         }
-                                                                         else
-                                                                         {
-                                                                             finalError = apiError;
-                                                                         }
-                                                                     }
-                                                                     else
-                                                                     {
-                                                                         finalResponseDictionary = responseJSON;
-                                                                     }
-                                                                 }
-                                                             }
-                                                
-                                                             [self logRequestWithUrlString:urlString
-                                                                                parameters:parameters
-                                                                            responseObject:finalError ? : finalResponseDictionary];
-                                                             
-                                                             if (finalError)
-                                                             {
-                                                                 failure(finalError);
-                                                             }
-                                                             else
-                                                             {
-                                                                 success(finalResponseDictionary,response);
-                                                             }
-                                                         });
-                                      }];
+	NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			ASDKAcquringApiError *finalError;
+			NSDictionary *finalResponseDictionary;
+			
+			if (error)
+			{
+				finalError = [ASDKAcquringApiError acquiringErrorWithError:error];
+			}
+			else
+			{
+				NSError *jsonError;
+				NSMutableDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&jsonError];
+				
+				if (jsonError)
+				{
+					ASDKAcquringApiError *apiJsonError = [ASDKAcquringApiError acquiringErrorWithError:jsonError];
+					finalError = apiJsonError;
+				}
+				else
+				{
+					ASDKAcquiringResponse *fullResponse = [[ASDKAcquiringResponse alloc] initWithDictionary:responseJSON];
+					
+					BOOL isCardsListRequest = [path isEqualToString:kASDKAPIPathGetCardList];
+					BOOL success = false;
+					
+					if (isCardsListRequest)
+					{
+						if ([responseJSON isKindOfClass:[NSDictionary class]])
+						{
+							success = [fullResponse success];
+						}
+						else
+						{
+							success = YES;
+						}
+					}
+					else
+					{
+						success = [fullResponse success];
+					}
+					
+					if (!success)
+					{
+						ASDKAcquringApiError *apiError = [ASDKAcquringApiError errorWithAcquringResponse:fullResponse urlString:urlString parameters:parameters code:[responseJSON[kASDKErrorCode] integerValue]];
+						if (apiError.code == kASDKApiErrorCodeEmptyCardList)
+						{
+							finalResponseDictionary = [NSDictionary dictionary];
+						}
+						else
+						{
+							finalError = apiError;
+						}
+					}
+					else
+					{
+						finalResponseDictionary = responseJSON;
+					}
+				}
+			}
+			
+			[self logRequestWithUrlString:urlString parameters:parameters responseObject:finalError ? : finalResponseDictionary];
+			
+			if (finalError)
+			{
+				failure(finalError);
+			}
+			else
+			{
+				success(finalResponseDictionary,response);
+			}
+		});
+	}];
     
     [dataTask resume];
 }
@@ -291,6 +275,28 @@ typedef NS_ENUM(NSInteger, APIVersion)
     }];
 }
 
+- (void)check3dsVersionWithRequest:(ASDKRequestCheck3dsVersion *)request
+						   success:(void (^)(ASDKResponseCheck3dsVersion *response))success
+						   failure:(void (^)(ASDKAcquringApiError *error))failure
+{
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{kASDKTerminalKey : request.terminalKey,
+																					  kASDKPaymentId   : request.paymentId,
+																					  kASDKCardData    : request.cardData,
+																					  kASDKToken       : request.token}];
+	
+	[self apiVersion:APIVersion_v2 path:kASDKAPIPathCheck3dsVersion parameters:parameters
+			 success:^(NSDictionary *responseDictionary, NSURLResponse *response)
+	 {
+		ASDKResponseCheck3dsVersion *responseObject = [[ASDKResponseCheck3dsVersion alloc] initWithDictionary:responseDictionary];
+		
+		success(responseObject);
+	}
+			 failure:^(ASDKAcquringApiError *error)
+	 {
+		failure(error);
+	}];
+}
+
 - (void)finishAuthorizeWithRequest:(ASDKFinishAuthorizeRequest *)request
                            success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                            failure:(void (^)(ASDKAcquringApiError *error))failure
@@ -308,7 +314,9 @@ typedef NS_ENUM(NSInteger, APIVersion)
     {
         [parameters setObject:request.infoEmail forKey:kASDKInfoEmail];
     }
-
+	
+	if (request.data) { [parameters setObject:request.data forKey:kASDKDATA]; }
+	
     [self apiVersion:APIVersion_v2 path:kASDKAPIPathFinishAuthorize parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)
     {

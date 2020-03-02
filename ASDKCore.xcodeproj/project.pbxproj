@@ -49,7 +49,15 @@
 		2C6E6BAA1F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E6BA81F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m */; };
 		2C6E6BAD1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6E6BAB1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h */; };
 		2C6E6BAE1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6E6BAC1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m */; };
+		2C6EA79D24054118008348B2 /* ASDKUtilsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C6EA79B24054118008348B2 /* ASDKUtilsRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C6EA79E24054118008348B2 /* ASDKUtilsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6EA79C24054118008348B2 /* ASDKUtilsRequest.m */; };
 		2C9BE102233904F60094347D /* ASDKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 83166EE51C63988F00533D85 /* ASDKCard.m */; };
+		2CA68BFB23FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA68BF923FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.h */; };
+		2CA68BFC23FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA68BFA23FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.m */; };
+		2CA68BFF23FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA68BFD23FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CA68C0023FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA68BFE23FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.m */; };
+		2CA68C0323FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CA68C0123FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.h */; };
+		2CA68C0423FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA68C0223FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.m */; };
 		2CFBF58E1FCBFD180060C87F /* ASDKUtilsAmount.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CFBF58C1FCBFD180060C87F /* ASDKUtilsAmount.h */; };
 		2CFBF58F1FCBFD180060C87F /* ASDKUtilsAmount.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CFBF58D1FCBFD180060C87F /* ASDKUtilsAmount.m */; };
 		83166ED71C63984E00533D85 /* ASDKCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 83166ED61C63984E00533D85 /* ASDKCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -152,6 +160,14 @@
 		2C6E6BA81F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKRequestSubmitRandomAmount.m; sourceTree = "<group>"; };
 		2C6E6BAB1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKRequestBuilderSubmitRandomAmount.h; sourceTree = "<group>"; };
 		2C6E6BAC1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKRequestBuilderSubmitRandomAmount.m; sourceTree = "<group>"; };
+		2C6EA79B24054118008348B2 /* ASDKUtilsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKUtilsRequest.h; sourceTree = "<group>"; };
+		2C6EA79C24054118008348B2 /* ASDKUtilsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKUtilsRequest.m; sourceTree = "<group>"; };
+		2CA68BF923FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKRequestCheck3dsVersion.h; sourceTree = "<group>"; };
+		2CA68BFA23FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKRequestCheck3dsVersion.m; sourceTree = "<group>"; };
+		2CA68BFD23FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKResponseCheck3dsVersion.h; sourceTree = "<group>"; };
+		2CA68BFE23FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKResponseCheck3dsVersion.m; sourceTree = "<group>"; };
+		2CA68C0123FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKRequestBuilderCheck3dsVersion.h; sourceTree = "<group>"; };
+		2CA68C0223FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKRequestBuilderCheck3dsVersion.m; sourceTree = "<group>"; };
 		2CFBF58C1FCBFD180060C87F /* ASDKUtilsAmount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASDKUtilsAmount.h; sourceTree = "<group>"; };
 		2CFBF58D1FCBFD180060C87F /* ASDKUtilsAmount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASDKUtilsAmount.m; sourceTree = "<group>"; };
 		83166ED31C63984E00533D85 /* ASDKCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ASDKCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +286,8 @@
 				83166F181C63988F00533D85 /* RequestBuilder */,
 				2CFBF58C1FCBFD180060C87F /* ASDKUtilsAmount.h */,
 				2CFBF58D1FCBFD180060C87F /* ASDKUtilsAmount.m */,
+				2C6EA79B24054118008348B2 /* ASDKUtilsRequest.h */,
+				2C6EA79C24054118008348B2 /* ASDKUtilsRequest.m */,
 			);
 			path = ASDKCore;
 			sourceTree = "<group>";
@@ -313,6 +331,8 @@
 				2C6E6B961F94902500B345B9 /* ASDKRequestGetAttachCardState.m */,
 				2C6E6BA71F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.h */,
 				2C6E6BA81F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.m */,
+				2CA68BF923FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.h */,
+				2CA68BFA23FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.m */,
 				83166EE91C63988F00533D85 /* Charge */,
 				83166EEC1C63988F00533D85 /* FinishAuthorize */,
 				83166EEF1C63988F00533D85 /* GetCardList */,
@@ -390,6 +410,8 @@
 				2C1C13521F8FA60C002B636F /* ASDKResponseAttachCard.m */,
 				2C6E6B9D1F949F9700B345B9 /* ASDKResponseGetAddCardState.h */,
 				2C6E6B9E1F949F9700B345B9 /* ASDKResponseGetAddCardState.m */,
+				2CA68BFD23FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.h */,
+				2CA68BFE23FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.m */,
 				943FC8691C6881550044C707 /* PaymentInfo */,
 				943FC86A1C6881550044C707 /* ThreeDsData */,
 				83166EFE1C63988F00533D85 /* Charge */,
@@ -486,6 +508,8 @@
 				2C6E6B9A1F949C2700B345B9 /* ASDKRequestBuilderGetAttachCardState.m */,
 				2C6E6BAB1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.h */,
 				2C6E6BAC1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m */,
+				2CA68C0123FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.h */,
+				2CA68C0223FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.m */,
 				83166F1B1C63988F00533D85 /* Charge */,
 				83166F1E1C63988F00533D85 /* FinishAuthorize */,
 				83166F211C63988F00533D85 /* GetCardList */,
@@ -602,6 +626,7 @@
 				83166F5E1C63988F00533D85 /* ASDKGetStateRequestBuilder.h in Headers */,
 				83166F541C63988F00533D85 /* ASDKCryptoUtils.h in Headers */,
 				2C6E6B9B1F949C2700B345B9 /* ASDKRequestBuilderGetAttachCardState.h in Headers */,
+				2CA68C0323FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.h in Headers */,
 				83166F5C1C63988F00533D85 /* ASDKGetCardListRequestBuilder.h in Headers */,
 				83166F471C63988F00533D85 /* ASDKGetCardListResponse.h in Headers */,
 				2C6E6B971F94902500B345B9 /* ASDKRequestGetAttachCardState.h in Headers */,
@@ -614,6 +639,7 @@
 				83166F411C63988F00533D85 /* ASDKAcquiringResponse.h in Headers */,
 				946C399E1C648F940036D1AF /* ASDKCardData.h in Headers */,
 				2C352DAB1E4B1707008215A5 /* ASDKCancelRequestBuilder.h in Headers */,
+				2CA68BFB23FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.h in Headers */,
 				2CFBF58E1FCBFD180060C87F /* ASDKUtilsAmount.h in Headers */,
 				2C1C13451F8F6184002B636F /* ASDKRequestAttachCard.h in Headers */,
 				943FC86D1C6881650044C707 /* ASDKPaymentInfo.h in Headers */,
@@ -625,12 +651,14 @@
 				83166ED71C63984E00533D85 /* ASDKCore.h in Headers */,
 				2C352DB31E4B1A66008215A5 /* ASDKCancelResponse.h in Headers */,
 				83166F431C63988F00533D85 /* ASDKChargeResponse.h in Headers */,
+				2CA68BFF23FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.h in Headers */,
 				83166F3F1C63988F00533D85 /* ASDKRemoveCardRequest.h in Headers */,
 				2C6E6BA91F94CB0300B345B9 /* ASDKRequestSubmitRandomAmount.h in Headers */,
 				946C39A31C64921A0036D1AF /* ASDKApiKeys.h in Headers */,
 				83166F371C63988F00533D85 /* ASDKFinishAuthorizeRequest.h in Headers */,
 				2C1C133D1F8F5AF2002B636F /* ASDKRequestBuilderAddCardInit.h in Headers */,
 				2C6E6B9F1F949F9700B345B9 /* ASDKResponseGetAddCardState.h in Headers */,
+				2C6EA79D24054118008348B2 /* ASDKUtilsRequest.h in Headers */,
 				83166F4D1C63988F00533D85 /* ASDKRemoveCardResponse.h in Headers */,
 				9483E8E61C69C9A2007F029A /* RSA.h in Headers */,
 				83166F3D1C63988F00533D85 /* ASDKInitRequest.h in Headers */,
@@ -733,6 +761,7 @@
 				9483E8E71C69C9A2007F029A /* RSA.m in Sources */,
 				83166F591C63988F00533D85 /* ASDKChargeRequestBuilder.m in Sources */,
 				2C1C13461F8F6184002B636F /* ASDKRequestAttachCard.m in Sources */,
+				2C6EA79E24054118008348B2 /* ASDKUtilsRequest.m in Sources */,
 				83166F5B1C63988F00533D85 /* ASDKFinishAuthorizeRequestBuilder.m in Sources */,
 				2C352DB41E4B1A66008215A5 /* ASDKCancelResponse.m in Sources */,
 				943FC8721C6881F10044C707 /* ASDKThreeDsData.m in Sources */,
@@ -760,9 +789,11 @@
 				2C9BE102233904F60094347D /* ASDKCard.m in Sources */,
 				BE1555371C7768EA00BEA6E1 /* ASDKAcquringSdkError.m in Sources */,
 				2C6E6BAE1F94CC2700B345B9 /* ASDKRequestBuilderSubmitRandomAmount.m in Sources */,
+				2CA68C0023FA7CB80061FEF6 /* ASDKResponseCheck3dsVersion.m in Sources */,
 				83166F381C63988F00533D85 /* ASDKFinishAuthorizeRequest.m in Sources */,
 				2C1C133E1F8F5AF2002B636F /* ASDKRequestBuilderAddCardInit.m in Sources */,
 				83166F5F1C63988F00533D85 /* ASDKGetStateRequestBuilder.m in Sources */,
+				2CA68C0423FA82C70061FEF6 /* ASDKRequestBuilderCheck3dsVersion.m in Sources */,
 				83166F301C63988F00533D85 /* ASDKBaseObject.m in Sources */,
 				83166F361C63988F00533D85 /* ASDKChargeRequest.m in Sources */,
 				83166F421C63988F00533D85 /* ASDKAcquiringResponse.m in Sources */,
@@ -770,6 +801,7 @@
 				83166F501C63988F00533D85 /* ASDKAcquiringApi.m in Sources */,
 				83166F4A1C63988F00533D85 /* ASDKGetStateResponse.m in Sources */,
 				2CFBF58F1FCBFD180060C87F /* ASDKUtilsAmount.m in Sources */,
+				2CA68BFC23FA6D9B0061FEF6 /* ASDKRequestCheck3dsVersion.m in Sources */,
 				2C6E6BA01F949F9700B345B9 /* ASDKResponseGetAddCardState.m in Sources */,
 				2C1C134A1F8F8112002B636F /* ASDKResponseAddCardInit.m in Sources */,
 				83166F5D1C63988F00533D85 /* ASDKGetCardListRequestBuilder.m in Sources */,
@@ -900,7 +932,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -909,7 +941,7 @@
 				INFOPLIST_FILE = ASDKCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.4.10;
+				MARKETING_VERSION = 1.5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKCore;
@@ -922,7 +954,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				CURRENT_PROJECT_VERSION = 77;
+				CURRENT_PROJECT_VERSION = 78;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -931,7 +963,7 @@
 				INFOPLIST_FILE = ASDKCore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 1.4.10;
+				MARKETING_VERSION = 1.5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKCore;
