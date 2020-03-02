@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,17 +19,17 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сохраненная карта" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g10-s9-o9I">
                         <rect key="frame" x="15" y="11.5" width="155" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ3-Hy-MC0">
-                        <rect key="frame" x="7" y="3" width="306" height="10"/>
+                        <rect key="frame" x="7" y="0.0" width="306" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="ayr-9l-8yg"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tfb-Dw-Ceg">
-                        <rect key="frame" x="7" y="31" width="306" height="10"/>
+                        <rect key="frame" x="7" y="34" width="306" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="TXC-oi-jfB"/>
                         </constraints>
@@ -43,7 +43,7 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ZZ3-Hy-MC0" firstAttribute="top" secondItem="Smq-15-Mc1" secondAttribute="topMargin" constant="-8" id="3a7-Jt-bam"/>
+                    <constraint firstItem="ZZ3-Hy-MC0" firstAttribute="top" secondItem="Smq-15-Mc1" secondAttribute="firstBaseline" id="3a7-Jt-bam"/>
                     <constraint firstItem="tfb-Dw-Ceg" firstAttribute="leading" secondItem="Smq-15-Mc1" secondAttribute="leadingMargin" constant="-8" id="8nF-Hf-faD"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ZZ3-Hy-MC0" secondAttribute="trailing" constant="-8" id="9Gg-5J-soS"/>
                     <constraint firstAttribute="trailingMargin" secondItem="tfb-Dw-Ceg" secondAttribute="trailing" constant="-8" id="KET-7N-KJA"/>
@@ -51,7 +51,7 @@
                     <constraint firstItem="g10-s9-o9I" firstAttribute="leading" secondItem="Smq-15-Mc1" secondAttribute="leadingMargin" id="QXY-1R-j3a"/>
                     <constraint firstAttribute="trailingMargin" secondItem="4pw-kr-B4d" secondAttribute="trailing" constant="7" id="VlI-SZ-G1p"/>
                     <constraint firstItem="ZZ3-Hy-MC0" firstAttribute="leading" secondItem="Smq-15-Mc1" secondAttribute="leadingMargin" constant="-8" id="WRN-Yf-jxs"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="tfb-Dw-Ceg" secondAttribute="bottom" constant="-8" id="keL-Vj-ADT"/>
+                    <constraint firstAttribute="baseline" secondItem="tfb-Dw-Ceg" secondAttribute="bottom" id="keL-Vj-ADT"/>
                     <constraint firstItem="g10-s9-o9I" firstAttribute="centerY" secondItem="Smq-15-Mc1" secondAttribute="centerY" id="r0y-wt-K1W"/>
                     <constraint firstItem="4pw-kr-B4d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="g10-s9-o9I" secondAttribute="trailing" constant="8" id="yyt-Gb-a12"/>
                 </constraints>

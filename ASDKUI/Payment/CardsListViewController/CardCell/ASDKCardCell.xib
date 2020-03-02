@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qNz-4I-DvD">
-                        <rect key="frame" x="8" y="3" width="304" height="10"/>
+                        <rect key="frame" x="8" y="0.0" width="304" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="iYK-99-MyB"/>
                         </constraints>
@@ -28,6 +28,7 @@
                             <constraint firstAttribute="width" constant="42" id="RZz-5B-eyC"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1nY-4j-NXZ" userLabel="paymentSystemLogo">
@@ -38,7 +39,7 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="07b-jW-ISW">
-                        <rect key="frame" x="8" y="31" width="304" height="10"/>
+                        <rect key="frame" x="8" y="34" width="304" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="Kvi-4X-0yc"/>
                         </constraints>
@@ -57,9 +58,9 @@
                     <constraint firstItem="1nY-4j-NXZ" firstAttribute="centerY" secondItem="puZ-XJ-1BZ" secondAttribute="centerY" id="Mtg-4b-9Ah"/>
                     <constraint firstItem="uON-rg-wrr" firstAttribute="centerY" secondItem="puZ-XJ-1BZ" secondAttribute="centerY" id="NA5-5y-Bl9"/>
                     <constraint firstItem="qNz-4I-DvD" firstAttribute="leading" secondItem="puZ-XJ-1BZ" secondAttribute="leadingMargin" constant="-8" id="UB6-Ra-wgX"/>
-                    <constraint firstItem="qNz-4I-DvD" firstAttribute="top" secondItem="puZ-XJ-1BZ" secondAttribute="topMargin" constant="-8" id="X84-ge-eXL"/>
+                    <constraint firstItem="qNz-4I-DvD" firstAttribute="top" secondItem="puZ-XJ-1BZ" secondAttribute="firstBaseline" id="X84-ge-eXL"/>
                     <constraint firstItem="07b-jW-ISW" firstAttribute="leading" secondItem="puZ-XJ-1BZ" secondAttribute="leadingMargin" constant="-8" id="Z40-ra-ZFD"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="07b-jW-ISW" secondAttribute="bottom" constant="-8" id="Z5q-66-fqE"/>
+                    <constraint firstAttribute="baseline" secondItem="07b-jW-ISW" secondAttribute="bottom" id="Z5q-66-fqE"/>
                     <constraint firstAttribute="trailingMargin" secondItem="qNz-4I-DvD" secondAttribute="trailing" constant="-8" id="l2y-3e-MXl"/>
                     <constraint firstAttribute="trailingMargin" secondItem="paE-5g-su5" secondAttribute="trailing" id="ofv-ir-prR"/>
                     <constraint firstItem="uON-rg-wrr" firstAttribute="leading" secondItem="1nY-4j-NXZ" secondAttribute="trailing" constant="8" id="prg-Ch-pnf"/>
@@ -75,7 +76,7 @@
                 <outlet property="customTopSeparatorHeight" destination="iYK-99-MyB" id="XGP-Q8-d1e"/>
                 <outlet property="paymentSystemLogoImageView" destination="1nY-4j-NXZ" id="lQF-dO-Acb"/>
             </connections>
-            <point key="canvasLocation" x="139" y="139"/>
+            <point key="canvasLocation" x="139" y="154"/>
         </tableViewCell>
     </objects>
     <resources>

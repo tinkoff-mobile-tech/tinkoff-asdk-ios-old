@@ -160,6 +160,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     self.title = LOC(@"acq_screen_title");
 	
 	[self.navigationController.navigationBar setTranslucent:NO];
+    self.navigationController.presentationController.delegate = self;
 	
 	self.tableView.sectionHeaderHeight = 0;
 	self.tableView.sectionFooterHeight = 0;
@@ -1446,6 +1447,13 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	}
 
 	return cardList;
+}
+
+#pragma mark - UIAdaptivePresentationControllerDelegate
+
+- (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController
+{
+    [self closeSelfWithCompletion:self.onCancelled];
 }
 
 @end

@@ -23,7 +23,7 @@
 
 @class ASDKAcquringApiError;
 
-@interface ASDKPaymentFormViewController : ASDKBaseTableViewController
+@interface ASDKPaymentFormViewController : ASDKBaseTableViewController <UIAdaptivePresentationControllerDelegate>
 
 @property (nonatomic, strong) ASDKAcquiringSdk *acquiringSdk;
 

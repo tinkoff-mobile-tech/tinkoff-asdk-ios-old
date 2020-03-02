@@ -652,7 +652,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 
 - (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller
 {
-	[self.presentingViewControllerApplePay dismissViewControllerAnimated:YES completion:^{
+	[controller dismissViewControllerAnimated:YES completion:^{
 		if (self.onCompleteSuccessPaymentInfo != nil && self.onCompleteError == nil && (self.onCompleteStatus == ASDKPaymentStatus_CONFIRMED || self.onCompleteStatus == ASDKPaymentStatus_AUTHORIZED))
 		{
 			self.onSuccess(self.onCompleteSuccessPaymentInfo);
