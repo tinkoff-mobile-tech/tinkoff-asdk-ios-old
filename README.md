@@ -193,14 +193,14 @@ _**PayController**_ фасад для _**ASDKAcquiringSdk**_ который со
 ### Поддержка
 - Просьба, по возникающим вопросам обращаться на oplata@tinkoff.ru
 - Баги и feature-реквесты можно направлять в раздел [issues][issues]
-- Докментация на сайте, описание [API методов][server-api]
+- Документация на сайте, описание [API методов][server-api]
 
-[acquiring]: https://t.tinkoff.ru/
-[applepay]: https://oplata.tinkoff.ru/landing/develop/applepay
+[acquiring]: https://oplata.tinkoff.ru
+[applepay]: https://developer.apple.com/documentation/passkit/apple_pay
 [cocoapods]: https://cocoapods.org
 [img-pay]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen.png
 [img-pay2]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen2.png
 [img-pay3]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/payscreen3.png
 [img-attachCard]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/attachCardScreen.png
-[server-api]: https://oplata.tinkoff.ru/landing/develop/documentation/termins_and_operations
+[server-api]: https://oplata.tinkoff.ru/develop/api/payments/
 [issues]: https://github.com/TinkoffCreditSystems/tinkoff-asdk-ios/issues

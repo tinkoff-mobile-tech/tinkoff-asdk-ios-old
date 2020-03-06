@@ -1083,14 +1083,17 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		
 		NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:threeDSMethodURL]];
 		request.timeoutInterval = _acquiringSdk.apiRequestsTimeoutInterval;
-		[request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
 		[request setHTTPMethod: @"POST"];
+		[request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
+
 		NSString *notificationURL = @"https://rest-api-test.tinkoff.ru/v2/Complete3DSMethodv2";
-		NSDictionary *params = @{@"threeDSServerTransID":tdsServerTransID, @"threeDSMethodNotificationURL":notificationURL};
-		NSData *dataParamsBase64 = [[NSData alloc] initWithBase64EncodedString:[NSString stringWithFormat:@"%@", params] options:NSDataBase64DecodingIgnoreUnknownCharacters];
-		NSData *data = [NSKeyedArchiver archivedDataWithRootObject:@{@"threeDSMethodData": dataParamsBase64}];
-		[request setHTTPBody: data];
-				
+
+		NSString *paramsString = [NSString stringWithFormat:@"{\"threeDSServerTransID\":\"%@\",\"threeDSMethodNotificationURL\":\"%@\"}",
+								  tdsServerTransID, notificationURL];
+		NSData *plainData = [paramsString dataUsingEncoding:NSUTF8StringEncoding];
+		NSString *postString = [NSString stringWithFormat:@"%@", [plainData base64EncodedStringWithOptions:0]];
+		NSData *postData = [[NSString stringWithFormat:@"threeDSMethodData=%@", postString] dataUsingEncoding: NSUTF8StringEncoding];
+		[request setHTTPBody: postData];
 		[webView loadRequest:request];
 		
 		NSMutableDictionary *result = [NSMutableDictionary dictionary];
@@ -1138,6 +1141,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			
 			[strongSelf.acquiringSdk finishAuthorizeWithPaymentId:payment.paymentId encryptedPaymentData:nil cardData:encryptedCardString infoEmail:emailString data:data success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
 				__strong typeof(weakSelf) strongSelf = weakSelf;
+				
+				data.threeDSVersion = [response threeDSVersion];
 				
 				if (status == ASDKPaymentStatus_3DS_CHECKING)
 				{

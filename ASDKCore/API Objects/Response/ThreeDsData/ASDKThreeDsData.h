@@ -23,12 +23,14 @@
 
 @interface ASDKThreeDsData : ASDKBaseObject
 
+@property (nonatomic, copy) NSString *threeDSVersion;
+
 // 1.X
 @property (nonatomic, copy) NSString *MD;
 @property (nonatomic, copy) NSString *paReq;
 
 // 2.X
-@property (nonatomic, strong) NSURL *acsUrl;
+@property (nonatomic, copy) NSString *acsUrl;
 @property (nonatomic, copy) NSString *acsTransId;
 @property (nonatomic, copy) NSString *tdsServerTransId;
 

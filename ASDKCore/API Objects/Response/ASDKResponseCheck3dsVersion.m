@@ -17,7 +17,7 @@
 
 @implementation ASDKResponseCheck3dsVersion
 
-- (NSString *)version
+- (NSString *)threeDSVersion
 {
 	return [_dictionary objectForKey: @"Version"];
 }

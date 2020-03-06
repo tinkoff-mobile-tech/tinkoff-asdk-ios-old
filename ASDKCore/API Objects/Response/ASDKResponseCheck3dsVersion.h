@@ -17,7 +17,7 @@
 
 @interface ASDKResponseCheck3dsVersion : ASDKAcquiringResponse
 
-- (NSString *)version;
+- (NSString *)threeDSVersion;
 - (NSString *)tdsServerTransID;
 - (NSString *)threeDSMethodURL;
 

@@ -23,12 +23,11 @@
 
 @implementation ASDKThreeDsData
 
-- (NSURL *)acsUrl
+- (NSString *)acsUrl
 {
     if (!_acsUrl)
     {
-        NSString *urlString = _dictionary[kASDKASCUrl];
-        _acsUrl = [NSURL URLWithString:urlString];
+        _acsUrl = _dictionary[kASDKASCUrl];
     }
     
     return _acsUrl;

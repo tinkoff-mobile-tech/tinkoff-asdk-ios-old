@@ -23,7 +23,7 @@
 	NSMutableDictionary *result = [NSMutableDictionary dictionary];
 	
 	[result setValue:@"application/json; charset=utf-8;" forKey:@"Content-Type"];
-	[result setValue:@"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" forKey:@"Accept"];
+	[result setValue:@"text/html,application/xhtml+xml;q=0.9,*/*;q=0.8" forKey:@"Accept"];
 	[result setValue:@"gzip,deflate" forKey:@"Accept-Encoding"];
 	
 	[result setValue:[NSString stringWithFormat:@"%@/%@(%@)/TinkoffAcquiringSDK/%@(%@)",
