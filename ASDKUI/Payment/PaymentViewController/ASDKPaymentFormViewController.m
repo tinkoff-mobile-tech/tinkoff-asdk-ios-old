@@ -102,6 +102,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 @property (nonatomic, assign) BOOL chargeError;
 @property (nonatomic, copy) NSString *chargeErrorPaymentId;
 
+@property (nonatomic, assign) BOOL needCheck3DS2;
+
 @end
 
 @implementation ASDKPaymentFormViewController
@@ -148,6 +150,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		_makeCharge = makeCharge;
 		_chargeError = NO;
 		_needSetupCardRequisitesCellForCVC = NO;
+		_needCheck3DS2 = YES;
     }
 
     return self;
@@ -943,16 +946,14 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     {
         __weak typeof(self) weakSelf = self;
 
-        [cardScanner scanCardSuccess:^(id<ASDKAcquiringSdkCardRequisites> cardRequisites) {
-			 __strong typeof(weakSelf) strongSelf = weakSelf;
-
-             if (strongSelf)
-             {
-                 [strongSelf updateCardRequisitesCellWithCardRequisites:cardRequisites.cardNumber expiredData:cardRequisites.cardExpireDate];
-             }
-         }
-                             failure:nil
-                              cancel:nil];
+		[cardScanner scanCardSuccess:^(id<ASDKAcquiringSdkCardRequisites> cardRequisites) {
+			__strong typeof(weakSelf) strongSelf = weakSelf;
+			
+			if (strongSelf)
+			{
+				[strongSelf updateCardRequisitesCellWithCardRequisites:cardRequisites.cardNumber expiredData:cardRequisites.cardExpireDate];
+			}
+		} failure:nil cancel:nil];
     }
 }
 
@@ -997,7 +998,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
                               success:^(ASDKInitResponse *response)
     {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        
         if (strongSelf)
         {
             [strongSelf performFinishAuthorizeRequestWithPaymentId:response];
@@ -1006,9 +1006,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
                               failure:^(ASDKAcquringSdkError *error)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-        
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        
         if (strongSelf)
         {
             [strongSelf manageError:error];
@@ -1054,9 +1052,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 - (void)confirmPaymentBy3dsCheckingWithCard:(ASDKThreeDsData *)data paymentInfo:(ASDKPaymentInfo *)paymentInfo
 {
-	ASDK3DSViewController *threeDsController = [[ASDK3DSViewController alloc] initWithPaymentId:paymentInfo.paymentId
-																					threeDsData:data
-																				   acquiringSdk:self.acquiringSdk];
+	ASDK3DSViewController *threeDsController = [[ASDK3DSViewController alloc] initWithPaymentId:paymentInfo.paymentId threeDsData:data acquiringSdk:self.acquiringSdk];
 	
 	__weak typeof(self) weakSelf = self;
 
@@ -1074,6 +1070,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 - (NSDictionary *)threeDSMethodCheckURL:(NSString *)threeDSMethodURL tdsServerTransID:(NSString *)tdsServerTransID
 {
+	NSString *notificationURL = @"https://rest-api-test.tinkoff.ru/v2/Complete3DSMethodv2";
+
 	if (threeDSMethodURL != nil && tdsServerTransID != nil)
 	{
 		WKWebViewConfiguration *wkWebConfig = [WKWebViewConfiguration new];
@@ -1086,18 +1084,19 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		[request setHTTPMethod: @"POST"];
 		[request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
 
-		NSString *notificationURL = @"https://rest-api-test.tinkoff.ru/v2/Complete3DSMethodv2";
 
-		NSString *paramsString = [NSString stringWithFormat:@"{\"threeDSServerTransID\":\"%@\",\"threeDSMethodNotificationURL\":\"%@\"}",
-								  tdsServerTransID, notificationURL];
+		NSString *paramsString = [NSString stringWithFormat:@"{\"threeDSServerTransID\":\"%@\",\"threeDSMethodNotificationURL\":\"%@\"}", tdsServerTransID, notificationURL];
 		NSData *plainData = [paramsString dataUsingEncoding:NSUTF8StringEncoding];
 		NSString *postString = [NSString stringWithFormat:@"%@", [plainData base64EncodedStringWithOptions:0]];
 		NSData *postData = [[NSString stringWithFormat:@"threeDSMethodData=%@", postString] dataUsingEncoding: NSUTF8StringEncoding];
 		[request setHTTPBody: postData];
 		[webView loadRequest:request];
-		
+	}
+	
+	if (threeDSMethodURL != nil || tdsServerTransID != nil)
+	{
 		NSMutableDictionary *result = [NSMutableDictionary dictionary];
-
+		
 		[result setObject:@"Y" forKey:@"threeDSCompInd"];
 		[result setObject:@"true" forKey:@"javaEnabled"];
 		[result setObject:ASDKLocalized.sharedInstance.localeIdentifier forKey:@"language"];
@@ -1113,6 +1112,54 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	return nil;
 }
 
+- (void)performFinishAuthorize:(NSDictionary *)additionalData emailString:(NSString *)emailString encryptedCardString:(NSString *)encryptedCardString payment:(ASDKInitResponse *)payment threeDSVersion:(NSString *)threeDSVersion
+{
+	__weak typeof(self) weakSelf = self;
+
+	[self.acquiringSdk finishAuthorizeWithPaymentId:payment.paymentId encryptedPaymentData:nil cardData:encryptedCardString infoEmail:emailString data:additionalData success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+		__strong typeof(weakSelf) strongSelf = weakSelf;
+		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+
+		data.threeDSVersion = threeDSVersion;
+		if (strongSelf)
+		{
+			if (status == ASDKPaymentStatus_3DS_CHECKING)
+			{
+				[strongSelf confirmPaymentBy3dsCheckingWithCard:data paymentInfo:paymentInfo];
+			}
+			else if (status == ASDKPaymentStatus_CONFIRMED || status == ASDKPaymentStatus_AUTHORIZED)
+			{
+				[strongSelf manageSuccessWithPaymentInfo:paymentInfo];
+			}
+			else
+			{
+				ASDKAcquiringResponse *result = [[ASDKAcquiringResponse alloc] initWithDictionary: paymentInfo.dictionary];
+				NSString *errorMessage = result.message;
+				NSString *errorDetails = result.details == nil ? [NSString stringWithFormat: @"%@", paymentInfo] : result.details;
+				NSInteger errorCode = result.errorCode == nil ? 0 : [result.errorCode integerValue];
+				
+				ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:errorMessage  details:errorDetails code:errorCode];
+				[strongSelf manageError:error];
+			}
+		}
+	} failure:^(ASDKAcquringSdkError *error) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+		__strong typeof(weakSelf) strongSelf = weakSelf;
+		if (strongSelf)
+		{
+			if (error.code == 106)
+			{
+				[strongSelf setNeedCheck3DS2:NO];
+				[strongSelf performPayment];
+			}
+			else
+			{
+				[strongSelf manageError:error];
+			}
+		}
+	}];
+}
+
 - (void)performFinishAuthorizeRequestWithPaymentId:(ASDKInitResponse *)payment
 {
 	if (self.selectedCard && self.selectedCard.rebillId && self.makeCharge == YES && self.chargeError == NO)
@@ -1125,78 +1172,31 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		NSString *date = [self cardRequisitesCell].cardExpirationDate;
 		date = [date stringByReplacingOccurrencesOfString:@"/" withString:@""];
 		NSString *cvv = [self cardRequisitesCell].cardCVC;
-		
 		NSString *emailString = [self emailCell].emailTextField.text;
-		
 		ASDKCardData *cardData = [[ASDKCardData alloc] initWithPan:cardNumber expiryDate:date securityCode:cvv cardId:self.selectedCard.cardId publicKeyRef:[self.acquiringSdk publicKeyRef]];
-		
 		NSString *encryptedCardString = cardData.cardData;
 		
 		__weak typeof(self) weakSelf = self;
-		
-		[self.acquiringSdk check3dsVersionWithPaymentId:payment.paymentId cardData:encryptedCardString success:^(ASDKResponseCheck3dsVersion *response) {
-			__strong typeof(weakSelf) strongSelf = weakSelf;
-
-			NSDictionary *data = [strongSelf threeDSMethodCheckURL:[response threeDSMethodURL] tdsServerTransID:[response tdsServerTransID]];
-			
-			[strongSelf.acquiringSdk finishAuthorizeWithPaymentId:payment.paymentId encryptedPaymentData:nil cardData:encryptedCardString infoEmail:emailString data:data success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+		if ([self needCheck3DS2] == YES)
+		{
+			[self.acquiringSdk check3dsVersionWithPaymentId:payment.paymentId cardData:encryptedCardString success:^(ASDKResponseCheck3dsVersion *response) {
 				__strong typeof(weakSelf) strongSelf = weakSelf;
-				
-				data.threeDSVersion = [response threeDSVersion];
-				
-				if (status == ASDKPaymentStatus_3DS_CHECKING)
-				{
-					if (strongSelf)
-					{
-						[strongSelf confirmPaymentBy3dsCheckingWithCard:data paymentInfo:paymentInfo];
-					}
-				}
-				else if (status == ASDKPaymentStatus_CONFIRMED || status == ASDKPaymentStatus_AUTHORIZED)
-				{
-					[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-					
-					if (strongSelf)
-					{
-						[strongSelf manageSuccessWithPaymentInfo:paymentInfo];
-					}
-				}
-				else
-				{
-					[[NSNotificationCenter defaultCenter] postNotificationName: ASDKNotificationHideLoader object:nil];
-					
-					ASDKAcquiringResponse *result = [[ASDKAcquiringResponse alloc] initWithDictionary: paymentInfo.dictionary];
-					NSString *errorMessage = result.message;
-					NSString *errorDetails = result.details == nil ? [NSString stringWithFormat: @"%@", paymentInfo] : result.details;
-					NSInteger errorCode = result.errorCode == nil ? 0 : [result.errorCode integerValue];
-					
-					ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:errorMessage  details:errorDetails code:errorCode];
-					
-					if (strongSelf)
-					{
-						[strongSelf manageError:error];
-					}
-				}
+				NSDictionary *additionalData = [strongSelf threeDSMethodCheckURL:[response threeDSMethodURL] tdsServerTransID:[response tdsServerTransID]];
+				[strongSelf performFinishAuthorize:additionalData emailString:emailString encryptedCardString:encryptedCardString payment:payment threeDSVersion:[response threeDSVersion]];
 			} failure: ^(ASDKAcquringSdkError *error) {
 				[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-				
 				__strong typeof(weakSelf) strongSelf = weakSelf;
-				
 				if (strongSelf)
 				{
 					[strongSelf manageError:error];
 				}
 			}];
-			
-		} failure: ^(ASDKAcquringSdkError *error) {
-			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-			
-			__strong typeof(weakSelf) strongSelf = weakSelf;
-			
-			if (strongSelf)
-			{
-				[strongSelf manageError:error];
-			}
-		}];
+		}
+		else
+		{
+			[self performFinishAuthorize:nil emailString:emailString encryptedCardString:encryptedCardString payment:payment threeDSVersion:nil];
+			[self setNeedCheck3DS2:YES];
+		}
 	}
 }
 
@@ -1216,15 +1216,13 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 {
     __weak typeof(self) weakSelf = self;
 	
-    void (^paymentSuccessBlock)(void) = ^
-    {
+    void (^paymentSuccessBlock)(void) = ^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
 		
         if (strongSelf)
         {
 			strongSelf.onCancelled = nil;
-            [strongSelf closeSelfWithCompletion:^
-             {
+            [strongSelf closeSelfWithCompletion:^{
                  if (strongSelf.onSuccess)
                  {
                      strongSelf.onSuccess(paymentInfo);
@@ -1315,15 +1313,10 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 - (BOOL)validateEmail:(NSString *)emailString
 {
-    NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:kASDKEmailRegexp
-                                                                            options:NSRegularExpressionCaseInsensitive
-                                                                              error:nil];
+    NSRegularExpression *regExp = [NSRegularExpression regularExpressionWithPattern:kASDKEmailRegexp options:NSRegularExpressionCaseInsensitive error:nil];
     
     __block NSTextCheckingType checkingType;
-    [regExp enumerateMatchesInString:emailString options:0 range:NSMakeRange(0, emailString.length) usingBlock:^(NSTextCheckingResult *result,
-                                                                                                                 NSMatchingFlags flags,
-                                                                                                                 BOOL *stop)
-     {
+    [regExp enumerateMatchesInString:emailString options:0 range:NSMakeRange(0, emailString.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
          checkingType = result.resultType;
      }];
     

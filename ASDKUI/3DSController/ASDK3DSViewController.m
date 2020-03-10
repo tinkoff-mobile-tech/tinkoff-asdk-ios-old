@@ -114,10 +114,15 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 - (void)setupWebView
 {
 	WKWebViewConfiguration *wkWebConfig = [WKWebViewConfiguration new];
+
+	[wkWebConfig.preferences setJavaScriptEnabled:YES];
+	[wkWebConfig.preferences setJavaScriptCanOpenWindowsAutomatically:YES];
+	
     self.webView = [[WKWebView alloc] initWithFrame: CGRectZero configuration: wkWebConfig];
     self.webView.navigationDelegate = self;
     self.webView.allowsBackForwardNavigationGestures = YES;
-    [self.view addSubview: self.webView];
+
+	[self.view addSubview: self.webView];
 
     self.webView.translatesAutoresizingMaskIntoConstraints = NO;
     
