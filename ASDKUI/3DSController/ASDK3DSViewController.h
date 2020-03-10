@@ -23,6 +23,8 @@
 #import "ASDKBaseViewController.h"
 
 #define kASDKSubmit3DSAuthorization @"Submit3DSAuthorization"
+#define kASDKSubmit3DSAuthorizationV2 @"Submit3DSAuthorizationV2"
+#define kASDKComplete3DSMethodv2 @"Complete3DSMethodv2"
 
 @interface ASDK3DSViewController : ASDKBaseViewController
 

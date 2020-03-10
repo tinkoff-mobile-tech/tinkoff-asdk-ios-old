@@ -1070,8 +1070,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 - (NSDictionary *)threeDSMethodCheckURL:(NSString *)threeDSMethodURL tdsServerTransID:(NSString *)tdsServerTransID
 {
-	NSString *notificationURL = @"https://rest-api-test.tinkoff.ru/v2/Complete3DSMethodv2";
-
 	if (threeDSMethodURL != nil && tdsServerTransID != nil)
 	{
 		WKWebViewConfiguration *wkWebConfig = [WKWebViewConfiguration new];
@@ -1084,8 +1082,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		[request setHTTPMethod: @"POST"];
 		[request setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
 
-
-		NSString *paramsString = [NSString stringWithFormat:@"{\"threeDSServerTransID\":\"%@\",\"threeDSMethodNotificationURL\":\"%@\"}", tdsServerTransID, notificationURL];
+		NSString *threeDSMethodNotificationURL = [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath_v2], kASDKComplete3DSMethodv2];
+		NSString *paramsString = [NSString stringWithFormat:@"{\"threeDSServerTransID\":\"%@\",\"threeDSMethodNotificationURL\":\"%@\"}", tdsServerTransID, threeDSMethodNotificationURL];
 		NSData *plainData = [paramsString dataUsingEncoding:NSUTF8StringEncoding];
 		NSString *postString = [NSString stringWithFormat:@"%@", [plainData base64EncodedStringWithOptions:0]];
 		NSData *postData = [[NSString stringWithFormat:@"threeDSMethodData=%@", postString] dataUsingEncoding: NSUTF8StringEncoding];
@@ -1095,6 +1093,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	
 	if (threeDSMethodURL != nil || tdsServerTransID != nil)
 	{
+		NSString *cresCallbackUrl = [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath_v2], kASDKSubmit3DSAuthorizationV2];
 		NSMutableDictionary *result = [NSMutableDictionary dictionary];
 		
 		[result setObject:@"Y" forKey:@"threeDSCompInd"];
@@ -1104,7 +1103,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		[result setObject:@([[NSTimeZone localTimeZone] secondsFromGMT] / 60) forKey:@"timezone"];
 		[result setObject:@(UIScreen.mainScreen.bounds.size.height) forKey:@"screen_height"];
 		[result setObject:@(UIScreen.mainScreen.bounds.size.width) forKey:@"screen_width"];
-		[result setObject:notificationURL forKey:@"cresCallbackUrl"];
+		[result setObject:cresCallbackUrl forKey:@"cresCallbackUrl"];
 		
 		return result;
 	}

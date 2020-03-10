@@ -54,6 +54,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 @property (nonatomic, strong) void (^onError)(ASDKAcquringSdkError *error);
 
 @property (nonatomic, assign) CheckStateType checkStateType;
+@property (nonatomic, copy) NSString *termURL;
 
 @end
 
@@ -188,15 +189,17 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 	
 	if (self.threeDsData.paReq != nil && self.threeDsData.MD != nil)
 	{
+		self.termURL = [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath], kASDKSubmit3DSAuthorization];
 		NSString *dataString = [self stringFromParameters:@{kASDKPaReq:self.threeDsData.paReq,
 															kASDKMD:self.threeDsData.MD,
-															kASDKTermUrl:[self termUrl]}];
+															kASDKTermUrl:self.termURL}];
 		
 		NSData *postData = [dataString dataUsingEncoding: NSUTF8StringEncoding];
 		[request setHTTPBody: postData];
 	}
 	else if (self.threeDsData.tdsServerTransId != nil && self.threeDsData.acsTransId != nil)
 	{
+		self.termURL = [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath_v2], kASDKSubmit3DSAuthorization];
 		NSString *paramsString = [NSString stringWithFormat:@"{\"threeDSServerTransID\":\"%@\",\"acsTransID\":\"%@\",\"messageVersion\":\"%@\",\"challengeWindowSize\":\"05\",\"messageType\":\"CReq\"}",
 								 self.threeDsData.tdsServerTransId, self.threeDsData.acsTransId, self.threeDsData.threeDSVersion];
 
@@ -209,11 +212,6 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 		
 	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
 	[self.webView loadRequest:request];
-}
-
-- (NSString *)termUrl
-{
-	return [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath], kASDKSubmit3DSAuthorization];
 }
 
 - (NSString *)stringFromParameters:(NSDictionary *)parameters
@@ -254,7 +252,7 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 				{
 					[self cancel3DS];
 				}
-				else if ([termUrl rangeOfString:[self termUrl]].location != NSNotFound)
+				else if ([termUrl rangeOfString:self.termURL].location != NSNotFound)
 				{
 					[self.webView evaluateJavaScript:@"document.getElementsByTagName('pre')[0].innerHTML" completionHandler:^(id _Nullable value, NSError * _Nullable error) {
 						NSString *responce = (NSString *)value;
