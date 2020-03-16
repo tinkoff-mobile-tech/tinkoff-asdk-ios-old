@@ -81,4 +81,9 @@
 	return _tdsServerTransId;
 }
 
+- (BOOL)fallbackOnTdsV1
+{
+	return [_dictionary[@"FallbackOnTdsV1"] boolValue];
+}
+
 @end

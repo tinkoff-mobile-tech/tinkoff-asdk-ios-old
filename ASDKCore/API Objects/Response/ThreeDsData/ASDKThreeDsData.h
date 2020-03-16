@@ -33,5 +33,6 @@
 @property (nonatomic, copy) NSString *acsUrl;
 @property (nonatomic, copy) NSString *acsTransId;
 @property (nonatomic, copy) NSString *tdsServerTransId;
+@property (nonatomic) BOOL fallbackOnTdsV1;
 
 @end

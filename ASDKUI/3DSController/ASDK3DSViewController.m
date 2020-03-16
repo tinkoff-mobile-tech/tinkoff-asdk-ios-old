@@ -187,26 +187,30 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod: @"POST"];
 	
-	if (self.threeDsData.paReq != nil && self.threeDsData.MD != nil)
-	{
-		self.termURL = [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath], kASDKSubmit3DSAuthorization];
-		NSString *dataString = [self stringFromParameters:@{kASDKPaReq:self.threeDsData.paReq,
-															kASDKMD:self.threeDsData.MD,
-															kASDKTermUrl:self.termURL}];
-		
-		NSData *postData = [dataString dataUsingEncoding: NSUTF8StringEncoding];
-		[request setHTTPBody: postData];
-	}
-	else if (self.threeDsData.tdsServerTransId != nil && self.threeDsData.acsTransId != nil)
+	if (self.threeDsData.tdsServerTransId != nil && self.threeDsData.acsTransId != nil)
 	{
 		self.termURL = [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath_v2], kASDKSubmit3DSAuthorization];
 		NSString *paramsString = [NSString stringWithFormat:@"{\"threeDSServerTransID\":\"%@\",\"acsTransID\":\"%@\",\"messageVersion\":\"%@\",\"challengeWindowSize\":\"05\",\"messageType\":\"CReq\"}",
-								 self.threeDsData.tdsServerTransId, self.threeDsData.acsTransId, self.threeDsData.threeDSVersion];
-
+								  self.threeDsData.tdsServerTransId, self.threeDsData.acsTransId, self.threeDsData.threeDSVersion];
+		
 		NSData *plainData = [paramsString dataUsingEncoding:NSUTF8StringEncoding];
 		NSString *postString = [NSString stringWithFormat:@"%@", [plainData base64EncodedStringWithOptions:0]];
 		NSData *postData = [[NSString stringWithFormat:@"creq=%@", postString] dataUsingEncoding: NSUTF8StringEncoding];
 		
+		[request setHTTPBody: postData];
+	}
+	else if (self.threeDsData.paReq != nil && self.threeDsData.MD != nil)
+	{
+		self.termURL = [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath], kASDKSubmit3DSAuthorization];
+		
+		NSMutableDictionary *params = [NSMutableDictionary dictionary];
+		[params setValue:self.threeDsData.paReq forKey:kASDKPaReq];
+		[params setValue:self.threeDsData.MD forKey:kASDKMD];
+		[params setValue:self.termURL forKey:kASDKTermUrl];
+		
+		NSString *dataString = [self stringFromParameters:params];
+		
+		NSData *postData = [dataString dataUsingEncoding: NSUTF8StringEncoding];
 		[request setHTTPBody: postData];
 	}
 		

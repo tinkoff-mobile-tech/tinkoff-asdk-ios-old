@@ -1130,7 +1130,12 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		data.threeDSVersion = threeDSVersion;
 		if (strongSelf)
 		{
-			if (status == ASDKPaymentStatus_3DS_CHECKING)
+			if (data.fallbackOnTdsV1 == true)
+			{
+				[strongSelf setNeedCheck3DS2:NO];
+				[strongSelf performPayment];
+			}
+			else if (status == ASDKPaymentStatus_3DS_CHECKING)
 			{
 				[strongSelf confirmPaymentBy3dsCheckingWithCard:data paymentInfo:paymentInfo];
 			}
@@ -1202,7 +1207,6 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		else
 		{
 			[self performFinishAuthorize:nil emailString:emailString encryptedCardString:encryptedCardString payment:payment threeDSVersion:nil];
-			[self setNeedCheck3DS2:YES];
 		}
 	}
 }
