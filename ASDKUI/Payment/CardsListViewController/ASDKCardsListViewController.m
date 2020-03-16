@@ -193,33 +193,30 @@ typedef enum
         [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
         
         __weak typeof (self) weakSelf = self;
-        [[ASDKCardsListDataController instance] removeCardWithCardId:@([card.cardId integerValue])
-                                                        successBlock:^
-         {
-             [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-
-             [weakSelf setCards:[ASDKCardsListDataController instance].externalCards];
-			 [weakSelf setSelectedCard:[[ASDKCardsListDataController instance].externalCards firstObject]];
-			 
-			 [tableView beginUpdates];
-             	[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-			 	[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-			 [tableView endUpdates];
-			 
-			 [tableView setEditing:NO];
-
+		[[ASDKCardsListDataController instance] removeCardWithCardId:@([card.cardId integerValue]) successBlock:^ {
+			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+			
+			[weakSelf setCards:[ASDKCardsListDataController instance].externalCards];
+			[weakSelf setSelectedCard:[[ASDKCardsListDataController instance].externalCards firstObject]];
+			
+			[tableView beginUpdates];
+				[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+				[tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+			[tableView endUpdates];
+			
+			[tableView setEditing:NO];
+			
 			id<ASDKCardsListDelegate> cardsListDelegate = self.cardsListDelegate;
 			if (cardsListDelegate && [cardsListDelegate respondsToSelector:@selector(cardListDidChanged)])
 			{
 				[cardsListDelegate cardListDidChanged];
 			}
-			 
+			
 			self->_didRemoveCards = YES;
-         }
-                                                          errorBlock:^(ASDKAcquringSdkError *error)
-         {
-             [[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
-         }];
+		}
+		errorBlock:^(ASDKAcquringSdkError *error) {
+			[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
+		}];
     }
 }
 

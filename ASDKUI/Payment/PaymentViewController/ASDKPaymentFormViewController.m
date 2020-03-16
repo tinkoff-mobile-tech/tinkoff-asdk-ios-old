@@ -242,17 +242,25 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+
+	if ( self.isMovingFromParentViewController || self.isBeingDismissed)
+	{
+		if (self.onCancelled)
+		{
+			self.onCancelled();
+		}
+	}
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-	
-	if (self.onCancelled)
-	{
-		self.onCancelled();
-	}
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
