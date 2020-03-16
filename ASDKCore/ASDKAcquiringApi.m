@@ -308,7 +308,12 @@ typedef NS_ENUM(NSInteger, APIVersion)
 	if ([request.cardData length] > 0) {[parameters setObject:request.cardData forKey:kASDKCardData];}
 	if ([request.sendEmail length] > 0) {[parameters setObject:request.sendEmail forKey:kASDKSendEmail];}
 	[parameters setObject:request.token forKey:kASDKToken];
-	if ([request.encryptedPaymentData length] > 0) {[parameters setObject:request.encryptedPaymentData forKey:@"EncryptedPaymentData"];}
+	if ([request.encryptedPaymentData length] > 0)
+	{
+		[parameters setObject:request.encryptedPaymentData forKey:@"EncryptedPaymentData"];
+		[parameters setObject:@"ACQ" forKey:@"Route"];
+		[parameters setObject:@"ApplePay" forKey:@"Source"];
+	}
 	
     if (request.infoEmail && [request.sendEmail boolValue])
     {
