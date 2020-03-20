@@ -28,6 +28,7 @@
 @property (nonatomic, copy) NSString *infoEmail;
 @property (nonatomic, copy) NSString *encryptedPaymentData;
 @property (nonatomic, strong) NSDictionary *data;
+@property (nonatomic, copy) NSString *ipAddress;
 
 - (ASDKFinishAuthorizeRequest *)initWithTerminalKey:(NSString *)terminalKey
                                           paymentId:(NSString *)paymentId
@@ -36,6 +37,7 @@
                                           infoEmail:(NSString *)infoEmail
 											  token:(NSString *)token
 							   encryptedPaymentData:(NSString *)encryptedPaymentData
-											   data:(NSDictionary *)data;
+											   data:(NSDictionary *)data
+												 ip:(NSString * )ipAddress;
 
 @end

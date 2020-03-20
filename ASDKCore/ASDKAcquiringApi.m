@@ -321,6 +321,7 @@ typedef NS_ENUM(NSInteger, APIVersion)
     }
 	
 	if (request.data) { [parameters setObject:request.data forKey:kASDKDATA]; }
+	if (request.ipAddress) { [parameters setObject:request.ipAddress forKey:@"IP"]; }
 	
     [self apiVersion:APIVersion_v2 path:kASDKAPIPathFinishAuthorize parameters:parameters
        success:^(NSDictionary *responseDictionary, NSURLResponse *response)

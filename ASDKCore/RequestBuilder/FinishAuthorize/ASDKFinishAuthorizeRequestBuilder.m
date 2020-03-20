@@ -26,6 +26,7 @@
 @property (nonatomic, copy) NSString *infoEmail;
 @property (nonatomic, copy) NSString *encryptedPaymentData;
 @property (nonatomic, strong) NSDictionary *data;
+@property (nonatomic, copy) NSString *ipAddress;
 
 @end
 
@@ -38,6 +39,7 @@
 												   password:(NSString *)password
 									   encryptedPaymentData:(NSString *)encryptedPaymentData
 													   data:(NSDictionary *)data
+														 ip:(NSString * )ipAddress
 {
     ASDKFinishAuthorizeRequestBuilder *builder = [[ASDKFinishAuthorizeRequestBuilder alloc] init];
     
@@ -51,6 +53,7 @@
         builder.password = password;
 		builder.encryptedPaymentData = encryptedPaymentData;
 		builder.data = data;
+		builder.ipAddress = ipAddress;
     }
     
     return builder;
@@ -83,7 +86,8 @@
                                                                                         infoEmail:self.infoEmail
                                                                                             token:token
 																			 encryptedPaymentData:self.encryptedPaymentData
-																							 data:self.data];
+																							 data:self.data
+																							   ip:self.ipAddress];
     
     return request;
 }
@@ -131,7 +135,6 @@
     {
         [parameters setObject:self.paymentId forKey:kASDKPaymentId];
     }
-
     if (self.cardData.length > 0)
     {
         [parameters setObject:self.cardData forKey:kASDKCardData];
@@ -143,6 +146,10 @@
 	if (self.encryptedPaymentData.length > 0)
 	{
 		[parameters setObject:self.encryptedPaymentData forKey:@"EncryptedPaymentData"];
+	}
+	if (self.ipAddress.length > 0)
+	{
+		[parameters setObject:self.ipAddress forKey:@"IP"];
 	}
 
     return parameters;

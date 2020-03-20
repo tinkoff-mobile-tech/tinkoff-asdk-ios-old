@@ -1119,11 +1119,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	return nil;
 }
 
-- (void)performFinishAuthorize:(NSDictionary *)additionalData emailString:(NSString *)emailString encryptedCardString:(NSString *)encryptedCardString payment:(ASDKInitResponse *)payment threeDSVersion:(NSString *)threeDSVersion
+- (void)performFinishAuthorize:(NSDictionary *)additionalData ip:(NSString *)ipAddress emailString:(NSString *)emailString encryptedCardString:(NSString *)encryptedCardString payment:(ASDKInitResponse *)payment threeDSVersion:(NSString *)threeDSVersion
 {
 	__weak typeof(self) weakSelf = self;
 
-	[self.acquiringSdk finishAuthorizeWithPaymentId:payment.paymentId encryptedPaymentData:nil cardData:encryptedCardString infoEmail:emailString data:additionalData success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+	[self.acquiringSdk finishAuthorizeWithPaymentId:payment.paymentId encryptedPaymentData:nil cardData:encryptedCardString infoEmail:emailString data:additionalData ip:ipAddress success:^(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
 		__strong typeof(weakSelf) strongSelf = weakSelf;
 		[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 
@@ -1194,7 +1194,8 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 			[self.acquiringSdk check3dsVersionWithPaymentId:payment.paymentId cardData:encryptedCardString success:^(ASDKResponseCheck3dsVersion *response) {
 				__strong typeof(weakSelf) strongSelf = weakSelf;
 				NSDictionary *additionalData = [strongSelf threeDSMethodCheckURL:[response threeDSMethodURL] tdsServerTransID:[response tdsServerTransID]];
-				[strongSelf performFinishAuthorize:additionalData emailString:emailString encryptedCardString:encryptedCardString payment:payment threeDSVersion:[response threeDSVersion]];
+				NSString *ipAddress = ASDKUtils.getIPAddress;
+				[strongSelf performFinishAuthorize:additionalData ip:ipAddress emailString:emailString encryptedCardString:encryptedCardString payment:payment threeDSVersion:[response threeDSVersion]];
 			} failure: ^(ASDKAcquringSdkError *error) {
 				[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationHideLoader object:nil];
 				__strong typeof(weakSelf) strongSelf = weakSelf;
@@ -1206,7 +1207,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		}
 		else
 		{
-			[self performFinishAuthorize:nil emailString:emailString encryptedCardString:encryptedCardString payment:payment threeDSVersion:nil];
+			[self performFinishAuthorize:nil ip:nil emailString:emailString encryptedCardString:encryptedCardString payment:payment threeDSVersion:nil];
 		}
 	}
 }
@@ -1245,7 +1246,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
     if (!self.selectedCard)
     {
         [[ASDKCardsListDataController instance] updateCardsListWithSuccessBlock:^{ paymentSuccessBlock(); }
-                                                                     errorBlock:^(ASDKAcquringSdkError *error) { paymentSuccessBlock(); } ];
+																	 errorBlock:^(ASDKAcquringSdkError *error) { paymentSuccessBlock(); } ];
     }
     else
     {

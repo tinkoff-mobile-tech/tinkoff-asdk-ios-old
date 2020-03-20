@@ -28,6 +28,7 @@
 												terminalKey:(NSString *)terminalKey
 												   password:(NSString *)password
 									   encryptedPaymentData:(NSString *)encryptedPaymentData
-													   data:(NSDictionary *)data;
+													   data:(NSDictionary *)data
+														 ip:(NSString * )ipAddress;
 
 @end

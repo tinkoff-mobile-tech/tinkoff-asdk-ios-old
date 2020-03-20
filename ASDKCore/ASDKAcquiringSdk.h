@@ -92,6 +92,7 @@
                             cardData:(NSString *)cardData
 						   infoEmail:(NSString *)infoEmail
 								data:(NSDictionary *)data
+								  ip:(NSString * )ipAddress
                              success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                              failure:(void (^)(ASDKAcquringSdkError *error))failure;
 

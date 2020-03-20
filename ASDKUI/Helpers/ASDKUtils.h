@@ -26,4 +26,7 @@
 + (UIColor *)colorWithInteger:(NSInteger)rgbValue alpha:(CGFloat)alpha;
 + (UIColor *)colorWithInteger:(NSInteger)rgbValue;
 + (UIColor *)colorWithIntegerShadeOfGrey:(NSInteger)greyHex;
+
++ (NSString *)getIPAddress;
+
 @end

@@ -191,6 +191,7 @@
                             cardData:(NSString *)cardData
                            infoEmail:(NSString *)infoEmail
 								data:(NSDictionary *)data
+								  ip:(NSString * )ipAddress
                              success:(void (^)(ASDKThreeDsData *data, ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status))success
                              failure:(void (^)(ASDKAcquringSdkError *error))failure
 {
@@ -202,7 +203,8 @@
 																							 terminalKey:self.terminalKey
 																								password:self.password
 																					encryptedPaymentData:encryptedPaymentData
-																									data:data];
+																									data:data
+																									  ip:ipAddress];
     
     ASDKFinishAuthorizeRequest *request = (ASDKFinishAuthorizeRequest *)[builder buildError:&buildError];
     

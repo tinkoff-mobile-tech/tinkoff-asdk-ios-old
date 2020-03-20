@@ -35,7 +35,6 @@
 
 - (ASDKAcquiringRequest *)buildError:(ASDKAcquringSdkError **)error
 {
-    //implement in subclasses
     return nil;
 }
 
@@ -50,7 +49,7 @@
 
 - (NSString *)makeTokenWithParameters:(NSDictionary *)parameters
 {
-    NSArray *keys = [[parameters allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    NSArray *keys = [[parameters allKeys] sortedArrayUsingSelector:@selector(compare:)];
     NSMutableString *tokenString = [NSMutableString string];
     for (NSString *key in keys)
     {
@@ -61,8 +60,6 @@
 			if ([parameterValue isKindOfClass:[NSDictionary class]] || [parameterValue isKindOfClass:[NSArray class]])
 			{
 				parameterValue = @"";
-				//NSData *data = [NSKeyedArchiver archivedDataWithRootObject:parameterValue];
-				//parameterValue = [NSString stringWithFormat:@"%@", data];
 			}
 			else
 			{
@@ -72,9 +69,7 @@
 
         [tokenString appendString:parameterValue];
     }
-    
-//    NSLog(@"%@",tokenString);
-    
+        
     NSString *encodedTokenString = [ASDKCryptoUtils sha256:tokenString];
     
     return encodedTokenString;
