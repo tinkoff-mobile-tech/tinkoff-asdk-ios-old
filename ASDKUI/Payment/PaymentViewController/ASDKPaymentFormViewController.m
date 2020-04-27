@@ -251,6 +251,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		if (self.onCancelled)
 		{
 			self.onCancelled();
+            self.onCancelled = nil;
 		}
 	}
 }
@@ -528,7 +529,11 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 - (IBAction)cancelAction:(id)sender
 {
     [self closeSelfWithCompletion:^{
-		
+        if (self.onCancelled)
+        {
+            self.onCancelled();
+            self.onCancelled = nil;
+        }
     }];
 }
 
@@ -1463,7 +1468,13 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 
 - (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController
 {
-    [self closeSelfWithCompletion:self.onCancelled];
+    [self closeSelfWithCompletion:^{
+        if (self.onCancelled)
+        {
+            self.onCancelled();
+            self.onCancelled = nil;
+        }
+    }];
 }
 
 @end
