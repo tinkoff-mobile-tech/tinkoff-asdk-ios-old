@@ -528,7 +528,10 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 - (IBAction)cancelAction:(id)sender
 {
     [self closeSelfWithCompletion:^{
-		
+        if (self.onCancelled)
+        {
+            self.onCancelled();
+        }
     }];
 }
 
