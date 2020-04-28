@@ -213,9 +213,27 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 		NSData *postData = [dataString dataUsingEncoding: NSUTF8StringEncoding];
 		[request setHTTPBody: postData];
 	}
-		
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:ASDKNotificationShowLoader object:nil];
-	[self.webView loadRequest:request];
+	
+	CGFloat systemVersion = (CGFloat)[[[UIDevice currentDevice] systemVersion] floatValue];
+	if (systemVersion < 11)
+	{
+		NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+		NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+		
+		NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self.webView loadData:data MIMEType:@"text/html" characterEncodingName:@"UTF-8" baseURL:[NSURL URLWithString:self.termURL]];
+			});
+		}];
+		
+		[dataTask resume];
+	}
+	else
+	{
+		[self.webView loadRequest:request];
+	}
 }
 
 - (NSString *)stringFromParameters:(NSDictionary *)parameters
