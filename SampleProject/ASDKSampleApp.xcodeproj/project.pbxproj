@@ -15,7 +15,6 @@
 		2CEF63911F54377C00C368AE /* TransactionHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF638A1F54377C00C368AE /* TransactionHistoryViewController.m */; };
 		2CEF63921F54377C00C368AE /* TransactionHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEF638B1F54377C00C368AE /* TransactionHistoryViewController.xib */; };
 		2CEF63931F54377C00C368AE /* UITableViewHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF638D1F54377C00C368AE /* UITableViewHelpers.m */; };
-		684AD5C6421F7F3343AABD7F /* libPods-ASDKSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */; };
 		83871B8B1C6DCFDC00D69603 /* ShopCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 83871B8A1C6DCFDC00D69603 /* ShopCart.m */; };
 		83871B8D1C6DF29C00D69603 /* DetailInfoTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B8C1C6DF29C00D69603 /* DetailInfoTableViewController.xib */; };
 		83871B911C6E0C3100D69603 /* ShopCartTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83871B901C6E0C3100D69603 /* ShopCartTableViewController.xib */; };
@@ -46,6 +45,7 @@
 		C38C870B1D37B7F6001ABBFA /* ASDKCardIOScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C38C870A1D37B7F6001ABBFA /* ASDKCardIOScanner.m */; };
 		C3AAB1401DAFE3FC00C64972 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEDEFF561C74B2A00026D454 /* Localizable.strings */; };
 		C3AAB1411DAFE40000C64972 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C3F489211DACC5F20032EC5E /* InfoPlist.strings */; };
+		CC18C5B6AA1BA09D370DDFF8 /* Pods_ASDKSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFB633105C8387E3014513EB /* Pods_ASDKSampleApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,7 +75,6 @@
 		2CEF638B1F54377C00C368AE /* TransactionHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionHistoryViewController.xib; sourceTree = "<group>"; };
 		2CEF638C1F54377C00C368AE /* UITableViewHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITableViewHelpers.h; sourceTree = "<group>"; };
 		2CEF638D1F54377C00C368AE /* UITableViewHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewHelpers.m; sourceTree = "<group>"; };
-		38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ASDKSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		80ADADDCD6F59A2D7EF6C6A3 /* Pods-ASDKSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ASDKSampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		831672871C6486A500533D85 /* ASDKSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASDKSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83871B891C6DCFDC00D69603 /* ShopCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopCart.h; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		C3F489201DACC5F20032EC5E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C3F489231DACC6ED0032EC5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C3F489241DACC6ED0032EC5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FFB633105C8387E3014513EB /* Pods_ASDKSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ASDKSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				684AD5C6421F7F3343AABD7F /* libPods-ASDKSampleApp.a in Frameworks */,
+				CC18C5B6AA1BA09D370DDFF8 /* Pods_ASDKSampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +166,7 @@
 		625962B01098A0E65DBF2FBD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38BBB53F96316A70A6C84981 /* libPods-ASDKSampleApp.a */,
+				FFB633105C8387E3014513EB /* Pods_ASDKSampleApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -391,7 +391,7 @@
 				831672841C6486A500533D85 /* Frameworks */,
 				831672851C6486A500533D85 /* Resources */,
 				831672A51C64878A00533D85 /* Embed Frameworks */,
-				57600297A2546A01FB72C740 /* [CP] Copy Pods Resources */,
+				B1428CA657CA7CAB30DFD47F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -473,23 +473,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		57600297A2546A01FB72C740 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6350D7BD1EF85E2BB386E837 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -506,6 +489,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1428CA657CA7CAB30DFD47F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ASDKSampleApp/Pods-ASDKSampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -677,7 +677,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ASDKSampleApp/ASDKSampleApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 79;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = 8SEFGGQX9M;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -690,7 +690,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "179273f2-bc09-426b-b1e5-b41e5ca91de9";
@@ -705,7 +705,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ASDKSampleApp/ASDKSampleApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 79;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = 8SEFGGQX9M;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -718,7 +718,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.tcsbank.ASDKSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "179273f2-bc09-426b-b1e5-b41e5ca91de9";

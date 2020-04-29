@@ -146,6 +146,8 @@
 	if (self.encryptedPaymentData.length > 0)
 	{
 		[parameters setObject:self.encryptedPaymentData forKey:@"EncryptedPaymentData"];
+		[parameters setObject:@"ACQ" forKey:@"Route"];
+		[parameters setObject:@"ApplePay" forKey:@"Source"];
 	}
 	if (self.ipAddress.length > 0)
 	{
