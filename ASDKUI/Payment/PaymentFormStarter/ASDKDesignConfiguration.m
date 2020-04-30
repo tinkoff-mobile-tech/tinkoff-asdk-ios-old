@@ -63,7 +63,7 @@
             __navigationBarColor = UIColor.whiteColor;
             __navigationBarItemsTextColor = UIColor.blackColor;
         }
-    __statusBarStyle = UIStatusBarStyleDefault;
+    __statusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
 		__presentStyleModal = UIModalPresentationFullScreen;
 	}
 
