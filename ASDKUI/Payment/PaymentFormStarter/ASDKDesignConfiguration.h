@@ -142,4 +142,7 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
 - (void)setPayViewTitle:(NSString *)title;
 - (NSString *)payViewTitle;
 
+- (void)setStatusBarStyle:(UIStatusBarStyle)style;
+- (UIStatusBarStyle)statusBarStyle;
+
 @end
