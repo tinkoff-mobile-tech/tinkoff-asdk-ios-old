@@ -191,7 +191,7 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 	
 	self.customSecureLogo = designConfiguration.paymentsSecureLogosView;
 	
-    cancelButton.tintColor = [designConfiguration navigationBarItemsTextColor];
+    cancelButton.tintColor = [designConfiguration navigationBarButtonsColor];
 	[self.navigationItem setLeftBarButtonItem:cancelButton];
 	
 	if (designConfiguration.customBackButton)

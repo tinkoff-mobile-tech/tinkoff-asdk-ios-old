@@ -112,7 +112,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 {
     ASDKDesignConfiguration *designConfiguration = self.designConfiguration;
     
-    [[ASDKBarButtonItem appearance] setTintColor:[designConfiguration navigationBarItemsTextColor]];
+    [[ASDKBarButtonItem appearance] setTintColor:[designConfiguration navigationBarButtonsColor]];
 }
 
 - (void)presentPaymentFormFromViewController:(UIViewController *)presentingViewController
