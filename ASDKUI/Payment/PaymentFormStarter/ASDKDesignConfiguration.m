@@ -27,6 +27,8 @@
 @property (nonatomic, strong) UIColor *_navigationBarTitleColor;
 @property (nonatomic) UIBarStyle _navigationBarStyle;
 
+@property (nonatomic) UIStatusBarStyle _statusBarStyle;
+
 @property (nonatomic, strong) UIColor *_payButtonColor;
 @property (nonatomic, strong) UIColor *_payButtonPressedColor;
 @property (nonatomic, strong) UIColor *_payButtonTextColor;
@@ -64,6 +66,7 @@
             __navigationBarButtonsColor = UIColor.blackColor;
             __navigationBarTitleColor = UIColor.blackColor;
         }
+    __statusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
 		__presentStyleModal = UIModalPresentationFullScreen;
 	}
 
@@ -132,6 +135,16 @@
 - (UIBarStyle)navigationBarStyle
 {
     return self._navigationBarStyle;
+}
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)style
+{
+    self._statusBarStyle = style;
+}
+
+- (UIStatusBarStyle)statusBarStyle
+{
+    return self._statusBarStyle;
 }
 
 - (void)setPayButtonColor:(UIColor *)payButtonColor payButtonPressedColor:(UIColor *)payButtonPressedColor payButtonTextColor:(UIColor *)payButtonTextColor

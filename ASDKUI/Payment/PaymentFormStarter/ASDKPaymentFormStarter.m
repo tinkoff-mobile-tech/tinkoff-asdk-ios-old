@@ -261,7 +261,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 {
     if (_loaderWindow == nil)
     {
-        ASDKLoaderViewController *loaderViewController = [ASDKLoaderViewController new];
+        ASDKLoaderViewController *loaderViewController;
+        loaderViewController = [[ASDKLoaderViewController alloc] initWithStatusBarStyle:self.designConfiguration.statusBarStyle];
         
         _loaderWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         

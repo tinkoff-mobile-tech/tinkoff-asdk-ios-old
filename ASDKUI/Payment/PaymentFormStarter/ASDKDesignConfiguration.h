@@ -157,4 +157,13 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
 - (void)setPayViewTitle:(NSString *)title;
 - (NSString *)payViewTitle;
 
+/*!
+ *  @discussion Установить конкретный стиль статус бара
+ *
+ *  @param style - стиль статус бара
+ */
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)style;
+- (UIStatusBarStyle)statusBarStyle;
+
 @end
