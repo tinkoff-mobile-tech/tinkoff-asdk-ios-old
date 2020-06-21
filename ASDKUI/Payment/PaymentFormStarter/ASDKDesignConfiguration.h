@@ -142,4 +142,10 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
 - (void)setPayViewTitle:(NSString *)title;
 - (NSString *)payViewTitle;
 
+
+- (void)setPresentationCompletion:(void (^)(void))presentationCompletion;
+- (void (^)(void))getPresentationCompletion;
+- (void)setPresentAnimated:(BOOL)animated;
+- (BOOL)shouldAnimate;
+
 @end
