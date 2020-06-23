@@ -701,21 +701,27 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 - (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller
 {
 	[controller dismissViewControllerAnimated:YES completion:^{
-		if (self.onCompleteSuccessPaymentInfo != nil && self.onCompleteError == nil && (self.onCompleteStatus == ASDKPaymentStatus_CONFIRMED || self.onCompleteStatus == ASDKPaymentStatus_AUTHORIZED))
+		if (self.onCompleteSuccessPaymentInfo != nil
+            && self.onCompleteError == nil
+            && (self.onCompleteStatus == ASDKPaymentStatus_CONFIRMED || self.onCompleteStatus == ASDKPaymentStatus_AUTHORIZED)
+            && self.onSuccess != nil)
 		{
 			self.onSuccess(self.onCompleteSuccessPaymentInfo);
 			self.onCompleteSuccessPaymentInfo = nil;
 		}
-		else if (self.onCompleteSuccessPaymentInfo == nil && self.onCompleteError == nil)
+		else if (self.onCompleteSuccessPaymentInfo == nil
+                 && self.onCompleteError == nil
+                 && self.onCancelled != nil)
 		{
 			self.onCancelled();
 		}
-		else if (self.onCompleteError != nil)
+		else if (self.onCompleteError != nil
+                 && self.onError != nil)
 		{
 			self.onError(self.onCompleteError);
 			self.onCompleteError = nil;
 		}
-		else
+		else if (self.onError != nil)
 		{
 			NSString *details = [NSString stringWithFormat:@"%@", self.onCompleteSuccessPaymentInfo];
 			ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:nil details:details code:0];
