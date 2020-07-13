@@ -1,5 +1,17 @@
 # Tinkoff Acquiring SDK for iOS
 
+### Внимание! Появилась новая версия Acquiring SDK 2.0, которая теперь находится в репозитории [AcquiringSdk_iOS][AcquiringSdk_IOS]
+
+Рекомендуем перейти на новую версию библиотеки.
+
+В версии 2.0 появились новые возможности:
+* поддержка оплаты через [Систему быстрых платежей][sbp]
+* новый современный дизайн экранов
+* теперь библиотека написана на Swift, а также улучшен и переработан API библиотеки.
+
+
+Текущая версия 1.5.х продолжает функционировать
+
 ![PayFormActivity1][img-pay]
 ![PayFormActivity2][img-pay2]
 ![PayFormActivity3][img-pay3]
@@ -204,3 +216,5 @@ _**PayController**_ фасад для _**ASDKAcquiringSdk**_ который со
 [img-attachCard]: https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/attachCardScreen.png
 [server-api]: https://oplata.tinkoff.ru/develop/api/payments/
 [issues]: https://github.com/TinkoffCreditSystems/tinkoff-asdk-ios/issues
+[AcquiringSdk_IOS]: https://github.com/TinkoffCreditSystems/AcquiringSdk_IOS
+[sbp]: https://sbp.nspk.ru/
