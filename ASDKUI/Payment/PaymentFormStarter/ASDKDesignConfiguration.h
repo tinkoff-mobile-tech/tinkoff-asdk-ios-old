@@ -48,8 +48,23 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
   navigationBarItemsTextColor:(UIColor *)navigationBarItemsTextColor
            navigationBarStyle:(UIBarStyle)navigationBarStyle;
 
+/*!
+ *  @discussion Настройка цветов в навигейшн баре
+ *
+ *  @param navigationBarColor          цвет фона
+ *  @param navigationBarButtonsColor цвет кнопок
+ *  @param navigationBarTitleColor цвет заголовка
+ *  @param navigationBarStyle          бар стайл
+ */
+
+- (void)setNavigationBarColor:(UIColor *)navigationBarColor
+    navigationBarButtonsColor:(UIColor *)navigationBarButtonsColor
+      navigationBarTitleColor:(UIColor *)navigationBarTitleColor
+           navigationBarStyle:(UIBarStyle)navigationBarStyle;
+
 - (UIColor *)navigationBarColor;
-- (UIColor *)navigationBarItemsTextColor;
+- (UIColor *)navigationBarButtonsColor;
+- (UIColor *)navigationBarTitleColor;
 - (UIBarStyle)navigationBarStyle;
 
 
@@ -141,5 +156,14 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
 
 - (void)setPayViewTitle:(NSString *)title;
 - (NSString *)payViewTitle;
+
+/*!
+ *  @discussion Установить конкретный стиль статус бара
+ *
+ *  @param style - стиль статус бара
+ */
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)style;
+- (UIStatusBarStyle)statusBarStyle;
 
 @end

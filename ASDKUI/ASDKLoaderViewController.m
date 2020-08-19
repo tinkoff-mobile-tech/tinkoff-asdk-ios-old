@@ -27,6 +27,7 @@ NSString *const ASDKNotificationHideLoader = @"ASDKNotificationHideLoader";
 
 @property (nonatomic, weak) IBOutlet UIView *backView;
 @property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic) UIStatusBarStyle statusBarStyle;
 
 @end
 
@@ -34,7 +35,13 @@ NSString *const ASDKNotificationHideLoader = @"ASDKNotificationHideLoader";
 
 - (instancetype)init
 {
+    return [self initWithStatusBarStyle:[[UIApplication sharedApplication] statusBarStyle]];
+}
+
+- (instancetype)initWithStatusBarStyle:(UIStatusBarStyle)style
+{
     self = [super initWithNibName:NSStringFromClass([self class]) bundle:[NSBundle bundleForClass:[self class]]];
+    self.statusBarStyle = style;
     
     return self;
 }
@@ -49,7 +56,7 @@ NSString *const ASDKNotificationHideLoader = @"ASDKNotificationHideLoader";
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return [[UIApplication sharedApplication] statusBarStyle];
+    return self.statusBarStyle;
 }
 
 @end

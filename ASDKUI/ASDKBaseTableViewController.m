@@ -34,8 +34,8 @@
 		self.navigationController.navigationBar.barStyle = [designConfiguration navigationBarStyle];
 		[self.navigationController.navigationBar setBackgroundImage:[ASDKUtils imageFromColor:[designConfiguration navigationBarColor]] forBarMetrics:UIBarMetricsDefault];
 
-		self.navigationController.navigationBar.tintColor = [designConfiguration navigationBarItemsTextColor];
-		self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [designConfiguration navigationBarItemsTextColor]};
+		self.navigationController.navigationBar.tintColor = [designConfiguration navigationBarButtonsColor];
+		self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName: [designConfiguration navigationBarTitleColor]};
 
 		self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	}

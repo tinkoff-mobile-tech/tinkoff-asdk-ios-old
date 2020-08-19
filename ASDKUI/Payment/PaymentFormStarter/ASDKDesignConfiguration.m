@@ -23,8 +23,11 @@
 @interface ASDKDesignConfiguration ()
 
 @property (nonatomic, strong) UIColor *_navigationBarColor;
-@property (nonatomic, strong) UIColor *_navigationBarItemsTextColor;
+@property (nonatomic, strong) UIColor *_navigationBarButtonsColor;
+@property (nonatomic, strong) UIColor *_navigationBarTitleColor;
 @property (nonatomic) UIBarStyle _navigationBarStyle;
+
+@property (nonatomic) UIStatusBarStyle _statusBarStyle;
 
 @property (nonatomic, strong) UIColor *_payButtonColor;
 @property (nonatomic, strong) UIColor *_payButtonPressedColor;
@@ -56,11 +59,14 @@
     	__navigationBarStyle = UIBarStyleDefault;
 		if (@available(iOS 13.0, *)) {
             __navigationBarColor = UIColor.systemBackgroundColor;
-            __navigationBarItemsTextColor = UIColor.labelColor;
+            __navigationBarButtonsColor = UIColor.labelColor;
+            __navigationBarTitleColor = UIColor.labelColor;
         } else {
             __navigationBarColor = UIColor.whiteColor;
-            __navigationBarItemsTextColor = UIColor.blackColor;
+            __navigationBarButtonsColor = UIColor.blackColor;
+            __navigationBarTitleColor = UIColor.blackColor;
         }
+    __statusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
 		__presentStyleModal = UIModalPresentationFullScreen;
 	}
 
@@ -72,7 +78,19 @@
            navigationBarStyle:(UIBarStyle)navigationBarStyle
 {
     __navigationBarColor = navigationBarColor;
-    __navigationBarItemsTextColor = navigationBarItemsTextColor;
+    __navigationBarButtonsColor = navigationBarItemsTextColor;
+    __navigationBarTitleColor = navigationBarItemsTextColor;
+    __navigationBarStyle = navigationBarStyle;
+}
+
+- (void)setNavigationBarColor:(UIColor *)navigationBarColor
+    navigationBarButtonsColor:(UIColor *)navigationBarButtonsColor
+      navigationBarTitleColor:(UIColor *)navigationBarTitleColor
+           navigationBarStyle:(UIBarStyle)navigationBarStyle
+{
+    __navigationBarColor = navigationBarColor;
+    __navigationBarButtonsColor = navigationBarButtonsColor;
+    __navigationBarTitleColor = navigationBarTitleColor;
     __navigationBarStyle = navigationBarStyle;
 }
 
@@ -86,11 +104,25 @@
     return [ASDKDesign colorNavigationBar];
 }
 
-- (UIColor *)navigationBarItemsTextColor
+- (UIColor *)navigationBarButtonsColor
 {
-    if (self._navigationBarItemsTextColor)
+    if (self._navigationBarButtonsColor)
     {
-        return self._navigationBarItemsTextColor;
+        return self._navigationBarButtonsColor;
+    }
+    
+    if (@available(iOS 13.0, *)) {
+        return [UIColor systemBackgroundColor];
+    }
+    
+    return [UIColor whiteColor];
+}
+
+- (UIColor *)navigationBarTitleColor
+{
+    if (self._navigationBarTitleColor)
+    {
+        return self._navigationBarTitleColor;
     }
     
     if (@available(iOS 13.0, *)) {
@@ -103,6 +135,16 @@
 - (UIBarStyle)navigationBarStyle
 {
     return self._navigationBarStyle;
+}
+
+- (void)setStatusBarStyle:(UIStatusBarStyle)style
+{
+    self._statusBarStyle = style;
+}
+
+- (UIStatusBarStyle)statusBarStyle
+{
+    return self._statusBarStyle;
 }
 
 - (void)setPayButtonColor:(UIColor *)payButtonColor payButtonPressedColor:(UIColor *)payButtonPressedColor payButtonTextColor:(UIColor *)payButtonTextColor
