@@ -367,7 +367,6 @@ typedef enum
 	//[self.textFieldCardNumber setDisablePaste:YES];
 	//[self.textFieldCardNumber setDisableCopy:YES];
 	[self.textFieldCardNumber setKeyboardType:UIKeyboardTypeNumberPad];
-	[self.textFieldCardNumber setKeyboardAppearance:UIKeyboardAppearanceLight];
 	[self.textFieldCardNumber setFont:[UIFont systemFontOfSize:17]];
 	[self.textFieldCardNumber setDelegate:self];
 	
@@ -381,7 +380,6 @@ typedef enum
 	[self.textFieldCardDate setDisableCopy:YES];
 	[self.textFieldCardDate setDelegate:self];
 	[self.textFieldCardDate setKeyboardType:UIKeyboardTypeNumberPad];
-	[self.textFieldCardDate setKeyboardAppearance:UIKeyboardAppearanceLight];
 	[self.textFieldCardDate setFont:[UIFont systemFontOfSize:17.0]];
 	[self.textFieldCardDate setKeyInputDelegate:self];
 	
@@ -394,7 +392,6 @@ typedef enum
 	[self.textFieldCardCVC setDisablePaste:YES];
 	[self.textFieldCardCVC setDisableCopy:YES];
 	[self.textFieldCardCVC setKeyboardType:UIKeyboardTypeNumberPad];
-	[self.textFieldCardCVC setKeyboardAppearance:UIKeyboardAppearanceLight];
 	[self.textFieldCardCVC setFont:[UIFont systemFontOfSize:17.0]];
 	[self.textFieldCardCVC setSecureTextEntry:YES];
 	[self.textFieldCardCVC setDelegate:self];
@@ -408,7 +405,6 @@ typedef enum
 	[self.secretCVVTextField setDisablePaste:YES];
 	[self.secretCVVTextField setDisableCopy:YES];
     [self.secretCVVTextField setKeyboardType:UIKeyboardTypeNumberPad];
-    [self.secretCVVTextField setKeyboardAppearance:UIKeyboardAppearanceLight];
     [self.secretCVVTextField setFont:[UIFont systemFontOfSize:17.0]];
     [self.secretCVVTextField setSecureTextEntry:YES];
     [self.secretCVVTextField setDelegate:self];
