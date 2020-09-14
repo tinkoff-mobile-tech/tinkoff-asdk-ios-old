@@ -61,7 +61,12 @@
 + (UIColor *)colorTextPlaceholder
 {
     if (@available(iOS 13.0, *)) {
-        return [UIColor placeholderTextColor];
+        return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                return [ASDKUtils colorWithInteger:0x333333];
+            }
+            return [ASDKUtils colorWithInteger:0xc7c9cc];
+        }];
     } else {
         return [ASDKUtils colorWithInteger:0xc7c9cc];
     }
@@ -69,11 +74,7 @@
 
 + (UIColor *)colorMainBlue
 {
-    if (@available(iOS 13.0, *)) {
-        return [UIColor systemTealColor];
-    } else {
-        return [ASDKUtils colorWithInteger:0x009ecf];
-    }
+    return [ASDKUtils colorWithInteger:0x428bf9];
 }
 
 + (UIColor *)colorNavigationBar
