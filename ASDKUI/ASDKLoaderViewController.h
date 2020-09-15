@@ -24,4 +24,6 @@ extern NSString *const ASDKNotificationHideLoader;
 
 @interface ASDKLoaderViewController : ASDKBaseViewController
 
+- (instancetype)initWithStatusBarStyle:(UIStatusBarStyle)style;
+
 @end

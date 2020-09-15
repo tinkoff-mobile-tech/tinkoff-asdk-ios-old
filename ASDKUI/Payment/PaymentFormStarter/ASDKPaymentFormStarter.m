@@ -112,7 +112,7 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 {
     ASDKDesignConfiguration *designConfiguration = self.designConfiguration;
     
-    [[ASDKBarButtonItem appearance] setTintColor:[designConfiguration navigationBarItemsTextColor]];
+    [[ASDKBarButtonItem appearance] setTintColor:[designConfiguration navigationBarButtonsColor]];
 }
 
 - (void)presentPaymentFormFromViewController:(UIViewController *)presentingViewController
@@ -268,7 +268,8 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 {
     if (_loaderWindow == nil)
     {
-        ASDKLoaderViewController *loaderViewController = [ASDKLoaderViewController new];
+        ASDKLoaderViewController *loaderViewController;
+        loaderViewController = [[ASDKLoaderViewController alloc] initWithStatusBarStyle:self.designConfiguration.statusBarStyle];
         
         _loaderWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         
