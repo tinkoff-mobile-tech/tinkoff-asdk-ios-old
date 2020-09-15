@@ -21,6 +21,11 @@
 
 @implementation ASDKDesign
 
++ (UIColor *)colorN1
+{
+    return [ASDKUtils colorWithInteger:0x333333];
+}
+
 + (UIColor *)colorN2
 {
     return [ASDKUtils colorWithInteger:0x3e4757];
@@ -54,7 +59,7 @@
     if (@available(iOS 13.0, *)) {
         return [UIColor labelColor];
     } else {
-        return [ASDKUtils colorWithInteger:0x333333];
+        return [ASDKDesign colorN1];
     }
 }
 
@@ -63,7 +68,7 @@
     if (@available(iOS 13.0, *)) {
         return [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
             if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                return [ASDKUtils colorWithInteger:0x333333];
+                return [ASDKDesign colorN1];
             }
             return [ASDKUtils colorWithInteger:0xc7c9cc];
         }];
