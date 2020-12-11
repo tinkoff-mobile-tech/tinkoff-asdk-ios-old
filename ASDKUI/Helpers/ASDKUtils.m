@@ -60,21 +60,22 @@
 + (NSString *)getIPAddress
 {
 	NSDictionary *dict = [self getIPAddresses];
-	
-	if ([dict objectForKey:@"en0/ipv4"])
-	{
-		return [dict objectForKey:@"en0/ipv4"];
-	}
-	else if ([dict objectForKey:@"en1/ipv4"])
-	{
-		return [dict objectForKey:@"en1/ipv4"];
-	}
-	else
-	{
-		return dict.allValues.firstObject;
-	}
-	
-	return nil;
+    
+    NSArray *priorityPorts = @[@"en0/ipv4", @"en0/ipv6",
+                              @"en1/ipv4", @"en1/ipv6",
+                              @"en2/ipv4", @"en2/ipv6"];
+    
+    NSString *ipAddress = nil;
+    for (NSString *port in priorityPorts)
+    {
+        ipAddress = dict[port];
+        if (ipAddress) {
+            break;
+        }
+    }
+    ipAddress = ipAddress ? ipAddress : dict.allValues.firstObject;
+        
+    return [self restoreFullIPAddress:ipAddress];
 }
 
 + (NSDictionary *)getIPAddresses
@@ -86,10 +87,12 @@
 		struct ifaddrs *interface;
 		for (interface=interfaces; interface; interface=interface->ifa_next)
 		{
-			if (!(interface->ifa_flags & IFF_UP))
-			{
-				continue;
-			}
+
+            // Check for running IPv4, IPv6 interfaces. Skip the loopback interface.
+            if ((interface->ifa_flags & (IFF_LOOPBACK | IFF_UP | IFF_RUNNING)) != (IFF_UP | IFF_RUNNING))
+            {
+                continue;
+            }
 			
 			const struct sockaddr_in *addr = (const struct sockaddr_in*)interface->ifa_addr;
 			char addrBuf[ MAX(INET_ADDRSTRLEN, INET6_ADDRSTRLEN) ];
@@ -125,6 +128,65 @@
 	}
 	
 	return [addresses count] ? addresses : nil;
+}
+
++ (NSString *)restoreFullIPAddress:(NSString *)ipAddress
+{
+    NSString *fullAddress = nil;
+    if ([self checkIfIPv4Address:ipAddress]) { fullAddress = ipAddress; };
+    if ([self checkIfIPv6Address:ipAddress]) { fullAddress = [self restoreFullIPv6Address:ipAddress]; }
+    
+    return fullAddress;
+}
+
++ (BOOL)checkIfIPv4Address:(NSString *)ipAddress
+{
+    struct in_addr address;
+    int result = inet_pton(AF_INET, [ipAddress UTF8String], &address);
+    return result > 0;
+}
+
++ (BOOL)checkIfIPv6Address:(NSString *)ipAddress
+{
+    struct in6_addr address;
+    int result = inet_pton(AF_INET6, [ipAddress UTF8String], &address);
+    return result > 0;
+}
+
+NSInteger const ipv6FullSegmentsCount = 8;
+NSInteger const ipv6OneSegmentElementsCount = 4;
+
++ (NSString *)restoreFullIPv6Address:(NSString *)ipAddress
+{
+    NSArray<NSString *> *segments = [ipAddress componentsSeparatedByString:@":"];
+    NSMutableArray<NSString *> *fullAddressSegments = [NSMutableArray array];
+    
+    for (NSString *segment in segments)
+    {
+        if (![segment length])
+        {
+            NSInteger numberOfOmmitedSegments = ipv6FullSegmentsCount - [segments count];
+            for (NSInteger i=0; i<=numberOfOmmitedSegments; i++)
+            {
+                [fullAddressSegments addObject:@"0000"];
+            }
+            continue;
+        }
+        
+        if ([segment length] < ipv6OneSegmentElementsCount)
+        {
+            NSInteger ommitedZeroesCount = ipv6OneSegmentElementsCount - [segment length];
+            NSString *ommitedZeroes = [@"" stringByPaddingToLength:ommitedZeroesCount withString:@"0" startingAtIndex:0];
+            NSString *enrichedSegment = [ommitedZeroes stringByAppendingString:segment];
+            [fullAddressSegments addObject:enrichedSegment];
+        }
+        else
+        {
+            [fullAddressSegments addObject:segment];
+        }
+    }
+    
+    return [fullAddressSegments componentsJoinedByString:@":"];
 }
 
 @end
