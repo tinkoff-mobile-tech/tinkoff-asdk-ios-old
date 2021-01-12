@@ -21,6 +21,7 @@
 
 @interface ASDKDesign : NSObject
 
++ (UIColor *)colorN1;
 + (UIColor *)colorN2;
 + (UIColor *)colorN4Separator;
 + (UIColor *)colorTableViewBackground;

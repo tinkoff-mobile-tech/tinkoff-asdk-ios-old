@@ -8,20 +8,10 @@
       "appearances" : [
         {
           "appearance" : "luminosity",
-          "value" : "light"
-        }
-      ],
-      "filename" : "buttom_logos-1.pdf",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
           "value" : "dark"
         }
       ],
-      "filename" : "bottom_logos_dark.png",
+      "filename" : "buttom_logos_dark.pdf",
       "idiom" : "universal"
     }
   ],

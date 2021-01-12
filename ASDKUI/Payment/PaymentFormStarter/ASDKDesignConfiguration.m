@@ -195,7 +195,7 @@
         return self._payButtonTextColor;
     }
     
-    return [ASDKDesign colorTextDark];
+    return [ASDKDesign colorN1];
 }
 
 - (NSString *)payButtonTitle
