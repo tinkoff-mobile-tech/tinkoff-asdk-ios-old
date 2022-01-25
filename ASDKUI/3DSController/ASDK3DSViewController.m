@@ -195,6 +195,11 @@ typedef NS_ENUM(NSInteger, CheckStateType)
 		
 		NSData *plainData = [paramsString dataUsingEncoding:NSUTF8StringEncoding];
 		NSString *postString = [NSString stringWithFormat:@"%@", [plainData base64EncodedStringWithOptions:0]];
+        
+        /// Remove padding
+        /// About padding you can read here: https://www.pixelstech.net/article/1457585550-How-does-Base64-work
+        postString = [postString stringByReplacingOccurrencesOfString:@"=" withString:@""];
+        
 		NSData *postData = [[NSString stringWithFormat:@"creq=%@", postString] dataUsingEncoding: NSUTF8StringEncoding];
 		
 		[request setHTTPBody: postData];

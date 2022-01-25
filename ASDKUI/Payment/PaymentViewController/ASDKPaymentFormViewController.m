@@ -1098,7 +1098,12 @@ NSUInteger const CellPyamentCardID = CellEmptyFlexibleSpace + 1;
 		NSString *threeDSMethodNotificationURL = [NSString stringWithFormat:@"%@%@", [self.acquiringSdk domainPath_v2], kASDKComplete3DSMethodv2];
 		NSString *paramsString = [NSString stringWithFormat:@"{\"threeDSServerTransID\":\"%@\",\"threeDSMethodNotificationURL\":\"%@\"}", tdsServerTransID, threeDSMethodNotificationURL];
 		NSData *plainData = [paramsString dataUsingEncoding:NSUTF8StringEncoding];
+        
 		NSString *postString = [NSString stringWithFormat:@"%@", [plainData base64EncodedStringWithOptions:0]];
+        /// Remove padding
+        /// About padding you can read here: https://www.pixelstech.net/article/1457585550-How-does-Base64-work
+        postString = [postString stringByReplacingOccurrencesOfString:@"=" withString:@""];
+        
 		NSData *postData = [[NSString stringWithFormat:@"threeDSMethodData=%@", postString] dataUsingEncoding: NSUTF8StringEncoding];
 		[request setHTTPBody: postData];
 		[webView loadRequest:request];
