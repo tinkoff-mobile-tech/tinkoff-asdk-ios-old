@@ -48,6 +48,9 @@
 
 @property (nonatomic, strong) NSString *payViewControllerTitle;
 
+@property (nonatomic, strong) void (^presentationCompletion)(void);
+@property (nonatomic) BOOL _presentAnimated;
+
 @end
 
 @implementation ASDKDesignConfiguration
@@ -68,6 +71,7 @@
         }
     __statusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
 		__presentStyleModal = UIModalPresentationFullScreen;
+        __presentAnimated = YES;
 	}
 
     return self;
@@ -338,6 +342,24 @@
 - (NSString *)payViewTitle
 {
 	return self.payViewControllerTitle;
+}
+
+- (void)setPresentationCompletion:(void (^)(void))presentationCompletion
+{
+    _presentationCompletion = presentationCompletion;
+}
+- (void (^)(void))getPresentationCompletion
+{
+    return _presentationCompletion;
+}
+
+-(void)setPresentAnimated:(BOOL)animated
+{
+    __presentAnimated = animated;
+}
+-(BOOL)shouldAnimate
+{
+    return __presentAnimated;
 }
 
 @end

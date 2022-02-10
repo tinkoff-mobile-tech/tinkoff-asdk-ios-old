@@ -170,37 +170,41 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 {
     [self prepareDesign];
     
-    ASDKPaymentFormViewController *vc = [[ASDKPaymentFormViewController alloc] initWithAmount:amount
-                                                                                      orderId:orderId
-                                                                                        title:title
-                                                                                  description:description
-                                                                                       cardId:cardId
-                                                                                        email:email
-                                                                                  customerKey:customerKey
-																					recurrent:recurrent
-																				   makeCharge:makeCharge
-																		additionalPaymentData:data
-																				  receiptData:receiptData
-																					shopsData:shopsData
-																			shopsReceiptsData:shopsReceiptsData
-                                                                                      success:^(ASDKPaymentInfo *paymentInfo)
-                                         {
-                                             [ASDKPaymentFormStarter resetSharedInstance];
-                                             
-                                             onSuccess(paymentInfo);
-                                         }
-                                                                                    cancelled:^
-                                         {
-                                             [ASDKPaymentFormStarter resetSharedInstance];
-                                             
-                                             onCancelled();
-                                         }
-                                                                                        error:^(ASDKAcquringSdkError *error)
-                                         {
-                                             [ASDKPaymentFormStarter resetSharedInstance];
-                                             
-                                             onError(error);
-                                         }];
+    ASDKPaymentFormViewController *vc = [
+                                         [ASDKPaymentFormViewController alloc]
+                                         initWithAmount:amount
+                                         orderId:orderId
+                                         title:title
+                                         description:description
+                                         cardId:cardId
+                                         email:email
+                                         customerKey:customerKey
+                                         recurrent:recurrent
+                                         makeCharge:makeCharge
+                                         additionalPaymentData:data
+                                         receiptData:receiptData
+                                         shopsData:shopsData
+                                         shopsReceiptsData:shopsReceiptsData
+                                         success:^(ASDKPaymentInfo *paymentInfo) {
+        [ASDKPaymentFormStarter resetSharedInstance];
+        if (onSuccess != nil)
+        {
+            onSuccess(paymentInfo);
+        }
+    }
+                                         cancelled:^{
+        [ASDKPaymentFormStarter resetSharedInstance];
+        if (onCancelled != nil){
+            onCancelled();
+        }
+    }
+                                         error:^(ASDKAcquringSdkError *error){
+        [ASDKPaymentFormStarter resetSharedInstance];
+        if (onError != nil)
+        {
+            onError(error);
+        }
+    }];
     
     vc.acquiringSdk = self.acquiringSdk;
 
@@ -209,7 +213,10 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 
     [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
 
-    [presentingViewController presentViewController:nc animated:YES completion:nil];
+    [presentingViewController presentViewController:nc
+                                           animated:self.designConfiguration.shouldAnimate
+                                         completion:self.designConfiguration.getPresentationCompletion
+     ];
 }
 
 #pragma mark - Loader
@@ -363,7 +370,10 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			if (viewController)
 			{
 				self.presentingViewControllerApplePay = presentingViewController;
-				[self.presentingViewControllerApplePay presentViewController:viewController animated:YES completion:^{}];
+				[self.presentingViewControllerApplePay presentViewController:viewController
+                                                                    animated:self.designConfiguration.shouldAnimate
+                                                                  completion:self.designConfiguration.getPresentationCompletion
+                 ];
 			}
 			else
 			{
@@ -447,7 +457,10 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 			if (viewController)
 			{
 				self.presentingViewControllerApplePay = presentingViewController;
-				[self.presentingViewControllerApplePay presentViewController: viewController animated: YES completion:^{}];
+				[self.presentingViewControllerApplePay presentViewController: viewController
+                                                                    animated:self.designConfiguration.shouldAnimate
+                                                                  completion:self.designConfiguration.getPresentationCompletion
+                 ];
 			}
 			else
 			{
@@ -467,11 +480,17 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 					   success:(void (^)(ASDKPaymentStatus status))onSuccess
 						 error:(void (^)(ASDKAcquringSdkError *error))onError
 {
-	[self.acquiringSdk getStateWithPaymentId:paymentId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
-		onSuccess(status);
-	} failure:^(ASDKAcquringSdkError *error) {
-		onError(error);
-	}];
+    [self.acquiringSdk getStateWithPaymentId:paymentId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+        if (onSuccess != nil)
+        {
+            onSuccess(status);
+        }
+    } failure:^(ASDKAcquringSdkError *error) {
+        if (onError != nil)
+        {
+            onError(error);
+        }
+    }];
 }
 
 - (void)refundTransaction:(NSString *)paymentId
@@ -479,9 +498,15 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 					error:(void (^)(ASDKAcquringSdkError *error))onError
 {
 	[self.acquiringSdk rejectTrancastionWithPaymentId:paymentId success:^(ASDKCancelResponse *response) {
-		onSuccess();
+        if (onSuccess != nil)
+        {
+            onSuccess();
+        }
 	} failure:^(ASDKAcquringSdkError *error) {
-		onError(error);
+        if (onError != nil)
+        {
+            onError(error);
+        }
 	}];
 }
 
@@ -506,93 +531,114 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 
 	[paymentData setObject:@(YES) forKey:@"chargeFlag"];
 
-	[self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue]
-							  orderId:orderId
-						  description:description
-							  payForm:nil
-						  customerKey:customerKey
-							recurrent:NO
-				additionalPaymentData:paymentData
-						  receiptData:receiptData
-							shopsData:shopsData
-					shopsReceiptsData:shopsReceiptsData
-							 location:ASDKLocalized.sharedInstance.localeIdentifier
-	 success:^(ASDKInitResponse *response) {
-		 [self.acquiringSdk chargeWithPaymentId:response.paymentId rebillId:rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
-			 [ASDKPaymentFormStarter resetSharedInstance];
-			 onSuccess(paymentInfo);
-		 } failure:^(ASDKAcquringSdkError *error) {
-			 ASDKAcquiringResponse *errorResponse = [error.userInfo objectForKey:@"acquringResponse"];
-			 //пользователю необходимо подтвердить платеж через ввод cvc ASDK-432
-			 //ErrorCode == 104
-			 if ([[errorResponse.dictionary objectForKey:@"ErrorCode"] integerValue] == 104)
-			 {
-				 [[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey] updateCardsListWithSuccessBlock:^{
-					 ASDKCard *selectedCard = [[ASDKCardsListDataController instance] cardByRebillId:rebillId];
-					 if (selectedCard != nil)
-					 {
-						[self prepareDesign];
-
-						 ASDKPaymentFormViewController *vc = [[ASDKPaymentFormViewController alloc] initWithAmount:amount
-																										   orderId:orderId
-																											 title:nil
-																									   description:description
-																											cardId:selectedCard.cardId
-																											 email:nil
-																									   customerKey:customerKey
-																										 recurrent:NO
-																										makeCharge:YES
-																							 additionalPaymentData:paymentData
-																									   receiptData:receiptData
-																										 shopsData:shopsData
-																								 shopsReceiptsData:shopsReceiptsData
-																										   success:^(ASDKPaymentInfo *paymentInfo)
-															  {
-																  [ASDKPaymentFormStarter resetSharedInstance];
-
-																  onSuccess(paymentInfo);
-															  }
-																										 cancelled:^
-															  {
-																  [ASDKPaymentFormStarter resetSharedInstance];
-
-																  onError(nil);
-															  }
-																											 error:^(ASDKAcquringSdkError *error)
-															  {
-																  [ASDKPaymentFormStarter resetSharedInstance];
-
-																  onError(error);
-															  }];
-
-						 vc.acquiringSdk = self.acquiringSdk;
-						 [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
-						 [vc setChargeError:YES];
-						 [vc setChargeErrorPaymentId:[errorResponse.dictionary objectForKey:@"PaymentId"]];
-						 [vc needSetupCardRequisitesCellForCVC];
-                         
-                         ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:vc];
-                         [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
-                         
-						 if (paymentConfirm)
-						 {
-							 paymentConfirm(nc);
-						 }
-					 }
-				 } errorBlock:^(ASDKAcquringSdkError *error) {
-					 [ASDKPaymentFormStarter resetSharedInstance];
-					 onError(error);
-				 }];
-			 }
-			 else
-			 {
-				 [ASDKPaymentFormStarter resetSharedInstance];
-				 onError(error);
-			 }
-		 }];
-	 } failure:^(ASDKAcquringSdkError *error) {
-		 onError(error);
-	 }];
+    [self.acquiringSdk initWithAmount:[NSNumber numberWithDouble:100 * amount.doubleValue]
+                              orderId:orderId
+                          description:description
+                              payForm:nil
+                          customerKey:customerKey
+                            recurrent:NO
+                additionalPaymentData:paymentData
+                          receiptData:receiptData
+                            shopsData:shopsData
+                    shopsReceiptsData:shopsReceiptsData
+                             location:ASDKLocalized.sharedInstance.localeIdentifier
+                              success:^(ASDKInitResponse *response) {
+        [self.acquiringSdk chargeWithPaymentId:response.paymentId rebillId:rebillId success:^(ASDKPaymentInfo *paymentInfo, ASDKPaymentStatus status) {
+            [ASDKPaymentFormStarter resetSharedInstance];
+            if (onSuccess != nil)
+            {
+                onSuccess(paymentInfo);
+            }
+        } failure:^(ASDKAcquringSdkError *error) {
+            ASDKAcquiringResponse *errorResponse = [error.userInfo objectForKey:@"acquringResponse"];
+            //пользователю необходимо подтвердить платеж через ввод cvc ASDK-432
+            //ErrorCode == 104
+            if ([[errorResponse.dictionary objectForKey:@"ErrorCode"] integerValue] == 104)
+            {
+                [[ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey] updateCardsListWithSuccessBlock:^{
+                    ASDKCard *selectedCard = [[ASDKCardsListDataController instance] cardByRebillId:rebillId];
+                    if (selectedCard != nil)
+                    {
+                        [self prepareDesign];
+                        
+                        ASDKPaymentFormViewController *vc = [
+                                                             [ASDKPaymentFormViewController alloc]
+                                                             initWithAmount:amount
+                                                             orderId:orderId
+                                                             title:nil
+                                                             description:description
+                                                             cardId:selectedCard.cardId
+                                                             email:nil
+                                                             customerKey:customerKey
+                                                             recurrent:NO
+                                                             makeCharge:YES
+                                                             additionalPaymentData:paymentData
+                                                             receiptData:receiptData
+                                                             shopsData:shopsData
+                                                             shopsReceiptsData:shopsReceiptsData
+                                                             success:^(ASDKPaymentInfo *paymentInfo)
+                                                             {
+                            [ASDKPaymentFormStarter resetSharedInstance];
+                            if (onSuccess != nil)
+                            {
+                                onSuccess(paymentInfo);
+                            }
+                        }
+                                                             cancelled:^
+                                                             {
+                            [ASDKPaymentFormStarter resetSharedInstance];
+                            if (onError != nil)
+                            {
+                                onError(nil);
+                            }
+                        }
+                                                             error:^(ASDKAcquringSdkError *error)
+                                                             {
+                            [ASDKPaymentFormStarter resetSharedInstance];
+                            if (onError != nil)
+                            {
+                                onError(error);
+                            }
+                        }];
+                        
+                        vc.acquiringSdk = self.acquiringSdk;
+                        [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
+                        [vc setChargeError:YES];
+                        [vc setChargeErrorPaymentId:[errorResponse.dictionary objectForKey:@"PaymentId"]];
+                        [vc needSetupCardRequisitesCellForCVC];
+                        
+                        ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:vc];
+                        [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
+                        
+                        if (paymentConfirm)
+                        {
+                            paymentConfirm(nc);
+                        }
+                    }
+                } errorBlock:^(ASDKAcquringSdkError *error) {
+                    [ASDKPaymentFormStarter resetSharedInstance];
+                    if (onError != nil)
+                    {
+                        onError(error);
+                    }
+                }];
+            }
+            else
+            {
+                [ASDKPaymentFormStarter resetSharedInstance];
+                if (onError != nil)
+                {
+                    onError(error);
+                }
+            }
+        }];
+    } failure:^(ASDKAcquringSdkError *error) {
+        if (onError != nil)
+        {
+            onError(error);
+        }
+    }
+     ];
 }
 
 #pragma mark - PKPaymentAuthorizationViewControllerDelegate
@@ -656,21 +702,27 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
 - (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller
 {
 	[controller dismissViewControllerAnimated:YES completion:^{
-		if (self.onCompleteSuccessPaymentInfo != nil && self.onCompleteError == nil && (self.onCompleteStatus == ASDKPaymentStatus_CONFIRMED || self.onCompleteStatus == ASDKPaymentStatus_AUTHORIZED))
+		if (self.onCompleteSuccessPaymentInfo != nil
+            && self.onCompleteError == nil
+            && (self.onCompleteStatus == ASDKPaymentStatus_CONFIRMED || self.onCompleteStatus == ASDKPaymentStatus_AUTHORIZED)
+            && self.onSuccess != nil)
 		{
 			self.onSuccess(self.onCompleteSuccessPaymentInfo);
 			self.onCompleteSuccessPaymentInfo = nil;
 		}
-		else if (self.onCompleteSuccessPaymentInfo == nil && self.onCompleteError == nil)
+		else if (self.onCompleteSuccessPaymentInfo == nil
+                 && self.onCompleteError == nil
+                 && self.onCancelled != nil)
 		{
 			self.onCancelled();
 		}
-		else if (self.onCompleteError != nil)
+		else if (self.onCompleteError != nil
+                 && self.onError != nil)
 		{
 			self.onError(self.onCompleteError);
 			self.onCompleteError = nil;
 		}
-		else
+		else if (self.onError != nil)
 		{
 			NSString *details = [NSString stringWithFormat:@"%@", self.onCompleteSuccessPaymentInfo];
 			ASDKAcquringSdkError *error = [ASDKAcquringSdkError errorWithMessage:nil details:details code:0];
@@ -699,23 +751,35 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
     
     //    ASDKLoopViewController *viewController = [[ASDKLoopViewController alloc] initWithAddCardRequestKey:@"1" acquiringSdk:self.acquiringSdk];
     
-    ASDKAttachCardViewController *viewController = [[ASDKAttachCardViewController alloc] initWithCardCheckType:cardCheckType
-                                                                                                     formTitle:(NSString *)title
-                                                                                                    formHeader:(NSString *)header
-                                                                                                   description:(NSString *)description
-                                                                                                         email:(NSString *)email
-                                                                                                   customerKey:(NSString *)customerKey
-                                                                                                additionalData:(NSDictionary *)data
-                                                                                                       success:^(ASDKResponseAttachCard *result) {
-                                                                                                           [ASDKPaymentFormStarter resetSharedInstance];
-                                                                                                           onSuccess(result);
-                                                                                                       } cancelled:^{
-                                                                                                           [ASDKPaymentFormStarter resetSharedInstance];
-                                                                                                           onCancelled();
-                                                                                                       } error:^(ASDKAcquringSdkError *error) {
-                                                                                                           [ASDKPaymentFormStarter resetSharedInstance];
-                                                                                                           onError(error);
-                                                                                                       }];
+    ASDKAttachCardViewController *viewController = [
+                                                    [ASDKAttachCardViewController alloc]
+                                                    initWithCardCheckType:cardCheckType
+                                                    formTitle:(NSString *)title
+                                                    formHeader:(NSString *)header
+                                                    description:(NSString *)description
+                                                    email:(NSString *)email
+                                                    customerKey:(NSString *)customerKey
+                                                    additionalData:(NSDictionary *)data
+                                                    success:^(ASDKResponseAttachCard *result) {
+        [ASDKPaymentFormStarter resetSharedInstance];
+        if (onSuccess != nil)
+        {
+            onSuccess(result);
+        }
+    } cancelled:^{
+        [ASDKPaymentFormStarter resetSharedInstance];
+        if (onCancelled != nil)
+        {
+            onCancelled();
+        }
+    } error:^(ASDKAcquringSdkError *error) {
+        [ASDKPaymentFormStarter resetSharedInstance];
+        if (onError != nil)
+        {
+            onError(error);
+        }
+    }
+                                                    ];
     viewController.isDissmissAfterCompletion = isDissmissAfterCompletion;
     
     viewController.acquiringSdk = self.acquiringSdk;
@@ -723,7 +787,10 @@ static ASDKPaymentFormStarter * __paymentFormStarterInstance = nil;
     ASDKNavigationController *nc = [[ASDKNavigationController alloc] initWithRootViewController:viewController];
     [nc setModalPresentationStyle:self.designConfiguration.modalPresentationStyle];
     [ASDKCardsListDataController cardsListDataControllerWithAcquiringSdk:self.acquiringSdk customerKey:customerKey];
-    [presentingViewController presentViewController:nc animated:YES completion:nil];
+    [presentingViewController presentViewController:nc
+                                           animated:self.designConfiguration.shouldAnimate
+                                         completion:self.designConfiguration.getPresentationCompletion
+     ];
 }
 
 - (void)presentAttachFormFromViewController:(UIViewController *)presentingViewController

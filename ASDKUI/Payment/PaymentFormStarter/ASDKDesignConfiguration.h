@@ -162,8 +162,12 @@ typedef NS_ENUM(NSUInteger, TableViewCellType)
  *
  *  @param style - стиль статус бара
  */
-
 - (void)setStatusBarStyle:(UIStatusBarStyle)style;
 - (UIStatusBarStyle)statusBarStyle;
+
+- (void)setPresentationCompletion:(void (^)(void))presentationCompletion;
+- (void (^)(void))getPresentationCompletion;
+- (void)setPresentAnimated:(BOOL)animated;
+- (BOOL)shouldAnimate;
 
 @end
