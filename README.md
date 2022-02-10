@@ -35,8 +35,8 @@ Acquiring SDK позволяет интегрировать [Интернет-Э
 Для подключения SDK мы рекомендуем использовать [Cocoa Pods][cocoapods]. Добавьте в файл Podfile зависимости
 ```c
 pod 'CardIO'
-pod 'ASDKCore', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/ASDKCore.podspec"
-pod 'ASDKUI', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/master/ASDKUI.podspec"
+pod 'ASDKCore', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/1.3.11/ASDKCore.podspec"
+pod 'ASDKUI', :podspec =>  "https://raw.githubusercontent.com/TinkoffCreditSystems/tinkoff-asdk-ios/1.3.11/ASDKUI.podspec"
 ```
 
 Либо, если вы не используете [Cocoa Pods][cocoapods], можно добавить _**ASDKUI.xcodeproj**_ в ваш проект.
